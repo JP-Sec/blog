@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Japan CSS Support Example Blog</title>
+  <title>Japan CSS Security Support Blog</title>
   
-  <subtitle>Japan CSS Support Example Blog</subtitle>
+  <subtitle>日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</subtitle>
   <link href="/blog/atom.xml" rel="self"/>
   
-  <link href="https://cssjpn.github.io/example-blog/"/>
-  <updated>2021-05-04T07:26:53.917Z</updated>
-  <id>https://cssjpn.github.io/example-blog/</id>
+  <link href="https://jp-sec.github.io/blog/"/>
+  <updated>2021-05-05T05:50:05.263Z</updated>
+  <id>https://jp-sec.github.io/blog/</id>
   
   <author>
-    <name>CSS Japan</name>
+    <name>CSS Japan Secuirty team</name>
     
   </author>
   
@@ -18,10 +18,10 @@
   
   <entry>
     <title>Example article</title>
-    <link href="https://cssjpn.github.io/example-blog/information/test/"/>
-    <id>https://cssjpn.github.io/example-blog/information/test/</id>
+    <link href="https://jp-sec.github.io/blog/information/test/"/>
+    <id>https://jp-sec.github.io/blog/information/test/</id>
     <published>2020-12-21T06:00:00.000Z</published>
-    <updated>2021-05-04T07:26:53.917Z</updated>
+    <updated>2021-05-05T05:50:05.263Z</updated>
     
     <content type="html"><![CDATA[<p>hello, world!</p>]]></content>
     
@@ -37,7 +37,7 @@
     
     
     
-      <category term="Information" scheme="https://cssjpn.github.io/example-blog/tags/Information/"/>
+      <category term="Information" scheme="https://jp-sec.github.io/blog/tags/Information/"/>
     
   </entry>
   
