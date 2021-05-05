@@ -3,29 +3,36 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Title (display)
-title: Japan CSS Support Example Blog
+title: Japan CSS Security Support Blog
 # Sub Title (display)
-subtitle: Japan CSS Support Example Blog
+subtitle: 日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。
 # Description
 description: Japan CSS Support Example Blog
 
 # Keywords
 keywords:
-  - Information
+  - Microsoft Defender for Endpoint
+  - Microsoft Defender for Identity
+  - Microsoft Cloud App Security
+  - Information Protection
+  - Microsoft Identity Manager
+  - Azure Sentinel
+  - Azure Security Center
 
-author: CSS Japan
+author: CSS Japan Secuirty team
 
 # Tag (hexo helper)
 root_tag_generator:
   root_tag_names:
     - Information
+    - 情報収集
   sub_tag_limit: 20
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://cssjpn.github.io/example-blog/
+url: https://jp-sec.github.io/blog/
 github:
-  url: https://github.com/cssjpn/blog-example/
+  url: https://github.com/jp-sec/blog-example/
   posts_dir: articles
 
 skip_render:
@@ -39,7 +46,7 @@ skip_render:
 ## Docs: https://hexo.io/doc  s/deployment.html
 deploy:
   type: git
-  repo: git@github.com:cssjpn/blog-example.git
+  repo: git@github.com:jp-sec/blog.git
   branch: gh-pages
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }} [skip ci]"
 
