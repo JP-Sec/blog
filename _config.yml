@@ -32,7 +32,7 @@ root_tag_generator:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://jp-sec.github.io/blog/
 github:
-  url: https://github.com/jp-sec/blog-example/
+  url: https://github.com/jp-sec/blog/
   posts_dir: articles
 
 skip_render:
