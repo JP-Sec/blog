@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Japan CSS Security Support Blog</title>
+  
+  <subtitle>日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</subtitle>
+  <link href="/blog/atom.xml" rel="self"/>
+  
+  <link href="https://jp-sec.github.io/blog/"/>
+  <updated>2021-05-07T14:34:58.798Z</updated>
+  <id>https://jp-sec.github.io/blog/</id>
+  
+  <author>
+    <name>CSS Japan Secuirty team</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://jp-sec.github.io/blog/information/test/"/>
+    <id>https://jp-sec.github.io/blog/information/test/</id>
+    <published>2021-01-21T06:00:00.000Z</published>
+    <updated>2021-05-07T14:34:58.798Z</updated>
+    
+    <content type="html"><![CDATA[<p>test</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;test&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Information" scheme="https://jp-sec.github.io/blog/tags/Information/"/>
+    
+  </entry>
+  
+</feed>
