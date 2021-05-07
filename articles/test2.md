@@ -1,3 +1,10 @@
+---
+title: Microsoft Defender for Endpoint の資料採取手順
+date: 2020-05-07 17:30:00
+tags:
+  - MDE
+---
+
 ▼Microsoft Defender ATP テナント情報取得
 １．Microsoft Defender ATP の管理ポータルにログインします
 ２．画面右上にあるユーザー情報をクリックした際に表示される、[Tenant ID] および[Org ID] を画面キャプチャおよびテキストベースで、ご提供いただけますでしょうか
