@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://jp-sec.github.io/blog/"/>
-  <updated>2021-05-07T13:57:21.374Z</updated>
+  <updated>2021-05-07T14:03:40.601Z</updated>
   <id>https://jp-sec.github.io/blog/</id>
   
   <author>
@@ -17,33 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test2</title>
-    <link href="https://jp-sec.github.io/blog/test2/"/>
-    <id>https://jp-sec.github.io/blog/test2/</id>
-    <published>2021-05-07T13:57:26.626Z</published>
-    <updated>2021-05-07T13:57:21.374Z</updated>
-    
-    <content type="html"><![CDATA[<p>▼Microsoft Defender ATP テナント情報取得<br>１．Microsoft Defender ATP の管理ポータルにログインします<br>２．画面右上にあるユーザー情報をクリックした際に表示される、[Tenant ID] および[Org ID] を画面キャプチャおよびテキストベースで、ご提供いただけますでしょうか<br><img src="https://user-images.githubusercontent.com/83526997/117460304-58c9d480-af87-11eb-94c5-959191bebcdd.png" alt="image"></p><p>▼Microsoft Defender ATP マシン情報取得<br>１．Microsoft Defender ATP の管理ポータルにログインします<br>２．画面左のツリーから、[Machines list ] -&gt; [該当マシン]の順にクリックします<br>３．マシンの詳細情報が表示されますので、画面キャプチャおよびURL をテキストベースで、ご提供いただけますでしょうか</p><p><img src="https://user-images.githubusercontent.com/83526997/117460292-56677a80-af87-11eb-9b1b-1f4341d16b81.png" alt="image"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;▼Microsoft Defender ATP テナント情報取得&lt;br&gt;１．Microsoft Defender ATP の管理ポータルにログインします&lt;br&gt;２．画面右上にあるユーザー情報をクリックした際に表示される、[Tenant ID] および[Org ID] を画面
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>test1</title>
     <link href="https://jp-sec.github.io/blog/information/test1/"/>
     <id>https://jp-sec.github.io/blog/information/test1/</id>
     <published>2021-01-25T06:00:00.000Z</published>
-    <updated>2021-05-07T13:57:21.374Z</updated>
+    <updated>2021-05-07T14:03:40.601Z</updated>
     
     <content type="html"><![CDATA[<p>test1</p>]]></content>
     
@@ -68,7 +46,7 @@
     <link href="https://jp-sec.github.io/blog/information/test/"/>
     <id>https://jp-sec.github.io/blog/information/test/</id>
     <published>2021-01-21T06:00:00.000Z</published>
-    <updated>2021-05-07T13:57:21.374Z</updated>
+    <updated>2021-05-07T14:03:40.601Z</updated>
     
     <content type="html"><![CDATA[<p>test</p>]]></content>
     
@@ -85,6 +63,30 @@
     
     
       <category term="Information" scheme="https://jp-sec.github.io/blog/tags/Information/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Microsoft Defender for Endpoint の資料採取手順</title>
+    <link href="https://jp-sec.github.io/blog/test2/"/>
+    <id>https://jp-sec.github.io/blog/test2/</id>
+    <published>2020-05-07T08:30:00.000Z</published>
+    <updated>2021-05-07T14:03:40.601Z</updated>
+    
+    <content type="html"><![CDATA[<p>▼Microsoft Defender ATP テナント情報取得<br>１．Microsoft Defender ATP の管理ポータルにログインします<br>２．画面右上にあるユーザー情報をクリックした際に表示される、[Tenant ID] および[Org ID] を画面キャプチャおよびテキストベースで、ご提供いただけますでしょうか<br><img src="https://user-images.githubusercontent.com/83526997/117460304-58c9d480-af87-11eb-94c5-959191bebcdd.png" alt="image"></p><p>▼Microsoft Defender ATP マシン情報取得<br>１．Microsoft Defender ATP の管理ポータルにログインします<br>２．画面左のツリーから、[Machines list ] -&gt; [該当マシン]の順にクリックします<br>３．マシンの詳細情報が表示されますので、画面キャプチャおよびURL をテキストベースで、ご提供いただけますでしょうか</p><p><img src="https://user-images.githubusercontent.com/83526997/117460292-56677a80-af87-11eb-9b1b-1f4341d16b81.png" alt="image"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;▼Microsoft Defender ATP テナント情報取得&lt;br&gt;１．Microsoft Defender ATP の管理ポータルにログインします&lt;br&gt;２．画面右上にあるユーザー情報をクリックした際に表示される、[Tenant ID] および[Org ID] を画面
+      
+    
+    </summary>
+    
+    
+    
+      <category term="MDE" scheme="https://jp-sec.github.io/blog/tags/MDE/"/>
     
   </entry>
   
