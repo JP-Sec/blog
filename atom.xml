@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://jp-sec.github.io/blog/"/>
-  <updated>2021-05-07T13:29:16.521Z</updated>
+  <updated>2021-05-07T13:32:24.852Z</updated>
   <id>https://jp-sec.github.io/blog/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Example article</title>
+    <title>test</title>
     <link href="https://jp-sec.github.io/blog/information/test/"/>
     <id>https://jp-sec.github.io/blog/information/test/</id>
     <published>2021-01-21T06:00:00.000Z</published>
-    <updated>2021-05-07T13:29:16.521Z</updated>
+    <updated>2021-05-07T13:32:24.852Z</updated>
     
     <content type="html"><![CDATA[<p>test</p>]]></content>
     
