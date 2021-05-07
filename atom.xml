@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://jp-sec.github.io/blog/"/>
-  <updated>2021-05-07T14:03:40.601Z</updated>
+  <updated>2021-05-07T14:10:00.810Z</updated>
   <id>https://jp-sec.github.io/blog/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://jp-sec.github.io/blog/information/test1/"/>
     <id>https://jp-sec.github.io/blog/information/test1/</id>
     <published>2021-01-25T06:00:00.000Z</published>
-    <updated>2021-05-07T14:03:40.601Z</updated>
+    <updated>2021-05-07T14:10:00.810Z</updated>
     
     <content type="html"><![CDATA[<p>test1</p>]]></content>
     
@@ -46,7 +46,7 @@
     <link href="https://jp-sec.github.io/blog/information/test/"/>
     <id>https://jp-sec.github.io/blog/information/test/</id>
     <published>2021-01-21T06:00:00.000Z</published>
-    <updated>2021-05-07T14:03:40.601Z</updated>
+    <updated>2021-05-07T14:10:00.810Z</updated>
     
     <content type="html"><![CDATA[<p>test</p>]]></content>
     
@@ -71,9 +71,9 @@
     <link href="https://jp-sec.github.io/blog/test2/"/>
     <id>https://jp-sec.github.io/blog/test2/</id>
     <published>2020-05-07T08:30:00.000Z</published>
-    <updated>2021-05-07T14:03:40.601Z</updated>
+    <updated>2021-05-07T14:10:00.810Z</updated>
     
-    <content type="html"><![CDATA[<p>▼Microsoft Defender ATP テナント情報取得<br>１．Microsoft Defender ATP の管理ポータルにログインします<br>２．画面右上にあるユーザー情報をクリックした際に表示される、[Tenant ID] および[Org ID] を画面キャプチャおよびテキストベースで、ご提供いただけますでしょうか<br><img src="https://user-images.githubusercontent.com/83526997/117460304-58c9d480-af87-11eb-94c5-959191bebcdd.png" alt="image"></p><p>▼Microsoft Defender ATP マシン情報取得<br>１．Microsoft Defender ATP の管理ポータルにログインします<br>２．画面左のツリーから、[Machines list ] -&gt; [該当マシン]の順にクリックします<br>３．マシンの詳細情報が表示されますので、画面キャプチャおよびURL をテキストベースで、ご提供いただけますでしょうか</p><p><img src="https://user-images.githubusercontent.com/83526997/117460292-56677a80-af87-11eb-9b1b-1f4341d16b81.png" alt="image"></p>]]></content>
+    <content type="html"><![CDATA[<p>▼Microsoft Defender ATP テナント情報取得<br>１．Microsoft Defender ATP の管理ポータルにログインします<br>２．画面右上にあるユーザー情報をクリックした際に表示される、[Tenant ID] および[Org ID] を画面キャプチャおよびテキストベースで、ご提供いただけますでしょうか<br><img src="https://user-images.githubusercontent.com/83526997/117462090-3d5fc900-af89-11eb-93f4-0082151d130a.png" alt="image"></p><p>▼Microsoft Defender ATP マシン情報取得<br>１．Microsoft Defender ATP の管理ポータルにログインします<br>２．画面左のツリーから、[Machines list ] -&gt; [該当マシン]の順にクリックします<br>３．マシンの詳細情報が表示されますので、画面キャプチャおよびURL をテキストベースで、ご提供いただけますでしょうか<br><img src="https://user-images.githubusercontent.com/83526997/117462101-405ab980-af89-11eb-8ec6-ec5bd03f6cad.png" alt="image"></p>]]></content>
     
     <summary type="html">
     
