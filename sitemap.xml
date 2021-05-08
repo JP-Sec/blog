@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jp-sec.github.io/blog/information/README/</loc>
+    
+    <lastmod>2021-05-08T15:36:16.828Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jp-sec.github.io/blog/information/test/</loc>
     
-    <lastmod>2021-05-08T15:34:04.684Z</lastmod>
+    <lastmod>2021-05-08T15:36:16.828Z</lastmod>
     
   </url>
   
