@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://jp-sec.github.io/blog/"/>
-  <updated>2021-05-08T15:36:16.828Z</updated>
+  <updated>2021-05-08T15:36:40.938Z</updated>
   <id>https://jp-sec.github.io/blog/</id>
   
   <author>
@@ -20,10 +20,18 @@
     <title>information/README</title>
     <link href="https://jp-sec.github.io/blog/information/README/"/>
     <id>https://jp-sec.github.io/blog/information/README/</id>
-    <published>2021-05-08T15:36:21.508Z</published>
-    <updated>2021-05-08T15:36:16.828Z</updated>
+    <published>2021-05-08T15:36:45.222Z</published>
+    <updated>2021-05-08T15:36:40.938Z</updated>
+    
+    <content type="html"><![CDATA[<p>日本マイクロソフト Azure セキュリティ サポート チームのブログです。<br>チームの担当製品であるセキュリティ製品の情報を中心にお届けします。</p>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;p&gt;日本マイクロソフト Azure セキュリティ サポート チームのブログです。&lt;br&gt;チームの担当製品であるセキュリティ製品の情報を中心にお届けします。&lt;/p&gt;
+
+      
     
     </summary>
     
@@ -36,7 +44,7 @@
     <link href="https://jp-sec.github.io/blog/information/test/"/>
     <id>https://jp-sec.github.io/blog/information/test/</id>
     <published>2021-01-21T06:00:00.000Z</published>
-    <updated>2021-05-08T15:36:16.828Z</updated>
+    <updated>2021-05-08T15:36:40.938Z</updated>
     
     <content type="html"><![CDATA[<p>test</p>]]></content>
     
