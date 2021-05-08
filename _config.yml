@@ -34,7 +34,8 @@ url: https://jp-sec.github.io/blog/
 github:
   url: https://github.com/jp-sec/blog/
   posts_dir: articles
-
+  default_branch: main ## <== ADD
+  
 skip_render:
   - '_data/*.png'
   # Bing Webmaster
