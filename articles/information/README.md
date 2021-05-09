@@ -1,6 +1,6 @@
 ---
 title: Information
-date: 2016-1-1 12:00:00
+date: 2016-1-2 12:00:00
 tags:
 - Information
 ---
