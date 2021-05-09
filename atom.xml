@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://jp-sec.github.io/blog/"/>
-  <updated>2021-05-09T05:58:01.333Z</updated>
+  <updated>2021-05-09T06:07:38.973Z</updated>
   <id>https://jp-sec.github.io/blog/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MIM 2016 SP1 にて PAM を利用する際に、http 404 / 500 エラーが発生する。</title>
+    <link href="https://jp-sec.github.io/blog/MIM/PAM_http_error/"/>
+    <id>https://jp-sec.github.io/blog/MIM/PAM_http_error/</id>
+    <published>2019-03-29T22:42:00.000Z</published>
+    <updated>2021-05-09T06:07:38.973Z</updated>
+    
+    <content type="html"><![CDATA[<p>こんにちは、Identity Manager サポート です。<br>MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に、いくつかの rest API が HTTP 404 や 500 エラーが出力される場合があります。</p><p><img src="https://github.com/JP-Sec/blog/blob/main/image/MIM_API.png" alt="image"></p><p>この際の対応手順について、ご紹介します。<br>回避策としては、以下の通り MIM のサービスアカウントの権限の委譲を以下の通り実施します。<br>実施後は、MIM サーバー上にて、iisreset にて IIS サービスの再起動を実施ください。</p><p>変更前</p><p>変更後</p><p>この事象は、Off box と呼ばれる新しい委任に関連する機能の問題によるものとなります。<br>MIM 2016 SP1 にて PAM 機能をご活用の際はご注意ください。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;こんにちは、Identity Manager サポート です。&lt;br&gt;MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に、いくつかの rest API が HTTP 404 や 500 エラーが出力される場合
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Identity Manager" scheme="https://jp-sec.github.io/blog/tags/Identity-Manager/"/>
+    
+  </entry>
+  
+  <entry>
     <title>FIM/MIM ADMAのExport処理で 0x80004005 エラー</title>
     <link href="https://jp-sec.github.io/blog/MIM/MIM_ADMA_Export_0x80004005/"/>
     <id>https://jp-sec.github.io/blog/MIM/MIM_ADMA_Export_0x80004005/</id>
     <published>2019-03-29T22:33:00.000Z</published>
-    <updated>2021-05-09T05:58:01.333Z</updated>
+    <updated>2021-05-09T06:07:38.973Z</updated>
     
     <content type="html"><![CDATA[<p>こんにちは、Identity Manager サポート です。<br>たびたびお問い合わせいただく、ADMA Export 時のエラーについて、ご紹介いたします。</p><p>FIM/MIM をご利用いただく目的の一つとして、Active Directory Domain Controller との連携があります。<br>通常、FIM/MIM 上にて更新処理が発生した場合などには、Export 処理にて、対象のドメインコントローラーへ更新処理を実施します。<br>その際に、稀に unexpected-error (0x80004005) のエラーにて Export が失敗する場合があります。<br>このとき、イベントログには ID 6401 と 6301 のエラーログが記録されます。</p><p>たびたびお問い合わせをいただくものの、稀に発生し再現ができず、原因究明が難しいエラーとなります。<br>今回は、想定原因と影響範囲についてご紹介します。</p><p>=============================<br>考えられる原因について<br>=============================<br>類似の現象で弊社に報告されている事例からは、以下の状況で上記のエラーが発生しております。</p><ol><li><p>AD-MA のコネクタ スペースに破損した情報が含まれていた状態で Export した場合</p></li><li><p>Export にて、何らかの要因で AD によって属性が書き込み拒否された場合</p></li><li><p>の現象に関しましては、全てのコネクタ スペースを削除し、再作成にて対応が可能となりますが、多くは 2 のケースに該当しています。</p></li><li><p>の現象に関しましては、既存のオブジェクトが存在するような同期環境において、userAccountControl 属性や unicodePwd 属性などの特殊な属性の上書きが、一時的に AD で拒否された場合に事象発生したとの報告がされておりました。<br>一時的な発生のために、事例からは原因の特定は難しく、お客様には影響範囲の確認と、正常性の確認を依頼しております。</p></li></ol><p>=====================<br>影響の範囲について<br>=====================<br>イベント ID 6401 と 6301 が記録された場合の影響範囲は、イベント 6301 に記録される GUID のコネクタ スペース オブジェクトに関するオブジェクトのみとなります。<br>従いまして、万が一再び上記のイベントが記録された場合には、該当の GUID に関連するオブジェクトの状況をご確認ください。<br>正しく同期先の AD に同期されているか、FIM/MIM 上でエラーが起こっていないかが確認できた場合は、上記のイベントの発生に関しましては無視することができます。<br>また、頻発する場合には、別の問題である可能性もありますので、その際は、弊社サポートまでご相談ください。</p><p>イベントログの例:<br>＜アプリケーションイベントログ / ソース : FIMSynchronizationService / イベント ID: 6301＞<br>BAIL: MMS(5872): ..\tower.cpp(3993): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\tower.cpp(12030): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\csobj.cpp(1870): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\expcall.cpp(905): 0x80004005 (エラーを特定できません)<br>ERR_: MMS(5872): ..\expbase.cpp(2957): PutAnchorWithDnInternal failed on CS object {XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX} with 0x80004005 (pass 1 of 5) Forefront Identity Manager 4.4.1302.0</p><p>CS object {XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX} に対して属性値等の精査をします。</p><p>元の記事<br><a href="https://social.technet.microsoft.com/Forums/ja-JP/8bb002c3-7f20-4709-9a50-d83e1334b8cc/fimmim-adma12398export209662970212391-0x80004005-124561252112540?forum=jpidentitymanager" target="_blank" rel="noopener">https://social.technet.microsoft.com/Forums/ja-JP/8bb002c3-7f20-4709-9a50-d83e1334b8cc/fimmim-adma12398export209662970212391-0x80004005-124561252112540?forum=jpidentitymanager</a></p>]]></content>
     
@@ -46,7 +70,7 @@
     <link href="https://jp-sec.github.io/blog/information/README/"/>
     <id>https://jp-sec.github.io/blog/information/README/</id>
     <published>2016-01-01T03:00:00.000Z</published>
-    <updated>2021-05-09T05:58:01.333Z</updated>
+    <updated>2021-05-09T06:07:38.973Z</updated>
     
     <content type="html"><![CDATA[<p>日本マイクロソフト Azure セキュリティ サポート チームのブログです。<br>チームの担当製品であるセキュリティ製品の情報を中心にお届けします。</p>]]></content>
     
