@@ -15,7 +15,7 @@
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://user-images.githubusercontent.com/83526997/117562123-95a4e100-b0d7-11eb-9418-ec728bafc83e.png">
 <meta property="article:published_time" content="2019-03-29T22:42:00.000Z">
-<meta property="article:modified_time" content="2021-05-09T06:09:54.980Z">
+<meta property="article:modified_time" content="2021-05-09T06:16:34.103Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Identity Manager">
 <meta name="twitter:card" content="summary">
@@ -104,13 +104,13 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7018490c-8b6c-5449-a4c4-35c120208872%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMIM+2016+SP1+%E3%81%AB%E3%81%A6+PAM+%E3%82%92%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AB%E3%80%81http+404+%2F+500+%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E3%80%82%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FMIM%2FPAM_http_error%2F%29%0A*+Content+Source%3A+%5Barticles%2FMIM%2FPAM_http_error.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FMIM%2FPAM_http_error.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/MIM/PAM_http_error/" data-id="ckogs168h00011ms4fou1ap4s" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/MIM/PAM_http_error/" data-id="ckogs9pih00031nqd1aav0sr3" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>こんにちは、Identity Manager サポート です。<br>MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に、いくつかの rest API が HTTP 404 や 500 エラーが出力される場合があります。</p>
-<p><img src="https://user-images.githubusercontent.com/83526997/117562123-95a4e100-b0d7-11eb-9418-ec728bafc83e.png" alt="image"></p>
+<p><img src="https://user-images.githubusercontent.com/83526997/117562123-95a4e100-b0d7-11eb-9418-ec728bafc83e.png" alt="該当画面"></p>
 <p>この際の対応手順について、ご紹介します。<br>回避策としては、以下の通り MIM のサービスアカウントの権限の委譲を以下の通り実施します。<br>実施後は、MIM サーバー上にて、iisreset にて IIS サービスの再起動を実施ください。</p>
 <p>変更前</p>
 <p>変更後</p>
