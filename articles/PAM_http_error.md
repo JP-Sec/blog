@@ -5,6 +5,7 @@ tags:
 - Identity Manager
 ---
 
+
 こんにちは、Identity Manager サポート です。
 MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に、いくつかの rest API が HTTP 404 や 500 エラーが出力される場合があります。
 
