@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jp-sec.github.io/blog/MIM/MIM_ADMA_Export_0x80004005/</loc>
+    <loc>https://jp-sec.github.io/blog/MIM_ADMA_Export_0x80004005/</loc>
     
-    <lastmod>2021-05-09T06:32:35.552Z</lastmod>
+    <lastmod>2021-05-16T16:41:59.407Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jp-sec.github.io/blog/PAM_http_error/</loc>
+    
+    <lastmod>2021-05-16T16:41:59.407Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/information/README/</loc>
     
-    <lastmod>2021-05-09T06:32:35.552Z</lastmod>
+    <lastmod>2021-05-16T16:41:59.407Z</lastmod>
     
   </url>
   
