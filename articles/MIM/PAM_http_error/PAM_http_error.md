@@ -29,3 +29,6 @@ MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に
 この事象は、Off box と呼ばれる新しい委任に関連する機能の問題によるものとなります。
 
 MIM 2016 SP1 にて PAM 機能をご活用の際はご注意ください。
+
+元の記事
+https://social.technet.microsoft.com/Forums/ja-JP/9534b9f4-043f-4582-97c3-5353def2729b/mim-2016-sp1-1239512390-pam?forum=jpidentitymanager
