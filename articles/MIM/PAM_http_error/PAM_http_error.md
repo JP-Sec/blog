@@ -27,4 +27,5 @@ MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に
 ![変更前画面](https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API4.png?raw=true)
  
 この事象は、Off box と呼ばれる新しい委任に関連する機能の問題によるものとなります。
+
 MIM 2016 SP1 にて PAM 機能をご活用の際はご注意ください。
