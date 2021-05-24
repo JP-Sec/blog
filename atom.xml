@@ -6,7 +6,7 @@
   <link href="https://jp-sec.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://jp-sec.github.io/blog/"/>
-  <updated>2021-05-24T22:45:59.352Z</updated>
+  <updated>2021-05-24T22:49:43.877Z</updated>
   <id>https://jp-sec.github.io/blog/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://jp-sec.github.io/blog/RightsManagementServicesClient2.1_1/"/>
     <id>https://jp-sec.github.io/blog/RightsManagementServicesClient2.1_1/</id>
     <published>2020-06-23T18:19:00.000Z</published>
-    <updated>2021-05-24T22:45:59.352Z</updated>
+    <updated>2021-05-24T22:49:43.877Z</updated>
     
     <content type="html"><![CDATA[<p>本フォーラムは 日本マイクロソフトサポートより Rights Management Services Client 2.1 で確認しております動作仕様について情報を掲載しております。</p><p>[事象]<br>Rights Management Services Client 2.1 を使用して、ネットワーク共有フォルダーに格納されている Excel ファイルを暗号/復号する際に、ファイル形式によって、処理時間に差異があることを確認しております。<br>同じファイル サイズの XLSX 形式と XLS 形式のファイルの処理を比較した場合に、Office ファイルの構造の違いにより、処理されるデータ量などが異なることから、より多くの通信が発生し、XLSX 形式のファイルの処理に、より多くの時間がかかることを確認しております。</p><p>[詳細]<br>以下の方法にて、XLSX 形式のファイルを暗号/復号した場合に事象が発生することを確認しております。</p><p>・Rights Management Service Client 2.1 の IpcfEncryptFile/IpcfDecryptFile を使用</p><p>XLSX 形式のファイル構造に起因しておりますため、Rights Management Service Client 2.1 のバージョンに関わらず、すべてのバージョンにて事象が発生することが想定されます。<br>※ 現在最新のバージョン 1.0.4114.0 でも事象の再現を確認しております。</p><p>また、DOCX や PPTX 形式など、その他の Open XML 形式のファイルにおきましても、DOC や PPT 形式などと比較した場合に、同様に処理時間に差異が発生する可能性があります。</p><p>[回避策]<br>暗号/復号対象となるファイルを、暗号/復号処理を行う端末のローカル フォルダー上に、事前に配置することで、遅延を回避することが可能です。</p><p>なお、本情報の内容は、作成日時点でのものであり、予告なく変更される場合があります。<br>何卒ご留意いただけますようお願い申し上げます。</p><p>元の記事<br><a href="https://social.technet.microsoft.com/Forums/ja-JP/ceadc243-ec23-4c42-879f-9f6431fbad42/excel?forum=jpsecurity">https://social.technet.microsoft.com/Forums/ja-JP/ceadc243-ec23-4c42-879f-9f6431fbad42/excel?forum=jpsecurity</a></p>]]></content>
     
@@ -44,7 +44,7 @@
     <link href="https://jp-sec.github.io/blog/Azure_Information_Protection_2019_11_18/"/>
     <id>https://jp-sec.github.io/blog/Azure_Information_Protection_2019_11_18/</id>
     <published>2019-11-18T00:50:00.000Z</published>
-    <updated>2021-05-24T22:45:59.348Z</updated>
+    <updated>2021-05-24T22:49:43.873Z</updated>
     
     <content type="html"><![CDATA[<p>◆ この情報はマイクロソフトサポートからのご案内となります(更新: 2019/11/18) ◆</p><p>Azure Information Protection にてコンテンツの保護や復号機能をご利用いただく場合の通信要件につきましては、以下のように弊社公開情報にてお纏めしております。</p><p>&lt;ファイアウォールとネットワーク インフラストラクチャ&gt;<br><a href="https://docs.microsoft.com/ja-jp/azure/information-protection/requirements#firewalls-and-network-infrastructure">https://docs.microsoft.com/ja-jp/azure/information-protection/requirements#firewalls-and-network-infrastructure</a></p><p>上記公開情報内に記載のリンクより、許可が必要な URL などの詳細を確認することが可能です。</p><p>なお、上記は、Azure information Protection 固有の通信要件となります。<br>そのため、その他にも Windows OS 観点などにて許可が必要な URL があることを確認しておりますので、以下にご案内いたします。</p><p>Azure information Protection では、SSL 通信を利用いたしますので、SSL 証明書を取得する際に以下のエンドポイントへの通信が発生する場合がございます。</p><p>ctldl.windowsupdate.com</p><p>こちらは、ルート証明書更新プログラムが、Windows Update 上の信頼機関の一覧を自動的に確認し、更新プログラムがあるかどうかを確認するために使用されます。<br>この URL への通信が許可されていない場合に、Azure information Protection ビューアーによるファイル閲覧時にエラーが発生する事象の報告を確認しております。<br>そのため、Azure information Protection 利用時には、必要に応じて、こちらの URL を許可することをご検討ください。</p><p>※ 現時点では、上記以外の URL は確認できておりませんが、今後他にも通信許可が必要な URL が報告されました際には、情報を更新して参ります。</p><p>[その他の参考 URL]<br>ルート証明書更新プログラムについては、以下の弊社公開情報およびブログをご参照ください。</p><p>&lt;Windows Vista、Windows Server 2008、Windows 7、および Windows Server 2008 R2 の信頼されていない証明書の自動更新ツールについて&gt;<br><a href="https://support.microsoft.com/ja-jp/help/2677070/an-automatic-updater-of-untrusted-certificates-is-available-for-window">https://support.microsoft.com/ja-jp/help/2677070/an-automatic-updater-of-untrusted-certificates-is-available-for-window</a></p><p>&lt;マイクロソフトが提供する信頼できる証明書利用基盤 ～ルート証明書更新プログラムと更新ツール ～&gt;<br><a href="https://blogs.technet.microsoft.com/jpsecurity/2013/01/16/65374/">https://blogs.technet.microsoft.com/jpsecurity/2013/01/16/65374/</a></p><p>Windows 10 端末が接続するエンドポイントについては、以下の弊社公開情報をご参考ください。</p><p>&lt;Windows 10 Enterprise Version 1903 の接続エンドポイントの管理&gt;<br><a href="https://docs.microsoft.com/ja-jp/windows/privacy/manage-windows-1903-endpoints">https://docs.microsoft.com/ja-jp/windows/privacy/manage-windows-1903-endpoints</a></p><p>元の記事<br><a href="https://social.technet.microsoft.com/Forums/ja-JP/6c111ee2-675f-4c27-915b-2e055bc176fd/azure-information-protection?forum=jpsecurity">https://social.technet.microsoft.com/Forums/ja-JP/6c111ee2-675f-4c27-915b-2e055bc176fd/azure-information-protection?forum=jpsecurity</a></p>]]></content>
     
@@ -63,11 +63,35 @@
   </entry>
   
   <entry>
+    <title>Windows Defender Antivirus 前回の更新日付が未来日になる</title>
+    <link href="https://jp-sec.github.io/blog/Defender_2019_05_08/"/>
+    <id>https://jp-sec.github.io/blog/Defender_2019_05_08/</id>
+    <published>2019-05-08T05:27:00.000Z</published>
+    <updated>2021-05-24T22:49:43.873Z</updated>
+    
+    <content type="html"><![CDATA[<p>皆さま、こんにちは、Windows Defender サポート です。</p><p>今回は Windows Defender Antivirus の更新日付の表示不具合についてについてご紹介致します。</p><p>Windows 10 バージョン 1809 に標準で実装されている Windows Defender Antivirus において、前回の更新日付が実際の時間より + 9 時間された日付になる不具合がございます。<br>当該不具合は表示上の問題であり、その他の機能に関しては一切影響はございません。</p><p><img src="https://github.com/JP-Sec/blog/blob/main/articles/defender/1436117.jpg?raw=true"></p><p>代替策として、イベントログ ビューアー (eventvwr.msc) を起動し、以下ログより最新の ID 2000 のログの日付をご確認くだい。</p><p>・ [アプリケーションとサービス ログ] - [Microsoft] - [Windows] - [Windows Defender] - Operational</p><p><img src="https://github.com/JP-Sec/blog/blob/main/articles/defender/1436118.jpg?raw=true"></p><p>本不具合はバージョン 1903 によって修正されております。<br>また、現時点でバージョン 1809 での修正は未定となっております。</p><p>恐れ入りますが、何卒ご理解賜りますようお願い申し上げます。</p><p>元の記事<br><a href="https://social.technet.microsoft.com/Forums/ja-JP/6458cc33-9564-4944-b45e-7c5446a0ffd0/windows-defender-antivirus?forum=jpsecurity">https://social.technet.microsoft.com/Forums/ja-JP/6458cc33-9564-4944-b45e-7c5446a0ffd0/windows-defender-antivirus?forum=jpsecurity</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;皆さま、こんにちは、Windows Defender サポート です。&lt;/p&gt;
+&lt;p&gt;今回は Windows Defender Antivirus の更新日付の表示不具合についてについてご紹介致します。&lt;/p&gt;
+&lt;p&gt;Windows 10 バージョン 1809 に標準で実装</summary>
+      
+    
+    
+    
+    
+    <category term="Windows Defender" scheme="https://jp-sec.github.io/blog/tags/Windows-Defender/"/>
+    
+  </entry>
+  
+  <entry>
     <title>MIM 2016 SP1 にて PAM を利用する際に、http 404 / 500 エラーが発生する。</title>
     <link href="https://jp-sec.github.io/blog/PAM_http_error/"/>
     <id>https://jp-sec.github.io/blog/PAM_http_error/</id>
     <published>2019-03-29T22:42:00.000Z</published>
-    <updated>2021-05-24T22:45:59.352Z</updated>
+    <updated>2021-05-24T22:49:43.877Z</updated>
     
     <content type="html"><![CDATA[<p>こんにちは、Identity Manager サポート です。<br>MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に、いくつかの rest API が HTTP 404 や 500 エラーが出力される場合があります。</p><p><img src="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API.png?raw=true" alt="該当画面1"></p><p><img src="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API2.png?raw=true" alt="該当画面2"></p><p>この際の対応手順について、ご紹介します。<br>回避策としては、以下の通り MIM のサービスアカウントの権限の委譲を以下の通り実施します。<br>実施後は、MIM サーバー上にて、iisreset にて IIS サービスの再起動を実施ください。</p><p>変更前</p><p><img src="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API3.png?raw=true" alt="変更前画面"></p><p>変更後</p><p><img src="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API4.png?raw=true" alt="変更前画面"></p><p>この事象は、Off box と呼ばれる新しい委任に関連する機能の問題によるものとなります。</p><p>MIM 2016 SP1 にて PAM 機能をご活用の際はご注意ください。</p><p>元の記事<br><a href="https://social.technet.microsoft.com/Forums/ja-JP/9534b9f4-043f-4582-97c3-5353def2729b/mim-2016-sp1-1239512390-pam?forum=jpidentitymanager">https://social.technet.microsoft.com/Forums/ja-JP/9534b9f4-043f-4582-97c3-5353def2729b/mim-2016-sp1-1239512390-pam?forum=jpidentitymanager</a></p>]]></content>
     
@@ -89,7 +113,7 @@
     <link href="https://jp-sec.github.io/blog/MIM_ADMA_Export_0x80004005/"/>
     <id>https://jp-sec.github.io/blog/MIM_ADMA_Export_0x80004005/</id>
     <published>2019-03-29T22:33:00.000Z</published>
-    <updated>2021-05-24T22:45:59.352Z</updated>
+    <updated>2021-05-24T22:49:43.873Z</updated>
     
     <content type="html"><![CDATA[<p>こんにちは、Identity Manager サポート です。<br>たびたびお問い合わせいただく、ADMA Export 時のエラーについて、ご紹介いたします。</p><p>FIM/MIM をご利用いただく目的の一つとして、Active Directory Domain Controller との連携があります。<br>通常、FIM/MIM 上にて更新処理が発生した場合などには、Export 処理にて、対象のドメインコントローラーへ更新処理を実施します。<br>その際に、稀に unexpected-error (0x80004005) のエラーにて Export が失敗する場合があります。<br>このとき、イベントログには ID 6401 と 6301 のエラーログが記録されます。</p><p>たびたびお問い合わせをいただくものの、稀に発生し再現ができず、原因究明が難しいエラーとなります。<br>今回は、想定原因と影響範囲についてご紹介します。</p><p>=============================<br>考えられる原因について<br>=============================<br>類似の現象で弊社に報告されている事例からは、以下の状況で上記のエラーが発生しております。</p><ol><li><p>AD-MA のコネクタ スペースに破損した情報が含まれていた状態で Export した場合</p></li><li><p>Export にて、何らかの要因で AD によって属性が書き込み拒否された場合</p></li><li><p>の現象に関しましては、全てのコネクタ スペースを削除し、再作成にて対応が可能となりますが、多くは 2 のケースに該当しています。</p></li><li><p>の現象に関しましては、既存のオブジェクトが存在するような同期環境において、userAccountControl 属性や unicodePwd 属性などの特殊な属性の上書きが、一時的に AD で拒否された場合に事象発生したとの報告がされておりました。<br>一時的な発生のために、事例からは原因の特定は難しく、お客様には影響範囲の確認と、正常性の確認を依頼しております。</p></li></ol><p>=====================<br>影響の範囲について<br>=====================<br>イベント ID 6401 と 6301 が記録された場合の影響範囲は、イベント 6301 に記録される GUID のコネクタ スペース オブジェクトに関するオブジェクトのみとなります。<br>従いまして、万が一再び上記のイベントが記録された場合には、該当の GUID に関連するオブジェクトの状況をご確認ください。<br>正しく同期先の AD に同期されているか、FIM/MIM 上でエラーが起こっていないかが確認できた場合は、上記のイベントの発生に関しましては無視することができます。<br>また、頻発する場合には、別の問題である可能性もありますので、その際は、弊社サポートまでご相談ください。</p><p>イベントログの例:<br>＜アプリケーションイベントログ / ソース : FIMSynchronizationService / イベント ID: 6301＞<br>BAIL: MMS(5872): ..\tower.cpp(3993): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\tower.cpp(12030): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\csobj.cpp(1870): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\expcall.cpp(905): 0x80004005 (エラーを特定できません)<br>ERR_: MMS(5872): ..\expbase.cpp(2957): PutAnchorWithDnInternal failed on CS object {XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX} with 0x80004005 (pass 1 of 5) Forefront Identity Manager 4.4.1302.0</p><p>CS object {XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX} に対して属性値等の精査をします。</p><p>元の記事<br><a href="https://social.technet.microsoft.com/Forums/ja-JP/8bb002c3-7f20-4709-9a50-d83e1334b8cc/fimmim-adma12398export209662970212391-0x80004005-124561252112540?forum=jpidentitymanager">https://social.technet.microsoft.com/Forums/ja-JP/8bb002c3-7f20-4709-9a50-d83e1334b8cc/fimmim-adma12398export209662970212391-0x80004005-124561252112540?forum=jpidentitymanager</a></p>]]></content>
     
@@ -112,7 +136,7 @@
     <link href="https://jp-sec.github.io/blog/information/README/"/>
     <id>https://jp-sec.github.io/blog/information/README/</id>
     <published>2016-01-01T03:00:00.000Z</published>
-    <updated>2021-05-24T22:45:59.352Z</updated>
+    <updated>2021-05-24T22:49:43.877Z</updated>
     
     <content type="html"><![CDATA[<p>日本マイクロソフト Azure セキュリティ サポート チームのブログです。<br>チームの担当製品であるセキュリティ製品の情報を中心にお届けします。</p>]]></content>
     
