@@ -4,25 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>MIM 2016 SP1 にて PAM を利用する際に、http 404 / 500 エラーが発生する。 | Japan CSS Security Support Blog</title>
+  <title>Excel ファイルに対する暗号/復号処理の遅延について | Japan CSS Security Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは、Identity Manager サポート です。MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に、いくつかの rest API が HTTP 404 や 500 エラーが出力される場合があります。   この際の対応手順について、ご紹介します。回避策としては、以下の通り MIM のサービスアカウントの権限の委譲を以下の">
+  <meta name="description" content="本フォーラムは 日本マイクロソフトサポートより Rights Management Services Client 2.1 で確認しております動作仕様について情報を掲載しております。 [事象]Rights Management Services Client 2.1 を使用して、ネットワーク共有フォルダーに格納されている Excel ファイルを暗号&#x2F;復号する際に、ファイル形式によって、処理時間に差">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MIM 2016 SP1 にて PAM を利用する際に、http 404 &#x2F; 500 エラーが発生する。">
-<meta property="og:url" content="https://jp-sec.github.io/blog/PAM_http_error/index.html">
+<meta property="og:title" content="Excel ファイルに対する暗号&#x2F;復号処理の遅延について">
+<meta property="og:url" content="https://jp-sec.github.io/blog/RightsManagementServicesClient2.1/index.html">
 <meta property="og:site_name" content="Japan CSS Security Support Blog">
-<meta property="og:description" content="こんにちは、Identity Manager サポート です。MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に、いくつかの rest API が HTTP 404 や 500 エラーが出力される場合があります。   この際の対応手順について、ご紹介します。回避策としては、以下の通り MIM のサービスアカウントの権限の委譲を以下の">
+<meta property="og:description" content="本フォーラムは 日本マイクロソフトサポートより Rights Management Services Client 2.1 で確認しております動作仕様について情報を掲載しております。 [事象]Rights Management Services Client 2.1 を使用して、ネットワーク共有フォルダーに格納されている Excel ファイルを暗号&#x2F;復号する際に、ファイル形式によって、処理時間に差">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API.png?raw=true">
-<meta property="og:image" content="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API2.png?raw=true">
-<meta property="og:image" content="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API3.png?raw=true">
-<meta property="og:image" content="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API4.png?raw=true">
-<meta property="article:published_time" content="2019-03-29T22:42:00.000Z">
+<meta property="article:published_time" content="2020-06-23T18:19:00.000Z">
 <meta property="article:modified_time" content="2021-05-24T22:17:56.186Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
-<meta property="article:tag" content="Identity Manager">
+<meta property="article:tag" content="Rights Management Service">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API.png?raw=true">
   
     <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
   
@@ -84,7 +79,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-PAM_http_error" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-RightsManagementServicesClient2.1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -93,7 +88,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MIM 2016 SP1 にて PAM を利用する際に、http 404 / 500 エラーが発生する。
+      Excel ファイルに対する暗号/復号処理の遅延について
     </h1>
   
 
@@ -101,28 +96,25 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2019-03-29T22:42:00.000Z" itemprop="datePublished">2019-03-30</time>
+  <time datetime="2020-06-23T18:19:00.000Z" itemprop="datePublished">2020-06-24</time>
 </a>
         
         
-        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+cbb39521-ce1b-5d91-99d4-12e318818b75%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMIM+2016+SP1+%E3%81%AB%E3%81%A6+PAM+%E3%82%92%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AB%E3%80%81http+404+%2F+500+%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E3%80%82%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FPAM_http_error%2F%29%0A*+Content+Source%3A+%5Barticles%2FPAM_http_error.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FPAM_http_error.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+b02bd4be-d566-5e67-8d86-5eb247fec53d%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BExcel+%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B%E6%9A%97%E5%8F%B7%2F%E5%BE%A9%E5%8F%B7%E5%87%A6%E7%90%86%E3%81%AE%E9%81%85%E5%BB%B6%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FRightsManagementServicesClient2.1%2F%29%0A*+Content+Source%3A+%5Barticles%2FRightsManagementServicesClient2.1.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FRightsManagementServicesClient2.1.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/PAM_http_error/" data-id="ckp367ssz00010mmu8qsbdwuv" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/RightsManagementServicesClient2.1/" data-id="ckp367st700030mmugyte7hnr" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは、Identity Manager サポート です。<br>MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に、いくつかの rest API が HTTP 404 や 500 エラーが出力される場合があります。</p>
-<p><img src="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API.png?raw=true" alt="該当画面1"></p>
-<p><img src="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API2.png?raw=true" alt="該当画面2"></p>
-<p>この際の対応手順について、ご紹介します。<br>回避策としては、以下の通り MIM のサービスアカウントの権限の委譲を以下の通り実施します。<br>実施後は、MIM サーバー上にて、iisreset にて IIS サービスの再起動を実施ください。</p>
-<p>変更前</p>
-<p><img src="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API3.png?raw=true" alt="変更前画面"></p>
-<p>変更後</p>
-<p><img src="https://github.com/JP-Sec/blog/blob/main/articles/MIM/PAM_http_error/MIM_API4.png?raw=true" alt="変更前画面"></p>
-<p>この事象は、Off box と呼ばれる新しい委任に関連する機能の問題によるものとなります。</p>
-<p>MIM 2016 SP1 にて PAM 機能をご活用の際はご注意ください。</p>
-<p>元の記事<br><a target="_blank" rel="noopener" href="https://social.technet.microsoft.com/Forums/ja-JP/9534b9f4-043f-4582-97c3-5353def2729b/mim-2016-sp1-1239512390-pam?forum=jpidentitymanager">https://social.technet.microsoft.com/Forums/ja-JP/9534b9f4-043f-4582-97c3-5353def2729b/mim-2016-sp1-1239512390-pam?forum=jpidentitymanager</a></p>
+        <p>本フォーラムは 日本マイクロソフトサポートより Rights Management Services Client 2.1 で確認しております動作仕様について情報を掲載しております。</p>
+<p>[事象]<br>Rights Management Services Client 2.1 を使用して、ネットワーク共有フォルダーに格納されている Excel ファイルを暗号/復号する際に、ファイル形式によって、処理時間に差異があることを確認しております。<br>同じファイル サイズの XLSX 形式と XLS 形式のファイルの処理を比較した場合に、Office ファイルの構造の違いにより、処理されるデータ量などが異なることから、より多くの通信が発生し、XLSX 形式のファイルの処理に、より多くの時間がかかることを確認しております。</p>
+<p>[詳細]<br>以下の方法にて、XLSX 形式のファイルを暗号/復号した場合に事象が発生することを確認しております。</p>
+<p>・Rights Management Service Client 2.1 の IpcfEncryptFile/IpcfDecryptFile を使用</p>
+<p>XLSX 形式のファイル構造に起因しておりますため、Rights Management Service Client 2.1 のバージョンに関わらず、すべてのバージョンにて事象が発生することが想定されます。<br>※ 現在最新のバージョン 1.0.4114.0 でも事象の再現を確認しております。</p>
+<p>また、DOCX や PPTX 形式など、その他の Open XML 形式のファイルにおきましても、DOC や PPT 形式などと比較した場合に、同様に処理時間に差異が発生する可能性があります。</p>
+<p>[回避策]<br>暗号/復号対象となるファイルを、暗号/復号処理を行う端末のローカル フォルダー上に、事前に配置することで、遅延を回避することが可能です。</p>
+<p>なお、本情報の内容は、作成日時点でのものであり、予告なく変更される場合があります。<br>何卒ご留意いただけますようお願い申し上げます。</p>
 
       
       
@@ -130,10 +122,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Rights-Management-Service/" rel="tag">Rights Management Service</a></li></ul>
 
         
-        <a href="https://github.com/jp-sec/blog/edit/main/articles/PAM_http_error.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/RightsManagementServicesClient2.1.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -141,19 +133,10 @@
     
 <nav id="article-nav">
   
-    <a href="../RightsManagementServicesClient2.1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          Excel ファイルに対する暗号/復号処理の遅延について
-        
-      </div>
-    </a>
   
-  
-    <a href="../MIM_ADMA_Export_0x80004005/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../PAM_http_error/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">FIM/MIM ADMAのExport処理で 0x80004005 エラー</div>
+      <div class="article-nav-title">MIM 2016 SP1 にて PAM を利用する際に、http 404 / 500 エラーが発生する。</div>
     </a>
   
 </nav>
@@ -172,11 +155,11 @@
       <ul>
         
           <li>
-            <a href="../RightsManagementServicesClient2.1/">Excel ファイルに対する暗号/復号処理の遅延について</a>
+            <a href="">Excel ファイルに対する暗号/復号処理の遅延について</a>
           </li>
         
           <li>
-            <a href="">MIM 2016 SP1 にて PAM を利用する際に、http 404 / 500 エラーが発生する。</a>
+            <a href="../PAM_http_error/">MIM 2016 SP1 にて PAM を利用する際に、http 404 / 500 エラーが発生する。</a>
           </li>
         
           <li>

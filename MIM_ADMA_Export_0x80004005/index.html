@@ -14,7 +14,7 @@
 <meta property="og:description" content="こんにちは、Identity Manager サポート です。たびたびお問い合わせいただく、ADMA Export 時のエラーについて、ご紹介いたします。 FIM&#x2F;MIM をご利用いただく目的の一つとして、Active Directory Domain Controller との連携があります。通常、FIM&#x2F;MIM 上にて更新処理が発生した場合などには、Export 処理にて、対象のドメインコント">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2019-03-29T22:33:00.000Z">
-<meta property="article:modified_time" content="2021-05-16T16:41:59.407Z">
+<meta property="article:modified_time" content="2021-05-24T22:17:56.186Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Identity Manager">
 <meta name="twitter:card" content="summary">
@@ -36,7 +36,7 @@
   
 <link rel="stylesheet" href="../css/style.css">
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   <div id="container">
@@ -54,7 +54,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" href="https://cssjpn.github.io/" target="_blank" rel="noopener">サポート情報</a>
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -102,7 +102,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7142f846-e34f-5e1d-8490-854aad9a692c%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BFIM%2FMIM+ADMA%E3%81%AEExport%E5%87%A6%E7%90%86%E3%81%A7+0x80004005+%E3%82%A8%E3%83%A9%E3%83%BC%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FMIM_ADMA_Export_0x80004005%2F%29%0A*+Content+Source%3A+%5Barticles%2FMIM_ADMA_Export_0x80004005.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FMIM_ADMA_Export_0x80004005.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/MIM_ADMA_Export_0x80004005/" data-id="ckoreoy7i00000pqdhfgl4agt" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/MIM_ADMA_Export_0x80004005/" data-id="ckp367sst00000mmu24yx6mkx" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -124,7 +124,7 @@
 <p>=====================<br>影響の範囲について<br>=====================<br>イベント ID 6401 と 6301 が記録された場合の影響範囲は、イベント 6301 に記録される GUID のコネクタ スペース オブジェクトに関するオブジェクトのみとなります。<br>従いまして、万が一再び上記のイベントが記録された場合には、該当の GUID に関連するオブジェクトの状況をご確認ください。<br>正しく同期先の AD に同期されているか、FIM/MIM 上でエラーが起こっていないかが確認できた場合は、上記のイベントの発生に関しましては無視することができます。<br>また、頻発する場合には、別の問題である可能性もありますので、その際は、弊社サポートまでご相談ください。</p>
 <p>イベントログの例:<br>＜アプリケーションイベントログ / ソース : FIMSynchronizationService / イベント ID: 6301＞<br>BAIL: MMS(5872): ..\tower.cpp(3993): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\tower.cpp(12030): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\csobj.cpp(1870): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\expcall.cpp(905): 0x80004005 (エラーを特定できません)<br>ERR_: MMS(5872): ..\expbase.cpp(2957): PutAnchorWithDnInternal failed on CS object {XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX} with 0x80004005 (pass 1 of 5) Forefront Identity Manager 4.4.1302.0</p>
 <p>CS object {XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX} に対して属性値等の精査をします。</p>
-<p>元の記事<br><a href="https://social.technet.microsoft.com/Forums/ja-JP/8bb002c3-7f20-4709-9a50-d83e1334b8cc/fimmim-adma12398export209662970212391-0x80004005-124561252112540?forum=jpidentitymanager" target="_blank" rel="noopener">https://social.technet.microsoft.com/Forums/ja-JP/8bb002c3-7f20-4709-9a50-d83e1334b8cc/fimmim-adma12398export209662970212391-0x80004005-124561252112540?forum=jpidentitymanager</a></p>
+<p>元の記事<br><a target="_blank" rel="noopener" href="https://social.technet.microsoft.com/Forums/ja-JP/8bb002c3-7f20-4709-9a50-d83e1334b8cc/fimmim-adma12398export209662970212391-0x80004005-124561252112540?forum=jpidentitymanager">https://social.technet.microsoft.com/Forums/ja-JP/8bb002c3-7f20-4709-9a50-d83e1334b8cc/fimmim-adma12398export209662970212391-0x80004005-124561252112540?forum=jpidentitymanager</a></p>
 
       
       
@@ -174,6 +174,10 @@
       <ul>
         
           <li>
+            <a href="../RightsManagementServicesClient2.1/">Excel ファイルに対する暗号/復号処理の遅延について</a>
+          </li>
+        
+          <li>
             <a href="../PAM_http_error/">MIM 2016 SP1 にて PAM を利用する際に、http 404 / 500 エラーが発生する。</a>
           </li>
         
@@ -194,7 +198,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">タグ</h3>
     <div class="widget">
-      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/" rel="tag">Information</a></li></ul>  -->
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Rights-Management-Service/" rel="tag">Rights Management Service</a></li></ul>  -->
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/">Information</a><span class="tag-list-count">1</span><ul></ul></li></ul>
     </div>
   </div>
@@ -205,7 +209,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
     </div>
   </div>
 
@@ -215,7 +219,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">タグクラウド</h3>
     <div class="widget tagcloud">
-      <a href="../tags/Identity-Manager/" style="font-size: 20px;">Identity Manager</a> <a href="../tags/Information/" style="font-size: 10px;">Information</a>
+      <a href="../tags/Identity-Manager/" style="font-size: 20px;">Identity Manager</a> <a href="../tags/Information/" style="font-size: 10px;">Information</a> <a href="../tags/Rights-Management-Service/" style="font-size: 10px;">Rights Management Service</a>
     </div>
   </div>
 
