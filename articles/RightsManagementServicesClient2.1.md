@@ -27,3 +27,5 @@ XLSX 形式のファイル構造に起因しておりますため、Rights Manag
 なお、本情報の内容は、作成日時点でのものであり、予告なく変更される場合があります。
 何卒ご留意いただけますようお願い申し上げます。
 
+元の記事
+https://social.technet.microsoft.com/Forums/ja-JP/ceadc243-ec23-4c42-879f-9f6431fbad42/excel?forum=jpsecurity
