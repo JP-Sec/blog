@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   
   
-  <title>Azure Information Protection の通信要件に関する補足情報 | Japan CSS Security Support Blog</title>
+  <title>Azure Information Protection サービスプリンシパルを用いた認証が失敗する事象について 更新:2019/12/3 | Japan CSS Security Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="◆ この情報はマイクロソフトサポートからのご案内となります(更新: 2019&#x2F;11&#x2F;18) ◆ Azure Information Protection にてコンテンツの保護や復号機能をご利用いただく場合の通信要件につきましては、以下のように弊社公開情報にてお纏めしております。 &lt;ファイアウォールとネットワーク インフラストラクチャ&gt;https:&#x2F;&#x2F;docs.microsoft.com">
+  <meta name="description" content="◆ この情報はマイクロソフトサポートからのご案内となります(更新: 2019&#x2F;12&#x2F;3) ◆ Azure Information Protection サービスをご利用される場合にサービスプリンシパル（Set-RMSServerAuthentication）を用いる場合に認証ができず、処理に失敗する事象が確認できております。この事象について以下のとおりご連絡いたします。 [事象]2019 年 8">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Azure Information Protection の通信要件に関する補足情報">
-<meta property="og:url" content="https://jp-sec.github.io/blog/Azure_Information_Protection_2019_11_18/index.html">
+<meta property="og:title" content="Azure Information Protection サービスプリンシパルを用いた認証が失敗する事象について 更新:2019&#x2F;12&#x2F;3">
+<meta property="og:url" content="https://jp-sec.github.io/blog/Azure_Information_Protectio_2019_08_30/index.html">
 <meta property="og:site_name" content="Japan CSS Security Support Blog">
-<meta property="og:description" content="◆ この情報はマイクロソフトサポートからのご案内となります(更新: 2019&#x2F;11&#x2F;18) ◆ Azure Information Protection にてコンテンツの保護や復号機能をご利用いただく場合の通信要件につきましては、以下のように弊社公開情報にてお纏めしております。 &lt;ファイアウォールとネットワーク インフラストラクチャ&gt;https:&#x2F;&#x2F;docs.microsoft.com">
+<meta property="og:description" content="◆ この情報はマイクロソフトサポートからのご案内となります(更新: 2019&#x2F;12&#x2F;3) ◆ Azure Information Protection サービスをご利用される場合にサービスプリンシパル（Set-RMSServerAuthentication）を用いる場合に認証ができず、処理に失敗する事象が確認できております。この事象について以下のとおりご連絡いたします。 [事象]2019 年 8">
 <meta property="og:locale" content="ja_JP">
-<meta property="article:published_time" content="2019-11-18T00:50:00.000Z">
+<meta property="article:published_time" content="2019-08-29T15:00:00.000Z">
 <meta property="article:modified_time" content="2021-05-24T23:30:54.893Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Azure Information Protection">
@@ -79,7 +79,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Azure_Information_Protection_2019_11_18" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Azure_Information_Protectio_2019_08_30" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -88,7 +88,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Azure Information Protection の通信要件に関する補足情報
+      Azure Information Protection サービスプリンシパルを用いた認証が失敗する事象について 更新:2019/12/3
     </h1>
   
 
@@ -96,32 +96,30 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2019-11-18T00:50:00.000Z" itemprop="datePublished">2019-11-18</time>
+  <time datetime="2019-08-29T15:00:00.000Z" itemprop="datePublished">2019-08-30</time>
 </a>
         
         
-        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+29af0056-7811-53e8-95aa-8f72aa17420c%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Information+Protection+%E3%81%AE%E9%80%9A%E4%BF%A1%E8%A6%81%E4%BB%B6%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E8%A3%9C%E8%B6%B3%E6%83%85%E5%A0%B1%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FAzure_Information_Protection_2019_11_18%2F%29%0A*+Content+Source%3A+%5Barticles%2FAzure_Information_Protection_2019_11_18.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FAzure_Information_Protection_2019_11_18.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+2b6fa996-855b-55f8-a6d5-17389481fe9d%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Information+Protection+%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B7%E3%83%91%E3%83%AB%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E8%AA%8D%E8%A8%BC%E3%81%8C%E5%A4%B1%E6%95%97%E3%81%99%E3%82%8B%E4%BA%8B%E8%B1%A1%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6+%E6%9B%B4%E6%96%B0%3A2019%2F12%2F3%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FAzure_Information_Protectio_2019_08_30%2F%29%0A*+Content+Source%3A+%5Barticles%2FAzure_Information_Protectio_2019_08_30.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FAzure_Information_Protectio_2019_08_30.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Azure_Information_Protection_2019_11_18/" data-id="ckp38tn8300030moc173d4rn3" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Azure_Information_Protectio_2019_08_30/" data-id="ckp38tn8000010mocatt33p1a" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>◆ この情報はマイクロソフトサポートからのご案内となります(更新: 2019/11/18) ◆</p>
-<p>Azure Information Protection にてコンテンツの保護や復号機能をご利用いただく場合の通信要件につきましては、以下のように弊社公開情報にてお纏めしております。</p>
-<p>&lt;ファイアウォールとネットワーク インフラストラクチャ&gt;<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/information-protection/requirements#firewalls-and-network-infrastructure">https://docs.microsoft.com/ja-jp/azure/information-protection/requirements#firewalls-and-network-infrastructure</a></p>
-<p>上記公開情報内に記載のリンクより、許可が必要な URL などの詳細を確認することが可能です。</p>
-<p>なお、上記は、Azure information Protection 固有の通信要件となります。<br>そのため、その他にも Windows OS 観点などにて許可が必要な URL があることを確認しておりますので、以下にご案内いたします。</p>
-<p>Azure information Protection では、SSL 通信を利用いたしますので、SSL 証明書を取得する際に以下のエンドポイントへの通信が発生する場合がございます。</p>
-<p>ctldl.windowsupdate.com</p>
-<p>こちらは、ルート証明書更新プログラムが、Windows Update 上の信頼機関の一覧を自動的に確認し、更新プログラムがあるかどうかを確認するために使用されます。<br>この URL への通信が許可されていない場合に、Azure information Protection ビューアーによるファイル閲覧時にエラーが発生する事象の報告を確認しております。<br>そのため、Azure information Protection 利用時には、必要に応じて、こちらの URL を許可することをご検討ください。</p>
-<p>※ 現時点では、上記以外の URL は確認できておりませんが、今後他にも通信許可が必要な URL が報告されました際には、情報を更新して参ります。</p>
-<p>[その他の参考 URL]<br>ルート証明書更新プログラムについては、以下の弊社公開情報およびブログをご参照ください。</p>
-<p>&lt;Windows Vista、Windows Server 2008、Windows 7、および Windows Server 2008 R2 の信頼されていない証明書の自動更新ツールについて&gt;<br><a target="_blank" rel="noopener" href="https://support.microsoft.com/ja-jp/help/2677070/an-automatic-updater-of-untrusted-certificates-is-available-for-window">https://support.microsoft.com/ja-jp/help/2677070/an-automatic-updater-of-untrusted-certificates-is-available-for-window</a></p>
-<p>&lt;マイクロソフトが提供する信頼できる証明書利用基盤 ～ルート証明書更新プログラムと更新ツール ～&gt;<br><a target="_blank" rel="noopener" href="https://blogs.technet.microsoft.com/jpsecurity/2013/01/16/65374/">https://blogs.technet.microsoft.com/jpsecurity/2013/01/16/65374/</a></p>
-<p>Windows 10 端末が接続するエンドポイントについては、以下の弊社公開情報をご参考ください。</p>
-<p>&lt;Windows 10 Enterprise Version 1903 の接続エンドポイントの管理&gt;<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/windows/privacy/manage-windows-1903-endpoints">https://docs.microsoft.com/ja-jp/windows/privacy/manage-windows-1903-endpoints</a></p>
-<p>元の記事<br><a target="_blank" rel="noopener" href="https://social.technet.microsoft.com/Forums/ja-JP/6c111ee2-675f-4c27-915b-2e055bc176fd/azure-information-protection?forum=jpsecurity">https://social.technet.microsoft.com/Forums/ja-JP/6c111ee2-675f-4c27-915b-2e055bc176fd/azure-information-protection?forum=jpsecurity</a></p>
+        <p>◆ この情報はマイクロソフトサポートからのご案内となります(更新: 2019/12/3) ◆</p>
+<p>Azure Information Protection サービスをご利用される場合にサービスプリンシパル（Set-RMSServerAuthentication）を用いる場合に認証ができず、処理に失敗する事象が確認できております。<br>この事象について以下のとおりご連絡いたします。</p>
+<p>[事象]<br>2019 年 8 月初旬より、サービスプリンシパルを用いて、Azure Information Protection の機能を利用する場合に 0x80040211 や 0x800704dc など、認証に関するエラーが発生いたします。<br>なお、ユーザーアカウントで AIP をご利用されている場合については影響を受けません。</p>
+<p>[対象製品]<br>・Azure Information Protection Client<br>・RMS Client 2.1</p>
+<p>[対象バージョン]<br>・1.53.10.0 未満のバージョンの Azure Information Protection Client<br>・1.0.4114.0 未満のバージョンの RMS Client 2.1</p>
+<p>[回避策]<br>各アプリケーションのバージョンアップが回避策となります。</p>
+<ul>
+<li>Azure Information Protection Client</li>
+<li>RMS Client 2.1 </li>
+</ul>
+<p>[原因]<br>2018 年に Symmetric Key の実装が更新され、RMS サービス側で下位互換性のサポートを行わなくなったため、サポート対象外のバージョンのアプリケーションをご利用されていた場合に当該事象が発生したことを確認いたしました。<br>ご迷惑をおかけいたしまして誠に申し訳ございませんが、当該事象が確認された場合には AIP Client、及び、RMS Client のバージョンアップを実施いただけますようお願いいたします。</p>
+<p>この情報は 2019/12/3 時点のものとなります。<br>今後予期せず変更される可能性がございますので、ご留意くださいますようお願い申し上げます。</p>
+<p>元の記事<br><a target="_blank" rel="noopener" href="https://social.technet.microsoft.com/Forums/ja-JP/c3ec69b1-6133-45ff-9470-11c7e022437a/azure-information-protection-2019123?forum=jpsecurity">https://social.technet.microsoft.com/Forums/ja-JP/c3ec69b1-6133-45ff-9470-11c7e022437a/azure-information-protection-2019123?forum=jpsecurity</a></p>
 
       
       
@@ -132,7 +130,7 @@
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Azure-Information-Protection/" rel="tag">Azure Information Protection</a></li></ul>
 
         
-        <a href="https://github.com/jp-sec/blog/edit/main/articles/Azure_Information_Protection_2019_11_18.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/Azure_Information_Protectio_2019_08_30.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -140,19 +138,19 @@
     
 <nav id="article-nav">
   
-    <a href="../AdvancedThreat_2020_02_12/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../Azure_Information_Protection_2019_11_18/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">次の記事</strong>
       <div class="article-nav-title">
         
-          FAQ Microsoft Advanced Threat Analytics(ATA)/ AzureAdvanced Threat Protection(AATP)
+          Azure Information Protection の通信要件に関する補足情報
         
       </div>
     </a>
   
   
-    <a href="../Azure_Information_Protectio_2019_08_30/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../Defender_2019_05_08/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Azure Information Protection サービスプリンシパルを用いた認証が失敗する事象について 更新:2019/12/3</div>
+      <div class="article-nav-title">Windows Defender Antivirus 前回の更新日付が未来日になる</div>
     </a>
   
 </nav>
@@ -179,11 +177,11 @@
           </li>
         
           <li>
-            <a href="">Azure Information Protection の通信要件に関する補足情報</a>
+            <a href="../Azure_Information_Protection_2019_11_18/">Azure Information Protection の通信要件に関する補足情報</a>
           </li>
         
           <li>
-            <a href="../Azure_Information_Protectio_2019_08_30/">Azure Information Protection サービスプリンシパルを用いた認証が失敗する事象について 更新:2019/12/3</a>
+            <a href="">Azure Information Protection サービスプリンシパルを用いた認証が失敗する事象について 更新:2019/12/3</a>
           </li>
         
           <li>
