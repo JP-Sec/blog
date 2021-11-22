@@ -1,6 +1,6 @@
 ---
 title: Red Hat Enterprise Linux へ Microsoft Defender for Endpoint をインストールする際の依存関係について
-date: 2020-11-22 17:30:00
+date: 2021-11-22 17:30:00
 tags:
 - Microsoft Defender for Endpoint
 ---
