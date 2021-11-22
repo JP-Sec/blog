@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>FIM/MIM ADMAのExport処理で 0x80004005 エラー | Japan CSS Security Support Blog</title>
+  <title>Red Hat Enterprise Linux へ Microsoft Defender for Endpoint をインストールする際の依存関係について | Japan CSS Security Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは、Identity Manager サポート です。たびたびお問い合わせいただく、ADMA Export 時のエラーについて、ご紹介いたします。 FIM&#x2F;MIM をご利用いただく目的の一つとして、Active Directory Domain Controller との連携があります。通常、FIM&#x2F;MIM 上にて更新処理が発生した場合などには、Export 処理にて、対象のドメインコント">
+  <meta name="description" content="いつも弊社製品をご利用いただきまして誠にありがとうございます。日本マイクロソフト Azure Security サポートチームです。本記事では、Red Hat Enterprise Linux へ Microsoft Defender for Endpoint(以降 MDE) をインストール、及びアップデートいただく際の依存関係について紹介します。 [発生する事象]MDE のインストール、及びアッ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FIM&#x2F;MIM ADMAのExport処理で 0x80004005 エラー">
-<meta property="og:url" content="https://jp-sec.github.io/blog/MIM_ADMA_Export_0x80004005/index.html">
+<meta property="og:title" content="Red Hat Enterprise Linux へ Microsoft Defender for Endpoint をインストールする際の依存関係について">
+<meta property="og:url" content="https://jp-sec.github.io/blog/Microsoft_Defender_for_Endpoint_2021_11_22/index.html">
 <meta property="og:site_name" content="Japan CSS Security Support Blog">
-<meta property="og:description" content="こんにちは、Identity Manager サポート です。たびたびお問い合わせいただく、ADMA Export 時のエラーについて、ご紹介いたします。 FIM&#x2F;MIM をご利用いただく目的の一つとして、Active Directory Domain Controller との連携があります。通常、FIM&#x2F;MIM 上にて更新処理が発生した場合などには、Export 処理にて、対象のドメインコント">
+<meta property="og:description" content="いつも弊社製品をご利用いただきまして誠にありがとうございます。日本マイクロソフト Azure Security サポートチームです。本記事では、Red Hat Enterprise Linux へ Microsoft Defender for Endpoint(以降 MDE) をインストール、及びアップデートいただく際の依存関係について紹介します。 [発生する事象]MDE のインストール、及びアッ">
 <meta property="og:locale" content="ja_JP">
-<meta property="article:published_time" content="2019-03-29T22:33:00.000Z">
+<meta property="article:published_time" content="2020-11-22T08:30:00.000Z">
 <meta property="article:modified_time" content="2021-11-22T15:12:13.995Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
-<meta property="article:tag" content="Identity Manager">
+<meta property="article:tag" content="Microsoft Defender for Endpoint">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
@@ -79,7 +79,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-MIM_ADMA_Export_0x80004005" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Microsoft_Defender_for_Endpoint_2021_11_22" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -88,7 +88,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      FIM/MIM ADMAのExport処理で 0x80004005 エラー
+      Red Hat Enterprise Linux へ Microsoft Defender for Endpoint をインストールする際の依存関係について
     </h1>
   
 
@@ -96,35 +96,28 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2019-03-29T22:33:00.000Z" itemprop="datePublished">2019-03-30</time>
+  <time datetime="2020-11-22T08:30:00.000Z" itemprop="datePublished">2020-11-22</time>
 </a>
         
         
-        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7142f846-e34f-5e1d-8490-854aad9a692c%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BFIM%2FMIM+ADMA%E3%81%AEExport%E5%87%A6%E7%90%86%E3%81%A7+0x80004005+%E3%82%A8%E3%83%A9%E3%83%BC%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FMIM_ADMA_Export_0x80004005%2F%29%0A*+Content+Source%3A+%5Barticles%2FMIM_ADMA_Export_0x80004005.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FMIM_ADMA_Export_0x80004005.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+423234e2-f8f3-58d1-ad22-aba825a474d3%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BRed+Hat+Enterprise+Linux+%E3%81%B8+Microsoft+Defender+for+Endpoint+%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E4%BE%9D%E5%AD%98%E9%96%A2%E4%BF%82%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FMicrosoft_Defender_for_Endpoint_2021_11_22%2F%29%0A*+Content+Source%3A+%5Barticles%2FMicrosoft_Defender_for_Endpoint_2021_11_22.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FMicrosoft_Defender_for_Endpoint_2021_11_22.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/MIM_ADMA_Export_0x80004005/" data-id="ckwat5fc300080nph1znxajml" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Microsoft_Defender_for_Endpoint_2021_11_22/" data-id="ckwat5fc5000a0nphdmfm68n1" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは、Identity Manager サポート です。<br>たびたびお問い合わせいただく、ADMA Export 時のエラーについて、ご紹介いたします。</p>
-<p>FIM/MIM をご利用いただく目的の一つとして、Active Directory Domain Controller との連携があります。<br>通常、FIM/MIM 上にて更新処理が発生した場合などには、Export 処理にて、対象のドメインコントローラーへ更新処理を実施します。<br>その際に、稀に unexpected-error (0x80004005) のエラーにて Export が失敗する場合があります。<br>このとき、イベントログには ID 6401 と 6301 のエラーログが記録されます。</p>
-<p>たびたびお問い合わせをいただくものの、稀に発生し再現ができず、原因究明が難しいエラーとなります。<br>今回は、想定原因と影響範囲についてご紹介します。</p>
-<p>=============================<br>考えられる原因について<br>=============================<br>類似の現象で弊社に報告されている事例からは、以下の状況で上記のエラーが発生しております。</p>
-<ol>
-<li><p>AD-MA のコネクタ スペースに破損した情報が含まれていた状態で Export した場合</p>
-</li>
-<li><p>Export にて、何らかの要因で AD によって属性が書き込み拒否された場合</p>
-</li>
-<li><p>の現象に関しましては、全てのコネクタ スペースを削除し、再作成にて対応が可能となりますが、多くは 2 のケースに該当しています。</p>
-</li>
-<li><p>の現象に関しましては、既存のオブジェクトが存在するような同期環境において、userAccountControl 属性や unicodePwd 属性などの特殊な属性の上書きが、一時的に AD で拒否された場合に事象発生したとの報告がされておりました。<br>一時的な発生のために、事例からは原因の特定は難しく、お客様には影響範囲の確認と、正常性の確認を依頼しております。</p>
-</li>
-</ol>
-<p>=====================<br>影響の範囲について<br>=====================<br>イベント ID 6401 と 6301 が記録された場合の影響範囲は、イベント 6301 に記録される GUID のコネクタ スペース オブジェクトに関するオブジェクトのみとなります。<br>従いまして、万が一再び上記のイベントが記録された場合には、該当の GUID に関連するオブジェクトの状況をご確認ください。<br>正しく同期先の AD に同期されているか、FIM/MIM 上でエラーが起こっていないかが確認できた場合は、上記のイベントの発生に関しましては無視することができます。<br>また、頻発する場合には、別の問題である可能性もありますので、その際は、弊社サポートまでご相談ください。</p>
-<p>イベントログの例:<br>＜アプリケーションイベントログ / ソース : FIMSynchronizationService / イベント ID: 6301＞<br>BAIL: MMS(5872): ..\tower.cpp(3993): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\tower.cpp(12030): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\csobj.cpp(1870): 0x80004005 (エラーを特定できません)<br>BAIL: MMS(5872): ..\expcall.cpp(905): 0x80004005 (エラーを特定できません)<br>ERR_: MMS(5872): ..\expbase.cpp(2957): PutAnchorWithDnInternal failed on CS object {XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX} with 0x80004005 (pass 1 of 5) Forefront Identity Manager 4.4.1302.0</p>
-<p>CS object {XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX} に対して属性値等の精査をします。</p>
-<p>元の記事<br><a target="_blank" rel="noopener" href="https://social.technet.microsoft.com/Forums/ja-JP/8bb002c3-7f20-4709-9a50-d83e1334b8cc/fimmim-adma12398export209662970212391-0x80004005-124561252112540?forum=jpidentitymanager">https://social.technet.microsoft.com/Forums/ja-JP/8bb002c3-7f20-4709-9a50-d83e1334b8cc/fimmim-adma12398export209662970212391-0x80004005-124561252112540?forum=jpidentitymanager</a></p>
+        <p>いつも弊社製品をご利用いただきまして誠にありがとうございます。<br>日本マイクロソフト Azure Security サポートチームです。<br>本記事では、Red Hat Enterprise Linux へ Microsoft Defender for Endpoint(以降 MDE) をインストール、及びアップデートいただく際の依存関係について紹介します。</p>
+<p>[発生する事象]<br>MDE のインストール、及びアップデートでは、yum コマンドによる依存関係の確認や解決が行われます。<br>依存関係が自動解決されない場合、インストールやアップデートに失敗します。</p>
+<p>[発生する事象例]<br>MDE のコンポーネントである mdatp モジュールのバージョン 101.45.13 以降では、mde-netfilter モジュールが依存関係モジュールとして追加されています。<br>※ mde-netfilterモジュールを依存関係とするmdatpモジュールのバージョン 101.45.13は、2021/10/15時点で prod チャネルから配信しています<br>mde-netfilter モジュールは、libnetfilter_queue と依存関係があります。<br>libnetfilter_queue が未インストールの場合、自動解決が試行されます。<br>自動解決によるインストールに失敗した場合、mde-netfilter モジュール、及び mdatp モジュールのインストールに失敗します。</p>
+<p>エラーの例:<br>問題: package mdatp-101.45.13-1.x86_64 requires mde-netfilter, but none of the providers can be installed</p>
+<ul>
+<li>cannot install the best candidate for the job</li>
+<li>nothing provides libnetfilter_queue needed by mde-netfilter-100.69.32-1.x86_64</li>
+</ul>
+<p>[発生する事象例の想定原因]<br>デフォルトでは、libnetfilter_queueはrhui-rhel-8-for-x86_64-baseos-rhui-rpms リポジトリから libnetfilter_queue のダウンロードを試行します。<br>libnetfilter_queueはrhui-rhel-8-for-x86_64-baseos-rhui-rpms リポジトリへのアクセス制限やリポジトリの未構成、モジュールのインストール制限が行われている可能性があります。</p>
+<p>[発生する事象例の対処策]<br>rhui-rhel-8-for-x86_64-baseos-rhui-rpms リポジトリへのアクセスやリポジトリの構成、及びモジュールのインストール許可を Red Hat Enterprise Linux やネットワーク観点でご確認ください。</p>
+<p>この情報は2021/11/22 時点のものとなります。<br>今後予期せず変更される可能性がございますので、ご留意くださいますようお願い申し上げます。</p>
 
       
       
@@ -132,10 +125,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li></ul>
 
         
-        <a href="https://github.com/jp-sec/blog/edit/main/articles/MIM_ADMA_Export_0x80004005.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/Microsoft_Defender_for_Endpoint_2021_11_22.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -143,19 +136,19 @@
     
 <nav id="article-nav">
   
-    <a href="../PAM_http_error/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../Identity_Manager_2021_08_31/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">次の記事</strong>
       <div class="article-nav-title">
         
-          MIM 2016 SP1 にて PAM を利用する際に、http 404 / 500 エラーが発生する。
+          AD サーバーの OS 起動における PCNS サービスの起動シーケンスについて
         
       </div>
     </a>
   
   
-    <a href="../Identity_Manager_2019_03_30/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../RightsManagementServicesClient2.1_1/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Identity Manager サービス再起動時の PCNS への影響について</div>
+      <div class="article-nav-title">Excel ファイルに対する暗号/復号処理の遅延について</div>
     </a>
   
 </nav>
@@ -178,7 +171,7 @@
           </li>
         
           <li>
-            <a href="../Microsoft_Defender_for_Endpoint_2021_11_22/">Red Hat Enterprise Linux へ Microsoft Defender for Endpoint をインストールする際の依存関係について</a>
+            <a href="">Red Hat Enterprise Linux へ Microsoft Defender for Endpoint をインストールする際の依存関係について</a>
           </li>
         
           <li>
