@@ -1,6 +1,6 @@
 ---
 title: AIP クライアント (分類して保護する) におけるカスタム アクセス許可設定について 更新:2022/5/19
-date: 2022-05-19
+date: 2022-05-18
 tags:
 - Azure Information Protection
 ---
