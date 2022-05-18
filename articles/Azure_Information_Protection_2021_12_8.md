@@ -2,7 +2,7 @@
 title: AIP スキャナーが対象リポジトリ内のファイルを破損してしまう事例について
 date: 2021-12-8 13:00:00
 tags:
-- Azure Infomation Protection
+- Azure Information Protection
 ---
 
 こんにちは。Azure Security サポートチームです。
