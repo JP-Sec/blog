@@ -1,5 +1,5 @@
 ---
-title: "分類して保護する" が "Microsoft.Azip.RightClick" になってしまう事象について
+title: 分類して保護するが Microsoft.Azip.RightClick になってしまう事象について
 date: 2022-06-08
 tags:
 - Azure Information Protection
