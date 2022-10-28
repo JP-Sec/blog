@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Microsoft Defender ウイルス対策のマルウェア対策プラットフォームを手動で更新・ロールバックする方法 | Japan CSS Security Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは Azure Security サポートチームです。 本記事ではMicrosoft  Defender ウイルス対策(MDAV)のマルウェア対策プラットフォームを手動で更新する方法についてご案内いたします。 MDAVのセキュリティインテリジェンス(定義ファイル)を手動で更新する方法については以下の記事をご参照ください。 参考情報：Microsoft Defender ウイルス対策のセキュ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Microsoft Defender ウイルス対策のマルウェア対策プラットフォームを手動で更新・ロールバックする方法">
+<meta property="og:url" content="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-08-26/index.html">
+<meta property="og:site_name" content="Japan CSS Security Support Blog">
+<meta property="og:description" content="こんにちは Azure Security サポートチームです。 本記事ではMicrosoft  Defender ウイルス対策(MDAV)のマルウェア対策プラットフォームを手動で更新する方法についてご案内いたします。 MDAVのセキュリティインテリジェンス(定義ファイル)を手動で更新する方法については以下の記事をご参照ください。 参考情報：Microsoft Defender ウイルス対策のセキュ">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-08-26-01.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-08-26-02.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-08-26-03.png">
+<meta property="article:published_time" content="2022-09-08T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-28T08:11:53.862Z">
+<meta property="article:author" content="CSS Japan Secuirty team">
+<meta property="article:tag" content="Microsoft Defender ウイルス対策">
+<meta property="article:tag" content="マルウェア対策プラットフォーム">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-08-26-01.png">
+  
+    <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-sec.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../index.html" id="logo">Japan CSS Security Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../index.html" id="subtitle">日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Endpoint-MDAV-2022-08-26" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Microsoft Defender ウイルス対策のマルウェア対策プラットフォームを手動で更新・ロールバックする方法
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-09-08T00:00:00.000Z" itemprop="datePublished">2022-09-08</time>
+</a>
+        
+        
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+07000ddd-9a36-511f-82b0-963603a56272%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMicrosoft+Defender+%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%82%92%E6%89%8B%E5%8B%95%E3%81%A7%E6%9B%B4%E6%96%B0%E3%83%BB%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%90%E3%83%83%E3%82%AF%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2022-08-26%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2022-08-26.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2022-08-26.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-08-26/" data-id="cl9s7ug6y001l0mmp7u6l0ntr" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは Azure Security サポートチームです。</p>
+<p>本記事ではMicrosoft  Defender ウイルス対策(MDAV)のマルウェア対策プラットフォームを手動で更新する方法についてご案内いたします。</p>
+<p>MDAVのセキュリティインテリジェンス(定義ファイル)を手動で更新する方法については以下の記事をご参照ください。</p>
+<p>参考情報：<a href="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-07-29/">Microsoft Defender ウイルス対策のセキュリティインテリジェンス(定義ファイル)を手動で更新・ロールバック・削除する方法</a></p>
+<p>※ 本記事の内容はWindow Server 2019環境にて動作を確認いたしております。</p>
+<!-- omit in toc -->
+<h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul>
+<li><a href="#MDAV%E3%81%AE%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">MDAVのマルウェア対策プラットフォームについて</a></li>
+<li><a href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99">事前準備</a><ul>
+<li><a href="#%E7%AB%AF%E6%9C%AB%E6%83%85%E5%A0%B1%E3%81%AE%E7%A2%BA%E8%AA%8D">端末情報の確認</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89">使用するモジュールのダウンロード</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AE%E6%89%8B%E5%8B%95%E6%9B%B4%E6%96%B0%E6%96%B9%E6%B3%95">マルウェア対策プラットフォームの手動更新方法</a><ul>
+<li><a href="#%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3418200110%E3%81%AE%E6%89%8B%E5%8B%95%E9%81%A9%E7%94%A8%E7%AB%AF%E6%9C%AB%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%8C418200110%E6%9C%AA%E6%BA%80%E3%81%A7%E3%81%82%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E3%81%BF">バージョン<code>4.18.2001.10</code>の手動適用(端末のバージョンが<code>4.18.2001.10</code>未満である場合のみ)</a></li>
+<li><a href="#%E6%9C%80%E6%96%B0%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AE%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AE%E6%89%8B%E5%8B%95%E9%81%A9%E7%94%A8">最新バージョンのマルウェア対策プラットフォームの手動適用</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%90%E3%83%83%E3%82%AF%E6%89%8B%E9%A0%86">更新プログラムのロールバック手順</a></li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li>
+</ul>
+<h2 id="MDAVのマルウェア対策プラットフォームについて"><a href="#MDAVのマルウェア対策プラットフォームについて" class="headerlink" title="MDAVのマルウェア対策プラットフォームについて"></a>MDAVのマルウェア対策プラットフォームについて</h2><p>MDAVにより端末に最新の脅威からの保護を提供するためには、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#security-intelligence-updates">セキュリティインテリジェンスの更新プログラム</a>と<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#product-updates">製品の更新プログラム(マルウェア対策プラットフォーム)</a>を常に最新に保つことが重要です。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#monthly-platform-and-engine-versions">月次プラットフォームとエンジンのバージョン</a>に記載の通り、MDAVのマルウェア対策プラットフォームは公開している最新バージョンから 2 世代前より古いバージョンのサポートはアップグレードに関するサポートのみに縮小されます。</p>
+<p>MDAVのマルウェア対策プラットフォーム更新プログラムは、2022年8月時点では「KB4052623」にてリリースされております。</p>
+<p>この更新プログラムは通常、 Windows Update によってインターネットまたは WSUS などの更新元から取得され、自動的に更新されます。</p>
+<p>本記事では、トラブルシューティングなどの目的で、MDAVのマルウェア対策プラットフォームを手動で更新する方法についてご紹介いたします。</p>
+<h2 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h2><p>MDAVのマルウェア対策プラットフォームは、更新プログラム(KB4052623)を端末に手動適用することで更新が可能です。</p>
+<p>本項では、マルウェア対策プラットフォームの手動更新前に必要な準備について記載します。</p>
+<h3 id="端末情報の確認"><a href="#端末情報の確認" class="headerlink" title="端末情報の確認"></a>端末情報の確認</h3><p>マルウェア対策プラットフォームの手動更新前に、更新を行う端末で以下の情報を確認する必要があります。</p>
+<ol>
+<li><strong>MDAVのサービス稼働状況の確認</strong></li>
+</ol>
+<p>Windows Update または手動更新手順によって MDAV のマルウェア対策プラットフォームを更新するためには、前提条件としてMDAVのサービス(WinDefend)が稼働している必要があります。</p>
+<p>MDAV のサービスが停止している場合はマルウェア対策プラットフォームの更新に失敗するため、更新前にサービスが稼働していることを確認します。</p>
+<p>PowerShell またはコマンドプロンプトで以下のコマンドを実行し、[STATE] に [4  RUNNING] と表示されることを確認します。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.exe query WinDefend</span><br></pre></td></tr></table></figure>
+
+<p>もし Windows Server 2016/ 2019 /2022 などのサーバ OS で MDAV のサービスが停止している場合、グループポリシーまたはレジストリの設定によってMDAVが無効化されているか否かを確認し、無効化されている場合は設定を解除する必要があります。</p>
+<p>上記のサーバ OS を使用している場合は、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/use-group-policy-microsoft-defender-antivirus?view=o365-worldwide#configure-microsoft-defender-antivirus-using-group-policy">グループ ポリシーを使用して Microsoft Defender ウイルス対策を構成する</a>に記載の手順に従って、[Microsoft Defender ウイルス対策を無効にする] の設定を [未構成] または [無効] に変更します。</p>
+<p>レジストリ設定により MDAV を無効化している場合は、 <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware">DisableAntiSpyware</a> のレジストリ値を削除します。</p>
+<p>なお、バージョン<code>4.18.2108.4</code>以上のマルウェア対策プラットフォームが適用されている Windows 10 / 11 などのクライアント OS では、前述のグループポリシーや <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware">DisableAntiSpyware</a> を用いた MDAV の無効化設定はサポートされていません。</p>
+<p>これらのクライアント OS では、サードパーティ製のアンチマルウェアソフトがインストールされた際に、 MDAV が自動的に無効化されます。</p>
+<p>そのため、上記のクライアント OS で MDAV を有効化するためには、サードパーティ製のアンチマルウェアソフトを一時的にアンインストールする必要があります。</p>
+<ol start="2">
+<li><strong>現在適用されているマルウェア対策プラットフォームのバージョン</strong></li>
+</ol>
+<p>端末に適用されているマルウェア対策プラットフォームのバージョンが<code>4.18.2001.10</code>未満である場合、最新の更新プログラムを適用する前に<code>4.18.2001.10</code>の更新プログラムを適用する必要があります。</p>
+<p>※ バージョン<code>4.18.2001.10</code>を適用する際にはOSの再起動が必要になります。</p>
+<p>※ すでにバージョン<code>4.18.2001.10</code>以降のバージョンが適用されている場合は、マルウェア対策プラットフォームの更新時のOS再起動は不要です。</p>
+<p>現在適用されているマルウェア対策プラットフォームのバージョン情報は、PowerShellにて以下のコマンドレットを実行することで確認が可能です。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-MpComputerStatus</span> | <span class="built_in">Select-Object</span> AMProductVersion</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>端末のCPUアーキテクチャ</strong></li>
+</ol>
+<p>端末のCPUプラットフォームによって、マルウェア対策プラットフォームの手動更新に使用するモジュールが異なります。</p>
+<p>具体的には、以下の3種類の更新モジュールが用意されておりますため、対象の端末に合わせて更新モジュールを選択する必要があります。</p>
+<ul>
+<li>amd64fre：64 bit CPU アーキテクチャ向けのパッチ</li>
+<li>x86fre：32 bit CPU アーキテクチャ向けのパッチ</li>
+<li>arm64fre：arm64 アーキテクチャ向けのパッチ</li>
+</ul>
+<p>端末の情報については、[設定]アプリの[システム]&gt;[バージョン情報]&gt;[デバイスの仕様]の表示を参照するか、以下のコマンドレットにて特定することが可能です。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-ComputerInfo</span> | <span class="built_in">Select-Object</span> WindowsBuildLabEx,CsSystemType</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用するモジュールのダウンロード"><a href="#使用するモジュールのダウンロード" class="headerlink" title="使用するモジュールのダウンロード"></a>使用するモジュールのダウンロード</h3><p>端末情報を確認した後、更新に使用するモジュールを取得して端末にコピーします。</p>
+<p>更新プログラムは<a target="_blank" rel="noopener" href="https://www.catalog.update.microsoft.com/Search.aspx?q=KB4052623">Microsoft Update カタログ</a>からダウンロードできます。</p>
+<p><img src="../images/Endpoint-MDAV-2022-08-26-01.png" alt="Endpoint-MDAV-2022-08-26-01"></p>
+<ol>
+<li><strong>バージョン<code>4.18.2001.10</code>の取得(端末のバージョンが<code>4.18.2001.10</code>未満である場合のみ)</strong></li>
+</ol>
+<p>端末に適用されているマルウェア対策プラットフォームのバージョンが<code>4.18.2001.10</code>未満である場合は、まずバージョン<code>4.18.2001.10</code>の更新プログラムをダウンロードする必要があります。</p>
+<p>タイトルが「Windows Defender Antivirus マルウェア対策プラットフォームの更新プログラム - KB4052623 (Version 4.18.2001.10)」である行の内、最終更新日時が最も新しい行を選び、右側の[ダウンロード]をクリックします。</p>
+<p>以下の画面が表示されたら、端末のCPUプラットフォームに対応したモジュールをダウンロードします。</p>
+<p><img src="../images/Endpoint-MDAV-2022-08-26-02.png" alt="Endpoint-MDAV-2022-08-26-02"></p>
+<p>各モジュールに対応するプラットフォームを確認する場合は、それぞれのファイルを一度ダウンロードした後、右クリックして [プロパティ]&gt;[詳細] を開きます。</p>
+<p>ここで、[ファイルの説明] 欄の括弧の中に対象となるプラットフォームの情報が記載されています。</p>
+<p><img src="../images/Endpoint-MDAV-2022-08-26-03.png" alt="Endpoint-MDAV-2022-08-26-03"></p>
+<p>なお、本記事執筆時点では、バージョン<code>4.18.2001.10</code>の更新プログラムのファイル名と対象プラットフォームの対応は以下の通りであることを確認しております。</p>
+<table>
+<thead>
+<tr>
+<th align="center">ファイル名</th>
+<th align="center">対応するアーキテクチャ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">updateplatform_0456e6719c3ee098af03b785230ac020643fa1ac.exe</td>
+<td align="center">amd64</td>
+</tr>
+<tr>
+<td align="center">updateplatform_eaf76728f00b841dc9b3b1722f778e50ed59438a.exe</td>
+<td align="center">x86</td>
+</tr>
+<tr>
+<td align="center">updateplatform_19608225e67d613b65e183e1ca4159bc915cf331.exe</td>
+<td align="center">arm64</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><strong>最新バージョンの取得</strong></li>
+</ol>
+<p>次に、最新の更新プログラムを取得します。</p>
+<p>[1.] の手順と同様に、<a target="_blank" rel="noopener" href="https://www.catalog.update.microsoft.com/Search.aspx?q=KB4052623">Microsoft Update カタログ</a>にてタイトルが最新バージョンを指す行の右側 [ダウンロード] ボタンをクリックします。</p>
+<p>※ 本記事執筆時点では<code>4.18.2205.7</code>が最新バージョンです。</p>
+<p>端末のCPUプラットフォームに対応したモジュールをダウンロードするために、3つすべてのモジュールをダウンロードします。</p>
+<p>ダウンロードしたモジュールを右クリックして [プロパティ]&gt;[詳細] を開き、[ファイルの説明] 欄の情報から更新対象のプラットフォームに対応したモジュールを特定し、不要なファイルを端末から削除します。</p>
+<h2 id="マルウェア対策プラットフォームの手動更新方法"><a href="#マルウェア対策プラットフォームの手動更新方法" class="headerlink" title="マルウェア対策プラットフォームの手動更新方法"></a>マルウェア対策プラットフォームの手動更新方法</h2><h3 id="バージョン4-18-2001-10の手動適用-端末のバージョンが4-18-2001-10未満である場合のみ"><a href="#バージョン4-18-2001-10の手動適用-端末のバージョンが4-18-2001-10未満である場合のみ" class="headerlink" title="バージョン4.18.2001.10の手動適用(端末のバージョンが4.18.2001.10未満である場合のみ)"></a>バージョン<code>4.18.2001.10</code>の手動適用(端末のバージョンが<code>4.18.2001.10</code>未満である場合のみ)</h3><p>端末に適用されているマルウェア対策プラットフォームのバージョンが<code>4.18.2001.10</code>未満である場合、先にバージョン<code>4.18.2001.10</code>の更新プログラムを適用し、OSを再起動する必要があります。</p>
+<p>事前に取得したバージョン<code>4.18.2001.10</code>の更新プログラムを端末にコピーし、右クリックして [管理者権限で実行] をクリックした後、更新が完了するまで1分ほど待機します。</p>
+<p>※ 更新はバックグラウンドで実施されます。</p>
+<p>その後OSを再起動し、PowerShellにて以下のコマンドレットを実行し、マルウェア対策プラットフォームのバージョンが<code>4.18.2001.10</code>に更新されていることを確認します。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-MpComputerStatus</span> | <span class="built_in">Select-Object</span> AMProductVersion</span><br></pre></td></tr></table></figure>
+
+<h3 id="最新バージョンのマルウェア対策プラットフォームの手動適用"><a href="#最新バージョンのマルウェア対策プラットフォームの手動適用" class="headerlink" title="最新バージョンのマルウェア対策プラットフォームの手動適用"></a>最新バージョンのマルウェア対策プラットフォームの手動適用</h3><p>事前に取得した最新バージョンの更新プログラムを端末にコピーし、右クリックして [管理者権限で実行] をクリックした後、更新が完了するまで1分ほど待機します。</p>
+<p>※ こちらも更新はバックグラウンドで実行されます。</p>
+<p>PowerShellにて以下のコマンドレットを実行し、マルウェア対策プラットフォームのバージョンが最新バージョンに更新されていることを確認します。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-MpComputerStatus</span> | <span class="built_in">Select-Object</span> AMProductVersion</span><br></pre></td></tr></table></figure>
+
+<p>※ バージョン<code>4.18.2001.10</code>以降の更新プログラムを適用する際にはOSの再起動は不要です。</p>
+<h2 id="更新プログラムのロールバック手順"><a href="#更新プログラムのロールバック手順" class="headerlink" title="更新プログラムのロールバック手順"></a>更新プログラムのロールバック手順</h2><p>続いて、トラブルシューティングを目的としてMDAVのマルウェア対策プラットフォームをロールバックする方法についてご紹介いたします。</p>
+<p>マルウェア対策プラットフォームのロールバックはコマンドライン ツール<code>MpCmdRun.exe</code>を使用することで実施することが可能です。</p>
+<p><code>MpCmdRun.exe</code>は、システムの以下のフォルダに存在します。<br>(使用するためには、管理者権限でPower Shellかコマンドプロンプトを起動する必要があります)</p>
+<ul>
+<li>C:\Program Files\Windows Defender</li>
+<li>C:\ProgramData\Microsoft\Windows Defender\Platform&lt;最新のプラットフォームバージョン&gt;</li>
+</ul>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/command-line-arguments-microsoft-defender-antivirus?view=o365-worldwide">コマンドラインを使用して Microsoft Defender ウイルス対策を管理する</a></p>
+<p>以下のコマンドで、コマンドラインツール<code>MpCmdRun.exe</code>を使用してマルウェア対策プラットフォームをロールバックすることができます。</p>
+<p>※ <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection?view=o365-worldwide">改ざん防止機能</a>が有効な場合、これらのコマンド実行がブロックされる場合があります。</p>
+<p>※ 公開している最新バージョンより 3 世代以上古いバージョンのサポートはアップグレードに関するサポートのみに縮小されるため、ロールバック後は必ずマルウェア対策プラットフォームを更新いただくようお願いいたします。</p>
+<p>※ Windows 10 1809 / Windows Server 2016 以前のバージョンではロールバックはサポートされていません。</p>
+<ol>
+<li><strong>以前のバージョンにロールバックする方法</strong></li>
+</ol>
+<p>以下のコマンドで、マルウェア対策プラットフォームを以前のバージョンにロールバックすることができます。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MpCmdRun.exe <span class="literal">-revertplatform</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>更新前のバージョンにロールバックする方法</strong></li>
+</ol>
+<p>以下のコマンドで、マルウェア対策プラットフォームを完全に更新前の状態にロールバックすることができます。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MpCmdRun.exe <span class="literal">-resetplatform</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事ではMicrosoft Defender ウイルス対策(MDAV)のマルウェア対策プラットフォームを手動で更新・ロールバックする方法についてご紹介いたしました。</p>
+<p>※ 本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合がありますことご了承ください。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" rel="tag">マルウェア対策プラットフォーム</a></li></ul>
+
+        
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/Endpoint-MDAV-2022-08-26.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../AIP-AzureInformationProtection-2022-09-26-01/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          日本語 (マルチバイト文字) でカスタム プロパティが構成されている Office ドキュメントの秘密度ラベルを削除するとファイルが破損する場合がある。
+        
+      </div>
+    </a>
+  
+  
+    <a href="../Azure_Information_Protection_2021_12_8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">AIP スキャナーが対象リポジトリ内のファイルを破損してしまう事例について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2022-09-28/">macOS および Linux デバイスで Client Analyzer ツールによる正常性診断を実行する方法</a>
+          </li>
+        
+          <li>
+            <a href="../AIP-AzureInformationProtection-2022-09-26-01/">日本語 (マルチバイト文字) でカスタム プロパティが構成されている Office ドキュメントの秘密度ラベルを削除するとファイルが破損する場合がある。</a>
+          </li>
+        
+          <li>
+            <a href="">Microsoft Defender ウイルス対策のマルウェア対策プラットフォームを手動で更新・ロールバックする方法</a>
+          </li>
+        
+          <li>
+            <a href="../Azure_Information_Protection_2021_12_8/">AIP スキャナーが対象リポジトリ内のファイルを破損してしまう事例について</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2022-07-29/">Microsoft Defender ウイルス対策のセキュリティインテリジェンス(定義ファイル)を手動で更新・ロールバック・削除する方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-AdvancedThreat-Protection/" rel="tag">Azure AdvancedThreat Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-Information-Protection/" rel="tag">Azure Information Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-Linux/" rel="tag">MDE on Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-macOS/" rel="tag">MDE on macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" rel="tag">Microsoft AdvancedThreat Analytics(ATA)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Rights-Management-Service/" rel="tag">Rights Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" rel="tag">セキュリティインテリジェンス</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" rel="tag">マルウェア対策プラットフォーム</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/">Information</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../tags/Azure-AdvancedThreat-Protection/" style="font-size: 10px;">Azure AdvancedThreat Protection</a> <a href="../tags/Azure-Information-Protection/" style="font-size: 20px;">Azure Information Protection</a> <a href="../tags/Identity-Manager/" style="font-size: 17.5px;">Identity Manager</a> <a href="../tags/Information/" style="font-size: 10px;">Information</a> <a href="../tags/MDE-on-Linux/" style="font-size: 10px;">MDE on Linux</a> <a href="../tags/MDE-on-macOS/" style="font-size: 10px;">MDE on macOS</a> <a href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" style="font-size: 10px;">Microsoft AdvancedThreat Analytics(ATA)</a> <a href="../tags/Microsoft-Defender-for-Endpoint/" style="font-size: 12.5px;">Microsoft Defender for Endpoint</a> <a href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" style="font-size: 15px;">Microsoft Defender ウイルス対策</a> <a href="../tags/Rights-Management-Service/" style="font-size: 10px;">Rights Management Service</a> <a href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" style="font-size: 10px;">セキュリティインテリジェンス</a> <a href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" style="font-size: 10px;">マルウェア対策プラットフォーム</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 CSS Japan Secuirty team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
