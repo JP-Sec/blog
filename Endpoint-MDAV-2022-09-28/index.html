@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>macOS および Linux デバイスで Client Analyzer ツールによる正常性診断を実行する方法 | Japan CSS Security Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは Azure Security サポートチームです。 この記事では Microsoft Defender for Endpoint on mac(MDE on mac) および Microsoft Defender for Endpoint on Linux(MDE on Linux) のデバイス正常性の評価に役立つ Microsoft Defender for Endpoint Cli">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macOS および Linux デバイスで Client Analyzer ツールによる正常性診断を実行する方法">
+<meta property="og:url" content="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/index.html">
+<meta property="og:site_name" content="Japan CSS Security Support Blog">
+<meta property="og:description" content="こんにちは Azure Security サポートチームです。 この記事では Microsoft Defender for Endpoint on mac(MDE on mac) および Microsoft Defender for Endpoint on Linux(MDE on Linux) のデバイス正常性の評価に役立つ Microsoft Defender for Endpoint Cli">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-09-28-01.png">
+<meta property="article:published_time" content="2022-09-28T06:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-28T08:11:53.862Z">
+<meta property="article:author" content="CSS Japan Secuirty team">
+<meta property="article:tag" content="MDE on Linux">
+<meta property="article:tag" content="MDE on macOS">
+<meta property="article:tag" content="Microsoft Defender for Endpoint">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-09-28-01.png">
+  
+    <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-sec.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../index.html" id="logo">Japan CSS Security Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../index.html" id="subtitle">日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Endpoint-MDAV-2022-09-28" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      macOS および Linux デバイスで Client Analyzer ツールによる正常性診断を実行する方法
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-09-28T06:00:00.000Z" itemprop="datePublished">2022-09-28</time>
+</a>
+        
+        
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+21bfc6a3-0e23-53f6-8ea0-e065d61e793c%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BmacOS+%E3%81%8A%E3%82%88%E3%81%B3+Linux+%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%A7+Client+Analyzer+%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AB%E3%82%88%E3%82%8B%E6%AD%A3%E5%B8%B8%E6%80%A7%E8%A8%BA%E6%96%AD%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2022-09-28%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2022-09-28.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2022-09-28.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/" data-id="cl9s7ug6c000k0mmpc3i8bxh8" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは Azure Security サポートチームです。</p>
+<p>この記事では Microsoft Defender for Endpoint on mac(MDE on mac) および Microsoft Defender for Endpoint on Linux(MDE on Linux) のデバイス正常性の評価に役立つ <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide">Microsoft Defender for Endpoint Client Analyzer(MDECA)</a> の使用方法についてご紹介します。</p>
+<p>Client Analyzer ツールの詳細については、以下の公開情報にてご案内いたしております。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide">Microsoft Defender for Endpoint クライアント アナライザーを使用したセンサーの正常性のトラブルシューティング</a></p>
+<!-- omit in toc -->
+<h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul>
+<li><a href="#Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB">Client Analyzer ツールを使用する前に</a></li>
+<li><a href="#macOS-%E3%81%A7-Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">macOS で Client Analyzer ツールを使用する</a><ul>
+<li><a href="#macOS-%E3%81%A7%E3%81%AE-Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AE%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95-Python3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">macOS での Client Analyzer ツールの実行方法 (Python3を使用する)</a></li>
+<li><a href="#macOS-%E3%81%A7%E3%81%AE-Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AE%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95-Python3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%AA%E3%81%84">macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)</a></li>
+</ul>
+</li>
+<li><a href="#Linux-%E3%81%A7-Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">Linux で Client Analyzer ツールを使用する</a><ul>
+<li><a href="#Linux-%E3%81%A7%E3%81%AE-Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AE%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95-Python3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">Linux での Client Analyzer ツールの実行方法 (Python3を使用する)</a></li>
+<li><a href="#Linux-%E3%81%A7%E3%81%AE-Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AE%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95-Python3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%AA%E3%81%84">Linux での Client Analyzer ツールの実行方法 (Python3を使用しない)</a></li>
+</ul>
+</li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li>
+</ul>
+<h2 id="Client-aAnalyzer-ツールを使用する前に"><a href="#Client-aAnalyzer-ツールを使用する前に" class="headerlink" title="Client aAnalyzer ツールを使用する前に"></a>Client aAnalyzer ツールを使用する前に</h2><p>macOS または Linux 端末にてClient Analyzer ツールを使用してデバイスの診断を行う前に、デバイスが以下の前提要件を満たしていることを確認する必要があります。</p>
+<ol>
+<li>プロキシまたはファイアウォールの構成で <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-proxy-internet?view=o365-worldwide#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">Microsoft Defender for Endpoint サービスの使用する URL</a> へのアクセス許可が構成されていることを確認します。</li>
+<li>デバイスが MDE へのオンボードに必要な <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/minimum-requirements?view=o365-worldwide">最小要件</a> を満たしていることを確認します。</li>
+</ol>
+<p>Client Analyzer ツールを使用する場合の前提要件に関する最新の情報は以下のページより確認いただくことができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide#requirements">Microsoft Defender for Endpoint クライアント アナライザーを使用したセンサーの正常性のトラブルシューティング | 前提要件</a></p>
+<h2 id="macOS-で-Client-Analyzer-ツールを使用する"><a href="#macOS-で-Client-Analyzer-ツールを使用する" class="headerlink" title="macOS で Client Analyzer ツールを使用する"></a>macOS で Client Analyzer ツールを使用する</h2><p>※ 本記事の手順は Intelベースの macOS Big Sur(Version 11.7) にて動作確認を実施しています。</p>
+<p>Client Analyzer ツールを使用する手順に関する最新の情報については、以下の公開情報ページをご参照くださいますようお願いいたします。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-macos-linux?view=o365-worldwide#running-the-analyzer-through-gui-scenario">macOS または Linux でのクライアント アナライザーの実行</a></p>
+<h3 id="macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用する"><a href="#macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用する" class="headerlink" title="macOS での Client Analyzer ツールの実行方法 (Python3を使用する)"></a>macOS での Client Analyzer ツールの実行方法 (Python3を使用する)</h3><p>このセクションでは、コマンドラインインターフェース(CLI)を使用した Client Analyzer ツールの実行方法について紹介します。</p>
+<p>このセクションで紹介する手順を使用するためには、デバイスで <code>python3</code> コマンドと Python パッケージ <a target="_blank" rel="noopener" href="https://pypi.org/search/?q=lxml">lxml</a> が利用可能である必要があります。</p>
+<p>※ <code>python3</code> コマンドが使用できないデバイスで Client Analyzer ツールを実行する手順については、[macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)][#macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)] のセクションを参照してください。</p>
+<ol>
+<li>デバイスで ターミナルを起動し、任意のディレクトリで以下のコマンドを順に実行します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -OL https://aka.ms/XMDEClientAnalyzer</span><br><span class="line">$ unzip -q XMDEClientAnalyzer</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>圧縮ファイルが展開され、以下のファイルとディレクトリが存在することを確認します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── mde_support_tool.sh</span><br><span class="line">├── mde_tools/</span><br><span class="line">└── requirements.txt</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>以下のコマンドを実行して、<code>mde_support_tool.sh</code>に実行権限を付与します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><code>mde_support_tool.sh</code>を実行し、必要なコンポーネントをインストールします。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+
+<p>※ デバイスで<code>python3</code>コマンドが使用できない場合、<code>mde_support_tool.sh</code>の実行に失敗し、以下のようにPython3のインストールを要求する画面が表示される場合があります。</p>
+<p><img src="../images/Endpoint-MDAV-2022-09-28-01.png" alt="Endpoint-MDAV-2022-09-28-01"></p>
+<ol start="5">
+<li>上記のコマンド実行によりコンポーネントのインストールに成功した後、以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2022-09-28 03:47:45.646][INFO] Archive created at: /tmp/28_09_2022_03_47_45_output.zip</span><br></pre></td></tr></table></figure>
+
+<h3 id="macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用しない"><a href="#macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用しない" class="headerlink" title="macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)"></a>macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)</h3><p>このセクションでは、<code>python3</code>コマンドまたは Python パッケージ <a target="_blank" rel="noopener" href="https://pypi.org/search/?q=lxml">lxml</a> が使用できない環境にてClient Analyzer ツールを実行する方法について紹介します。</p>
+<ol>
+<li>デバイスで ターミナルを起動し、任意のディレクトリで以下のコマンドを順に実行します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -OL https://aka.ms/XMDEClientAnalyzerBinary</span><br><span class="line">$ unzip -q XMDEClientAnalyzerBinary</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>圧縮ファイルが展開され、以下のファイルが存在することを確認します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── SupportToolLinuxBinary.zip</span><br><span class="line">├── SupportToolmacOS-armBinary.zip</span><br><span class="line">└── SupportToolmacOSBinary.zip</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>以下のコマンドで、Intel ベースの macOS 用パッケージを展開します。</li>
+</ol>
+<p>※ M1 ベースの macOS を使用する場合は<code>SupportToolmacOS-armBinary.zip</code>を展開します。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -q SupportToolmacOSBinary.zip</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>以下のコマンドを実行して、展開された<code>MDESupportTool</code>に実行権限を付与します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x MDESupportTool</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2022-09-28 03:47:45.646][INFO] Archive created at: /tmp/28_09_2022_03_47_45_output.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux-で-Client-Analyzer-ツールを使用する"><a href="#Linux-で-Client-Analyzer-ツールを使用する" class="headerlink" title="Linux で Client Analyzer ツールを使用する"></a>Linux で Client Analyzer ツールを使用する</h2><p>※ 本記事の手順は Red Hat Enterprise Linux Server 7.7 (Maipo) にて動作確認を実施しています。</p>
+<p>Client Analyzer ツールを使用する手順に関する最新の情報については、以下の公開情報ページをご参照ください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-macos-linux?view=o365-worldwide#running-the-analyzer-through-gui-scenario">macOS または Linux でのクライアント アナライザーの実行</a></p>
+<h3 id="Linux-での-Client-Analyzer-ツールの実行方法-Python3を使用する"><a href="#Linux-での-Client-Analyzer-ツールの実行方法-Python3を使用する" class="headerlink" title="Linux での Client Analyzer ツールの実行方法 (Python3を使用する)"></a>Linux での Client Analyzer ツールの実行方法 (Python3を使用する)</h3><p>このセクションでは、コマンドラインインターフェース(CLI)を使用した Client Analyzer ツールの実行方法について紹介します。</p>
+<p>このセクションで紹介する手順を使用するためには、デバイスで <code>python3</code> コマンドと Python パッケージ <a target="_blank" rel="noopener" href="https://pypi.org/search/?q=lxml">lxml</a> が利用可能である必要があります。</p>
+<p>※ <code>python3</code> コマンドが使用できないデバイスで Client Analyzer ツールを実行する手順については、[Linux での Client Analyzer ツールの実行方法 (Python3を使用しない)][#Linux での Client Analyzer ツールの実行方法 (Python3を使用しない)] のセクションを参照してください。</p>
+<ol>
+<li>デバイスの CLI を使用し、任意のディレクトリで以下のコマンドを順に実行します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget --quiet -O XMDEClientAnalyzer.zip https://aka.ms/XMDEClientAnalyzer</span><br><span class="line">$ unzip -q XMDEClientAnalyzer.zip</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>圧縮ファイルが展開され、以下のファイルとディレクトリが存在することを確認します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── mde_support_tool.sh</span><br><span class="line">├── mde_tools/</span><br><span class="line">└── requirements.txt</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>以下のコマンドを実行して、<code>mde_support_tool.sh</code>に実行権限を付与します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><code>mde_support_tool.sh</code>を実行し、必要なコンポーネントをインストールします。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+
+<p>※ デバイスで<code>python3</code>コマンドが使用できない場合、<code>python3: command not found</code>のエラーメッセージが表示され、<code>mde_support_tool.sh</code>の実行に失敗します。</p>
+<ol start="5">
+<li>上記のコマンド実行によりコンポーネントのインストールに成功した後、以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2022-09-28 02:27:45.636][INFO] Archive created at: /tmp/28_09_2022_02_26_53_output.zip</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-での-Client-Analyzer-ツールの実行方法-Python3を使用しない"><a href="#Linux-での-Client-Analyzer-ツールの実行方法-Python3を使用しない" class="headerlink" title="Linux での Client Analyzer ツールの実行方法 (Python3を使用しない)"></a>Linux での Client Analyzer ツールの実行方法 (Python3を使用しない)</h3><p>このセクションでは、<code>python3</code>コマンドまたは Python パッケージ <a target="_blank" rel="noopener" href="https://pypi.org/search/?q=lxml">lxml</a> が使用できない環境にてClient Analyzer ツールを実行する方法について紹介します。</p>
+<ol>
+<li>デバイスの CLI を使用し、任意のディレクトリで以下のコマンドを順に実行します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget --quiet -O XMDEClientAnalyzerBinary.zip https://aka.ms/XMDEClientAnalyzerBinary</span><br><span class="line">$ unzip -q XMDEClientAnalyzerBinary.zip</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>圧縮ファイルが展開され、以下のファイルが存在することを確認します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── SupportToolLinuxBinary.zip</span><br><span class="line">├── SupportToolmacOS-armBinary.zip</span><br><span class="line">└── SupportToolmacOSBinary.zip</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>以下のコマンドで、Linux 用のパッケージを展開します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -q SupportToolLinuxBinary.zip</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>以下のコマンドを実行して、展開された<code>MDESupportTool</code>に実行権限を付与します。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x MDESupportTool</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2022-09-28 02:40:51.848][INFO] Archive created at: /tmp/28_09_2022_02_40_00_output.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>この記事では、 MDE にオンボードされた macOS および Linux デバイスの正常性の評価に役立つ <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide">Microsoft Defender for Endpoint Client Analyzer(MDECA)</a> の使用方法についてご紹介しました。</p>
+<p>Client Analyzer ツールによって作成されたパッケージファイルに含まれる情報の概要については<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-macos-linux?view=o365-worldwide#result-package-contents-on-macos-and-linux">macOS と Linux のパッケージの内容</a> にてご案内いたしております。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/MDE-on-Linux/" rel="tag">MDE on Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/MDE-on-macOS/" rel="tag">MDE on macOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li></ul>
+
+        
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/Endpoint-MDAV-2022-09-28.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../AIP-AzureInformationProtection-2022-09-26-01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">日本語 (マルチバイト文字) でカスタム プロパティが構成されている Office ドキュメントの秘密度ラベルを削除するとファイルが破損する場合がある。</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">macOS および Linux デバイスで Client Analyzer ツールによる正常性診断を実行する方法</a>
+          </li>
+        
+          <li>
+            <a href="../AIP-AzureInformationProtection-2022-09-26-01/">日本語 (マルチバイト文字) でカスタム プロパティが構成されている Office ドキュメントの秘密度ラベルを削除するとファイルが破損する場合がある。</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2022-08-26/">Microsoft Defender ウイルス対策のマルウェア対策プラットフォームを手動で更新・ロールバックする方法</a>
+          </li>
+        
+          <li>
+            <a href="../Azure_Information_Protection_2021_12_8/">AIP スキャナーが対象リポジトリ内のファイルを破損してしまう事例について</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2022-07-29/">Microsoft Defender ウイルス対策のセキュリティインテリジェンス(定義ファイル)を手動で更新・ロールバック・削除する方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-AdvancedThreat-Protection/" rel="tag">Azure AdvancedThreat Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-Information-Protection/" rel="tag">Azure Information Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-Linux/" rel="tag">MDE on Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-macOS/" rel="tag">MDE on macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" rel="tag">Microsoft AdvancedThreat Analytics(ATA)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Rights-Management-Service/" rel="tag">Rights Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" rel="tag">セキュリティインテリジェンス</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" rel="tag">マルウェア対策プラットフォーム</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/">Information</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../tags/Azure-AdvancedThreat-Protection/" style="font-size: 10px;">Azure AdvancedThreat Protection</a> <a href="../tags/Azure-Information-Protection/" style="font-size: 20px;">Azure Information Protection</a> <a href="../tags/Identity-Manager/" style="font-size: 17.5px;">Identity Manager</a> <a href="../tags/Information/" style="font-size: 10px;">Information</a> <a href="../tags/MDE-on-Linux/" style="font-size: 10px;">MDE on Linux</a> <a href="../tags/MDE-on-macOS/" style="font-size: 10px;">MDE on macOS</a> <a href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" style="font-size: 10px;">Microsoft AdvancedThreat Analytics(ATA)</a> <a href="../tags/Microsoft-Defender-for-Endpoint/" style="font-size: 12.5px;">Microsoft Defender for Endpoint</a> <a href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" style="font-size: 15px;">Microsoft Defender ウイルス対策</a> <a href="../tags/Rights-Management-Service/" style="font-size: 10px;">Rights Management Service</a> <a href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" style="font-size: 10px;">セキュリティインテリジェンス</a> <a href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" style="font-size: 10px;">マルウェア対策プラットフォーム</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 CSS Japan Secuirty team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

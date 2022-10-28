@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>AIP スキャナーが対象リポジトリ内のファイルを破損してしまう事例について | Japan CSS Security Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは。Azure Security サポートチームです。今回は AIPスキャナーが対象ファイルを破損させてしまう事例とその回避方法についてご案内いたします。 AIP スキャナーによるスキャンによって対象ファイルが破損するシナリオ 1.スキャナー ノードの記憶域の空き領域が逼迫している状態でラベル付け処理を行うとファイルが故障します。AIP スキャナーはスキャン対象のファイルを検査・ラベル付け">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AIP スキャナーが対象リポジトリ内のファイルを破損してしまう事例について">
+<meta property="og:url" content="https://jp-sec.github.io/blog/Azure_Information_Protection_2021_12_8/index.html">
+<meta property="og:site_name" content="Japan CSS Security Support Blog">
+<meta property="og:description" content="こんにちは。Azure Security サポートチームです。今回は AIPスキャナーが対象ファイルを破損させてしまう事例とその回避方法についてご案内いたします。 AIP スキャナーによるスキャンによって対象ファイルが破損するシナリオ 1.スキャナー ノードの記憶域の空き領域が逼迫している状態でラベル付け処理を行うとファイルが故障します。AIP スキャナーはスキャン対象のファイルを検査・ラベル付け">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Azure_Information_Protection_2021_12_8_1.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Azure_Information_Protection_2021_12_8_2.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Azure_Information_Protection_2021_12_8_3.png">
+<meta property="article:published_time" content="2022-08-26T06:13:00.000Z">
+<meta property="article:modified_time" content="2022-10-28T08:11:53.862Z">
+<meta property="article:author" content="CSS Japan Secuirty team">
+<meta property="article:tag" content="Azure Information Protection">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jp-sec.github.io/blog/images/Azure_Information_Protection_2021_12_8_1.png">
+  
+    <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-sec.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../index.html" id="logo">Japan CSS Security Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../index.html" id="subtitle">日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Azure_Information_Protection_2021_12_8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AIP スキャナーが対象リポジトリ内のファイルを破損してしまう事例について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-08-26T06:13:00.000Z" itemprop="datePublished">2022-08-26</time>
+</a>
+        
+        
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+fca12b48-4b52-54a8-a1d8-5909f3afaf0d%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAIP+%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%8A%E3%83%BC%E3%81%8C%E5%AF%BE%E8%B1%A1%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E5%86%85%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E7%A0%B4%E6%90%8D%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%86%E4%BA%8B%E4%BE%8B%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FAzure_Information_Protection_2021_12_8%2F%29%0A*+Content+Source%3A+%5Barticles%2FAzure_Information_Protection_2021_12_8.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FAzure_Information_Protection_2021_12_8.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-sec.github.io/blog/Azure_Information_Protection_2021_12_8/" data-id="cl9s7ug6500080mmpbv9w2g54" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは。Azure Security サポートチームです。<br>今回は AIPスキャナーが対象ファイルを破損させてしまう事例とその回避方法についてご案内いたします。</p>
+<p>AIP スキャナーによるスキャンによって対象ファイルが破損するシナリオ</p>
+<h2 id="1-スキャナー-ノードの記憶域の空き領域が逼迫している状態でラベル付け処理を行うとファイルが故障します。"><a href="#1-スキャナー-ノードの記憶域の空き領域が逼迫している状態でラベル付け処理を行うとファイルが故障します。" class="headerlink" title="1.スキャナー ノードの記憶域の空き領域が逼迫している状態でラベル付け処理を行うとファイルが故障します。"></a>1.スキャナー ノードの記憶域の空き領域が逼迫している状態でラベル付け処理を行うとファイルが故障します。</h2><p>AIP スキャナーはスキャン対象のファイルを検査・ラベル付け処理を行う際に、スキャナー コンピューターの一時領域に対象ファイル データを転送し、秘密度ラベルの適用処理後に<br>スキャン対象のリポジトリ パスにある原本と差し替えます。<br>現状の仕様ではスキャナー ノードの記憶域が十分に確保されていない場合にもコンテンツ スキャン ジョブは実行されてしまいます。この場合、スキャナー本体の記憶域の範囲内で<br>不完全なデータの状態で対象のコンテンツをラベル付けし、元のリポジトリ パスにあるファイルを差し替えるため、結果としてラベル付けされたファイルが故障してしまう場合があります。</p>
+<p>&lt;回避策&gt;<br>スキャナー ノードの記憶域は十分な空き領域を確保いただくようにお願いいたします。<br>公開されている AIP スキャナーの前提条件では一時ファイルとして 10 GB は確保いただくことをお勧めしております。</p>
+<p>&lt;参考&gt;<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/information-protection/deploy-aip-scanner-prereqs#windows-server-requirements">Azure Information Protection (AIP) 統合ラベルスキャナーの前提条件</a></p>
+<p><img src="/blog/images/Azure_Information_Protection_2021_12_8_1.png"></p>
+<h2 id="2-異なるスキャナー-クラスターに参加する複数の-AIP-スキャナーで同一のリポジトリをラベル付け処理するよう構成するとファイルが故障する場合があります。"><a href="#2-異なるスキャナー-クラスターに参加する複数の-AIP-スキャナーで同一のリポジトリをラベル付け処理するよう構成するとファイルが故障する場合があります。" class="headerlink" title="2.異なるスキャナー クラスターに参加する複数の AIP スキャナーで同一のリポジトリをラベル付け処理するよう構成するとファイルが故障する場合があります。"></a>2.異なるスキャナー クラスターに参加する複数の AIP スキャナーで同一のリポジトリをラベル付け処理するよう構成するとファイルが故障する場合があります。</h2><p>同一のリポジトリを対象にしたコンテンツ スキャン ジョブを設定した別々のクラスターに参加するノードでスキャンを実行すると、コンテンツ スキャンのタイミングがノード間でバッティングしてしまう場合があります。同一のコンテンツに対して複数のノードによるコンテンツ スキャンのタイミングがバッティングしてしまうと、最初のスキャン ジョブによるラベリング処理途中のコンテンツを後続のスキャン ジョブによってキャプチャしてしまう場合があり、この場合にも AIP スキャナーが 1. のシナリオと同様に不完全なデータをキャプチャして元のリポジトリに返すことでラベル付け処理されたコンテンツが故障する場合があります。</p>
+<p>&lt;回避策&gt;<br>AIP スキャナーをスケールアウトする場合、単一のスキャナー クラスターに複数のノードを参加させて構成します。複数のノードで構成されているスキャナー クラスターは共有するデータベースによって、スキャン対象のリポジトリのスキャンに関するデータが共有され、各ノードが効率的にスキャンを行うよう動作します。<br>※以下の図は代表的なスキャナーのアーキテクチャの概要図になります。</p>
+<p><img src="/blog/images/Azure_Information_Protection_2021_12_8_2.png"><br>図 1: Security,Compliance,and Identity に公開された “Best practices for deploying and using the AIP UL scanner“ より抜粋</p>
+<p>上記を踏まえ、スキャナーのパフォーマンス向上の観点でスキャナーのノードの増設を検討する場合には、別々のリポジトリをスキャンするよう複数のクラスターを構成するか、同一のクラスターに<br>複数のノードを参加させるよう構成いただくことを検討ください。</p>
+<p>&lt;参考&gt;<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/information-protection/deploy-aip-scanner-configure-install?tabs=azure-portal-only#optimize-scanner-performance">Azure Information Protection (AIP) 統合ラベル スキャナーをインストールして構成する</a></p>
+<p><img src="/blog/images/Azure_Information_Protection_2021_12_8_3.png"></p>
+<h2 id="3-対象のリポジトリ内のコンテンツが-DFS-レプリケーション等で複数のファイル-サーバーと同期途中の状態でラベル付け処理を行うとファイルが故障する可能性があります。"><a href="#3-対象のリポジトリ内のコンテンツが-DFS-レプリケーション等で複数のファイル-サーバーと同期途中の状態でラベル付け処理を行うとファイルが故障する可能性があります。" class="headerlink" title="3.対象のリポジトリ内のコンテンツが DFS レプリケーション等で複数のファイル サーバーと同期途中の状態でラベル付け処理を行うとファイルが故障する可能性があります。"></a>3.対象のリポジトリ内のコンテンツが DFS レプリケーション等で複数のファイル サーバーと同期途中の状態でラベル付け処理を行うとファイルが故障する可能性があります。</h2><p>スキャン対象のコンテンツが DFS レプリケーションなど複数のファイル サーバー間でデータの同期を行うよう構成されている場合、レプリケーション途中のファイルを AIP スキャナーがキャプチャしてしまう場合があります。<br>この場合にも 1. のシナリオと同様のメカニズムにより AIP スキャナーが不完全な状態のデータをキャプチャしラベル付けした上で元のリポジトリにあるファイルと差し替えをしてしまいファイルが故障してしまう場合があります。</p>
+<p>&lt;回避策&gt;<br>DFS レプリケーションを構成している環境では、レプリケーションのスケジュール調整ならびにコンテンツ スキャン ジョブのスケジュールを “手動” に設定いただき、レプリケーションを実施する時間とコンテンツ スキャン ジョブが実行される時間帯が重複しないように調整いただくことを検討ください。</p>
+<h2 id="4-AIP-スキャナーがスキャン対象としているリポジトリに対して、AIP-クライアント側から一括ラベル付け処理を実施するとファイルが破損する可能性があります。"><a href="#4-AIP-スキャナーがスキャン対象としているリポジトリに対して、AIP-クライアント側から一括ラベル付け処理を実施するとファイルが破損する可能性があります。" class="headerlink" title="4. AIP スキャナーがスキャン対象としているリポジトリに対して、AIP クライアント側から一括ラベル付け処理を実施するとファイルが破損する可能性があります。"></a>4. AIP スキャナーがスキャン対象としているリポジトリに対して、AIP クライアント側から一括ラベル付け処理を実施するとファイルが破損する可能性があります。</h2><p>上記の 1 ～ 3 のシナリオにて解説いたしました AIP スキャナー と同様に AIP クライアントも対象ファイルをラベル付け処理を行う際に、対象のファイルをローカルのプロファイル内にある一時フォルダにコピーした後に処理を実施します。<br>スキャナーによるファイル処理と AIP クライアントによるファイル処理がバッティングしてしまうと、不完全なファイルをキャプチャする事象が発生し、ラベル付け処理が行われたファイルが破損する可能性があります。</p>
+<p>&lt;回避策&gt;<br>実際の環境でスキャン ジョブによる処理と AIP クライアントによるラベル付け処理がバッティングしてしまう可能性は現実的には低いと考えられますが、理論上はファイルが破損するリスクがあります。<br>AIP クライアントの GUI や PowerShell コマンド (Set-AIPFileLable) コマンドによって一括ラベル付け処理を計画される場合には、対象のフォルダ パスが AIP スキャナーのコンテンツ スキャン ジョブと重複していないか事前に確認いただくなど、運用によってリスクを低減することを検討ください。</p>
+<h2 id="5-スキャン対象のリポジトリのファイル容量が逼迫している場合、スキャン対象のファイルが破損する可能性があります。"><a href="#5-スキャン対象のリポジトリのファイル容量が逼迫している場合、スキャン対象のファイルが破損する可能性があります。" class="headerlink" title="5. スキャン対象のリポジトリのファイル容量が逼迫している場合、スキャン対象のファイルが破損する可能性があります。"></a>5. スキャン対象のリポジトリのファイル容量が逼迫している場合、スキャン対象のファイルが破損する可能性があります。</h2><p>AIP スキャナーのローカルにある一時記憶域にてラベル付け処理が完了したファイルは、最終的にスキャン対象の元のリポジトリのファイル パスにあるデータと差し替えられます。<br>スキャナーがリポジトリ先の記憶域の逼迫を検出できた場合には、スキャン処理が失敗しますが、リポジトリ側の記憶域の逼迫の検出タイミング等の何らかの要因により、スキャナーがラベル付けを行ったファイルの差し替え処理の継続を試みる可能性があります。<br>対象リポジトリの記憶域が逼迫していることでデータの差し替えに失敗し、スキャン対象のファイルが破損する可能性があります。</p>
+<p>&lt;回避策&gt;<br>スキャナー コンピューター自体の記憶域だけでなく、スキャン対象のリポジトリの記憶の空き容量にも十分注意いただくようお願いいたします。</p>
+<p>AIP スキャナーにはラベル付け処理によって壊れてしまったファイルを復元する機能はありません。<br>今回の記事でご案内させていただいた各シナリオの情報が、AIP スキャナーを適切に展開/運用いただくことに寄与しましたら幸いです。</p>
+<p>※本ブログ記事化にあたり、弊社サポートによる調査にご協力いただきましたお客様に深く感謝いたします。<br>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Azure-Information-Protection/" rel="tag">Azure Information Protection</a></li></ul>
+
+        
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/Azure_Information_Protection_2021_12_8.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../Endpoint-MDAV-2022-08-26/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          Microsoft Defender ウイルス対策のマルウェア対策プラットフォームを手動で更新・ロールバックする方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="../Endpoint-MDAV-2022-07-29/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Microsoft Defender ウイルス対策のセキュリティインテリジェンス(定義ファイル)を手動で更新・ロールバック・削除する方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2022-09-28/">macOS および Linux デバイスで Client Analyzer ツールによる正常性診断を実行する方法</a>
+          </li>
+        
+          <li>
+            <a href="../AIP-AzureInformationProtection-2022-09-26-01/">日本語 (マルチバイト文字) でカスタム プロパティが構成されている Office ドキュメントの秘密度ラベルを削除するとファイルが破損する場合がある。</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2022-08-26/">Microsoft Defender ウイルス対策のマルウェア対策プラットフォームを手動で更新・ロールバックする方法</a>
+          </li>
+        
+          <li>
+            <a href="">AIP スキャナーが対象リポジトリ内のファイルを破損してしまう事例について</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2022-07-29/">Microsoft Defender ウイルス対策のセキュリティインテリジェンス(定義ファイル)を手動で更新・ロールバック・削除する方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-AdvancedThreat-Protection/" rel="tag">Azure AdvancedThreat Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-Information-Protection/" rel="tag">Azure Information Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-Linux/" rel="tag">MDE on Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-macOS/" rel="tag">MDE on macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" rel="tag">Microsoft AdvancedThreat Analytics(ATA)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Rights-Management-Service/" rel="tag">Rights Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" rel="tag">セキュリティインテリジェンス</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" rel="tag">マルウェア対策プラットフォーム</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/">Information</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../tags/Azure-AdvancedThreat-Protection/" style="font-size: 10px;">Azure AdvancedThreat Protection</a> <a href="../tags/Azure-Information-Protection/" style="font-size: 20px;">Azure Information Protection</a> <a href="../tags/Identity-Manager/" style="font-size: 17.5px;">Identity Manager</a> <a href="../tags/Information/" style="font-size: 10px;">Information</a> <a href="../tags/MDE-on-Linux/" style="font-size: 10px;">MDE on Linux</a> <a href="../tags/MDE-on-macOS/" style="font-size: 10px;">MDE on macOS</a> <a href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" style="font-size: 10px;">Microsoft AdvancedThreat Analytics(ATA)</a> <a href="../tags/Microsoft-Defender-for-Endpoint/" style="font-size: 12.5px;">Microsoft Defender for Endpoint</a> <a href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" style="font-size: 15px;">Microsoft Defender ウイルス対策</a> <a href="../tags/Rights-Management-Service/" style="font-size: 10px;">Rights Management Service</a> <a href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" style="font-size: 10px;">セキュリティインテリジェンス</a> <a href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" style="font-size: 10px;">マルウェア対策プラットフォーム</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 CSS Japan Secuirty team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
