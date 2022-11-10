@@ -2,142 +2,149 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jp-sec.github.io/blog/AIP-AzureInformationProtection-2022-06-08-01/</loc>
-    
-    <lastmod>2022-10-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jp-sec.github.io/blog/AIP-AzureInformationProtection-2022-09-26-01/</loc>
-    
-    <lastmod>2022-10-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jp-sec.github.io/blog/AdvancedThreat_2020_02_12/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Azure_Information_Protection_2019_08_30/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Azure_Information_Protection_2019_11_18/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Azure_Information_Protection_2021_12_8/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Azure_Information_Protection_2022_05_18/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Azure_Information_Protection_2022_05_20/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Defender_2019_05_08/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-07-29/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Identity_Manager_2019_03_30/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Identity_Manager_2021_08_31/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/MIM_ADMA_Export_0x80004005/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Microsoft_Defender_for_Endpoint_2021_11_22/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/PAM_http_error/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/RightsManagementServicesClient2.1_1/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/information/README/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-08-26/</loc>
     
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-11-01/</loc>
+    
+    <lastmod>2022-11-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jp-sec.github.io/blog/AIP-AzureInformationProtection-2022-06-08-01/</loc>
+    
+    <lastmod>2022-11-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jp-sec.github.io/blog/AIP-AzureInformationProtection-2022-09-26-01/</loc>
+    
+    <lastmod>2022-11-10</lastmod>
     
   </url>
   
 
   <url>
     <loc>https://jp-sec.github.io/blog</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -145,84 +152,84 @@
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/Azure-Information-Protection/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/Azure-AdvancedThreat-Protection/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/Microsoft-AdvancedThreat-Analytics-ATA/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/MDE-on-Linux/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/MDE-on-macOS/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/Microsoft-Defender-for-Endpoint/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/Identity-Manager/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/Rights-Management-Service/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/Information/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jp-sec.github.io/blog/tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/</loc>
-    <lastmod>2022-10-28</lastmod>
+    <lastmod>2022-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
