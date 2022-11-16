@@ -15,6 +15,7 @@
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-11-01-01.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-11-01-02.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-11-01-08.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-11-01-03.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-11-01-04.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-11-01-05.png">
@@ -24,7 +25,7 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-11-01-06.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-11-01-04.png">
 <meta property="article:published_time" content="2022-11-09T02:00:00.000Z">
-<meta property="article:modified_time" content="2022-11-16T10:52:42.295Z">
+<meta property="article:modified_time" content="2022-11-16T10:56:50.340Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="MDE on Linux">
 <meta property="article:tag" content="MDE on macOS">
@@ -115,7 +116,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+1caeb083-8b20-51c7-9f78-8905cc35256b%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMicrosoft+Defender+for+Endpoint%28MDE%29+%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%95%E3%82%8C%E3%81%9F%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%AE%E6%AD%A3%E5%B8%B8%E6%80%A7%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2022-11-01%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2022-11-01.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2022-11-01.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-11-01/" data-id="clajiygq0001p0mtd9o249sbt" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-11-01/" data-id="clajj3sow001m0mol8botan6t" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -163,6 +164,7 @@
 <p>また、Windows Server 2016 / 2012 R2 をオンボードする場合には、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-server-endpoints?view=o365-worldwide#prerequisites">Windows Server 2016 と 2012 R2 の前提条件</a>の要件も併せて確認します。</p>
 <p>※ MDE がサポートする OS のバージョンは、OS のライフサイクルに依存します。</p>
 <p>※ <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#product-updates">Microsoft Defender ウイルス対策(MDAV) のマルウェア対策プラットフォーム</a>は、最新から 2 世代以内のバージョンに更新する必要があります。</p>
+<p>※ MDE にオンボードしたデバイスから作成した OS イメージを基に展開・複製したマシンを使用する場合、事前に <a href="/blog/Endpoint-MDAV-2022-11-15">MDE にオンボードされたデバイスをイメージ化・複製する場合の注意事項</a> に記載の内容を必ずご確認ください。</p>
 <h3 id="STEP2-MDE-Client-Analyzer-ツールを使用して接続テストを実施する"><a href="#STEP2-MDE-Client-Analyzer-ツールを使用して接続テストを実施する" class="headerlink" title="STEP2 MDE Client Analyzer ツールを使用して接続テストを実施する"></a>STEP2 MDE Client Analyzer ツールを使用して接続テストを実施する</h3><p>Windows 端末の場合、 MDE Client Analyzer ツールを使用して接続テストを実施することが可能です。</p>
 <p>MDE Client Analyzer ツールに関する最新の情報は以下の公開情報を参照してください。</p>
 <p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/download-client-analyzer?view=o365-worldwide">Microsoft Defender for Endpoint クライアントアナライザーをダウンロードする | Microsoft Learn</a></p>
@@ -187,6 +189,9 @@
 <p>接続テストに失敗する場合は、 [Results] 列の記載から、接続テストに失敗した URL を確認します。</p>
 <p>通信テストに失敗した場合は、以下公開情報の [商用顧客向けの Microsoft Defender for Endpoint の URL リスト] にてご案内しております通信要件を満たす構成であるか否かを確認します。</p>
 <p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-proxy-internet?view=o365-worldwide#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">商用顧客向けの Microsoft Defender for Endpoint の URL リスト</a></p>
+<p>また、「MDEClientAnalyzer.htm」の [Detailed Results] 欄に [AntiSpoofingNotActive] の警告が表示される場合、<a href="/blog/Endpoint-MDAV-2022-11-15">MDE にオンボードされたデバイスをイメージ化・複製する場合の注意事項</a> にてご案内しております制限事項に該当する環境の可能性があります。</p>
+<p><img src="../images/Endpoint-MDAV-2022-11-01-08.png" alt="AntiSpoofingNotActive の警告"></p>
+<p>上記の制限事項に該当する場合、デバイスと MDE との接続に問題が発生する可能性があるため、必ず<a href="/blog/Endpoint-MDAV-2022-11-15">リンク先</a>の情報をご確認ください。</p>
 <h3 id="STEP3-Windows-デバイスで-MDE-のアラート検出テストを実施する"><a href="#STEP3-Windows-デバイスで-MDE-のアラート検出テストを実施する" class="headerlink" title="STEP3 Windows デバイスで MDE のアラート検出テストを実施する"></a>STEP3 Windows デバイスで MDE のアラート検出テストを実施する</h3><p>STEP2の通信テストにすべて成功することが確認できたら、デバイスで検出されたアラートが<a target="_blank" rel="noopener" href="https://security.microsoft.com/alerts">Microsoft 365 Defender ポータル</a>上で検出されることを確認します。</p>
 <p>アラートの検出テストは以下の手順で実施します。</p>
 <ol>

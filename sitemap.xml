@@ -2,27 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jp-sec.github.io/blog/Azure_Information_Protection_2022_05_20/</loc>
-    
-    <lastmod>2022-11-16</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jp-sec.github.io/blog/Defender_2019_05_08/</loc>
-    
-    <lastmod>2022-11-16</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-07-29/</loc>
-    
-    <lastmod>2022-11-16</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/</loc>
     
     <lastmod>2022-11-16</lastmod>
@@ -86,13 +65,6 @@
   </url>
   
   <url>
-    <loc>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-08-26/</loc>
-    
-    <lastmod>2022-11-16</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-11-01/</loc>
     
     <lastmod>2022-11-16</lastmod>
@@ -143,6 +115,34 @@
   
   <url>
     <loc>https://jp-sec.github.io/blog/Azure_Information_Protection_2022_05_18/</loc>
+    
+    <lastmod>2022-11-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jp-sec.github.io/blog/Azure_Information_Protection_2022_05_20/</loc>
+    
+    <lastmod>2022-11-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jp-sec.github.io/blog/Defender_2019_05_08/</loc>
+    
+    <lastmod>2022-11-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-07-29/</loc>
+    
+    <lastmod>2022-11-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-08-26/</loc>
     
     <lastmod>2022-11-16</lastmod>
     
