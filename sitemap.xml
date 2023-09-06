@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jp-sec.github.io/blog/information/README/</loc>
-    
-    <lastmod>2023-09-06</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jp-sec.github.io/blog/AIP-AzureInformationProtection-2022-06-08-01/</loc>
     
     <lastmod>2023-09-06</lastmod>
@@ -143,6 +136,13 @@
   
   <url>
     <loc>https://jp-sec.github.io/blog/RightsManagementServicesClient2.1_1/</loc>
+    
+    <lastmod>2023-09-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jp-sec.github.io/blog/information/README/</loc>
     
     <lastmod>2023-09-06</lastmod>
     
