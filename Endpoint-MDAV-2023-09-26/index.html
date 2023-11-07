@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Japan CSS Security Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは Azure Security サポートチームです。 この記事では、Windows Server 2012 R2 と Windows Server 2016 を Microsoft Defender for Endpoint(MDE) にオンボード &#x2F; オフボードする方法についておまとめいたします。 なお、本記事の内容は、2023 年 11 月 5 日時点で最新の情報を元に作成いたしてお">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Japan CSS Security Support Blog">
+<meta property="og:url" content="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-09-26/index.html">
+<meta property="og:site_name" content="Japan CSS Security Support Blog">
+<meta property="og:description" content="こんにちは Azure Security サポートチームです。 この記事では、Windows Server 2012 R2 と Windows Server 2016 を Microsoft Defender for Endpoint(MDE) にオンボード &#x2F; オフボードする方法についておまとめいたします。 なお、本記事の内容は、2023 年 11 月 5 日時点で最新の情報を元に作成いたしてお">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-003.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-007.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-001.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-006.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-004.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-005.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-008.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-009.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-010.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-012.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-011.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-013.png">
+<meta property="article:published_time" content="2023-11-07T00:44:43.575Z">
+<meta property="article:modified_time" content="2023-11-07T00:44:37.687Z">
+<meta property="article:author" content="CSS Japan Secuirty team">
+<meta property="article:tag" content="Microsoft Defender for Endpoint">
+<meta property="article:tag" content="Microsoft Defender for Identity">
+<meta property="article:tag" content="Microsoft Cloud App Security">
+<meta property="article:tag" content="Information Protection">
+<meta property="article:tag" content="Microsoft Identity Manager">
+<meta property="article:tag" content="Azure Sentinel">
+<meta property="article:tag" content="Azure Security Center">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-09-26-003.png">
+  
+    <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-sec.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../index.html" id="logo">Japan CSS Security Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../index.html" id="subtitle">日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Endpoint-MDAV-2023-09-26" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは Azure Security サポートチームです。</p>
+<p>この記事では、Windows Server 2012 R2 と Windows Server 2016 を Microsoft Defender for Endpoint(MDE) にオンボード / オフボードする方法についておまとめいたします。</p>
+<p>なお、本記事の内容は、2023 年 11 月 5 日時点で最新の情報を元に作成いたしております。</p>
+<p>Windows Server のオンボードに関する最新情報については、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-server-endpoints?view=o365-worldwide">Microsoft Learn</a> をご参照ください。</p>
+<p>また、サーバを MDE にオンボードした後の正常性確認方法については以下の Blog 記事にておまとめしておりますので、併せてご参照ください。</p>
+<p>参考：<a href="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-11-01/">Microsoft Defender for Endpoint(MDE) にオンボードされたデバイスの正常性確認ポイント | Japan CSS Security Support Blog</a></p>
+<h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul>
+<li><a href="#Windows-Server-%E3%82%92-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">Windows Server を MDE にオンボードする前の確認ポイント</a><ul>
+<li><a href="#%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E7%AB%AF%E6%9C%AB%E3%81%AE-OS-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">オンボード端末の OS バージョンを確認する</a></li>
+<li><a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%82%92%E6%B1%BA%E5%AE%9A%E3%81%99%E3%82%8B">サーバをオンボードする方法を決定する</a></li>
+<li><a href="#%E7%AB%AF%E6%9C%AB%E3%81%AE%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E6%8E%A5%E7%B6%9A%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">端末のネットワーク接続を確認する</a></li>
+<li><a href="#%E3%82%B5%E3%83%BC%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E8%A3%BD%E3%81%AE%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E8%A3%BD%E5%93%81%E3%81%AE%E6%9C%89%E7%84%A1%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">サードパーティ製のウイルス対策製品の有無を確認する</a></li>
+<li><a href="#MMA-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E6%97%A7%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E6%96%B9%E6%B3%95%E3%81%A7-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E6%B8%88%E3%81%BF%E3%81%8B%E3%81%A9%E3%81%86%E3%81%8B%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">MMA を使用した旧オンボード方法で MDE にオンボード済みかどうか確認する</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%92%E9%85%8D%E7%BD%AE%E3%81%99%E3%82%8B">サーバを MDE にオンボードするためのスクリプトを配置する</a><ul>
+<li><a href="#MDE-%E3%81%B8%E3%81%AE%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E7%94%A8%E6%84%8F%E3%81%99%E3%82%8B">MDE へのオンボードに必要なファイルを用意する</a></li>
+<li><a href="#%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%85%8D%E7%BD%AE%E3%81%99%E3%82%8B">オンボードに必要なファイルを配置する</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B">インストールスクリプトを使用してサーバを MDE にオンボードする</a><ul>
+<li><a href="#MMA-%E3%81%AB%E3%82%88%E3%82%8A%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88">MMA によりサーバを MDE にオンボードしている場合</a></li>
+<li><a href="#%E3%82%B5%E3%83%BC%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E8%A3%BD%E3%81%AE%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E8%A3%BD%E5%93%81%E3%81%8C%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88">サードパーティ製のウイルス対策製品がインストールされている場合</a></li>
+<li><a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">サーバを MDE にオンボードするコマンド</a></li>
+<li><a href="#MMA-%E3%81%8B%E3%82%89%E3%81%AE%E7%A7%BB%E8%A1%8C%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%82%92%E8%A1%8C%E3%81%86%E5%A0%B4%E5%90%88%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">MMA からの移行オンボードを行う場合のコマンド</a></li>
+<li><a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%81%8C-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%95%E3%82%8C%E3%81%9F%E3%81%93%E3%81%A8%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">サーバが MDE にオンボードされたことを確認する</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E7%B5%B1%E5%90%88%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E3%81%AE%E3%82%A2%E3%83%B3%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A8%E3%82%AA%E3%83%95%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%A1%8C%E3%81%86">インストールスクリプトを使用して統合エージェントのアンインストールとオフボード操作を行う</a></li>
+</ul>
+</li>
+<li><a href="#MDE-%E3%81%AE%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%AB%E5%A4%B1%E6%95%97%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">MDE のオンボードに失敗する場合のトラブルシューティング</a><ul>
+<li><a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%81%A7%E9%80%9A%E4%BF%A1%E3%83%86%E3%82%B9%E3%83%88%E3%82%92%E8%A1%8C%E3%81%86">サーバで通信テストを行う</a></li>
+<li><a href="#%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%8B%E3%82%89%E9%80%9A%E4%BF%A1%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">レポートから通信テストの結果を確認する</a></li>
+<li><a href="#%E9%80%9A%E4%BF%A1%E3%81%AB%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">通信にプロキシサーバを利用する場合の確認ポイント</a></li>
+</ul>
+</li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li>
+</ul>
+<h2 id="Windows-Server-を-MDE-にオンボードする前の確認ポイント"><a href="#Windows-Server-を-MDE-にオンボードする前の確認ポイント" class="headerlink" title="Windows Server を MDE にオンボードする前の確認ポイント"></a>Windows Server を MDE にオンボードする前の確認ポイント</h2><h3 id="オンボード端末の-OS-バージョンを確認する"><a href="#オンボード端末の-OS-バージョンを確認する" class="headerlink" title="オンボード端末の OS バージョンを確認する"></a>オンボード端末の OS バージョンを確認する</h3><p>Windows Server を MDE にオンボードする前に、サーバの OS バージョンを確認します。</p>
+<p>下記リンク先の公開情報に記載の通り、Windows Server 2016 以前と Windows Server 2019 以降のバージョンでは、MDE へのオンボード方法が異なる点にご留意ください。</p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-003.png" alt="サーバのオンボード"></p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-server-endpoints?view=o365-worldwide">Windows サーバーを Microsoft Defender for Endpoint にオンボードします | Microsoft Learn</a></p>
+<p>なお、この記事では、Windows Server 2012 R2 および Windows Server  2016 を MDE にオンボードする方法について記載します。</p>
+<p>Windows Server 2019 以降のサーバを MDE にオンボードする場合は、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/onboard-windows-client?view=o365-worldwide">Windows クライアント を MDE にオンボードする</a> に記載の手順に従います。</p>
+<blockquote>
+<p>注意： </p>
+<p>Windows Server 2012 R2 は 2023年 10 月 10 日に延長サポートが終了いたしております。</p>
+<p>サポートが終了した OS を MDE にオンボードして利用いただくことは非推奨ですので、MDE をご利用いただく場合は、サポート中の OS バージョンへの更新を実施ください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/lifecycle/products/windows-server-2012-r2">Windows Server 2012 R2 - Microsoft Lifecycle | Microsoft Learn</a></p>
+</blockquote>
+<h3 id="サーバをオンボードする方法を決定する"><a href="#サーバをオンボードする方法を決定する" class="headerlink" title="サーバをオンボードする方法を決定する"></a>サーバをオンボードする方法を決定する</h3><p>MDE にオンボードするサーバのバージョンが Windows Server 2012 R2 または Windows Server 2016 であることを確認したら、次はサーバを MDE にオンボードする方法を決定します。</p>
+<p>サーバを MDE にオンボードする場合のステップを以下の通り簡単にまとめます。</p>
+<ol>
+<li><p><strong>MDE にオンボードするサーバが、システムや通信などの<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/minimum-requirements?view=o365-worldwide">最小要件</a>を満たすことを確認します。また、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-server-endpoints?view=o365-worldwide#windows-server-2012-r2-and-windows-server-2016">Windows Server 2012 R2 および 2016 をオンボードする場合の要件</a> についても確認を行います。</strong></p>
+</li>
+<li><p><strong>Microsoft 365 Defender ポータルからダウンロード可能なインストールパッケージ(md4ws.msi) を使用して、サーバに統合エージェントをインストールします。</strong></p>
+</li>
+<li><p><strong>統合エージェントパッケージをインストールしたら、展開方法に合わせてダウンロードしたオンボードスクリプトをサーバで実行することで、オンボード操作が完了します。グループポリシー用のスクリプトを使用する場合は、グループポリシーや <a target="_blank" rel="noopener" href="https://github.com/microsoft/mdefordownlevelserver/blob/main/Install.ps1">Install.ps1</a> を用いて実行する必要があります。</strong></p>
+</li>
+</ol>
+<p>なお、上記の手順は、Microsoft Defender for Cloud(MDfC) の <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/defender-for-cloud/integration-defender-for-endpoint?tabs=windows#enable-the-integration">MDE 統合機能</a>を利用しないサーバを MDE にオンボードする場合の手順です。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/defender-for-cloud/integration-defender-for-endpoint?tabs=windows#enable-the-integration">MDE 統合機能</a>を利用する場合は、ユーザによるパッケージのダウンロードやサーバへの展開作業は不要です。</p>
+<h3 id="端末のネットワーク接続を確認する"><a href="#端末のネットワーク接続を確認する" class="headerlink" title="端末のネットワーク接続を確認する"></a>端末のネットワーク接続を確認する</h3><p>サーバを MDE にオンボードする前に、端末のネットワーク接続を確認する必要があります。</p>
+<p>※ MDE にオンボードされたサーバが上記の通信先との接続に失敗する場合、サーバの情報が Microsoft 365 Defender ポータルに登録されず、EDR などの保護機能の利用に問題が発生する可能性があります。</p>
+<p>MDE を使用してサーバを保護するためには、下記の公開情報の [スプレッドシートをダウンロードします] からダウンロード可能なスプレッドシート内の [Microsoft Defender URLs] シートに一覧されている宛先との通信が可能である必要があります。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-environment?view=o365-worldwide#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">商用のお客様向けのMicrosoft Defender for Endpoint URL リスト (標準)</a></p>
+<blockquote>
+<p>注意：</p>
+<p>MDE の稼働に必要な暗号化通信の復号はサポートされておりません。</p>
+<p>そのため、ユーザの環境で TLS(SSL) インスペクションのような HTTPS 通信を復号するシステムを利用する場合は、必ず MDE の通信要件にリストされている通信先を、復号の対象から除外する必要があります。</p>
+</blockquote>
+<p>※ 本記事執筆時点でパブリック プレビュー中の合理化(Streamlined)された接続を使用してオンボードを行う場合には、<code>統合 URL リストのMicrosoft Defender for Endpoint (NEW - 合理化)</code> からダウンロード可能なスプレッドシートを参照します。</p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-007.png" alt="通信要件が記載されたスプレッドシート"></p>
+<p>なお、もし MDE にオンボードするサーバがインターネットに直接接続できない環境に配置されている場合には、以下の公開情報にてご案内している手順でプロキシサーバを構成いただく必要があります。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-proxy-internet?view=o365-worldwide#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">情報保護のためにデバイス プロキシとインターネット接続の設定を構成する | Microsoft Learn</a></p>
+<p>上記の公開情報にてご案内している通り、 MDE の通信要件を満たすためには、以下のいずれかのプロキシ設定を使用できます。</p>
+<ol>
+<li><p><strong>WinHTTP プロキシ設定</strong></p>
+</li>
+<li><p><strong>EDR センサー用のレジストリベースの静的プロキシ設定</strong></p>
+</li>
+</ol>
+<p>※ WinHTTP プロキシ設定は Windows インターネットブラウザプロキシ(WinINet) とは異なります。</p>
+<p>また、Microsoft  Defender ウイルス対策(MDAV) のクラウド保護やセキュリティインテリジェンスの更新に使用するために、下記公開情報にてご案内している Microsoft Defender ウイルス対策用の静的プロキシ設定も実施いただくことを推奨します。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-proxy-internet?view=o365-worldwide#configure-a-static-proxy-for-microsoft-defender-antivirus">Microsoft Defender ウイルス対策の静的プロキシを構成する | Microsoft Learn</a></p>
+<blockquote>
+<p>情報：</p>
+<p>2023 年 10 月 26 日時点でパプリックプレビューとして提供されている「合理的な接続」を使用してデバイスをオンボードする場合の通信要件については下記の公開情報の記載を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-device-connectivity?view=o365-worldwide&branch=connect-devices">Onboarding devices using streamlined connectivity for Microsoft Defender for Endpoint | Microsoft Learn</a></p>
+</blockquote>
+<h3 id="サードパーティ製のウイルス対策製品の有無を確認する"><a href="#サードパーティ製のウイルス対策製品の有無を確認する" class="headerlink" title="サードパーティ製のウイルス対策製品の有無を確認する"></a>サードパーティ製のウイルス対策製品の有無を確認する</h3><p>MDE にオンボードするサーバが、サードパーティ製のウイルス対策製品を利用しているか、もしくは利用する予定があるか確認します。</p>
+<p>MDE による EDR(Endpoint Detection and Response)保護機能は、EPP(エンドポイント保護)機能を持つサードパーティ製のウイルス対策製品と併用して利用いただくことが可能です。</p>
+<p>しかし、サーバで MDE と他のウイルス対策製品を併用する場合には、サーバで Microsoft Defender ウイルス対策(MDAV)をパッシブモードに変更する必要があります。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-compatibility?view=o365-worldwide">Microsoft Defender ウイルス対策の他のセキュリティ製品との互換性 | Microsoft Learn</a></p>
+<h3 id="MMA-を使用した旧オンボード方法で-MDE-にオンボード済みかどうか確認する"><a href="#MMA-を使用した旧オンボード方法で-MDE-にオンボード済みかどうか確認する" class="headerlink" title="MMA を使用した旧オンボード方法で MDE にオンボード済みかどうか確認する"></a>MMA を使用した旧オンボード方法で MDE にオンボード済みかどうか確認する</h3><p>Windows Server 2012 R2 および 2016 にてすでに MDE をご利用中の場合には、対象のサーバが Microsoft Monitoring Agent(MMA) を使用する旧オンボード方法によって MDE にオンボードされているかどうかを確認します。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-server-endpoints?view=o365-worldwide">Windows サーバーを Microsoft Defender for Endpoint にオンボードします | Microsoft Learn</a></p>
+<h2 id="サーバを-MDE-にオンボードするためのスクリプトを配置する"><a href="#サーバを-MDE-にオンボードするためのスクリプトを配置する" class="headerlink" title="サーバを MDE にオンボードするためのスクリプトを配置する"></a>サーバを MDE にオンボードするためのスクリプトを配置する</h2><p>本記事では、統合エージェントのインストールとオンボードスクリプトの実行を行うために弊社が提供しているツールである  <a target="_blank" rel="noopener" href="https://github.com/microsoft/mdefordownlevelserver/blob/main/Install.ps1">Install.ps1</a> を使用してサーバを MDE にオンボードする方法について紹介します。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/microsoft/mdefordownlevelserver/blob/main/Install.ps1">Install.ps1</a> を使用すると、各端末を手動で MDE にオンボードすることや、Active Directory 管理下のサーバを MDE にオンボードすることなどが可能になります。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-server-endpoints?view=o365-worldwide#apply-the-microsoft-defender-for-endpoint-installation-and-onboarding-packages-using-group-policy">グループ ポリシーを使用して Microsoft Defender for Endpoint のインストールパッケージとオンボード パッケージを適用する</a></p>
+<h3 id="MDE-へのオンボードに必要なファイルを用意する"><a href="#MDE-へのオンボードに必要なファイルを用意する" class="headerlink" title="MDE へのオンボードに必要なファイルを用意する"></a>MDE へのオンボードに必要なファイルを用意する</h3><p><a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%82%92%E6%B1%BA%E5%AE%9A%E3%81%99%E3%82%8B">サーバをオンボードする方法を決定する</a>  にて Windows Server 2012 R2 または 2016 を MDE にオンボードする方法を決定したら、オンボード操作に必要な以下のファイルを Microsoft 365 Defender ポータルから取得します。</p>
+<p>※ <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/defender-for-cloud/integration-defender-for-endpoint?tabs=windows#enable-the-integration">MDE 統合機能</a>を利用して MDE へのオンボードを行う場合は、パッケージのダウンロードやサーバへの展開作業は不要です。</p>
+<ul>
+<li><p><strong>インストールパッケージ(md4ws.msi)</strong></p>
+</li>
+<li><p><strong>オンボードスクリプト</strong></p>
+</li>
+<li><p><strong>Install.ps1</strong></p>
+</li>
+</ul>
+<p>MDE へのオンボードに必要なインストールパッケージとオンボードスクリプトは、Microsoft 365 Defender ポータルの [設定]&gt;[エンドポイント]&gt;[オンボーディング] からダウンロードすることが可能です。</p>
+<p>Windows Server 2012 R2 または 2016 用のパッケージを取得する場合は、オペレーティングシステムを「Windows Server 2012 R2 または 2016」に変更します。</p>
+<p>また、[展開方法] は使用するオンボード方法に合わせて選択します。</p>
+<p>Install.ps1 を使用して MDE へのオンボードを行う場合は [展開方法] の設定を「グループポリシー」に変更します。</p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-001.png" alt="インストール/オンボード パッケージのダウンロード"></p>
+<p>また、Install.ps1 は <a target="_blank" rel="noopener" href="https://github.com/microsoft/mdefordownlevelserver/archive/refs/heads/main.zip">ダウンロードリンク</a> からダウンロードできます。</p>
+<p>上記のリンク先からダウンロードした mdefordownlevelserver-main.zip を展開すると、Microsoft によって署名された Install.ps1 ファイルを取得することができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/server-migration?view=o365-worldwide#installer-script">インストーラースクリプト</a></p>
+<h3 id="オンボードに必要なファイルを配置する"><a href="#オンボードに必要なファイルを配置する" class="headerlink" title="オンボードに必要なファイルを配置する"></a>オンボードに必要なファイルを配置する</h3><p>続いて、取得したインストールパッケージ(md4ws.msi)、オンボードスクリプト(WindowsDefenderATPOnboardingScript.cmd)、Install.ps1 の 3 つのファイルを MDE にオンボードするサーバからアクセス可能なフォルダに配置します。</p>
+<p>特定のサーバのみを MDE にオンボードする場合、これらのファイルはそのサーバのローカルフォルダに配置することができます。</p>
+<p>また、Active Directory を使用して複数のサーバを一斉に MDE にオンボードする場合は、MDE にオンボードするサーバからアクセス可能な共有フォルダにこれらのファイルを配置する必要があります。(共有フォルダを利用する場合は、対象の共有フォルダに対して書き込みアクセスが許可されている必要があります。)</p>
+<p>本記事では、<code>\\FileShareServer\MDEOnboard</code> という UNC パスでアクセス可能な共有フォルダ内に、md4ws.msi、WindowsDefenderATPOnboardingScript.cmd、Install.ps1 の 3 つのファイルを配置した環境で動作確認を実施します。</p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-006.png" alt="オンボードに必要なファイルの配置"></p>
+<p>なお、Install.ps1 を使用してオンボードを行う場合には、md4ws.msi のファイル名は変更せず、Install.ps1 と同じフォルダに配置する必要がある点に注意が必要です。</p>
+<p>※ オンボーディングスクリプト(WindowsDefenderATPOnboardingScript.cmd) は必ずしも同じフォルダに配置いただく必要はありません。</p>
+<h2 id="インストールスクリプトを使用してサーバを-MDE-にオンボードする"><a href="#インストールスクリプトを使用してサーバを-MDE-にオンボードする" class="headerlink" title="インストールスクリプトを使用してサーバを MDE にオンボードする"></a>インストールスクリプトを使用してサーバを MDE にオンボードする</h2><p>Install.ps1 を使用し、以下の手順で Windows Server 2012 R2 または 2016 を MDE にオンボードします。</p>
+<p>事前に必ず、<a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%82%92%E6%B1%BA%E5%AE%9A%E3%81%99%E3%82%8B">サーバをオンボードする方法を決定する</a> の項を参照し、MDE にオンボードするサーバが Windows Server 2012 R2 または 2016 であることを確認します。</p>
+<p>Windows Server 2019 以降のバージョンを使用する場合は、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/onboard-windows-client?view=o365-worldwide">Windows クライアント を MDE にオンボードする</a> に記載の手順に従います。</p>
+<p><strong>この時、MDE にオンボードするサーバが要件を満たすことを必ず確認してください。</strong></p>
+<p><strong>サーバに必要な更新プログラムが適用されていない場合、統合エージェントのインストールやオンボード操作に失敗する場合があります。</strong></p>
+<p><strong>また、サーバが MDE の通信要件を満たしていない場合には、端末の情報が正常にサービスに連携されずにポータルに端末が登録されない問題や、検知アラートを出力できない問題が発生する可能性があります。</strong></p>
+<p>MDE の通信要件については <a href="#%E7%AB%AF%E6%9C%AB%E3%81%AE%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E6%8E%A5%E7%B6%9A%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">端末のネットワーク接続を確認する</a> の記載を参照してください。</p>
+<p>サーバを MDE にオンボードした後で通信の問題が発生した場合のトラブルシューティングを行う際には、<a href="#MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%97%E3%81%9F%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AE%E9%80%9A%E4%BF%A1%E3%83%86%E3%82%B9%E3%83%88%E6%96%B9%E6%B3%95">MDE にオンボードしたサーバの通信テスト方法</a> の記載を参照してください。</p>
+<h3 id="MMA-によりサーバを-MDE-にオンボードしている場合"><a href="#MMA-によりサーバを-MDE-にオンボードしている場合" class="headerlink" title="MMA によりサーバを MDE にオンボードしている場合"></a>MMA によりサーバを MDE にオンボードしている場合</h3><p>MDE にオンボードするサーバが、すでに MMA によって MDE にオンボードされているか確認します。</p>
+<p>サーバに MMA がインストールされている場合、<code>C:\Program Files\Microsoft Monitoring Agent\Agent\AgentControlPanel.exe</code> を起動することで MMA に登録されているワークスペース ID などの情報を確認できます。</p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-004.png" alt="MMA に登録したワークスペース ID の確認"></p>
+<p>なお、ご利用テナントの MDE にサーバをオンボードするために登録するワークスペース ID は、Microsoft 365 Defender ポータルの [設定]&gt;[エンドポイント]&gt;[オンボーディング] 画面でオペレーティングシステムを [Windows Server 2008 R2 SP1] に変更することで確認いただくことが可能です。</p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-005.png" alt="ご利用テナントのワークスペース ID の確認"></p>
+<p>サーバがすでに MMA によってオンボードされている場合には、事前に MMA をアンインストールするか、MMA に登録されている MDE のオンボードに使用しているワークスペース ID を削除してください。</p>
+<p>また、サーバの台数が多い場合には、[MMA からの移行オンボードを行う場合](#MMA からの移行オンボードを行う場合) に記載の手順で、Install.ps1 を使用して MMA からワークスペース ID の情報を削除し、MDE へのオンボードを行うことも可能です。</p>
+<h3 id="サードパーティ製のウイルス対策製品がインストールされている場合"><a href="#サードパーティ製のウイルス対策製品がインストールされている場合" class="headerlink" title="サードパーティ製のウイルス対策製品がインストールされている場合"></a>サードパーティ製のウイルス対策製品がインストールされている場合</h3><p><a href="#%E3%82%B5%E3%83%BC%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E8%A3%BD%E3%81%AE%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E8%A3%BD%E5%93%81%E3%81%AE%E6%9C%89%E7%84%A1%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">サードパーティ製のウイルス対策製品の有無を確認する</a> の項を参照し、MDE にオンボードするサーバでサードパーティ製のウイルス対策製品を使用している、もしくは使用する予定があるか確認します。</p>
+<p>サードパーティ製のウイルス対策製品を MDE と併用する場合は、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-compatibility?view=o365-worldwide#windows-server-and-passive-mode">Windows Server とパッシブ モード</a> に記載の手順で必ずパッシブモードを有効化する必要があります。</p>
+<p>また、すでにサードパーティ製のウイルス対策製品が稼働しているサーバを MDE にオンボードする場合は、一度サードパーティ製のウイルス対策製品をアンインストールいただき、統合エージェントのインストールと MDE へのオンボード操作を実施後にウイルス対策製品を再インストールいただくことをおすすめします。</p>
+<p>もしサードパーティ製のウイルス対策製品アンインストールせずに統合エージェントのインストールと MDE へのオンボード操作を実施する場合は、オンボード作業の前に必ず <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-compatibility?view=o365-worldwide#windows-server-and-passive-mode">MDAV のパッシブモード設定</a> を有効化してください。</p>
+<p>また、<a href="#%E7%AB%AF%E6%9C%AB%E3%81%AE%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E6%8E%A5%E7%B6%9A%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">端末のネットワーク接続を確認する</a> ので紹介したスプレッドシートの [Microsoft Defender Processes] シートに記載のプロセスをサードパーティ製のウイルス対策製品のスキャン除外リストに登録いただくとともに、サードパーティ製のウイルス対策製品を <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-exclusions-microsoft-defender-antivirus?view=o365-worldwide">MDAV の除外リスト</a> に登録いただくことをおすすめします。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-server-endpoints?view=o365-worldwide#prerequisites-for-running-with-third-party-security-solutions">Windows サーバーを Microsoft Defender for Endpoint にオンボードします | Microsoft Learn</a></p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-008.png" alt="MDE の関連プロセス"></p>
+<blockquote>
+<p> 注意：</p>
+<p> Windows Server 2016 以降のサーバですでにサードパーティ製のウイルス対策製品を使用している場合、グループポリシーやレジストリ設定にて Microsoft Defender ウイルス対策(MDAV) が無効化されている場合があります。</p>
+<p> サーバ OS の場合はサードパーティ製のウイルス対策製品をアンインストールしても MDAV の無効化設定は解除されないため、MDE をご利用いただく前に必ず設定を解除してください。</p>
+</blockquote>
+<h3 id="サーバを-MDE-にオンボードするコマンド"><a href="#サーバを-MDE-にオンボードするコマンド" class="headerlink" title="サーバを MDE にオンボードするコマンド"></a>サーバを MDE にオンボードするコマンド</h3><p>Install.ps1 を使用してサーバを手動で MDE にオンボードする場合、管理者権限で起動した PowerShell から以下のコマンドを実行します。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PowerShell.exe <span class="literal">-ExecutionPolicy</span> RemoteSigned \\FileShareServer\MDEOnboard\Install.ps1 <span class="literal">-OnboardingScript</span> \\FileShareServer\MDEOnboard\WindowsDefenderATPOnboardingScript.cmd</span><br></pre></td></tr></table></figure>
+
+<p>※ 必要なファイルの配置については <a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%92%E9%85%8D%E7%BD%AE%E3%81%99%E3%82%8B">サーバを MDE にオンボードするためのスクリプトを配置する</a> の項を参照します。</p>
+<p>※ 本記事では <code>\\FileShareServer\MDEOnboard</code> という UNC パスでアクセス可能な共有フォルダ内に、md4ws.msi、WindowsDefenderATPOnboardingScript.cmd、Install.ps1 の 3 つのファイルを配置した環境で動作確認を実施しています。</p>
+<p>※ <code>\\FileShareServer\MDEOnboard</code> には任意の UNC パスもしくはローカルのフォルダパスを指定することが可能です。</p>
+<p>グループポリシーを使用して Install.ps1 による MDE へのオンボード操作を行う場合は以下の公開情報の手順を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-server-endpoints?view=o365-worldwide#apply-the-microsoft-defender-for-endpoint-installation-and-onboarding-packages-using-group-policy">グループ ポリシーを使用して Microsoft Defender for Endpoint のインストールパッケージとオンボード パッケージを適用する</a></p>
+<h3 id="MMA-からの移行オンボードを行う場合のコマンド"><a href="#MMA-からの移行オンボードを行う場合のコマンド" class="headerlink" title="MMA からの移行オンボードを行う場合のコマンド"></a>MMA からの移行オンボードを行う場合のコマンド</h3><p>すでに MMA を使用して MDE にオンボードしているサーバを、新しい統合エージェントを使用して MDE にオンボードする場合、管理者権限で起動した PowerShell から以下のコマンドを実行します。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PowerShell.exe <span class="literal">-ExecutionPolicy</span> RemoteSigned \\FileShareServer\MDEOnboard\Install.ps1 <span class="literal">-RemoveMMA</span> &lt;MMA に登録されているワークスペース ID&gt; <span class="literal">-OnboardingScript</span> \\FileShareServer\MDEOnboard\WindowsDefenderATPOnboardingScript.cmd</span><br></pre></td></tr></table></figure>
+
+<p>※ <code>\\FileShareServer\MDEOnboard</code> には任意の UNC パスもしくはローカルのフォルダパスを指定することが可能です。</p>
+<p>なお、事前に MMA をアンインストール済みの場合や、MMA から MDE のオンボードのために登録しているワークスペース ID を削除している場合は、上記のコマンドではなく <a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">サーバを MDE にオンボードするコマンド</a> に記載のコマンドを使用します。</p>
+<p>また、グループポリシーを使用して Install.ps1 を使用した MMA からの移行操作を行う場合も、以下の公開情報同じ手順をご利用いただくことができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-server-endpoints?view=o365-worldwide#apply-the-microsoft-defender-for-endpoint-installation-and-onboarding-packages-using-group-policy">グループ ポリシーを使用して Microsoft Defender for Endpoint のインストールパッケージとオンボード パッケージを適用する</a></p>
+<h3 id="サーバが-MDE-にオンボードされたことを確認する"><a href="#サーバが-MDE-にオンボードされたことを確認する" class="headerlink" title="サーバが MDE にオンボードされたことを確認する"></a>サーバが MDE にオンボードされたことを確認する</h3><p>サーバが MDE に正常にオンボードされたことを確認したい場合には、以下の公開情報の手順をご利用いただけます。</p>
+<p>参考情報：<a href="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-11-01/">Microsoft Defender for Endpoint(MDE) にオンボードされたデバイスの正常性確認ポイント | Japan CSS Security Support Blog</a></p>
+<h3 id="インストールスクリプトを使用して統合エージェントのアンインストールとオフボード操作を行う"><a href="#インストールスクリプトを使用して統合エージェントのアンインストールとオフボード操作を行う" class="headerlink" title="インストールスクリプトを使用して統合エージェントのアンインストールとオフボード操作を行う"></a>インストールスクリプトを使用して統合エージェントのアンインストールとオフボード操作を行う</h3><p>テナントの移行やトラブルシューティングの目的でサーバを MDE からオフボードし、統合エージェントのアンインストールを行う場合にも Install.ps1 を使用することができます。</p>
+<p>Install.ps1 を使用して統合エージェントのアンインストールとオフボード操作を行う場合は、以下の手順に従います。</p>
+<ol>
+<li><p>Microsoft 365 Defender ポータルにサインインし、[設定]&gt;[オフボーディング] を開きます。</p>
+</li>
+<li><p>プラットフォームを [Windows Server 2012 および 2016]、[展開方法] を [グループポリシー] に変更した上で、オフボードパッケージ(WindowsDefenderATPOffboardingPackage_valid_until_20XX-XX-XX.zip)をダウンロードします。</p>
+<p>※ オフボードスクリプトには 30 日間の有効期限が設定される点にご留意ください。</p>
+</li>
+<li><p>次に、取得したオフボードパッケージ内のオフボードスクリプト(WindowsDefenderATPOffboardingScript_valid_until_XX-XX-XX.cmd) を <a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%92%E9%85%8D%E7%BD%AE%E3%81%99%E3%82%8B">サーバを MDE にオンボードするためのスクリプトを配置する</a> の項と同じ手順で取得した Install.ps1 と同じ、MDE からオフボードするサーバからアクセス可能なフォルダに配置します。</p>
+</li>
+<li><p>MDE からオフボードするサーバにアクセスし、管理者権限で起動した PowerShell から以下のコマンドを実行することで、統合エージェントのアンインストールと MDE からのオフボードが完了します。</p>
+</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PowerShell.exe <span class="literal">-ExecutionPolicy</span> RemoteSigned \\FileShareServer\MDEOnboard\Install.ps1 <span class="literal">-Uninstall</span> <span class="literal">-OffboardingScript</span> \\FileShareServer\MDEOnboard\WindowsDefenderATPOffboardingScript_valid_until_XX<span class="literal">-XX</span><span class="literal">-XX</span>.cmd</span><br></pre></td></tr></table></figure>
+
+<p>※ オフボードスクリプトのファイル名の XX には有効期限の日付の値が入ります。</p>
+<p>※ <code>\\FileShareServer\MDEOnboard</code> には任意の UNC パスもしくはローカルのフォルダパスを指定することが可能です。</p>
+<ol start="5">
+<li><p>各サーバで MDE からのオフボードと統合エージェントのアンインストールが完了したことを確認したい場合は、[sc.exe query sense] コマンドを実行します。</p>
+<p>Windows Server 2012 R2 および 2016 の場合には、Sense サービスが存在しないことを確認いただくことで、オフボードとアンインストールが正常に完了していると判断することができます。</p>
+</li>
+</ol>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-009.png" alt="Sense サービスの存在確認"></p>
+<p>なお、オフボード操作を行う場合も、下記と同じ手順でグループポリシーを使用することで、 Install.ps1 を使用したオフボード操作を複数のサーバに展開することができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-server-endpoints?view=o365-worldwide#apply-the-microsoft-defender-for-endpoint-installation-and-onboarding-packages-using-group-policy">グループ ポリシーを使用して Microsoft Defender for Endpoint のインストールパッケージとオンボード パッケージを適用する</a></p>
+<h2 id="MDE-のオンボードに失敗する場合のトラブルシューティング"><a href="#MDE-のオンボードに失敗する場合のトラブルシューティング" class="headerlink" title="MDE のオンボードに失敗する場合のトラブルシューティング"></a>MDE のオンボードに失敗する場合のトラブルシューティング</h2><p>サーバを MDE にオンボードした後に以下のような問題が発生する場合、対象のサーバが MDE の利用のための要件を満たしていない可能性が考えられます。</p>
+<ul>
+<li><p><strong>サーバのオンボード後、最大で 24 時間以上経過しても Microsoft 365 Defender ポータルにサーバが登録されない</strong></p>
+</li>
+<li><p><strong>Microsoft 365 Defender ポータルのデバイスインベントリにサーバが登録されたが、[センサーの正常性状態] 列のステータスが [アクティブ] にならない</strong></p>
+</li>
+<li><p><strong>サーバで検知テストを行ったが、 Microsoft 365 Defender ポータルにアラートが出力されない</strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/live-response?view=o365-worldwide">ライブ応答機能</a> や <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/respond-machine-alerts?view=o365-worldwide#isolate-devices-from-the-network">デバイス分離機能</a> が有効に動作しない</strong></p>
+</li>
+</ul>
+<p>一般的に、これらの問題の多くは、MDE にオンボードしたサーバが通信要件を満たしていない場合に発生します。</p>
+<p>そのため、サーバを MDE にオンボードした後に上記のような問題が発生する場合は、以下の手順にてサーバが MDE の動作に必要な通信要件を満たしているかどうかを確認してください。</p>
+<h3 id="サーバで通信テストを行う"><a href="#サーバで通信テストを行う" class="headerlink" title="サーバで通信テストを行う"></a>サーバで通信テストを行う</h3><p>下記公開情報に記載の手順にてサーバで MDEClientAnalyzer ツールを実行することで、サーバが MDE の通信要件を満たすかどうかテストすることが可能です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-windows?view=o365-worldwide">Windows でクライアント アナライザーを実行する | Microsoft Learn</a></p>
+<blockquote>
+<p>注意：</p>
+<p>MDEClientAnalyzer ツールをローカルサーバで使用する場合には、 SysInternals に含まれる PsExec.exe ツールを実行できることが <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide#requirements">前提要件</a> に含まれます。</p>
+<p>サーバで PsExec.exe ツールを制限している場合には、一時的に実行を許可した上で MDEClientAnalyzer ツールを使用してください。</p>
+</blockquote>
+<p>テスト結果は以下のようなレポート(MDEClientAnalyzer.htm)として出力され、 MDEClientAnalyzer ツールの実行後に既定のブラウザで自動的に表示されます。 </p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-010.png" alt="テスト結果のレポート情報"></p>
+<h3 id="レポートから通信テストの結果を確認する"><a href="#レポートから通信テストの結果を確認する" class="headerlink" title="レポートから通信テストの結果を確認する"></a>レポートから通信テストの結果を確認する</h3><p>レポート(MDEClientAnalyzer.htm) から通信テストの結果を確認する場合は、レポートの [Detailed Results] 欄の情報を確認します。</p>
+<p>サーバが MDE の通信要件を満たしている場合、以下の例のように通信テストの結果がすべて <code>[Informational]</code> として表示されます。</p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-012.png" alt="通信テスト結果の確認①"></p>
+<p>一方で、MDEClientAnalyzer ツールによる通信テストに失敗した項目が存在する場合には、以下のように通信テストの結果が <code>[Error]</code> として表示されます。</p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-011.png" alt="通信テスト結果の確認②"></p>
+<p>通信テストの結果に  <code>[Error]</code> と表示される項目が存在する場合、[Results] 列にはテストに失敗した通信先の URL が表示されます。</p>
+<p>レポート内に <code>[Error]</code> の項目が存在する場合、MDE の動作に問題が発生する可能性があるため、[Results] 列に表示される情報と <a href="#Windows-Server-%E3%82%92-MDE-%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">Windows Server を MDE にオンボードする前の確認ポイント</a> の記載を今一度ご確認の上、すべての動作要件を満たすように構成変更を実施します。</p>
+<h3 id="通信にプロキシサーバを利用する場合の確認ポイント"><a href="#通信にプロキシサーバを利用する場合の確認ポイント" class="headerlink" title="通信にプロキシサーバを利用する場合の確認ポイント"></a>通信にプロキシサーバを利用する場合の確認ポイント</h3><p>インターネット通信にプロキシサーバが必要な構成のサーバで通信テストに失敗する場合、レポート(MDEClientAnalyzer.htm) の [Sense service discovered proxy] に適切なプロキシサーバのアドレスとポート番号が指定されているか確認します。</p>
+<p>MDE の稼働に必要な通信要件とプロキシ設定については <a href="#%E7%AB%AF%E6%9C%AB%E3%81%AE%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E6%8E%A5%E7%B6%9A%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">端末のネットワーク接続を確認する</a> の項を参照します。</p>
+<p><img src="../images/Endpoint-MDAV-2023-09-26-013.png" alt="MDEClientAnalyzer レポートからプロキシ設定を確認する"></p>
+<p>※ 上記は WinHTTP プロキシを構成している場合の出力結果の例です。</p>
+<p>プロキシサーバが適切に設定されているにも関わらず通信テストに失敗する場合には、設定されているプロキシサーバ側で必要な通信が許可されていることを確認します。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では Windows Server 2012 R2 と Windows Server 2016 を Microsoft Defender for Endpoint(MDE) にオンボード / オフボードする方法についておまとめいたしました。</p>
+<p>※ 本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合がありますことご了承ください。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+        
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/Endpoint-MDAV-2023-09-26.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../AIP-AzureInformationProtection-2023-09-14-01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Active Directory Rithts Management Service (AD RMS) の役割は Azure IaaS を含めパブリック クラウドへの移行は許諾されません。</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="../AIP-AzureInformationProtection-2023-09-14-01/">Active Directory Rithts Management Service (AD RMS) の役割は Azure IaaS を含めパブリック クラウドへの移行は許諾されません。</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2023-08-17/">Windows デバイスの Microsoft Defender ウイルス対策(MDAV) のセキュリティインテリジェンス(定義ファイル)更新設定について</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2023-06-21/">Microsoft 365 Defender ポータルの「デバイスのインベントリ」に関するよくあるご質問</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2023-05-02/">Microsoft Defender for Endpoint(MDE) デバイス分離機能の解除ができない場合のトラブルシューティング</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Active-Directory-Rithts-Management-Service/" rel="tag">Active Directory Rithts Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-AdvancedThreat-Protection/" rel="tag">Azure AdvancedThreat Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-Information-Protection/" rel="tag">Azure Information Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-Linux/" rel="tag">MDE on Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-macOS/" rel="tag">MDE on macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" rel="tag">Microsoft AdvancedThreat Analytics(ATA)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Rights-Management-Service/" rel="tag">Rights Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" rel="tag">セキュリティインテリジェンス</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" rel="tag">マルウェア対策プラットフォーム</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/">Information</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../tags/Active-Directory-Rithts-Management-Service/" style="font-size: 10px;">Active Directory Rithts Management Service</a> <a href="../tags/Azure-AdvancedThreat-Protection/" style="font-size: 10px;">Azure AdvancedThreat Protection</a> <a href="../tags/Azure-Information-Protection/" style="font-size: 20px;">Azure Information Protection</a> <a href="../tags/Identity-Manager/" style="font-size: 14px;">Identity Manager</a> <a href="../tags/Information/" style="font-size: 10px;">Information</a> <a href="../tags/MDE-on-Linux/" style="font-size: 12px;">MDE on Linux</a> <a href="../tags/MDE-on-macOS/" style="font-size: 12px;">MDE on macOS</a> <a href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" style="font-size: 10px;">Microsoft AdvancedThreat Analytics(ATA)</a> <a href="../tags/Microsoft-Defender-for-Endpoint/" style="font-size: 18px;">Microsoft Defender for Endpoint</a> <a href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" style="font-size: 16px;">Microsoft Defender ウイルス対策</a> <a href="../tags/Rights-Management-Service/" style="font-size: 10px;">Rights Management Service</a> <a href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" style="font-size: 10px;">セキュリティインテリジェンス</a> <a href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" style="font-size: 10px;">マルウェア対策プラットフォーム</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 CSS Japan Secuirty team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
