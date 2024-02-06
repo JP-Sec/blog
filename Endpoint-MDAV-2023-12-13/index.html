@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-020.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/image-20240204224138800.png">
 <meta property="article:published_time" content="2024-02-07T06:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-06T06:37:22.294Z">
+<meta property="article:modified_time" content="2024-02-06T06:43:29.797Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta property="article:tag" content="Microsoft Defender for Endpoint">
@@ -122,7 +122,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+cc40a099-ccb0-5f29-bb53-33699c82672f%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E6%A9%9F%E8%83%BD%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%E6%89%8B%E9%A0%86%E3%81%A8%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2023-12-13%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2023-12-13.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2023-12-13.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-12-13/" data-id="cls9znuya002e0nlx6s9h121u" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-12-13/" data-id="cls9zvso0002e0no73ke0fv66" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -171,10 +171,10 @@
 </ul>
 </li>
 <li><a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%BE%E3%81%9F%E3%81%AF-Intune-%E3%81%AE-OMA-URI-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA">グループポリシーまたは Intune の OMA-URI を使用してアクセス制御を構成するサンプルシナリオ</a><ul>
-<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-1---%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%8B%92%E5%90%A6%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</a></li>
-<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-2---%E7%89%B9%E5%AE%9A%E3%81%AE-USB-%E3%83%A1%E3%83%A2%E3%83%AA%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E3%81%AE%E3%81%BF%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B">シナリオ 2 - 特定の USB メモリに対してのみアクセスを許可する</a></li>
-<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-3---%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%94%E3%81%A8%E3%81%AB%E7%95%B0%E3%81%AA%E3%82%8B%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%B1%E5%8F%AF%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 3 - デバイスごとに異なるアクセス許可を構成する</a></li>
-<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-4---%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B">シナリオ 4 - 特定のユーザに対してアクセスを許可する</a></li>
+<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-1-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%8B%92%E5%90%A6%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</a></li>
+<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-2-%E7%89%B9%E5%AE%9A%E3%81%AE-USB-%E3%83%A1%E3%83%A2%E3%83%AA%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E3%81%AE%E3%81%BF%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B">シナリオ 2 - 特定の USB メモリに対してのみアクセスを許可する</a></li>
+<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-3-%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%94%E3%81%A8%E3%81%AB%E7%95%B0%E3%81%AA%E3%82%8B%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%B1%E5%8F%AF%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 3 - デバイスごとに異なるアクセス許可を構成する</a></li>
+<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-4-%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B">シナリオ 4 - 特定のユーザに対してアクセスを許可する</a></li>
 </ul>
 </li>
 <li><a href="#%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E8%B3%AA%E5%95%8F">リムーバブルメディアアクセス制御に関するよくある質問</a><ul>
@@ -234,7 +234,7 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; <span class="built_in">Get-MpComputerStatus</span> | <span class="built_in">Select-Object</span> DeviceControlDefaultEnforcement</span><br><span class="line"></span><br><span class="line">DeviceControlDefaultEnforcement</span><br><span class="line">-------------------------------</span><br><span class="line">DefaultAllow</span><br></pre></td></tr></table></figure>
 
 <p>なお、この設定はリムーバブルメディアアクセス制御を含むすべてのデバイスコントロール機能に対する設定であるため、既定の処理を [拒否] とした場合にはデバイスコントロール機能のプリンター保護機能の動作にも影響する点に注意が必要です。</p>
-<p>そのため、リムーバブルメディアアクセスに対してのみ既定の処理を構成したい場合には、[デバイスコントロールの既定の強制ポリシーの選択] の設定は未構成のままとし、後述する <a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-1---%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%8B%92%E5%90%A6%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</a> の手順でリムーバブルメディアアクセス制御ポリシーにて既定の動作を定義します。</p>
+<p>そのため、リムーバブルメディアアクセスに対してのみ既定の処理を構成したい場合には、[デバイスコントロールの既定の強制ポリシーの選択] の設定は未構成のままとし、後述する <a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-1-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%8B%92%E5%90%A6%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</a> の手順でリムーバブルメディアアクセス制御ポリシーにて既定の動作を定義します。</p>
 <blockquote>
 <p><strong>organizationでプリンターがブロックされるのはなぜですか?</strong></p>
 <p>既定の適用設定は、すべてのデバイスコントロールコンポーネントに対するものです。</p>
@@ -270,7 +270,7 @@
 <h3 id="Intune-の-OMA-URI-でデバイスコントロールグループを構成する"><a href="#Intune-の-OMA-URI-でデバイスコントロールグループを構成する" class="headerlink" title="Intune の OMA-URI でデバイスコントロールグループを構成する"></a>Intune の OMA-URI でデバイスコントロールグループを構成する</h3><p>Intune の OMA-URI を使用する場合も、グループポリシーで設定する場合と同じく XML ファイルでデバイスコントロールグループとアクセス制御ポリシーを設定します。</p>
 <p>ただし、Intune の OMA-URI でデバイスコントロールグループを構成する場合、1 つのグループごとに 1 つの OMA-URI を割り当てる必要があります。</p>
 <p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-deploy-manage-intune?view=o365-worldwide#creating-groups-with-oma-uri">OMA-URI を使用したグループの作成 | Microsoft Learn</a></p>
-<p>この項では、<a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-4---%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B">シナリオ 4 - 特定のユーザに対してアクセスを許可する</a> のサンプルポリシーを Intne の OMA-URI で設定する手順を紹介します。</p>
+<p>この項では、<a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-4-%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B">シナリオ 4 - 特定のユーザに対してアクセスを許可する</a> のサンプルポリシーを Intne の OMA-URI で設定する手順を紹介します。</p>
 <p>このサンプルシナリオで使用する OMA-URI 用の XML ファイルは、以下の公開リポジトリからダウンロード可能です。</p>
 <p>参考情報：<a target="_blank" rel="noopener" href="https://github.com/microsoft/mdatp-devicecontrol/tree/main/windows/Getting%20Started/Intune%20OMA-URI">Getting Started/Intune OMA-URI</a></p>
 <p>デバイスコントロールグループの設定のため、以下の 3 つの XML ファイルを使用します。</p>
@@ -597,7 +597,7 @@
 
 <p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-walkthroughs?view=o365-worldwide">デバイス コントロールのチュートリアル | Microsoft Learn</a></p>
 <p>上記のサンプルクエリを実行すると、デバイスに接続されたリムーバブルメディアのクラス名や DeviceId などの情報を取得できるため、アクセス制御ポリシーの設定に役立てることができます。</p>
-<p>他にも、<a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-1---%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%8B%92%E5%90%A6%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</a> を参考に、<code>PrimaryId</code> に <code>RemovableMediaDevices</code> や <code>WpdDevices</code>、または <code>CdRomDevices</code> などを設定した広範なアクセス拒否ポリシーを一度端末に適用して制御したいメディアへのアクセスをブロックし、そのイベントを確認する方法も有効です。</p>
+<p>他にも、<a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-1-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%8B%92%E5%90%A6%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</a> を参考に、<code>PrimaryId</code> に <code>RemovableMediaDevices</code> や <code>WpdDevices</code>、または <code>CdRomDevices</code> などを設定した広範なアクセス拒否ポリシーを一度端末に適用して制御したいメディアへのアクセスをブロックし、そのイベントを確認する方法も有効です。</p>
 <p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-overview?view=o365-worldwide&tabs=Removable#supported-devices">サポート対象のデバイス | Microsoft Learn</a></p>
 <p>アクセス拒否ポリシーによりメディアへのアクセスがブロックされた際の <code>RemovableStoragePolicyTriggered</code> イベントを参照すると、デバイスインスタンスパスや Vendor/Product ID など、アクセス制御ポリシーで明示的にデバイスを指定する際に使用できる様々な情報を参照できます。</p>
 <p><img src="../images/image-20240204224138800.png" alt="アクセス拒否時の RemovableStoragePolicyTriggered イベント"></p>
