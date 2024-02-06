@@ -30,9 +30,8 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-004.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-005.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-020.png">
-<meta property="og:image" content="https://jp-sec.github.io/blog/images/image-20240204224138800.png">
 <meta property="article:published_time" content="2024-02-07T06:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-06T06:43:29.797Z">
+<meta property="article:modified_time" content="2024-02-06T06:44:51.595Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta property="article:tag" content="Microsoft Defender for Endpoint">
@@ -122,7 +121,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+cc40a099-ccb0-5f29-bb53-33699c82672f%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E6%A9%9F%E8%83%BD%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%E6%89%8B%E9%A0%86%E3%81%A8%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2023-12-13%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2023-12-13.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2023-12-13.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-12-13/" data-id="cls9zvso0002e0no73ke0fv66" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-12-13/" data-id="cls9zxio9002e0npxeb5k9wk0" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -599,8 +598,7 @@
 <p>上記のサンプルクエリを実行すると、デバイスに接続されたリムーバブルメディアのクラス名や DeviceId などの情報を取得できるため、アクセス制御ポリシーの設定に役立てることができます。</p>
 <p>他にも、<a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-1-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%8B%92%E5%90%A6%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</a> を参考に、<code>PrimaryId</code> に <code>RemovableMediaDevices</code> や <code>WpdDevices</code>、または <code>CdRomDevices</code> などを設定した広範なアクセス拒否ポリシーを一度端末に適用して制御したいメディアへのアクセスをブロックし、そのイベントを確認する方法も有効です。</p>
 <p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-overview?view=o365-worldwide&tabs=Removable#supported-devices">サポート対象のデバイス | Microsoft Learn</a></p>
-<p>アクセス拒否ポリシーによりメディアへのアクセスがブロックされた際の <code>RemovableStoragePolicyTriggered</code> イベントを参照すると、デバイスインスタンスパスや Vendor/Product ID など、アクセス制御ポリシーで明示的にデバイスを指定する際に使用できる様々な情報を参照できます。</p>
-<p><img src="../images/image-20240204224138800.png" alt="アクセス拒否時の RemovableStoragePolicyTriggered イベント"></p>
+<p>このクエリを使用してアクセス拒否ポリシーによりメディアへのアクセスがブロックされた際の <code>RemovableStoragePolicyTriggered</code> イベントを参照すると、デバイスインスタンスパスや Vendor/Product ID など、アクセス制御ポリシーで明示的にデバイスを指定する際に使用できる様々な情報を参照できます。</p>
 <p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-walkthroughs?view=o365-worldwide#step-1-deny-all-removable-media">手順 1: リムーバブル メディアをすべて拒否する | Microsoft Learn</a></p>
 <h3 id="既定の処理を拒否に設定すると読み取り許可のアクセス制御ポリシーが動作しなくなるのはなぜですか？"><a href="#既定の処理を拒否に設定すると読み取り許可のアクセス制御ポリシーが動作しなくなるのはなぜですか？" class="headerlink" title="既定の処理を拒否に設定すると読み取り許可のアクセス制御ポリシーが動作しなくなるのはなぜですか？"></a>既定の処理を拒否に設定すると読み取り許可のアクセス制御ポリシーが動作しなくなるのはなぜですか？</h3><p>デバイスコントロール機能が有効な環境で既定の処理が [拒否] に設定されている場合、明示的にポリシーで許可されていない限り、すべてのリムーバブルメディアやプリンターへのアクセスは拒否されます。</p>
 <p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-policies?view=o365-worldwide&tabs=Removable#controlling-default-behavior">Device control policies in Microsoft Defender for Endpoint | Microsoft Learn</a></p>
