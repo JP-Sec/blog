@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>デバイスコントロール機能を使用してリムーバブルメディアアクセス制御を構成する手順と確認ポイント | Japan CSS Security Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは Security &amp; Compliance サポートチームです。 この記事では、Microsoft Defender for Endpoint(MDE) を使用する Windows マシンでデバイスコントロール機能を使用してリムーバブルメディアアクセスを制御する方法を紹介します。 なお、本記事の内容は、2024 年 1 月 24 日時点で最新の情報を元に作成いたしております。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="デバイスコントロール機能を使用してリムーバブルメディアアクセス制御を構成する手順と確認ポイント">
+<meta property="og:url" content="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-12-13/index.html">
+<meta property="og:site_name" content="Japan CSS Security Support Blog">
+<meta property="og:description" content="こんにちは Security &amp; Compliance サポートチームです。 この記事では、Microsoft Defender for Endpoint(MDE) を使用する Windows マシンでデバイスコントロール機能を使用してリムーバブルメディアアクセスを制御する方法を紹介します。 なお、本記事の内容は、2024 年 1 月 24 日時点で最新の情報を元に作成いたしております。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-001.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-002.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-003.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-006.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-007.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-008.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-009.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-010.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-011.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-012.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-013.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-014.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-018.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-015.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-004.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-005.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-020.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/image-20240204224138800.png">
+<meta property="article:published_time" content="2024-02-07T06:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-06T06:37:22.294Z">
+<meta property="article:author" content="CSS Japan Secuirty team">
+<meta property="article:tag" content="Microsoft Defender ウイルス対策">
+<meta property="article:tag" content="Microsoft Defender for Endpoint">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-12-13-001.png">
+  
+    <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-sec.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../index.html" id="logo">Japan CSS Security Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../index.html" id="subtitle">日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Endpoint-MDAV-2023-12-13" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      デバイスコントロール機能を使用してリムーバブルメディアアクセス制御を構成する手順と確認ポイント
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2024-02-07T06:00:00.000Z" itemprop="datePublished">2024-02-07</time>
+</a>
+        
+        
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+cc40a099-ccb0-5f29-bb53-33699c82672f%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E6%A9%9F%E8%83%BD%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%E6%89%8B%E9%A0%86%E3%81%A8%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2023-12-13%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2023-12-13.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2023-12-13.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-12-13/" data-id="cls9znuya002e0nlx6s9h121u" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは Security &amp; Compliance サポートチームです。</p>
+<p>この記事では、Microsoft Defender for Endpoint(MDE) を使用する Windows マシンでデバイスコントロール機能を使用してリムーバブルメディアアクセスを制御する方法を紹介します。</p>
+<p>なお、本記事の内容は、2024 年 1 月 24 日時点で最新の情報を元に作成いたしております。</p>
+<p>また、本記事の手順はすべて Windows 11 23H2 にて動作確認を実施しております。</p>
+<p>デバイスコントロール機能に関する最新情報については、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-removable-storage-protection?view=o365-worldwide">Microsoft Learn</a> をご参照ください。</p>
+<h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul>
+<li><a href="#%E6%9C%AC%E8%A8%98%E4%BA%8B%E3%81%AE%E5%86%85%E5%AE%B9">本記事の内容</a></li>
+<li><a href="#%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%81%AE%E6%A6%82%E8%A6%81">リムーバブルメディアアクセス制御の概要</a><ul>
+<li><a href="#%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%81%A8%E3%81%AF">リムーバブルメディアアクセス制御とは</a></li>
+<li><a href="#%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%81%AE%E5%89%8D%E6%8F%90%E8%A6%81%E4%BB%B6">リムーバブルメディアアクセス制御の前提要件</a></li>
+<li><a href="#%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%81%AE%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95">リムーバブルメディアアクセス制御の設定方法</a></li>
+<li><a href="#%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%81%AE%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95%E3%82%92%E9%81%B8%E6%8A%9E%E3%81%99%E3%82%8B">リムーバブルメディアアクセス制御の設定方法を選択する</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">グループポリシーを使用してリムーバブルメディアアクセス制御を構成する</a><ul>
+<li><a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99">グループポリシーを使用するための事前準備</a></li>
+<li><a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E6%A9%9F%E8%83%BD%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B">グループポリシーでデバイスコントロール機能を有効化する</a></li>
+<li><a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E5%87%A6%E7%90%86%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">グループポリシーで既定の処理を構成する</a></li>
+<li><a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">グループポリシーでデバイスコントロールグループを構成する</a></li>
+<li><a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">グループポリシーでアクセス制御ポリシーを構成する</a></li>
+<li><a href="#%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%81%AE%E8%A8%AD%E5%AE%9A%E7%8A%B6%E6%B3%81%E3%81%A8%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%AE%E6%9B%B4%E6%96%B0%E6%9C%89%E7%84%A1%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">デバイスコントロールの設定状況とポリシーの更新有無を確認する</a></li>
+</ul>
+</li>
+<li><a href="#Intune-%E3%81%AE-OMA-URI-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">Intune の OMA-URI を使用してリムーバブルメディアアクセス制御を構成する</a><ul>
+<li><a href="#Intune-%E3%81%AE-OMA-URI-%E3%81%A7%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E6%A9%9F%E8%83%BD%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B">Intune の OMA-URI でデバイスコントロール機能を有効化する</a></li>
+<li><a href="#Intune-%E3%81%AE-OMA-URI-%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E5%87%A6%E7%90%86%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">Intune の OMA-URI で既定の処理を構成する</a></li>
+<li><a href="#Intune-%E3%81%AE-OMA-URI-%E3%81%A7%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">Intune の OMA-URI でデバイスコントロールグループを構成する</a></li>
+<li><a href="#Intune-%E3%81%AE-OMA-URI-%E3%81%A7%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">Intune の OMA-URI でアクセス制御ポリシーを構成する</a></li>
+</ul>
+</li>
+<li><a href="#Intune-%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">Intune のユーザインターフェースを使用してリムーバブルメディアアクセス制御を構成する</a></li>
+<li><a href="#%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92-XML-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">デバイスコントロールグループを XML ファイルで構成する</a><ul>
+<li><a href="#PrimaryId-%E3%81%AB%E3%82%88%E3%82%8B%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%AE%E6%8C%87%E5%AE%9A">PrimaryId によるデバイスの指定</a></li>
+<li><a href="#InstancePathUd-%E3%81%A8-VID_PID-%E3%81%AB%E3%82%88%E3%82%8B%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%AE%E6%8C%87%E5%AE%9A">InstancePathId と VID_PID によるデバイスの指定</a></li>
+<li><a href="#%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%AE%E6%8C%87%E5%AE%9A%E6%96%B9%E6%B3%95">その他のデバイスコントロールグループの指定方法</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92-XML-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">リムーバブルメディアアクセス制御を XML ファイルで構成する</a><ul>
+<li><a href="#%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%83%AC%E3%83%99%E3%83%AB%E3%81%A7%E8%AA%AD%E3%81%BF%E6%9B%B8%E3%81%8D%E5%AE%9F%E8%A1%8C%E3%82%92%E6%8B%92%E5%90%A6%E3%81%99%E3%82%8B">ディスクレベルで読み書き実行を拒否する</a></li>
+<li><a href="#SID-%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%A6%E8%AA%AD%E3%81%BF%E5%8F%96%E3%82%8A%E3%81%A8%E6%9B%B8%E3%81%8D%E8%BE%BC%E3%81%BF%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%B1%E5%8F%AF%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">SID を指定して読み取りと書き込みアクセス許可を構成する</a></li>
+<li><a href="#Advanced-Hunging-%E3%81%A7%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">Advanced Hunging でリムーバブルメディアアクセス制御イベントを確認する</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%BE%E3%81%9F%E3%81%AF-Intune-%E3%81%AE-OMA-URI-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA">グループポリシーまたは Intune の OMA-URI を使用してアクセス制御を構成するサンプルシナリオ</a><ul>
+<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-1---%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%8B%92%E5%90%A6%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</a></li>
+<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-2---%E7%89%B9%E5%AE%9A%E3%81%AE-USB-%E3%83%A1%E3%83%A2%E3%83%AA%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E3%81%AE%E3%81%BF%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B">シナリオ 2 - 特定の USB メモリに対してのみアクセスを許可する</a></li>
+<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-3---%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%94%E3%81%A8%E3%81%AB%E7%95%B0%E3%81%AA%E3%82%8B%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%B1%E5%8F%AF%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 3 - デバイスごとに異なるアクセス許可を構成する</a></li>
+<li><a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-4---%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B">シナリオ 4 - 特定のユーザに対してアクセスを許可する</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E8%B3%AA%E5%95%8F">リムーバブルメディアアクセス制御に関するよくある質問</a><ul>
+<li><a href="#%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%83%91%E3%82%B9%E3%81%AA%E3%81%A9%E3%81%AE%E7%A2%BA%E8%AA%8D%E6%96%B9%E6%B3%95%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93">特定のメディアを指定するために使用するデバイスインスタンスパスなどの確認方法がわかりません</a></li>
+<li><a href="#%E6%97%A2%E5%AE%9A%E3%81%AE%E5%87%A6%E7%90%86%E3%82%92%E6%8B%92%E5%90%A6%E3%81%AB%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B%E3%81%A8%E8%AA%AD%E3%81%BF%E5%8F%96%E3%82%8A%E8%A8%B1%E5%8F%AF%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%8C%E5%8B%95%E4%BD%9C%E3%81%97%E3%81%AA%E3%81%8F%E3%81%AA%E3%82%8B%E3%81%AE%E3%81%AF%E3%81%AA%E3%81%9C%E3%81%A7%E3%81%99%E3%81%8B">既定の処理を拒否に設定すると読み取り許可のアクセス制御ポリシーが動作しなくなるのはなぜですか？</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="リムーバブルメディアアクセス制御の概要"><a href="#リムーバブルメディアアクセス制御の概要" class="headerlink" title="リムーバブルメディアアクセス制御の概要"></a>リムーバブルメディアアクセス制御の概要</h2><h3 id="リムーバブルメディアアクセス制御とは"><a href="#リムーバブルメディアアクセス制御とは" class="headerlink" title="リムーバブルメディアアクセス制御とは"></a>リムーバブルメディアアクセス制御とは</h3><p>MDE を利用する Windows マシンでデバイスコントロール機能を利用することで、リムーバブルメディアへのアクセス制御が可能です。</p>
+<p>リムーバブルメディアへのアクセス制御を構成することで、USB フラッシュメモリや CD/DVD、WPAD 端末など、さまざまなリムーバブルメディアに対して読み取り、書き込みまたは実行アクセスの監査やブロックを行うことが可能です。</p>
+<h3 id="リムーバブルメディアアクセス制御の前提要件"><a href="#リムーバブルメディアアクセス制御の前提要件" class="headerlink" title="リムーバブルメディアアクセス制御の前提要件"></a>リムーバブルメディアアクセス制御の前提要件</h3><p>下記公開情報に記載の通り、リムーバブルメディアアクセス制御は本記事執筆時点(2024 年 1 月) では、Windows 10 / 11 および macOS 11(Big Sur) 以降での利用をサポートしています。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-overview?view=o365-worldwide&tabs=Removable#prerequisites">Microsoft Defender for Endpointのデバイス制御 | Microsoft Learn</a></p>
+<h3 id="リムーバブルメディアアクセス制御の設定方法"><a href="#リムーバブルメディアアクセス制御の設定方法" class="headerlink" title="リムーバブルメディアアクセス制御の設定方法"></a>リムーバブルメディアアクセス制御の設定方法</h3><p>Windows マシンの場合、リムーバブルメディアアクセス制御機能はグループポリシーまたは Intune で構成することができます。</p>
+<p>Intune を使用して管理する場合は、OMA-URI および XML ファイルを使用する方法と、Intune ユーザー インターフェイスを使用する方法のいずれか一方にて設定を行うことができます。</p>
+<p>リムーバブルメディアアクセス制御の設定を複数のサービスで管理することは非推奨の構成にあたるため、設定を行う場合はいずれか 1 つの方法を選択してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/deploy-manage-removable-storage-group-policy?view=o365-worldwide">グループ ポリシーを使用してリムーバブルメディアアクセス制御を展開および管理する | Microsoft Learn</a></p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/deploy-manage-removable-storage-intune?view=o365-worldwide#deploy-removable-storage-access-control-by-using-intune-user-interface">Intune を使用してリムーバブルメディアアクセス制御を展開および管理する | Microsoft Learn</a></p>
+<h3 id="リムーバブルメディアアクセス制御の設定方法を選択する"><a href="#リムーバブルメディアアクセス制御の設定方法を選択する" class="headerlink" title="リムーバブルメディアアクセス制御の設定方法を選択する"></a>リムーバブルメディアアクセス制御の設定方法を選択する</h3><p>Windows マシンのリムーバブルメディアアクセス制御は以下のいずれかの方法で構成できます。</p>
+<ol>
+<li><p><strong>グループポリシー</strong></p>
+</li>
+<li><p><strong>Intune(OMA-URI)</strong></p>
+</li>
+<li><p><strong>Intune(ユーザインタフェース)</strong></p>
+</li>
+</ol>
+<p>グループポリシーまたは Intune(OMA-URI) を使用する場合は、制御対象となるリムーバブルメディアなどを指定するデバイスコントロールグループを指定する XML ファイルと、デバイスコントロールグループに対するアクセス制御ポリシーを記述する XML ファイルをそれぞれ作成し、端末にポリシーとして配布する必要があります。</p>
+<p>グループポリシーまたは Intune(OMA-URI) でリムーバブルメディアアクセス制御を行う際に作成する必要がある XML ファイルについては、<a href="#%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92-XML-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">リムーバブルメディアアクセス制御を XML ファイルで構成する</a> の項の記載を参照してください。</p>
+<p>一方で、Intune(ユーザインタフェース)を使用する場合は Intune ポータル上のポリシー構成画面から GUI にてリムーバブルメディアアクセス制御を構成できます。</p>
+<p>そのため、Intune(ユーザインタフェース)を使用する場合は XML ファイルの作成は不要です。</p>
+<p>※ リムーバブルメディアアクセス制御の設定を複数のサービスで管理することは非推奨の構成にあたるため、設定を行う場合はいずれか 1 つの方法を選択してください。</p>
+<h2 id="グループポリシーを使用してリムーバブルメディアアクセス制御を構成する"><a href="#グループポリシーを使用してリムーバブルメディアアクセス制御を構成する" class="headerlink" title="グループポリシーを使用してリムーバブルメディアアクセス制御を構成する"></a>グループポリシーを使用してリムーバブルメディアアクセス制御を構成する</h2><h3 id="グループポリシーを使用するための事前準備"><a href="#グループポリシーを使用するための事前準備" class="headerlink" title="グループポリシーを使用するための事前準備"></a>グループポリシーを使用するための事前準備</h3><p>グループポリシーを使用してデバイスコントロール機能のリムーバブルメディアアクセス制御を実施する場合、現在ご利用中の管理用テンプレートにデバイスコントロール機能の設定項目が含まれているかどうか事前に確認する必要があります。</p>
+<p>デバイスコントロール機能は、Windows 10 の既定の管理用テンプレートなどを利用する環境では、既定で設定を変更することができません。</p>
+<p>そのため、Active Directory やローカルグループポリシーを使用してデバイスコントロール機能の設定を行う場合には、必ず事前に以下の 2 つの設定項目が存在していることを確認してください。</p>
+<ul>
+<li><p> <strong>[Microsoft Defender ウイルス対策]&gt;[機能]</strong> </p>
+</li>
+<li><p><strong>[Microsoft Defender ウイルス対策]&gt;[デバイス制御]</strong></p>
+</li>
+</ul>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-deploy-manage-gpo?view=o365-worldwide#enable-or-disable-removable-storage-access-control">Deploy and manage device control in Microsoft Defender for Endpoint with Group Policy | Microsoft Learn</a></p>
+<p>以下は  <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/details.aspx?id=105390">Administrative Templates (.admx) for Windows 11 2022 Update (22H2) - v3.0</a> として配布している管理用テンプレートを使用してセントラル ストアの admx および adml を更新済みの環境でグループポリシーエディタを起動した画面です。</p>
+<p>このように [Microsoft Defender ウイルス対策] 内に [機能] と [デバイス制御] の設定項目がそれぞれ表示されている場合には、デバイスコントロール機能のリムーバブルメディアアクセス制御をグループポリシーで構成することが可能です。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-001.png" alt="Windows 11 2022 Update (22H2) - v3.0 の管理用テンプレート (.admx) を使用する場合"></p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/troubleshoot/windows-client/group-policy/create-and-manage-central-store">セントラル ストアの作成と管理 - Windows Client | Microsoft Learn</a></p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/deploy-manage-removable-storage-group-policy?view=o365-worldwide#deploy-using-group-policy">グループ ポリシーを使用してデプロイする | Microsoft Learn</a></p>
+<h3 id="グループポリシーでデバイスコントロール機能を有効化する"><a href="#グループポリシーでデバイスコントロール機能を有効化する" class="headerlink" title="グループポリシーでデバイスコントロール機能を有効化する"></a>グループポリシーでデバイスコントロール機能を有効化する</h3><p>グループポリシーエディタ上でデバイスコントロール機能に対応する設定項目が存在することを確認したら、**[Microsoft Defender ウイルス対策]&gt;[機能]&gt;[デバイス制御]** の設定項目を有効化します。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-002.png" alt="グループポリシーでデバイスコントロール機能を有効化する"></p>
+<p>端末でデバイスコントロール機能が有効化されているかどうかを確認したい場合、PowerShell で <code>Select-Object DeviceControlState</code> を実行し、出力結果が Enabled となることを確認してください。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; <span class="built_in">Get-MpComputerStatus</span> | <span class="built_in">Select-Object</span> DeviceControlState</span><br><span class="line"></span><br><span class="line">DeviceControlState</span><br><span class="line">------------------</span><br><span class="line">Enabled</span><br></pre></td></tr></table></figure>
+
+<h3 id="グループポリシーで既定の処理を構成する"><a href="#グループポリシーで既定の処理を構成する" class="headerlink" title="グループポリシーで既定の処理を構成する"></a>グループポリシーで既定の処理を構成する</h3><p>必要に応じて、**[Microsoft Defender ウイルス対策]&gt;[デバイス制御]&gt;[デバイスコントロールの既定の強制ポリシーの選択]** からデバイスコントロール機能の既定の処理を構成することが可能です。</p>
+<p>既定の処理を [拒否] とした場合、ポリシーによって明示的に許可されていない操作がデバイスコントロール機能によってブロックされます。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-003.png" alt="デバイスコントロール機能の既定の処理"></p>
+<p>端末に適用されているデバイスコントロール機能の既定の処理は <code>Get-MpComputerStatus | Select-Object DeviceControlDefaultEnforcement</code> を PowerShell で実行することで確認できます。</p>
+<p>本記事執筆時点で最新の WIndows 11 デバイスでは、上記の設定が未構成の場合にはデバイスコントロール機能の既定の処理は [許可(DefaultAllow)] が設定されています。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; <span class="built_in">Get-MpComputerStatus</span> | <span class="built_in">Select-Object</span> DeviceControlDefaultEnforcement</span><br><span class="line"></span><br><span class="line">DeviceControlDefaultEnforcement</span><br><span class="line">-------------------------------</span><br><span class="line">DefaultAllow</span><br></pre></td></tr></table></figure>
+
+<p>なお、この設定はリムーバブルメディアアクセス制御を含むすべてのデバイスコントロール機能に対する設定であるため、既定の処理を [拒否] とした場合にはデバイスコントロール機能のプリンター保護機能の動作にも影響する点に注意が必要です。</p>
+<p>そのため、リムーバブルメディアアクセスに対してのみ既定の処理を構成したい場合には、[デバイスコントロールの既定の強制ポリシーの選択] の設定は未構成のままとし、後述する <a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-1---%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%8B%92%E5%90%A6%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</a> の手順でリムーバブルメディアアクセス制御ポリシーにて既定の動作を定義します。</p>
+<blockquote>
+<p><strong>organizationでプリンターがブロックされるのはなぜですか?</strong></p>
+<p>既定の適用設定は、すべてのデバイスコントロールコンポーネントに対するものです。</p>
+<p>つまり、 Deny設定すると、すべてのプリンターもブロックされます。 </p>
+<p>プリンターを明示的に許可するカスタム ポリシーを作成するか、既定の適用ポリシーをカスタム ポリシーに置き換えることができます。</p>
+</blockquote>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-removable-storage-access-control-faq?view=o365-worldwide#why-is-my-printer-blocked-in-my-organization">organizationでプリンターがブロックされるのはなぜですか? | Microsoft Learn</a></p>
+<h3 id="グループポリシーでデバイスコントロールグループを構成する"><a href="#グループポリシーでデバイスコントロールグループを構成する" class="headerlink" title="グループポリシーでデバイスコントロールグループを構成する"></a>グループポリシーでデバイスコントロールグループを構成する</h3><p>グループポリシーでリムーバブルメディアアクセス制御を構成する際に必要なデバイスコントロールグループは、**[Microsoft Defender ウイルス対策]&gt;[デバイス制御]&gt;[デバイス制御ポリシーグループの定義]** から設定できます。 </p>
+<p>このポリシーでは、デバイスコントロールグループの設定を記述した XML ファイルが存在するネットワークファイル共有の UNC パス、またはローカルファイルのフルパスを指定します。</p>
+<p>設定を適切に反映するためには、デバイスコントロール機能を利用する端末がネットワークファイル共有の UNC パス、またはローカルファイルのフルパスから XML ファイルをロードできる必要があります。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-006.png" alt="デバイスコントロールグループの設定"></p>
+<p>デバイスコントロールグループの設定を記述するための XML ファイルの作成方法については、後述する <a href="#%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92-XML-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">デバイスコントロールグループを XML ファイルで構成する</a> および、<a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%BE%E3%81%9F%E3%81%AF-Intune-%E3%81%AE-OMA-URI-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA">グループポリシーまたは Intune の OMA-URI を使用してアクセス制御を構成するサンプルシナリオ</a> の記載を参照してください。</p>
+<h3 id="グループポリシーでアクセス制御ポリシーを構成する"><a href="#グループポリシーでアクセス制御ポリシーを構成する" class="headerlink" title="グループポリシーでアクセス制御ポリシーを構成する"></a>グループポリシーでアクセス制御ポリシーを構成する</h3><p>グループポリシーでリムーバブルメディアアクセス制御を構成する際に必要なアクセス制御ポリシーは、**[Microsoft Defender ウイルス対策]&gt;[デバイス制御]&gt;[デバイス制御ポリシールールの定義]** から設定できます。 </p>
+<p>こちらも同じく、アクセス制御ポリシーの設定を記述した XML ファイルが存在するネットワークファイル共有の UNC パス、またはローカルファイルのフルパスを指定します。</p>
+<p>設定を適切に反映するためには、デバイスコントロール機能を利用する端末がネットワークファイル共有の UNC パス、またはローカルファイルのフルパスから XML ファイルをロードできる必要があります。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-007.png" alt="アクセス制御ポリシーの設定"></p>
+<p>アクセス制御ポリシーの設定を記述するための XML ファイルの作成方法については、後述する <a href="#%E3%83%AA%E3%83%A0%E3%83%BC%E3%83%90%E3%83%96%E3%83%AB%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92-XML-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">リムーバブルメディアアクセス制御を XML ファイルで構成する</a> および、<a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%BE%E3%81%9F%E3%81%AF-Intune-%E3%81%AE-OMA-URI-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA">グループポリシーまたは Intune の OMA-URI を使用してアクセス制御を構成するサンプルシナリオ</a> の記載を参照してください。</p>
+<h3 id="デバイスコントロールの設定状況とポリシーの更新有無を確認する"><a href="#デバイスコントロールの設定状況とポリシーの更新有無を確認する" class="headerlink" title="デバイスコントロールの設定状況とポリシーの更新有無を確認する"></a>デバイスコントロールの設定状況とポリシーの更新有無を確認する</h3><p>デバイスコントロール機能の設定内容が反映されているか否かの確認のためには、以下の PowerShell コマンドレットを使用できます。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; <span class="built_in">Get-MpComputerStatus</span> | <span class="built_in">Select-Object</span> DeviceControlState,DeviceControlDefaultEnforcement,DeviceControlPoliciesLastUpdated</span><br><span class="line"></span><br><span class="line">DeviceControlState DeviceControlDefaultEnforcement DeviceControlPoliciesLastUpdated</span><br><span class="line">------------------ ------------------------------- --------------------------------</span><br><span class="line">Enabled            DefaultAllow                    <span class="number">2024</span>/<span class="number">01</span>/<span class="number">20</span> <span class="number">8</span>:<span class="number">30</span>:<span class="number">36</span></span><br></pre></td></tr></table></figure>
+
+<p>デバイスコントロール機能が正常に有効化されている場合には、<code>DeviceControlState</code> の値が <code>Enabled</code> になります。</p>
+<p>また、デバイスコントロールグループおよびアクセス制御ポリシーの情報が反映された場合には、<code>DeviceControlPoliciesLastUpdated</code> に表示される時刻が更新されます。</p>
+<h2 id="Intune-の-OMA-URI-を使用してリムーバブルメディアアクセス制御を構成する"><a href="#Intune-の-OMA-URI-を使用してリムーバブルメディアアクセス制御を構成する" class="headerlink" title="Intune の OMA-URI を使用してリムーバブルメディアアクセス制御を構成する"></a>Intune の OMA-URI を使用してリムーバブルメディアアクセス制御を構成する</h2><h3 id="Intune-の-OMA-URI-でデバイスコントロール機能を有効化する"><a href="#Intune-の-OMA-URI-でデバイスコントロール機能を有効化する" class="headerlink" title="Intune の OMA-URI でデバイスコントロール機能を有効化する"></a>Intune の OMA-URI でデバイスコントロール機能を有効化する</h3><p>MDE にオンボード済みの Windows マシンを Intune に登録したら、[デバイス]&gt;[構成プロファイル] から新規プロファイルを作成し、プラットフォームを [Windows 10 以降]、プロファイルの種類を [テンプレート] として、カスタム構成プロファイルを選択します。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-008.png" alt="Intune でカスタム構成プロファイルを作成する"></p>
+<p>作成する構成プロファイルに、<code>Enable_DeviceControl</code> などの任意の名前を設定した後、[構成設定] 画面で <code>./Vendor/MSFT/Defender/Configuration/DeviceControlEnabled</code> という OMA-URI を追加し、データ型を [整数]、値を 1 とします。</p>
+<p>この設定によって、マシンでデバイスコントロール機能を有効化できます。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-009.png" alt="DeviceControlEnabled でデバイスコントロール機能を有効化する"></p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-deploy-manage-intune?view=o365-worldwide#defining-settings-with-oma-uri">Microsoft Intuneを使用してMicrosoft Defender for Endpointでデバイス制御をデプロイおよび管理する | Microsoft Learn</a></p>
+<h3 id="Intune-の-OMA-URI-で既定の処理を構成する"><a href="#Intune-の-OMA-URI-で既定の処理を構成する" class="headerlink" title="Intune の OMA-URI で既定の処理を構成する"></a>Intune の OMA-URI で既定の処理を構成する</h3><p>同じ構成プロファイルで <code>./Vendor/MSFT/Defender/Configuration/DefaultEnforcement</code> の OMA-URI を追加することで、デバイスコントロール機能の既定の処理を変更することができます。</p>
+<p>データ型を [整数] とし、既定の処理を [許可] に設定する場合は 1 を、[拒否] に変更する場合は 2 を設定します。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-010.png" alt="DefaultEnforcement で既定の処理を設定する"></p>
+<p>なお、グループポリシーで設定する場合と同じく、既定の処理の設定はリムーバブルメディアアクセス制御を含むすべてのデバイスコントロール機能に対する設定であるため、既定の処理を [拒否] とした場合にはデバイスコントロール機能のプリンター保護機能の動作にも影響する点に注意が必要です。</p>
+<h3 id="Intune-の-OMA-URI-でデバイスコントロールグループを構成する"><a href="#Intune-の-OMA-URI-でデバイスコントロールグループを構成する" class="headerlink" title="Intune の OMA-URI でデバイスコントロールグループを構成する"></a>Intune の OMA-URI でデバイスコントロールグループを構成する</h3><p>Intune の OMA-URI を使用する場合も、グループポリシーで設定する場合と同じく XML ファイルでデバイスコントロールグループとアクセス制御ポリシーを設定します。</p>
+<p>ただし、Intune の OMA-URI でデバイスコントロールグループを構成する場合、1 つのグループごとに 1 つの OMA-URI を割り当てる必要があります。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-deploy-manage-intune?view=o365-worldwide#creating-groups-with-oma-uri">OMA-URI を使用したグループの作成 | Microsoft Learn</a></p>
+<p>この項では、<a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-4---%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B">シナリオ 4 - 特定のユーザに対してアクセスを許可する</a> のサンプルポリシーを Intne の OMA-URI で設定する手順を紹介します。</p>
+<p>このサンプルシナリオで使用する OMA-URI 用の XML ファイルは、以下の公開リポジトリからダウンロード可能です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://github.com/microsoft/mdatp-devicecontrol/tree/main/windows/Getting%20Started/Intune%20OMA-URI">Getting Started/Intune OMA-URI</a></p>
+<p>デバイスコントロールグループの設定のため、以下の 3 つの XML ファイルを使用します。</p>
+<ul>
+<li><code>all_removable_media_devices&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Device&quot;</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- ./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyGroups/%7Bd8819053-24f4-444a-a0fb-9ce5a9e97862%7D/GroupData --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Name</span>&gt;</span>All removable media devices<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">PrimaryId</span>&gt;</span>RemovableMediaDevices<span class="tag">&lt;/<span class="name">PrimaryId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>authorized_usbs&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Device&quot;</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- ./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyGroups/%7B368a2c82-17be-4137-bffa-370bbdff9672%7D/GroupData --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Name</span>&gt;</span>Authorized USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">InstancePathId</span>&gt;</span>USB\VID_154B<span class="symbol">&amp;amp;</span>PID_0028\6EA9150055800605<span class="tag">&lt;/<span class="name">InstancePathId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>readonly_usbs&#123;23c24566-98a5-4218-8802-59614513b97e&#125;.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;23c24566-98a5-4218-8802-59614513b97e&#125;&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Device&quot;</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- ./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyGroups/%7B23c24566-98a5-4218-8802-59614513b97e%7D/GroupData --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Name</span>&gt;</span>Readonly USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">VID_PID</span>&gt;</span>090C_1000<span class="tag">&lt;/<span class="name">VID_PID</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Intune の OMA-URI でデバイスコントロールグループを定義する場合、1 つのグループごとに <code>./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyGroups/%7b[GroupId]%7d/GroupData</code> のような OMA-URI を作成し、グループの定義を含む XML ファイルをアップロードします。</p>
+<p><code>[GroupId]</code> の箇所は構成するデバイスコントロールグループの GroupID に置き換えます。</p>
+<p>例えば、上記のサンプルファイル <code>all_removable_media_devices&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;.xml</code> を使用する場合は、以下の <code>./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyGroups/%7Bd8819053-24f4-444a-a0fb-9ce5a9e97862%7D/GroupData</code> という OMA-URI を追加します。</p>
+<p>この時、[データ型] は [文字列(XML ファイル)] を選択し、<code>Group</code> 要素を 1 つ含むファイルをアップロードします。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-011.png" alt="OMA-URI によるデバイスコントロールグループの設定"></p>
+<p>上記と同様の手順で <code>Authorized USBs</code> と <code>Read Only USBs</code> のグループを定義する OMA-URI も追加します。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-012.png" alt="デバイスコントロールグループの OMA-URI を登録する"></p>
+<p>グループの XML を適用する前に、<code>InstancePathId</code> や <code>VID_PID</code> の指定する値をユーザが利用するメディアの情報に置き換えてください。</p>
+<p>また、特にデバイスインスタンスパスを使用して明示的にデバイスを指定する場合には、XML ファイル内で <code>&amp;</code> をエスケープ文字 <code>&amp;amp;</code> に置き換える必要がある点に注意してください。</p>
+<h3 id="Intune-の-OMA-URI-でアクセス制御ポリシーを構成する"><a href="#Intune-の-OMA-URI-でアクセス制御ポリシーを構成する" class="headerlink" title="Intune の OMA-URI でアクセス制御ポリシーを構成する"></a>Intune の OMA-URI でアクセス制御ポリシーを構成する</h3><p>デバイスコントロールグループの OMA-URI を追加したので、次はこれらのグループと対応するアクセス制御ポリシーを登録します。</p>
+<p>アクセス制御ポリシーを登録する場合も、1 つの <code>PolicyRule</code> ごとに 1 つの OMA-URI を登録する必要があります。</p>
+<p>グループポリシー用の XML ファイルとは異なり、<code>PolicyRules</code> 要素にて複数の  <code>PolicyRule</code> をまとめて記述することができない点に注意が必要です。</p>
+<p>このサンプルシナリオで使用する OMA-URI 用のポリシー XML ファイルは、以下の公開リポジトリからダウンロード可能です。(ファイル名が <code>step_4</code> から始まるものを使用します。)</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://github.com/microsoft/mdatp-devicecontrol/tree/main/windows/Getting%20Started/Intune%20OMA-URI">Getting Started/Intune OMA-URI</a></p>
+<p>アクセス制御ポリシーの設定のため、以下の XML ファイルを使用します。</p>
+<ul>
+<li><code>step_4_-_deny_all_other_usbs&#123;7beca8fe-313a-46f2-a090-399eb3d74318&#125;.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;7beca8fe-313a-46f2-a090-399eb3d74318&#125;&quot;</span> &gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- ./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyRules/%7B7beca8fe-313a-46f2-a090-399eb3d74318%7D/RuleData --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 4 - Deny all other USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;23c24566-98a5-4218-8802-59614513b97e&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;c82cb32c-4c56-4c76-8897-b2cc99558299&#125;&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Type</span>&gt;</span>Deny<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>7<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;70582e83-ea91-4b14-8f6c-f3921dab9d7a&#125;&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Type</span>&gt;</span>AuditDenied<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>7<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Options</span>&gt;</span>3<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>step_4_-_allow_access_to_writeable_usbs_for_some_users&#123;a054bbcf-3454-4b95-9058-f7ed00deeee9&#125;.xml</code> </li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;a054bbcf-3454-4b95-9058-f7ed00deeee9&#125;&quot;</span> &gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- ./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyRules/%7Ba054bbcf-3454-4b95-9058-f7ed00deeee9%7D/RuleData --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 4 - Allow Access to Writeable USBs for some users<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;e78857e3-9e36-473b-a07c-fe1a1f356ec9&#125;&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Type</span>&gt;</span>Allow<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>63<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Sid</span>&gt;</span>S-1-1-0<span class="tag">&lt;/<span class="name">Sid</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>step_4_-_allow_read_only_access_to_read_only_usbs_for_some_users&#123;b2b9cfc0-799d-457c-babc-da617d9a8b83&#125;.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;b2b9cfc0-799d-457c-babc-da617d9a8b83&#125;&quot;</span> &gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- ./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyRules/%7Bb2b9cfc0-799d-457c-babc-da617d9a8b83%7D/RuleData --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 4 - Allow Read Only Access to Read Only USBs for some users<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;23c24566-98a5-4218-8802-59614513b97e&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;e78857e3-9e36-473b-a07c-fe1a1f356ec9&#125;&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Type</span>&gt;</span>Allow<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>9<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Sid</span>&gt;</span>S-1-1-0<span class="tag">&lt;/<span class="name">Sid</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>アクセス制御ポリシーを登録する場合、<code>./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyRules/%7b[PolicyRule Id]%7d/RuleData</code> のような OMA-URI を作成し、1 つの <code>PolicyRule</code> を記述した XML ファイルをアップロードします。</p>
+<p>OMA-URI の  <code>[PolicyRule Id]</code> の箇所は、適用する <code>PolicyRule</code> の ID に置き換える必要があります。</p>
+<p>例えば、サンプルポリシーの <code>step_4_-_allow_access_to_writeable_usbs_for_some_users&#123;a054bbcf-3454-4b95-9058-f7ed00deeee9&#125;.xml</code> を使用して OMA-URI を登録する場合には、<code>./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyRules/%7Ba054bbcf-3454-4b95-9058-f7ed00deeee9%7D/RuleData</code> というパスを指定します。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-013.png" alt="アクセス制御ポリシーの OMA-URI を登録"></p>
+<p>すべての設定が完了したら、カスタム構成プロファイルを保存し、任意のデバイスやユーザに割り当てます。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-014.png" alt="カスタム構成プロファイルの保存"></p>
+<p>割り当てされたポリシーが端末に配信されると、デバイスコントロール機能が有効化され、端末にアクセス制御ポリシーが適用されます。</p>
+<p>ポリシーが反映されたことを確認したい場合は PowerShell で <code>Get-MpComputerStatus | Select-Object DeviceControlState,DeviceControlDefaultEnforcement,DeviceControlPoliciesLastUpdated</code>  を実行し、<code>DeviceControlPoliciesLastUpdated</code> の時刻が更新されていることを確認します。</p>
+<h2 id="Intune-のユーザインターフェースを使用してリムーバブルメディアアクセス制御を構成する"><a href="#Intune-のユーザインターフェースを使用してリムーバブルメディアアクセス制御を構成する" class="headerlink" title="Intune のユーザインターフェースを使用してリムーバブルメディアアクセス制御を構成する"></a>Intune のユーザインターフェースを使用してリムーバブルメディアアクセス制御を構成する</h2><p>Intune を使用する場合、カスタム構成プロファイルではなく [エンドポイントセキュリティ]&gt;[攻撃面の減少] からデバイスコントロールプロファイルを作成することでもリムーバブルメディアのアクセス制御ポリシーを構成できます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-deploy-manage-intune?view=o365-worldwide#configure-and-manage-device-control-in-intune">Intune でデバイス制御を構成および管理する | Microsoft Learn</a></p>
+<p>例えば、以下の手順ですべてのリムーバブルメディアに対してアクセス拒否ポリシーを構成できます。</p>
+<ol>
+<li>まず、[エンドポイントセキュリティ]&gt;[攻撃面の減少] の [再利用可能な設定] から [リムーバブル記憶域] のインスタンスを追加し、[PrimaryId] を [RemovableMediaDevices] に設定します。</li>
+</ol>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-018.png" alt="再利用可能な設定"></p>
+<ol start="2">
+<li>次に、[エンドポイントセキュリティ]&gt;[攻撃面の減少] からデバイスコントロールプロファイルを作成し、[Device Control] のトグルを [構成されました] の状態に変更して [Included ID] に [再利用可能な設定] で作成したリムーバブルメディアグループを登録します。</li>
+<li>続けて、以下の画面のように [+ Edit Entry] からリムーバブルメディア制御ポリシーを設定することで、デバイスに対するアクセス拒否を構成できます。</li>
+</ol>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-015.png" alt="Intune のデバイスコントロールプロファイルを作成する"></p>
+<p>Intune のユーザインタフェースによるリムーバブルメディアアクセス制御ポリシーの設定項目については以下の公開情報の記載を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-policies?view=o365-worldwide&tabs=Removable#rules">Device control policies in Microsoft Defender for Endpoint | Microsoft Learn</a></p>
+<h2 id="デバイスコントロールグループを-XML-ファイルで構成する"><a href="#デバイスコントロールグループを-XML-ファイルで構成する" class="headerlink" title="デバイスコントロールグループを XML ファイルで構成する"></a>デバイスコントロールグループを XML ファイルで構成する</h2><p>グループポリシーまたは Intune の OMA-URI を使用してリムーバブルメディアアクセス制御を構成する場合、まずは制御対象となるデバイスやリムーバブルメディアをデバイスコントロールグループとして定義する必要があります。</p>
+<p>デバイスコントロールグループの定義に関する最新の情報は以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-policies?view=o365-worldwide&tabs=XML#groups">Device control policies in Microsoft Defender for Endpoint | Microsoft Learn</a></p>
+<p>グループポリシーを使用する場合、デバイスコントロールグループの XML ファイルは 、要素 <code>Groups</code> の中に 1 つ以上の <code>Group</code> を定義する構造となっています。つまり、1 つの XML ファイル内に複数の <code>Group</code> の定義を統合できます。</p>
+<p>一方で、Intune の OMA-URI を使用する場合、要素 <code>Groups</code> は使用せず、1 つの <code>Group</code> ごとに 1 つの OMA-URI を使用します。</p>
+<p>各 <code>Group</code> には <code>Id</code> 属性として GroupID を指定する必要があります。ここで使用可能な ID は、PowerShell で <code>New-Guid</code> コマンドレットを実行することでランダムに生成することが可能です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-removable-storage-access-control-faq?view=o365-worldwide#how-do-i-generate-guid-for-group-idpolicyrule-identry-id">Microsoft Defender for Endpoint デバイス コントロールリムーバブル ストレージに関してよく寄せられる質問 | Microsoft Learn</a></p>
+<h3 id="PrimaryId-によるデバイスの指定"><a href="#PrimaryId-によるデバイスの指定" class="headerlink" title="PrimaryId によるデバイスの指定"></a>PrimaryId によるデバイスの指定</h3><p>各 <code>Group</code> 要素には、グループ名や GroupID を記述できます。GroupID は後述するアクセス制御ポリシーの対象を指定するために使用します。</p>
+<p><code>Group</code> 内では、<code>MatchType</code> と <code>DescriptorIdList</code> によりグループの対象となるデバイスのプロパティを定義します。</p>
+<p>例えば、<code>MatchType</code> が <code>MatchAny</code> に設定されている場合は、<code>DescriptorIdList</code> 内の要素を OR リレーションシップで評価することを意味しています。</p>
+<p>つまり、<code>DescriptorIdList</code> 要素内で定義されたいずれかの条件に合致するデバイスが存在する場合、対象のデバイスがそのグループの対象となることを意味します。</p>
+<p><code>DescriptorIdList</code> 要素内で利用できる設定値として <code>PrimaryId</code> があります。</p>
+<p> <code>PrimaryId</code> に <code>RemovableMediaDevices</code> を指定する場合、すべての <code>RemovableMediaDevices</code>(USB フラッシュメモリや USB 接続の外付け SSD など) を対象とする グループを定義することがきできます。</p>
+<h3 id="InstancePathId-と-VID-PID-によるデバイスの指定"><a href="#InstancePathId-と-VID-PID-によるデバイスの指定" class="headerlink" title="InstancePathId と VID_PID によるデバイスの指定"></a>InstancePathId と VID_PID によるデバイスの指定</h3><p>グループの対象となるデバイスの条件を記述できる <code>DescriptorIdList</code> では、 <code>PrimaryId</code> 以外にも <code>InstancePathId</code> や <code>VID_PID</code> などを利用できます。</p>
+<p><code>InstancePathId</code> は、デバイスインスタンスパスを利用して対象のデバイスを明示的に指定します。(<code>InstancePathId</code> の指定にはワイルドカードを使用することもできます。)</p>
+<p>これは、特に USB フラッシュメモリなどの DiskDrive を指定するシナリオで使用できます。</p>
+<p>なお、<code>InstancePathId</code> を指定する場合には、もともとのデバイスインスタンスパスに含まれる <code>&amp;</code> をエスケープ文字 <code>&amp;amp;</code> に置き換えて XML に記述する必要があります。</p>
+<p><code>VID_PID</code> も同じく、特に USB フラッシュメモリなどの DiskDrive を指定するシナリオで使用できます。</p>
+<p><code>VID_PID</code> による指定は、 Vendor ID と  Product ID のペアで記述されます。Product ID 部分についてはについてはワイルドカードもサポートしています。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows-hardware/drivers/install/standard-usb-identifiers">標準 USB 識別子 - Windows drivers | Microsoft Learn</a></p>
+<h3 id="その他のデバイスコントロールグループの指定方法"><a href="#その他のデバイスコントロールグループの指定方法" class="headerlink" title="その他のデバイスコントロールグループの指定方法"></a>その他のデバイスコントロールグループの指定方法</h3><p>デバイスコントロールグループに含めるためのデバイスの指定は、上記のサンプル以外にも様々な条件で記述できます。</p>
+<p>例えば、USB フラッシュメモリや USB 接続の外付け SSD などのリムーバブルメディアの場合、<code>FriendlyNameId / PrimaryId / VID_PID / BusId / DeviceId / HardwareId / InstancePathId / SerialNumberId / PID / VID</code>  などの様々な値をデバイスの指定に使用できます。</p>
+<p>特定のリムーバブルメディアの識別に使用できる値は、Windows デバイスマネージャや Microsoft Defender の Advanced Hunting クエリなどを使用して調査できます。</p>
+<table>
+<thead>
+<tr>
+<th align="center">XML 内で使用するプロパティ</th>
+<th align="center">デバイスマネージャー上のプロパティ</th>
+<th align="center">サンプル KQL の実行結果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">FriendlyNameId</td>
+<td align="center">フレンドリ名</td>
+<td align="center">MediaName</td>
+</tr>
+<tr>
+<td align="center">InstancePathId</td>
+<td align="center">デバイスインスタンスパス</td>
+<td align="center">DeviceId</td>
+</tr>
+<tr>
+<td align="center">SerialNumberId</td>
+<td align="center"><code>デバイスインスタンスパス</code> から確認可能</td>
+<td align="center">Serial Number</td>
+</tr>
+<tr>
+<td align="center">PID</td>
+<td align="center"><code>親</code> から確認可能</td>
+<td align="center">ProductId</td>
+</tr>
+<tr>
+<td align="center">VID</td>
+<td align="center"><code>親</code> から確認可能</td>
+<td align="center">VendorId</td>
+</tr>
+</tbody></table>
+<p>なお、Advanced Hunting で USB メディアの情報を調査するためには以下のような KQL クエリを使用できます。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DeviceEvents </span><br><span class="line"><span class="operator">|</span> <span class="keyword">where</span> ActionType <span class="operator">=</span><span class="operator">=</span> &quot;RemovableStoragePolicyTriggered&quot;</span><br></pre></td></tr></table></figure>
+
+<p>より詳細な情報については以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-policies?view=o365-worldwide&tabs=XML#groups">Device control policies in Microsoft Defender for Endpoint | Microsoft Learn</a></p>
+<h2 id="リムーバブルメディアアクセス制御を-XML-ファイルで構成する"><a href="#リムーバブルメディアアクセス制御を-XML-ファイルで構成する" class="headerlink" title="リムーバブルメディアアクセス制御を XML ファイルで構成する"></a>リムーバブルメディアアクセス制御を XML ファイルで構成する</h2><p>制御対象となるデバイスやリムーバブルメディアをデバイスコントロールグループとして定義したら、各グループを対象とするアクセス制御ポリシーを作成します。</p>
+<p>アクセス制御ポリシーの定義に関する最新の情報は以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-policies?view=o365-worldwide&tabs=XML#policies">Device control policies in Microsoft Defender for Endpoint | Microsoft Learn</a></p>
+<p>グループポリシーを使用する場合に使用するアクセス制御ポリシーの XML ファイルは、要素 <code>PolicyRules</code> の中に 1 つ以上の <code>PolicyRule</code> を定義する構造になっています。つまり、1 つの XML ファイル内に複数の <code>PolicyRule</code> の定義を統合できます。</p>
+<p>一方で、Intune の OMA-URI を使用する場合、要素 <code>PolicyRules</code> は使用せず、1 つの <code>PolicyRule</code> ごとに 1 つの OMA-URI を使用します。</p>
+<p>各 <code>PolicyRule</code> には <code>Id</code> 属性として PolicyRuleID を指定する必要があります。</p>
+<p>※ ここで使用可能な ID は、デバイスコントロールグループと同じく PowerShell で <code>New-Guid</code> コマンドレットを実行することでランダムに生成することが可能です。</p>
+<p> <code>PolicyRule</code>  要素の中には、<code>IncludedIdList</code> 、<code>ExcludedIdList</code>、<code>Entry</code> 要素などを記述します。</p>
+<p><code>Entry</code> 要素には、具体的なアクセス制御ポリシーの定義を記述します。</p>
+<p>一方で、<code>IncludedIdList</code> や <code>ExcludedIdList</code> には、デバイスコントロールグループの XML で定義した <code>Group</code> 要素の GroupID を含めることができます。</p>
+<p>これによって、各 <code>PolicyRule</code>  要素では、<code>IncludedIdList</code> で指定されたグループに対して <code>Entry</code> 要素で定義したアクセス制御ポリシーが適用されるようになります。( <code>ExcludedIdList</code> で指定された GroupID のオブジェクトはアクセス制御ポリシーの対象外になります。)</p>
+<h3 id="ディスクレベルで読み書き実行を拒否する"><a href="#ディスクレベルで読み書き実行を拒否する" class="headerlink" title="ディスクレベルで読み書き実行を拒否する"></a>ディスクレベルで読み書き実行を拒否する</h3><p>アクセス制御ポリシーでは、<code>PolicyRule</code> 要素の中に記述する <code>Entry</code> 要素にて詳細なアクセス許可や拒否を定義できます。</p>
+<p>例えば、<code>Entry</code> 要素の <code>Type</code> が <code>Deny</code>、<code>AccessMask</code> に 7 が指定されている場合、ポリシーの対象となるグループに含まれるすべてのリムーバブルメディアに対して、DiskLevel での読み取り、書き込み、実行アクセスを拒否します。</p>
+<p>このように、Windows マシンのリムーバブルメディアアクセス制御を行う場合、制御ポリシーは <code>Type</code>  と  <code>AccessMask</code> の組み合わせで定義されます。(<code>Options</code> 要素の設定値の意味は <code>Type</code>  要素の値によって変わります。)</p>
+<p>まず、<code>Type</code> には、<code>Allow</code> または <code>Deny</code> および <code>AuditAllowed</code> または <code>AuditDenied</code> の 4 つのいずれかを指定できます。</p>
+<p><code>Allow</code> が指定されている場合には、<code>AccessMask</code> 要素の指定に従ってメディアへのアクセスが「許可」されます。</p>
+<p>一方で、<code>Deny</code> が指定されている場合には、<code>AccessMask</code> 要素の指定に従ってメディアへのアクセスが「拒否」されます。</p>
+<p><code>AuditAllowed</code> または <code>AuditDenied</code> については、それぞれ <code>Allow</code> か <code>Deny</code> の動作に対応して通知やイベント送信を行うかどうかを指定できます。</p>
+<p><code>AccessMask</code> 要素では、ディスクレベルもしくはファイルシステムレベルでメディアに対する Read, Write, Execute の操作をそれぞれ指定できます。</p>
+<p>例えば、<code>AccessMask</code> が 7 で <code>Type</code> が<code>Deny</code>の場合には、ディスクレベルでの  Read, Write, Execute 操作をすべて拒否する設定が適用されます。</p>
+<p>リムーバブルメディアアクセス制御ポリシーで使用できる <code>AccessMask</code> については以下の表を参照してください。</p>
+<table>
+<thead>
+<tr>
+<th align="center">アクセス制御</th>
+<th align="center">AccessMask</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DiskLevel の読み取りアクセス</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">DiskLevel の書き込みアクセス</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">DiskLevel の実行アクセス</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">FIleSystemLevel の読み取りアクセス</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">FIleSystemLevel の書き込みアクセス</td>
+<td align="center">16</td>
+</tr>
+<tr>
+<td align="center">FIleSystemLevel の実行アクセス</td>
+<td align="center">32</td>
+</tr>
+</tbody></table>
+<p>また、一般的に使用されるアクセス制御を構成するために使用する <code>AccessMask</code> については以下におまとめします。</p>
+<table>
+<thead>
+<tr>
+<th align="center">アクセス制御</th>
+<th align="center">AccessMask</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DiskLevel の読み、書き、実行アクセス</td>
+<td align="center">7 (1 + 2 + 4)</td>
+</tr>
+<tr>
+<td align="center">FileSystemLevel の読み、書き、実行アクセス</td>
+<td align="center">56 (8 + 16 + 32)</td>
+</tr>
+<tr>
+<td align="center">FileSystemLevel と DiskLevel の読み、書き、実行アクセス(フルアクセス)</td>
+<td align="center">63 (7 + 56)</td>
+</tr>
+<tr>
+<td align="center">DiskLevel + FileSystemLevel の読み取りアクセスのみ</td>
+<td align="center">9 (1 + 8)</td>
+</tr>
+<tr>
+<td align="center">DiskLevel + FileSystemLevel の読み取り、書き込みアクセスのみ</td>
+<td align="center">27 (9 + 18)</td>
+</tr>
+</tbody></table>
+<p>アクセス制御ポリシーに関するより詳細な情報については以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-policies?view=o365-worldwide&tabs=XML#understand-mask-access-windows">Understand mask access (Windows) | Microsoft Learn</a></p>
+<h3 id="SID-を指定して読み取りと書き込みアクセス許可を構成する"><a href="#SID-を指定して読み取りと書き込みアクセス許可を構成する" class="headerlink" title="SID を指定して読み取りと書き込みアクセス許可を構成する"></a>SID を指定して読み取りと書き込みアクセス許可を構成する</h3><p>ルールの <code>Entry</code> には、<code>Sid</code> や <code>ComputerSid</code> などの、より詳細な条件を定義可能な要素を含めることが可能です。</p>
+<p>例えば、ルールの <code>Entry</code> に <code>Sid</code> 要素を追加し、特定のローカルユーザの SID を記述した場合には、その SID を持つユーザにのみリムーバブルメディアへのアクセスを許可を構成することが可能です。</p>
+<p>例えば、以下のクエリを使用することで、 Microsoft Defender ポータルから Advanced Hunting にてログインユーザの SID を取得することができます。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DeviceLogonEvents</span><br><span class="line"><span class="operator">|</span> <span class="keyword">where</span> AccountSid <span class="operator">!=</span> &quot;&quot;</span><br><span class="line"><span class="operator">|</span> <span class="keyword">where</span> <span class="keyword">not</span>(AccountName startswith &quot;umfd-&quot;) <span class="keyword">and</span> <span class="keyword">not</span>(AccountName startswith &quot;dwm-&quot;)</span><br><span class="line"><span class="operator">|</span> <span class="keyword">distinct</span> AccountSid,AccountName,AccountDomain</span><br></pre></td></tr></table></figure>
+
+<p>また、AD ユーザや AD グループの SID については、ドメインコントローラにて <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-aduser?view=windowsserver2022-ps">Get-ADUser</a> や <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adgroup?view=windowsserver2022-ps">Get-ADGroup</a> コマンドレットを利用する方法などで調査できます。</p>
+<p>ローカルユーザやローカルグループについては、一例として以下のコマンドで確認できます。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">PS</span>&gt; (<span class="built_in">New-Object</span> System.Security.Principal.NTAccount(<span class="string">&#x27;Administrator&#x27;</span>)).Translate([<span class="type">System.Security.Principal.SecurityIdentifier</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># ローカルグループ BUILTIN\Users の SID を参照できる</span></span><br><span class="line"><span class="built_in">PS</span>&gt; (<span class="built_in">New-Object</span> System.Security.Principal.NTAccount(<span class="string">&#x27;BUILTIN\Users&#x27;</span>)).Translate([<span class="type">System.Security.Principal.SecurityIdentifier</span>])</span><br></pre></td></tr></table></figure>
+
+<p>汎用的な SID については <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows/win32/secauthz/well-known-sids">既知の SID</a> の情報を参照してください。</p>
+<p>また、その他、 <code>Entry</code> 要素で構成可能な項目の詳細は以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-policies?view=o365-worldwide&tabs=XML#determine-the-security-id-of-a-user-group-or-device">Device control policies in Microsoft Defender for Endpoint | Microsoft Learn</a></p>
+<h3 id="Advanced-Hunging-でリムーバブルメディアアクセス制御イベントを確認する"><a href="#Advanced-Hunging-でリムーバブルメディアアクセス制御イベントを確認する" class="headerlink" title="Advanced Hunging でリムーバブルメディアアクセス制御イベントを確認する"></a>Advanced Hunging でリムーバブルメディアアクセス制御イベントを確認する</h3><p>実際にこのポリシーを適用し、許可していないリムーバブルメディアデバイスへのアクセスがブロックされることを確認します。</p>
+<p>既定の構成では、このポリシーによってリムーバブルメディアへのアクセスがブロックされた場合、Windows セキュリティアプリからポップアップ通知が行われます。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-004.png" alt="Windows セキュリティアプリのポップアップ通知"></p>
+<p>また、Microsoft Device ポータルの [高度な追及] から、以下の Advanced Hunging クエリを発行することで、アクセス制御ポリシーによってブロックされた端末やリムーバブルメディアの詳細情報などを確認することができます。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">DeviceEvents</span><br><span class="line"><span class="operator">|</span> <span class="keyword">where</span> ActionType <span class="operator">=</span><span class="operator">=</span> &quot;RemovableStoragePolicyTriggered&quot;</span><br><span class="line"><span class="operator">|</span> extend parsed<span class="operator">=</span>parse_json(AdditionalFields)</span><br><span class="line"><span class="operator">|</span> extend RemovableStorageAccess <span class="operator">=</span> tostring(parsed.RemovableStorageAccess)</span><br><span class="line"><span class="operator">|</span> extend RemovableStoragePolicyVerdict <span class="operator">=</span> tostring(parsed.RemovableStoragePolicyVerdict)</span><br><span class="line"><span class="operator">|</span> extend MediaBusType <span class="operator">=</span> tostring(parsed.BusType)</span><br><span class="line"><span class="operator">|</span> extend MediaClassGuid <span class="operator">=</span> tostring(parsed.ClassGuid)</span><br><span class="line"><span class="operator">|</span> extend MediaClassName <span class="operator">=</span> tostring(parsed.ClassName)</span><br><span class="line"><span class="operator">|</span> extend MediaDeviceId <span class="operator">=</span> tostring(parsed.DeviceId)</span><br><span class="line"><span class="operator">|</span> extend MediaInstanceId <span class="operator">=</span> tostring(parsed.DeviceInstanceId)</span><br><span class="line"><span class="operator">|</span> extend MediaName <span class="operator">=</span> tostring(parsed.MediaName)</span><br><span class="line"><span class="operator">|</span> extend RemovableStoragePolicy <span class="operator">=</span> tostring(parsed.RemovableStoragePolicy)</span><br><span class="line"><span class="operator">|</span> extend MediaProductId <span class="operator">=</span> tostring(parsed.ProductId)</span><br><span class="line"><span class="operator">|</span> extend MediaVendorId <span class="operator">=</span> tostring(parsed.VendorId)</span><br><span class="line"><span class="operator">|</span> extend MediaSerialNumber <span class="operator">=</span> tostring(parsed.SerialNumber)</span><br><span class="line"><span class="operator">|</span>project <span class="type">Timestamp</span>, DeviceId, DeviceName, InitiatingProcessAccountName, ActionType, RemovableStorageAccess, RemovableStoragePolicyVerdict, MediaBusType, MediaClassGuid, MediaClassName, MediaDeviceId, MediaInstanceId, MediaName, RemovableStoragePolicy, MediaProductId, MediaVendorId, MediaSerialNumber, FolderPath, FileSize</span><br><span class="line"><span class="operator">|</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="type">Timestamp</span> <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="../images/Endpoint-MDAV-2023-12-13-005.png" alt="Advanced Hunting クエリ画面"></p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-walkthroughs?view=o365-worldwide">Device control walkthroughs | Microsoft Learn</a></p>
+<h2 id="グループポリシーまたは-Intune-の-OMA-URI-を使用してアクセス制御を構成するサンプルシナリオ"><a href="#グループポリシーまたは-Intune-の-OMA-URI-を使用してアクセス制御を構成するサンプルシナリオ" class="headerlink" title="グループポリシーまたは Intune の OMA-URI を使用してアクセス制御を構成するサンプルシナリオ"></a>グループポリシーまたは Intune の OMA-URI を使用してアクセス制御を構成するサンプルシナリオ</h2><p>この項では、公開されているサンプルポリシーを使用してリムーバブルメディアアクセス制御を構成する方法を紹介します。</p>
+<p>なお、以下で引用するサンプル XML ファイルは、グループポリシー用のサンプルファイルである点に留意してください。</p>
+<p>デバイスコントロールグループやアクセス制御ポリシーの記述方法はグループポリシーと Intune の OMA-URI を利用する場合で共通ですが、<strong>Intune の OMA-URI を使用する場合には、1 つのデバイスコントロールグループやアクセス制御ポリシーごとに 1 つの OMA-URI を作成する必要がある</strong>点に注意してください。</p>
+<h3 id="シナリオ-1-カスタムポリシーで既定のアクセス拒否ポリシーを構成する"><a href="#シナリオ-1-カスタムポリシーで既定のアクセス拒否ポリシーを構成する" class="headerlink" title="シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する"></a>シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</h3><p>このサンプルポリシーのファイルは、以下の Github リポジトリからダウンロード可能です。</p>
+<p>参考情報：<a href="/blog/Getting%20Started/deny_all_rules/">Device control policy sample: Step 1 - Deny all access</a></p>
+<p>ここで紹介するサンプル XML にてデバイスコントロールグループとアクセス制御ポリシーを記述することで、すべての <code>RemovableMediaDevices</code> に対してシステムレベルのアクセス拒否を構成することが可能です。</p>
+<p>以下の XML では、すべてのリムーバブルメディアデバイスを対象とするデバイスコントロールグループを定義しています。</p>
+<p>プロパティ名 <code>MatchType</code> に <code>MatchAny</code> が指定されている場合、続く <code>DescriptorIdList</code> プロパティ内で定義された属性は OR で比較されます。</p>
+<p>つまり、端末に接続したデバイスが <code>DescriptorIdList</code> プロパティ内で定義したいずれかの条件に合致した場合に、その端末は GroupID <code>&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;</code> を持つこのグループに含まれると判定されます。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Groups</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Device&quot;</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- ./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyGroups/%7Bd8819053-24f4-444a-a0fb-9ce5a9e97862%7D/GroupData --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Name</span>&gt;</span>All removable media devices<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">PrimaryId</span>&gt;</span>RemovableMediaDevices<span class="tag">&lt;/<span class="name">PrimaryId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Groups</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上記のデバイスコントロールグループでは、<code>PrimaryId</code> が <code>RemovableMediaDevices</code> であるデバイスすべてを対象としています。</p>
+<p>このようなデバイスには、USB フラッシュメモリや USB 接続の外付け SSD などが含まれます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-removable-storage-access-control?view=o365-worldwide#group">グループの設定 | Microsoft Learn</a></p>
+<p>次に、以下のアクセス制御ポリシーを作成します。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PolicyRules</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;d8e6f56c-f4c1-4875-ac45-51ad75d4580e&#125;&quot;</span> &gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- ./Vendor/MSFT/Defender/Configuration/DeviceControl/PolicyRules/%7Bd8e6f56c-f4c1-4875-ac45-51ad75d4580e%7D/RuleData --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Name</span>&gt;</span>Audit Deny<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;ad059b6f-bc9d-44e4-8ab9-907d7d00fc97&#125;&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Type</span>&gt;</span>Deny<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>7<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;4cf50b77-0152-4999-8d82-6f6afdf27b0b&#125;&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Type</span>&gt;</span>AuditDenied<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>7<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Options</span>&gt;</span>3<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRules</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>アクセス制御ポリシーではまず、ポリシーを適用する対象のデバイスをグループ単位で指定する必要があります。</p>
+<p>そのため、<code>IncludedIdList</code> には上記のデバイスコントロールグループの GroupID を指定しています。</p>
+<p>今回は除外対象のグループは指定しないので <code>ExcludedIdList</code> は空のままとしています。</p>
+<p>ポリシーを適用する対象のデバイスをグループにて指定したら、<code>Entry</code> にてアクセス制御を構成します。</p>
+<p>サンプルポリシーではリムーバブルメディアに対してすべてのアクセスを拒否するために、<code>Type</code> が <code>Deny</code> であり、<code>AccessMask</code> が 7 の <code>Entry</code> を定義しています。</p>
+<p>また、<code>Options</code> を 3 に設定した <code>AuditDenied</code> の <code>Entry</code> を同時に定義することで、通知の表示とイベントの送信を行うようにポリシーを定義しています。</p>
+<p>このサンプルポリシーを使用すると、すべてのリムーバブルメディアへのアクセスがブロックされます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-walkthroughs?view=o365-worldwide#step-1-deny-all-removable-media">手順 1: リムーバブル メディアをすべて拒否する | Microsoft Learn</a></p>
+<h3 id="シナリオ-2-特定の-USB-メモリに対してのみアクセスを許可する"><a href="#シナリオ-2-特定の-USB-メモリに対してのみアクセスを許可する" class="headerlink" title="シナリオ 2 - 特定の USB メモリに対してのみアクセスを許可する"></a>シナリオ 2 - 特定の USB メモリに対してのみアクセスを許可する</h3><p>このサンプルポリシーのファイルは、以下の Github リポジトリからダウンロード可能です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://github.com/microsoft/mdatp-devicecontrol/tree/main/windows/Getting%20Started/Step%202">Step 2 - Allow authorized USBs full access</a></p>
+<p>このシナリオでは、シナリオ 1 で作成した <code>RemovableMediaDevices</code> へのアクセス拒否ポリシーに加えて、特定の USB デバイスを使用する場合にのみアクセスを許可するポリシーを追加します。</p>
+<p>まず、デバイスコントロールグループを定義する XML は以下の通りです。</p>
+<p><code>All removable media devices</code> グループはシナリオ 1 で作成したものと同一ですが、新たに <code>Authorized USBs</code> というグループが追加されています。(Intune の OMA-URI を使用する場合は、グループの定義ごとに OMA-URI を追加します)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Groups</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Name</span>&gt;</span>All removable media devices<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">PrimaryId</span>&gt;</span>RemovableMediaDevices<span class="tag">&lt;/<span class="name">PrimaryId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Authorized USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- This is an example.  Replace this with the instance path id of your device --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">InstancePathId</span>&gt;</span>USB\VID_154B<span class="symbol">&amp;amp;</span>PID_0028\6EA9150055800605<span class="tag">&lt;/<span class="name">InstancePathId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Groups</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>この XML では、<code>InstancePathId</code> を使用して、特定のデバイスインスタンスパスを持つ リムーバブルメディアのみを <code>Authorized USBs</code> グループの対象として指定しています。 (XML の仕様上、インスタンスパス内の <code>&amp;</code> を <code>&amp;amp;</code> にエスケープしています)</p>
+<p>次に、以下のアクセス制御ポリシーの XML をチェックします。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PolicyRules</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;7beca8fe-313a-46f2-a090-399eb3d74318&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 2 - Deny all but authorized USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;c82cb32c-4c56-4c76-8897-b2cc99558299&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>Deny<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>7<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;70582e83-ea91-4b14-8f6c-f3921dab9d7a&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>AuditDenied<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>3<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>7<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;a054bbcf-3454-4b95-9058-f7ed00deeee9&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;e78857e3-9e36-473b-a07c-fe1a1f356ec9&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>Allow<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>63<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 2 - Allow Full Access to Authorized USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span><span class="tag">&lt;/<span class="name">PolicyRules</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Step 2 - Deny all but authorized USBs</code> というポリシーの <code>IncludedIdList</code> には、シナリオ 1 と同じく <code>All removable media devices</code> の GroupID を指定していますが、同時に <code>ExcludedIdList</code> に新に追加した <code>Authorized USBs</code> グループの GroupID を指定しています。</p>
+<p>さらに、2 つ目のポリシーである <code>Step 2 - Allow Full Access to Authorized USBs</code> では、<code>IncludedIdList</code> に <code>Authorized USBs</code> グループの GroupID を指定し、<code>AccessMask</code> が 63 の許可ルールを構成し、すべてのアクセスを明示的に許可する設定を定義しています。(Intune の OMA-URI を使用する場合は、ルールの定義ごとに OMA-URI を追加します)</p>
+<p>このサンプルポリシーを使用すると、<code>Authorized USBs</code> グループで指定した <code>InstancePathId</code> を持つリムーバブルメディアにのみアクセスが許可され、その他すべてのリムーバブルメディアへのアクセスがブロックされます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-walkthroughs?view=o365-worldwide#step-2-allow-access-for-authorized-usb-devices">手順 2: 承認された USB デバイスへのアクセスを許可する | Microsoft Learn</a></p>
+<h3 id="シナリオ-3-デバイスごとに異なるアクセス許可を構成する"><a href="#シナリオ-3-デバイスごとに異なるアクセス許可を構成する" class="headerlink" title="シナリオ 3 - デバイスごとに異なるアクセス許可を構成する"></a>シナリオ 3 - デバイスごとに異なるアクセス許可を構成する</h3><p>このサンプルポリシーのファイルは、以下の Github リポジトリからダウンロード可能です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://github.com/microsoft/mdatp-devicecontrol/tree/main/windows/Getting%20Started/Step%203">Step 3 - Allow different access to different devices</a></p>
+<p>このシナリオでは、シナリオ 2 で作成したポリシーを同様の手順で、複数のリムーバブルメディアに対してそれぞれ異なるアクセスを許可する設定を行います。</p>
+<p>まずはデバイスコントロールグループを定義するために、グループポリシー用の XML  ファイルである <code>allow_different_access_to_different_groups.xml</code> を確認します。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Groups</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Name</span>&gt;</span>All removable media devices<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">PrimaryId</span>&gt;</span>RemovableMediaDevices<span class="tag">&lt;/<span class="name">PrimaryId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Writeable USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- This is an example.  Replace this with the instance path id of your device --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">InstancePathId</span>&gt;</span>USB\VID_154B<span class="symbol">&amp;amp;</span>PID_0028\6EA9150055800605<span class="tag">&lt;/<span class="name">InstancePathId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;23c24566-98a5-4218-8802-59614513b97e&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Readonly USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- This is an example.  Replace this with the VID PID of another device --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">VID_PID</span>&gt;</span>090C_1000<span class="tag">&lt;/<span class="name">VID_PID</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Groups</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>All removable media devices</code> グループはこれまでのシナリオで作成したものと同じで、すべてのリムーバブルメディアを対象とするグループです。これは、カスタムポリシーによる既定のアクセス拒否を構成するために使用します。</p>
+<p>上記のサンプル XML ファイルでは、<code>Writeable USBs</code> と <code>Readonly USBs</code> という 2 つのグループが追加で定義されます。(Intune の OMA-URI を使用する場合は、グループの定義ごとに OMA-URI を追加します)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Writeable USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- This is an example.  Replace this with the instance path id of your device --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">InstancePathId</span>&gt;</span>USB\VID_154B<span class="symbol">&amp;amp;</span>PID_0028\6EA9150055800605<span class="tag">&lt;/<span class="name">InstancePathId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;23c24566-98a5-4218-8802-59614513b97e&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Readonly USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- This is an example.  Replace this with the VID PID of another device --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">VID_PID</span>&gt;</span>090C_1000<span class="tag">&lt;/<span class="name">VID_PID</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>それぞれのグループは <code>InstancePathId</code> や <code>VID_PID</code> によって特定のリムーバブルメディアを指定しています。</p>
+<p>続いて、アクセスポリシーを制御するための <code>allow_different_access_to_different_rules.xml</code> を確認します。</p>
+<p><code>Step 3 - Deny all other USBs</code> ルールはシナリオ 1、2 と同じく、<code>All removable media devices</code> グループに対してアクセス拒否を構成しています。</p>
+<p>ただし、<code>ExcludedIdList</code> にて <code>Writeable USBs</code> と <code>Readonly USBs</code> の 2 つのグループを適用対象外としています。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PolicyRules</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;7beca8fe-313a-46f2-a090-399eb3d74318&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 3 - Deny all other USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;23c24566-98a5-4218-8802-59614513b97e&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;c82cb32c-4c56-4c76-8897-b2cc99558299&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>Deny<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>7<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;70582e83-ea91-4b14-8f6c-f3921dab9d7a&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>AuditDenied<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>3<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>7<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;a054bbcf-3454-4b95-9058-f7ed00deeee9&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;e78857e3-9e36-473b-a07c-fe1a1f356ec9&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>Allow<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>63<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 3 - Allow Full Access to Writeable USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;b2b9cfc0-799d-457c-babc-da617d9a8b83&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;23c24566-98a5-4218-8802-59614513b97e&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;e78857e3-9e36-473b-a07c-fe1a1f356ec9&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>Allow<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>9<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 3 - Allow Read Only Access to Read Only USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRules</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>allow_different_access_to_different_rules.xml</code> の中には、<code>Step 3 - Deny all other USBs</code> ルールの他に以下の 2 つのルールが記述されています。(Intune の OMA-URI を使用する場合は、ルールの定義ごとに OMA-URI を追加します)</p>
+<p>まず、<code>Step 3 - Allow Full Access to Writeable USBs</code> ルールはシナリオ 2 と同じく <code>AccessMask</code> が 63 の <code>Allow</code> ルールによって <code>Writeable USBs</code> に完全なアクセス許可を構成しています。</p>
+<p>一方で、<code>Step 3 - Allow Read Only Access to Read Only USBs</code> では、 <code>Readonly USBs</code> の GroupID に対して  <code>AccessMask</code> が 9 の <code>Allow</code> ルールを構成しています。</p>
+<p><code>AccessMask</code> が 9(1 + 8) の場合、DiskLevel と FileSystemLevel の読み取りアクセスを同時に指定していることを意味します。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;a054bbcf-3454-4b95-9058-f7ed00deeee9&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;e78857e3-9e36-473b-a07c-fe1a1f356ec9&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>Allow<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>63<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 3 - Allow Full Access to Writeable USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;b2b9cfc0-799d-457c-babc-da617d9a8b83&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;23c24566-98a5-4218-8802-59614513b97e&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;e78857e3-9e36-473b-a07c-fe1a1f356ec9&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>Allow<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>9<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 3 - Allow Read Only Access to Read Only USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>このポリシーを適用すると、 <code>Writeable USBs</code> グループにて指定したリムーバブルメディアにのみ完全なアクセス許可が構成されます。</p>
+<p>また、<code>Readonly USBs</code> グループで指定したリムーバブルメディアには読み取りアクセスのみが許可され、それ以外のすべてのリムーバブルメディアはアクセスが拒否されます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-walkthroughs?view=o365-worldwide#step-3-allow-different-levels-of-access-for-different-types-of-devices">手順 3: さまざまな種類のデバイスに対してさまざまなレベルのアクセスを許可する | Microsoft Learn</a></p>
+<h3 id="シナリオ-4-特定のユーザに対してアクセスを許可する"><a href="#シナリオ-4-特定のユーザに対してアクセスを許可する" class="headerlink" title="シナリオ 4 - 特定のユーザに対してアクセスを許可する"></a>シナリオ 4 - 特定のユーザに対してアクセスを許可する</h3><p>このサンプルポリシーのファイルは、以下の Github リポジトリからダウンロード可能です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://github.com/microsoft/mdatp-devicecontrol/tree/main/windows/Getting%20Started/Step%204">Step 4 - Allow different access to different devices for different users</a></p>
+<p>デバイスコントロールグループを定義するグループポリシー用の XML ファイル <code>allow_different_access_to_different_user_groups.xml</code> は、シナリオ 3 で使用したものと同一です。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Groups</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Name</span>&gt;</span>All removable media devices<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">PrimaryId</span>&gt;</span>RemovableMediaDevices<span class="tag">&lt;/<span class="name">PrimaryId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Writeable USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- This is an example.  Replace this with the instance path id of your device --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">InstancePathId</span>&gt;</span>USB\VID_154B<span class="symbol">&amp;amp;</span>PID_0028\6EA9150055800605<span class="tag">&lt;/<span class="name">InstancePathId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Group</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;23c24566-98a5-4218-8802-59614513b97e&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Readonly USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MatchType</span>&gt;</span>MatchAny<span class="tag">&lt;/<span class="name">MatchType</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- This is an example.  Replace this with the VID PID of another device --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">VID_PID</span>&gt;</span>090C_1000<span class="tag">&lt;/<span class="name">VID_PID</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">DescriptorIdList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Groups</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>アクセス制御ポリシーを記述している <code>allow_different_access_to_different_users_rules.xml</code> もシナリオ 3 のものとほぼ同一ですが、書き込みや読み取りアクセスを許可するルールの <code>Entry</code> に <code>&lt;Sid&gt;S-1-1-0&lt;/Sid&gt;</code> という項目が追加で記述されています。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PolicyRules</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;7beca8fe-313a-46f2-a090-399eb3d74318&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 4 - Deny all other USBs<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;d8819053-24f4-444a-a0fb-9ce5a9e97862&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;23c24566-98a5-4218-8802-59614513b97e&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ExcludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;c82cb32c-4c56-4c76-8897-b2cc99558299&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>Deny<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>7<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;70582e83-ea91-4b14-8f6c-f3921dab9d7a&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>AuditDenied<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>3<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>7<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;a054bbcf-3454-4b95-9058-f7ed00deeee9&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;368a2c82-17be-4137-bffa-370bbdff9672&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;e78857e3-9e36-473b-a07c-fe1a1f356ec9&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>Allow<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>63<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Sid</span>&gt;</span>S-1-1-0<span class="tag">&lt;/<span class="name">Sid</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 4 - Allow Access to Writeable USBs for some users<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">PolicyRule</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;b2b9cfc0-799d-457c-babc-da617d9a8b83&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GroupId</span>&gt;</span>&#123;23c24566-98a5-4218-8802-59614513b97e&#125;<span class="tag">&lt;/<span class="name">GroupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">IncludedIdList</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Entry</span> <span class="attr">Id</span>=<span class="string">&quot;&#123;e78857e3-9e36-473b-a07c-fe1a1f356ec9&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Type</span>&gt;</span>Allow<span class="tag">&lt;/<span class="name">Type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Options</span>&gt;</span>0<span class="tag">&lt;/<span class="name">Options</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AccessMask</span>&gt;</span>9<span class="tag">&lt;/<span class="name">AccessMask</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Sid</span>&gt;</span>S-1-1-0<span class="tag">&lt;/<span class="name">Sid</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Entry</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Step 4 - Allow Read Only Access to Read Only USBs for some users<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRule</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">PolicyRules</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>ルールの <code>Entry</code> に <code>Sid</code> という項目が追加で記述されている場合、その  <code>Entry</code>  には追加の条件が定義されます。</p>
+<p> <code>Sid</code> 要素にはローカルユーザやコンピュータ、または Microsoft Entra オブジェクトの SID などを含めることができます。</p>
+<p>この設定によって、<code>Entry</code> 要素で記述されたルールを特定のユーザやユーザグループに適用するかどうかを指定できます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-policies?view=o365-worldwide&tabs=XML#determine-the-security-id-of-a-user-group-or-device">Device control policies in Microsoft Defender for Endpoint | Microsoft Learn</a></p>
+<p>上記のサンプルでは <code>S-1-1-0</code> という<a href="(https://learn.microsoft.com/ja-jp/windows/win32/secauthz/well-known-sids)">すべてのユーザを表すグループの SID</a> を指定していますが、特定のローカルユーザの SID に置き換えることで、その SID を持つユーザにのみリムーバブルメディアへのアクセスを許可を構成することが可能です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-walkthroughs?view=o365-worldwide#step-4-allow-different-levels-of-access-to-devices-for-specific-users-or-groups">手順 4: 特定のユーザーまたはグループのデバイスへのさまざまなレベルのアクセスを許可する | Microsoft Learn</a></p>
+<h2 id="リムーバブルメディアアクセス制御に関するよくある質問"><a href="#リムーバブルメディアアクセス制御に関するよくある質問" class="headerlink" title="リムーバブルメディアアクセス制御に関するよくある質問"></a>リムーバブルメディアアクセス制御に関するよくある質問</h2><p>デバイスコントロール機能やリムーバブルメディアアクセス制御に関するよくある質問の多くは、以下の公開情報におまとめしております。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-faq?view=o365-worldwide">Microsoft Defender for Endpoint Device Control frequently asked questions | Microsoft Learn</a></p>
+<h3 id="特定のメディアを指定するために使用するデバイスインスタンスパスなどの確認方法がわかりません"><a href="#特定のメディアを指定するために使用するデバイスインスタンスパスなどの確認方法がわかりません" class="headerlink" title="特定のメディアを指定するために使用するデバイスインスタンスパスなどの確認方法がわかりません"></a>特定のメディアを指定するために使用するデバイスインスタンスパスなどの確認方法がわかりません</h3><p>特定のメディアを明示的に指定するために使用するデバイスインスタンスパスなどの情報の多くは、Windows のデバイスマネージャーから対象デバイスのプロパティを確認することで特定できます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-faq?view=o365-worldwide#how-do-i-find-the-media-property-in-the-device-manager">How do I find the media property in the Device Manager? |Microsoft Learn</a></p>
+<p>例えば、USB フラッシュメモリのデバイスインスタンスパスは、デバイスマネージャーの以下のプロパティから参照できます。</p>
+<p><img src="../images/Endpoint-MDAV-2023-12-13-020.png" alt="デバイスマネージャーでデバイスインスタンスパスを参照する"></p>
+<p>また、Microsoft Defender ポータルの Advanced Hunging で以下のようなクエリを発行することも有効です。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DeviceEvents</span><br><span class="line"><span class="operator">|</span> <span class="keyword">where</span> ActionType <span class="operator">=</span><span class="operator">=</span> &quot;PnpDeviceConnected&quot;</span><br><span class="line"><span class="operator">|</span> extend parsed<span class="operator">=</span>parse_json(AdditionalFields)</span><br><span class="line"><span class="operator">|</span> extend MediaClass <span class="operator">=</span> tostring(parsed.ClassName)</span><br><span class="line"><span class="operator">|</span> extend MediaDeviceId <span class="operator">=</span> tostring(parsed.DeviceId)</span><br><span class="line"><span class="operator">|</span> extend MediaDescription <span class="operator">=</span> tostring(parsed.DeviceDescription)</span><br><span class="line"><span class="operator">|</span> extend MediaSerialNumber <span class="operator">=</span> tostring(parsed.SerialNumber)</span><br><span class="line"><span class="operator">|</span> project <span class="type">Timestamp</span>, DeviceId, DeviceName, AccountName, AccountDomain, MediaClass, MediaDeviceId, MediaDescription, MediaSerialNumber, parsed</span><br><span class="line"><span class="operator">|</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="type">Timestamp</span> <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
+
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-walkthroughs?view=o365-worldwide">デバイス コントロールのチュートリアル | Microsoft Learn</a></p>
+<p>上記のサンプルクエリを実行すると、デバイスに接続されたリムーバブルメディアのクラス名や DeviceId などの情報を取得できるため、アクセス制御ポリシーの設定に役立てることができます。</p>
+<p>他にも、<a href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-1---%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%A7%E6%97%A2%E5%AE%9A%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%8B%92%E5%90%A6%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">シナリオ 1 - カスタムポリシーで既定のアクセス拒否ポリシーを構成する</a> を参考に、<code>PrimaryId</code> に <code>RemovableMediaDevices</code> や <code>WpdDevices</code>、または <code>CdRomDevices</code> などを設定した広範なアクセス拒否ポリシーを一度端末に適用して制御したいメディアへのアクセスをブロックし、そのイベントを確認する方法も有効です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-overview?view=o365-worldwide&tabs=Removable#supported-devices">サポート対象のデバイス | Microsoft Learn</a></p>
+<p>アクセス拒否ポリシーによりメディアへのアクセスがブロックされた際の <code>RemovableStoragePolicyTriggered</code> イベントを参照すると、デバイスインスタンスパスや Vendor/Product ID など、アクセス制御ポリシーで明示的にデバイスを指定する際に使用できる様々な情報を参照できます。</p>
+<p><img src="../images/image-20240204224138800.png" alt="アクセス拒否時の RemovableStoragePolicyTriggered イベント"></p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-walkthroughs?view=o365-worldwide#step-1-deny-all-removable-media">手順 1: リムーバブル メディアをすべて拒否する | Microsoft Learn</a></p>
+<h3 id="既定の処理を拒否に設定すると読み取り許可のアクセス制御ポリシーが動作しなくなるのはなぜですか？"><a href="#既定の処理を拒否に設定すると読み取り許可のアクセス制御ポリシーが動作しなくなるのはなぜですか？" class="headerlink" title="既定の処理を拒否に設定すると読み取り許可のアクセス制御ポリシーが動作しなくなるのはなぜですか？"></a>既定の処理を拒否に設定すると読み取り許可のアクセス制御ポリシーが動作しなくなるのはなぜですか？</h3><p>デバイスコントロール機能が有効な環境で既定の処理が [拒否] に設定されている場合、明示的にポリシーで許可されていない限り、すべてのリムーバブルメディアやプリンターへのアクセスは拒否されます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-policies?view=o365-worldwide&tabs=Removable#controlling-default-behavior">Device control policies in Microsoft Defender for Endpoint | Microsoft Learn</a></p>
+<p>この時、ディスクレベルまたはファイルシステムレベルのみを指定してアクセス許可ポリシーを作成する場合、対象メディアへの読み取り、書き込み、または実行が拒否される問題が発生する場合があります。</p>
+<p>そのため、既定の処理を [拒否] にしている環境で明示的にリムーバブルメディアへのアクセス許可を構成する場合には、ディスクレベルとファイルシステムレベルの両方のアクセス許可を明示的に指定する必要がある点に注意してください。</p>
+<p>例えば、読み取りアクセスのみを許可したい場合は、<code>1+8</code> で 9 を AccessMask として指定します。</p>
+<p>また、すべてのアクセスを許可したい場合には、63 を AccessMask として設定します。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-policies?view=o365-worldwide&tabs=XML#understand-mask-access-windows">Understand mask access (Windows) | Microsoft Learn</a></p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>この記事では、Windows マシンでデバイスコントロール機能のアクセス制御ポリシーを構成する方法についておまとめいたしました。</p>
+<p>デバイスコントロール機能に関する最新の情報については公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-control-overview?view=o365-worldwide&tabs=Removable#prerequisites">Microsoft Defender for Endpointのデバイス制御 | Microsoft Learn</a></p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li></ul>
+
+        
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/Endpoint-MDAV-2023-12-13.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../Endpoint-MDAV-2023-09-26/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Windows Server 2012 R2 または Windows Server 2016 を MDE にオンボードする手順と確認ポイント</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">デバイスコントロール機能を使用してリムーバブルメディアアクセス制御を構成する手順と確認ポイント</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2023-09-26/">Windows Server 2012 R2 または Windows Server 2016 を MDE にオンボードする手順と確認ポイント</a>
+          </li>
+        
+          <li>
+            <a href="../AIP-AzureInformationProtection-2023-09-14-01/">Active Directory Rithts Management Service (AD RMS) の役割は Azure IaaS を含めパブリック クラウドへの移行は許諾されません。</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2023-08-17/">Windows デバイスの Microsoft Defender ウイルス対策(MDAV) のセキュリティインテリジェンス(定義ファイル)更新設定について</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2023-06-21/">Microsoft 365 Defender ポータルの「デバイスのインベントリ」に関するよくあるご質問</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Active-Directory-Rithts-Management-Service/" rel="tag">Active Directory Rithts Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-AdvancedThreat-Protection/" rel="tag">Azure AdvancedThreat Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-Information-Protection/" rel="tag">Azure Information Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-Linux/" rel="tag">MDE on Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-macOS/" rel="tag">MDE on macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" rel="tag">Microsoft AdvancedThreat Analytics(ATA)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Rights-Management-Service/" rel="tag">Rights Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" rel="tag">セキュリティインテリジェンス</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" rel="tag">マルウェア対策プラットフォーム</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/">Information</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../tags/Active-Directory-Rithts-Management-Service/" style="font-size: 10px;">Active Directory Rithts Management Service</a> <a href="../tags/Azure-AdvancedThreat-Protection/" style="font-size: 10px;">Azure AdvancedThreat Protection</a> <a href="../tags/Azure-Information-Protection/" style="font-size: 20px;">Azure Information Protection</a> <a href="../tags/Identity-Manager/" style="font-size: 15px;">Identity Manager</a> <a href="../tags/Information/" style="font-size: 10px;">Information</a> <a href="../tags/MDE-on-Linux/" style="font-size: 12.5px;">MDE on Linux</a> <a href="../tags/MDE-on-macOS/" style="font-size: 12.5px;">MDE on macOS</a> <a href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" style="font-size: 10px;">Microsoft AdvancedThreat Analytics(ATA)</a> <a href="../tags/Microsoft-Defender-for-Endpoint/" style="font-size: 20px;">Microsoft Defender for Endpoint</a> <a href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" style="font-size: 17.5px;">Microsoft Defender ウイルス対策</a> <a href="../tags/Rights-Management-Service/" style="font-size: 10px;">Rights Management Service</a> <a href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" style="font-size: 10px;">セキュリティインテリジェンス</a> <a href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" style="font-size: 10px;">マルウェア対策プラットフォーム</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 CSS Japan Secuirty team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
