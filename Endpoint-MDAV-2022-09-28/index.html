@@ -15,7 +15,7 @@
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-09-28-01.png">
 <meta property="article:published_time" content="2022-09-28T06:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-25T04:27:05.489Z">
+<meta property="article:modified_time" content="2024-05-16T08:08:19.181Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="MDE on Linux">
 <meta property="article:tag" content="MDE on macOS">
@@ -106,7 +106,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+21bfc6a3-0e23-53f6-8ea0-e065d61e793c%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BmacOS+%E3%81%8A%E3%82%88%E3%81%B3+Linux+%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%A7+Client+Analyzer+%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AB%E3%82%88%E3%82%8B%E6%AD%A3%E5%B8%B8%E6%80%A7%E8%A8%BA%E6%96%AD%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2022-09-28%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2022-09-28.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2022-09-28.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/" data-id="clu6g588j000n0npc6hw3frrd" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/" data-id="clw8yy0o1000n0nqf1ym68kk2" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -142,11 +142,11 @@
 <p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-macos-linux?view=o365-worldwide#running-the-analyzer-through-gui-scenario">macOS または Linux でのクライアント アナライザーの実行</a></p>
 <h3 id="macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用する"><a href="#macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用する" class="headerlink" title="macOS での Client Analyzer ツールの実行方法 (Python3を使用する)"></a>macOS での Client Analyzer ツールの実行方法 (Python3を使用する)</h3><p>このセクションでは、コマンドラインインターフェース(CLI)を使用した Client Analyzer ツールの実行方法について紹介します。</p>
 <p>このセクションで紹介する手順を使用するためには、デバイスで <code>python3</code> コマンドと Python パッケージ <a target="_blank" rel="noopener" href="https://pypi.org/search/?q=lxml">lxml</a> が利用可能である必要があります。</p>
-<p>※ <code>python3</code> コマンドが使用できないデバイスで Client Analyzer ツールを実行する手順については、[macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)][#macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)] のセクションを参照してください。</p>
+<p>※ <code>python3</code> コマンドが使用できないデバイスで Client Analyzer ツールを実行する手順については、<a href="#macOS-%E3%81%A7%E3%81%AE-Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AE%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95-Python3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%AA%E3%81%84">macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)</a> のセクションを参照してください。</p>
 <ol>
 <li>デバイスで ターミナルを起動し、任意のディレクトリで以下のコマンドを順に実行します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -OL https://aka.ms/XMDEClientAnalyzer</span><br><span class="line">$ unzip -q XMDEClientAnalyzer</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -OL https://aka.ms/XMDEClientAnalyzer</span><br><span class="line">unzip -q XMDEClientAnalyzer</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>圧縮ファイルが展開され、以下のファイルとディレクトリが存在することを確認します。</li>
@@ -156,19 +156,19 @@
 <ol start="3">
 <li>以下のコマンドを実行して、<code>mde_support_tool.sh</code>に実行権限を付与します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x mde_support_tool.sh</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li><code>mde_support_tool.sh</code>を実行し、必要なコンポーネントをインストールします。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mde_support_tool.sh</span><br></pre></td></tr></table></figure>
 
 <p>※ デバイスで<code>python3</code>コマンドが使用できない場合、<code>mde_support_tool.sh</code>の実行に失敗し、以下のようにPython3のインストールを要求する画面が表示される場合があります。</p>
 <p><img src="../images/Endpoint-MDAV-2022-09-28-01.png" alt="Endpoint-MDAV-2022-09-28-01"></p>
 <ol start="5">
 <li>上記のコマンド実行によりコンポーネントのインストールに成功した後、以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
@@ -179,7 +179,7 @@
 <ol>
 <li>デバイスで ターミナルを起動し、任意のディレクトリで以下のコマンドを順に実行します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -OL https://aka.ms/XMDEClientAnalyzerBinary</span><br><span class="line">$ unzip -q XMDEClientAnalyzerBinary</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -OL https://aka.ms/XMDEClientAnalyzerBinary</span><br><span class="line">unzip -q XMDEClientAnalyzerBinary</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>圧縮ファイルが展開され、以下のファイルが存在することを確認します。</li>
@@ -190,17 +190,17 @@
 <li>以下のコマンドで、Intel ベースの macOS 用パッケージを展開します。</li>
 </ol>
 <p>※ M1 ベースの macOS を使用する場合は<code>SupportToolmacOS-armBinary.zip</code>を展開します。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -q SupportToolmacOSBinary.zip</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -q SupportToolmacOSBinary.zip</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>以下のコマンドを実行して、展開された<code>MDESupportTool</code>に実行権限を付与します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x MDESupportTool</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x MDESupportTool</span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
@@ -216,7 +216,7 @@
 <ol>
 <li>デバイスの CLI を使用し、任意のディレクトリで以下のコマンドを順に実行します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget --quiet -O XMDEClientAnalyzer.zip https://aka.ms/XMDEClientAnalyzer</span><br><span class="line">$ unzip -q XMDEClientAnalyzer.zip</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget --quiet -O XMDEClientAnalyzer.zip https://aka.ms/XMDEClientAnalyzer</span><br><span class="line">unzip -q XMDEClientAnalyzer.zip</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>圧縮ファイルが展開され、以下のファイルとディレクトリが存在することを確認します。</li>
@@ -226,18 +226,18 @@
 <ol start="3">
 <li>以下のコマンドを実行して、<code>mde_support_tool.sh</code>に実行権限を付与します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x mde_support_tool.sh</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li><code>mde_support_tool.sh</code>を実行し、必要なコンポーネントをインストールします。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mde_support_tool.sh</span><br></pre></td></tr></table></figure>
 
 <p>※ デバイスで<code>python3</code>コマンドが使用できない場合、<code>python3: command not found</code>のエラーメッセージが表示され、<code>mde_support_tool.sh</code>の実行に失敗します。</p>
 <ol start="5">
 <li>上記のコマンド実行によりコンポーネントのインストールに成功した後、以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
@@ -248,7 +248,7 @@
 <ol>
 <li>デバイスの CLI を使用し、任意のディレクトリで以下のコマンドを順に実行します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget --quiet -O XMDEClientAnalyzerBinary.zip https://aka.ms/XMDEClientAnalyzerBinary</span><br><span class="line">$ unzip -q XMDEClientAnalyzerBinary.zip</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget --quiet -O XMDEClientAnalyzerBinary.zip https://aka.ms/XMDEClientAnalyzerBinary</span><br><span class="line">unzip -q XMDEClientAnalyzerBinary.zip</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>圧縮ファイルが展開され、以下のファイルが存在することを確認します。</li>
@@ -258,17 +258,17 @@
 <ol start="3">
 <li>以下のコマンドで、Linux 用のパッケージを展開します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -q SupportToolLinuxBinary.zip</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -q SupportToolLinuxBinary.zip</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>以下のコマンドを実行して、展開された<code>MDESupportTool</code>に実行権限を付与します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x MDESupportTool</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x MDESupportTool</span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
