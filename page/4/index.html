@@ -85,6 +85,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-PAM_http_error" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="../../PAM_http_error/" class="article-date">
+  <time datetime="2019-03-29T22:42:00.000Z" itemprop="datePublished">2019-03-30</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../PAM_http_error/">MIM 2016 SP1 にて PAM を利用する際に、http 404 / 500 エラーが発生する。</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        こんにちは、Identity Manager サポート です。MIM 2016 SP1 の Privilege Access Management(PAM) をご利用いただく際に、いくつかの rest API が HTTP 404 や 500 エラーが出力される場合があります。
+
+
+この際の対応手順について、ご紹介します。回避策としては、以下の通り MIM のサービスアカウントの権限の委譲を以下の通り実施します。実施後は、MIM サーバー上にて、iisreset にて IIS サービスの再起動を実施ください。
+変更前
+
+変更後
+
+この事象は、Off box と呼ばれる新しい委任に関連する機能の問題によるものとなります。
+MIM 2016 SP1 にて PAM 機能をご活用の際はご注意ください。
+元の記事https://social.technet.microsoft.com/Forums/...
+        <p class="article-readmore">
+          <a href="../../PAM_http_error/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jp-sec.github.io/blog/PAM_http_error/" data-id="clzchb6h7001d0mp78vm584fr" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Identity-Manager/" rel="tag">Identity Manager</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-MIM_ADMA_Export_0x80004005" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -124,7 +182,7 @@ FIM/MIM をご利用いただく目的の一つとして、Active Directory Doma
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jp-sec.github.io/blog/MIM_ADMA_Export_0x80004005/" data-id="clwsxvf6800180onlagbncuph" class="article-share-link">共有</a-->
+      <!--a data-url="https://jp-sec.github.io/blog/MIM_ADMA_Export_0x80004005/" data-id="clzchb6h500180mp7aixyh0na" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Identity-Manager/" rel="tag">Identity Manager</a></li></ul>
@@ -174,7 +232,7 @@ Identity Manager を再起動後、当該 Identity Manager と連携している
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jp-sec.github.io/blog/Identity_Manager_2019_03_30/" data-id="clwsxvf6500150onl8tfz5o6s" class="article-share-link">共有</a-->
+      <!--a data-url="https://jp-sec.github.io/blog/Identity_Manager_2019_03_30/" data-id="clzchb6h200150mp79hl8dgga" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Identity-Manager/" rel="tag">Identity Manager</a></li></ul>
@@ -223,7 +281,7 @@ Identity Manager を再起動後、当該 Identity Manager と連携している
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jp-sec.github.io/blog/information/README/" data-id="clwsxvf6c001g0onl0me92ico" class="article-share-link">共有</a-->
+      <!--a data-url="https://jp-sec.github.io/blog/information/README/" data-id="clzchb6h9001g0mp74nq58yyj" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li></ul>
@@ -252,6 +310,10 @@ Identity Manager を再起動後、当該 Identity Manager と連携している
       <ul>
         
           <li>
+            <a href="../../how-to-create-supportcase/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="../../Hiring-AboutSecurity-01/">&lt;第 1 弾&gt; Security &amp; Compliance サポートチームについて</a>
           </li>
         
@@ -265,10 +327,6 @@ Identity Manager を再起動後、当該 Identity Manager と連携している
         
           <li>
             <a href="../../Hiring-AboutSecurity-04/">&lt;第 4 弾&gt; チームの様子、雰囲気について</a>
-          </li>
-        
-          <li>
-            <a href="../../Hiring-AboutSecurity-05/">&lt;第 5 弾&gt; Security &amp; Compliance チームの多様性について</a>
           </li>
         
       </ul>
@@ -291,7 +349,7 @@ Identity Manager を再起動後、当該 Identity Manager と連携している
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2016/01/">2016 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2016/01/">2016 / 01</a></li></ul>
     </div>
   </div>
 
