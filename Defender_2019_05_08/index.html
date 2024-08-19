@@ -6,17 +6,17 @@
   
   <title>Windows Defender Antivirus 前回の更新日付が未来日になる | Japan CSS Security Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="皆さま、こんにちは、Windows Defender サポート です。 今回は Windows Defender Antivirus の更新日付の表示不具合についてについてご紹介致します。 Windows 10 バージョン 1809 に標準で実装されている Windows Defender Antivirus において、前回の更新日付が実際の時間より + 9 時間された日付になる不具合がございます">
+  <meta name="description" content="皆さま、こんにちは、Windows Defender サポート です。 今回は Windows Defender Antivirus の更新日付の表示不具合についてについてご紹介致します。 警告Windows 10 バージョン 1809 に標準で実装されている Windows Defender Antivirus において、前回の更新日付が実際の時間より + 9 時間された日付になる不具合がござい">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows Defender Antivirus 前回の更新日付が未来日になる">
 <meta property="og:url" content="https://jp-sec.github.io/blog/Defender_2019_05_08/index.html">
 <meta property="og:site_name" content="Japan CSS Security Support Blog">
-<meta property="og:description" content="皆さま、こんにちは、Windows Defender サポート です。 今回は Windows Defender Antivirus の更新日付の表示不具合についてについてご紹介致します。 Windows 10 バージョン 1809 に標準で実装されている Windows Defender Antivirus において、前回の更新日付が実際の時間より + 9 時間された日付になる不具合がございます">
+<meta property="og:description" content="皆さま、こんにちは、Windows Defender サポート です。 今回は Windows Defender Antivirus の更新日付の表示不具合についてについてご紹介致します。 警告Windows 10 バージョン 1809 に標準で実装されている Windows Defender Antivirus において、前回の更新日付が実際の時間より + 9 時間された日付になる不具合がござい">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Defender_2019_05_08-01.jpg">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Defender_2019_05_08-02.jpg">
 <meta property="article:published_time" content="2019-05-08T05:27:00.000Z">
-<meta property="article:modified_time" content="2024-08-07T07:48:28.883Z">
+<meta property="article:modified_time" content="2024-08-19T03:29:23.200Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta name="twitter:card" content="summary">
@@ -107,14 +107,14 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+128578fc-b633-5b9e-8ed3-440d35c79a6c%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BWindows+Defender+Antivirus+%E5%89%8D%E5%9B%9E%E3%81%AE%E6%9B%B4%E6%96%B0%E6%97%A5%E4%BB%98%E3%81%8C%E6%9C%AA%E6%9D%A5%E6%97%A5%E3%81%AB%E3%81%AA%E3%82%8B%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FDefender_2019_05_08%2F%29%0A*+Content+Source%3A+%5Barticles%2FDefender_2019_05_08.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FDefender_2019_05_08.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Defender_2019_05_08/" data-id="clzjjs72c000i0npnd5vha82n" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Defender_2019_05_08/" data-id="cm00ft7zw000i0no6du0yavah" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>皆さま、こんにちは、Windows Defender サポート です。</p>
 <p>今回は Windows Defender Antivirus の更新日付の表示不具合についてについてご紹介致します。</p>
-<p>Windows 10 バージョン 1809 に標準で実装されている Windows Defender Antivirus において、前回の更新日付が実際の時間より + 9 時間された日付になる不具合がございます。<br>当該不具合は表示上の問題であり、その他の機能に関しては一切影響はございません。</p>
+<div class="alert is-warning"><p class="alert-title">警告</p><p>Windows 10 バージョン 1809 に標準で実装されている Windows Defender Antivirus において、前回の更新日付が実際の時間より + 9 時間された日付になる不具合がございます。</p><p>当該不具合は表示上の問題であり、その他の機能に関しては一切影響はございません。</p></div>
 <p><img src="../images/Defender_2019_05_08-01.jpg" alt="Defender_2019_05_08-01"></p>
 <p>代替策として、イベントログ ビューアー (eventvwr.msc) を起動し、以下ログより最新の ID 2000 のログの日付をご確認くだい。</p>
 <p>・ [アプリケーションとサービス ログ] - [Microsoft] - [Windows] - [Windows Defender] - Operational</p>
