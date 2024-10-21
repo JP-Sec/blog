@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Windows におけるウイルス対策と除外に関するよくあるお問い合わせ | Japan CSS Security Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは Security &amp; Compliance サポートチームです。 この記事では、Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) の検知機能と、ウイルス対策スキャン除外設定に関するよくあるお問い合わせについておまとめいたします。 なお、本情報の内容（添付文書、リンク先などを含む）は、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows におけるウイルス対策と除外に関するよくあるお問い合わせ">
+<meta property="og:url" content="https://jp-sec.github.io/blog/Endpoint-MDAV-2024-08-19/index.html">
+<meta property="og:site_name" content="Japan CSS Security Support Blog">
+<meta property="og:description" content="こんにちは Security &amp; Compliance サポートチームです。 この記事では、Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) の検知機能と、ウイルス対策スキャン除外設定に関するよくあるお問い合わせについておまとめいたします。 なお、本情報の内容（添付文書、リンク先などを含む）は、">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240902133330401.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240902162229526.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240902133641339.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240902171016489.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240904151834003.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240904151805737.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240904151955351.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240906164739920.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240906164819417.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240906170027594.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240902120540538.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240902121306433.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240925161645398.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240930163501554.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240930163744806.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240930165150602.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240930165502811.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20241003163331782.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240930172138632.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20241020195551547.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20241016122739335.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20241020195851352.png">
+<meta property="article:published_time" content="2024-10-22T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-21T10:43:16.395Z">
+<meta property="article:author" content="CSS Japan Secuirty team">
+<meta property="article:tag" content="Microsoft Defender ウイルス対策">
+<meta property="article:tag" content="Microsoft Defender for Endpoint">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2024-08-19/image-20240902133330401.png">
+  
+    <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-sec.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../index.html" id="logo">Japan CSS Security Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../index.html" id="subtitle">日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Endpoint-MDAV-2024-08-19" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Windows におけるウイルス対策と除外に関するよくあるお問い合わせ
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Published: 
+        <a href="" class="article-date-single">
+  <time datetime="2024-10-22T00:00:00.000Z" itemprop="datePublished">2024-10-22</time>
+</a>
+        
+        
+        
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+e0925630-0622-5dc9-b4cd-fe01319b3c11%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BWindows+%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%A8%E9%99%A4%E5%A4%96%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2024-08-19%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2024-08-19.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2024-08-19.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2024-08-19/" data-id="cm2iw1vmn00370no77r9cainq" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは Security &amp; Compliance サポートチームです。</p>
+<p>この記事では、Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) の検知機能と、ウイルス対策スキャン除外設定に関するよくあるお問い合わせについておまとめいたします。</p>
+<p>なお、本情報の内容（添付文書、リンク先などを含む）は、作成日時点(2024 年 10 月 21 日)でのものであり、予告なく変更される場合があります。</p>
+<p>MDAV の除外設定に関する最新の情報については以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-exclusions-microsoft-defender-antivirus">Microsoft Defender ウイルス対策のカスタム除外を構成する | Microsoft Learn</a></p>
+<div class="alert is-important"><p class="alert-title">重要</p><p></p>
+<p>本記事は、MDAV の除外設定に関する推奨事項やベストプラクティスをご案内するものではありません。</p>
+<p>スキャン除外の設定はセキュリティレベルの低下をもたらす恐れがあるため、弊社では原則として不必要な除外設定の実施を推奨しておりません。</p>
+<p>また、MDAV の除外設定を行う際には、除外に伴うセキュリティリスクをユーザにて評価し、組織のセキュリティポリシーに合わせて設定を検討いただく必要があります。</p>
+<p>除外リストについては定期的なレビューを実施いただき、不要になった除外設定は削除いただくことをおすすめいたします。</p></div>
+<p>※ 本記事では、Microsoft Defender ウイルス対策を MDAV、Microsoft Defender for Endpoint を MDE と記載します。</p>
+<h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul>
+<li><a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E9%99%A4%E5%A4%96%E8%A8%AD%E5%AE%9A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">ウイルス対策のカスタム除外設定について</a><ul>
+<li><a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E9%99%A4%E5%A4%96%E8%A8%AD%E5%AE%9A%E3%81%A8%E3%81%AF">ウイルス対策の除外設定とは</a></li>
+<li><a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E9%99%A4%E5%A4%96%E3%81%AE%E4%B8%BB%E3%81%AA%E7%9B%AE%E7%9A%84">ウイルス対策除外の主な目的</a></li>
+<li><a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E9%99%A4%E5%A4%96%E8%A8%AD%E5%AE%9A%E3%81%A7%E6%8A%91%E5%88%B6%E5%8F%AF%E8%83%BD%E3%81%AA%E6%A4%9C%E7%9F%A5%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">ウイルス対策の除外設定で抑制可能な検知イベントについて</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A4%9C%E7%9F%A5%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%8B%E3%82%89%E6%A4%9C%E5%87%BA%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%92%E7%89%B9%E5%AE%9A%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">検知イベントから検出ソースを特定する方法</a><ul>
+<li><a href="#%E6%A4%9C%E7%9F%A5%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%82%92%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AE%E9%99%A4%E5%A4%96%E3%81%A7%E6%8A%91%E5%88%B6%E5%8F%AF%E8%83%BD%E3%81%8B%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">検知イベントをウイルス対策スキャンの除外で抑制可能か確認する方法</a></li>
+<li><a href="#MDE-%E3%81%AE-EDR-%E6%A9%9F%E8%83%BD%E3%81%AB%E3%82%88%E3%82%8B%E6%A4%9C%E5%87%BA%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">MDE の EDR 機能による検出アラートについて</a></li>
+<li><a href="#MDE-%E3%81%AE%E8%87%AA%E5%8B%95%E8%AA%BF%E6%9F%BB%E6%A9%9F%E8%83%BD%E3%81%AB%E3%82%88%E3%82%8B%E6%A4%9C%E5%87%BA%E3%81%A8%E4%BF%AE%E5%BE%A9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">MDE の自動調査機能による検出と修復について</a></li>
+<li><a href="#SmartScreen-%E3%81%AB%E3%82%88%E3%82%8B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E6%99%82%E3%81%AE%E8%AD%A6%E5%91%8A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">SmartScreen によるファイルダウンロード時の警告について</a></li>
+<li><a href="#SmartScreen-%E3%81%AB%E3%82%88%E3%82%8B%E3%82%A2%E3%83%97%E3%83%AA%E5%AE%9F%E8%A1%8C%E6%99%82%E3%81%AE%E8%AD%A6%E5%91%8A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">SmartScreen によるアプリ実行時の警告について</a></li>
+<li><a href="#%E6%94%BB%E6%92%83%E9%9D%A2%E3%81%AE%E6%B8%9B%E5%B0%91%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%AB%E3%82%88%E3%82%8A%E6%93%8D%E4%BD%9C%E3%81%8C%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF%E3%81%95%E3%82%8C%E3%81%9F%E5%A0%B4%E5%90%88%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">攻撃面の減少ルールにより操作がブロックされた場合のイベントについて</a></li>
+<li><a href="#%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%81%AB%E3%82%88%E3%82%8B%E4%BF%9D%E8%AD%B7%E3%81%95%E3%82%8C%E3%81%9F%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%81%B8%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">フォルダアクセスコントロールによる保護されたフォルダへのアクセスブロックについて</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A8%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%81%AE%E3%83%91%E3%82%B9%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">ファイルとフォルダのパスを使用してウイルス対策の除外を構成する</a><ul>
+<li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A8%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%81%AE%E3%83%91%E3%82%B9%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E9%99%A4%E5%A4%96%E3%81%AE%E6%A6%82%E8%A6%81">ファイルとフォルダのパスを使用するウイルス対策の除外の概要</a></li>
+<li><a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%91%E3%82%B9%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%8F%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">グループポリシーを使用してパスに基づく除外を構成する</a></li>
+<li><a href="#Intune-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%91%E3%82%B9%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%8F%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">Intune を使用してパスに基づく除外を構成する</a></li>
+<li><a href="#PowerShell-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%91%E3%82%B9%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%8F%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">PowerShell を使用してパスに基づく除外を構成する</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">プロセス除外を構成する</a><ul>
+<li><a href="#%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E9%99%A4%E5%A4%96%E3%81%AE%E6%A6%82%E8%A6%81">プロセス除外の概要</a></li>
+<li><a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">グループポリシーを使用してプロセス除外を構成する</a></li>
+<li><a href="#Intune-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">Intune を使用してプロセス除外を構成する</a></li>
+<li><a href="#PowerShell-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">PowerShell を使用してプロセス除外を構成する</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E9%99%A4%E5%A4%96%E8%A8%AD%E5%AE%9A%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">ウイルス対策の除外設定に関するよくある問い合わせ</a><ul>
+<li><a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E9%99%A4%E5%A4%96%E3%81%AE%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9%E3%82%92%E6%95%99%E3%81%88%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84">ウイルス対策除外のベストプラクティスを教えてください</a></li>
+<li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%8C%E8%AA%A4%E3%81%A3%E3%81%A6%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E3%81%A8%E3%81%97%E3%81%A6%E6%A4%9C%E5%87%BA%E3%81%95%E3%82%8C%E3%81%9F%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%87%A6%E6%96%B9%E6%B3%95%E3%82%92%E6%95%99%E3%81%88%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84">ファイルが誤ってマルウェアとして検出された場合の対処方法を教えてください</a></li>
+<li><a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E9%99%A4%E5%A4%96%E8%A8%AD%E5%AE%9A%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%97%E3%81%A6%E3%82%82%E6%A4%9C%E5%87%BA%E3%81%8C%E6%AD%A2%E3%81%BE%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93">ウイルス対策の除外設定を追加しても検出が止まりません</a></li>
+<li><a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E9%99%A4%E5%A4%96%E8%A8%AD%E5%AE%9A%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%97%E3%81%A6%E3%82%82%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%82%84%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%81%8C%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99">ウイルス対策の除外設定を追加してもプログラムやスクリプトの実行がブロックされます</a></li>
+<li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%B1%E3%83%BC%E3%82%BF%E3%82%92%E7%99%BB%E9%8C%B2%E3%81%97%E3%81%9F%E5%BE%8C%E3%82%82%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%A4%9C%E5%87%BA%E3%81%8C%E8%A1%8C%E3%82%8F%E3%82%8C%E3%81%BE%E3%81%99">ファイルインジケータを登録した後もファイルの検出が行われます</a></li>
+<li><a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%97%E3%81%A6%E3%82%82-MDE-%E3%81%AE%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%E6%A4%9C%E5%87%BA%E3%81%8C%E8%A1%8C%E3%82%8F%E3%82%8C%E3%81%BE%E3%81%99">ウイルス対策の除外を追加しても MDE のアラート検出が行われます</a></li>
+<li><a href="#Windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A2%E3%83%97%E3%83%AA%E3%82%84-PowerShell-%E3%81%8B%E3%82%89%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%9B%E3%82%93">Windows セキュリティアプリや PowerShell から除外を追加できません</a></li>
+<li><a href="#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E3%83%91%E3%82%B9%E9%99%A4%E5%A4%96%E3%81%8C%E6%9C%89%E5%8A%B9%E3%81%AB%E5%8B%95%E4%BD%9C%E3%81%97%E3%81%BE%E3%81%9B%E3%82%93">環境変数を使用したパス除外が有効に動作しません</a></li>
+<li><a href="#CPU-%E4%BD%BF%E7%94%A8%E7%8E%87%E3%81%AE%E9%AB%98%E9%A8%B0%E3%82%92%E8%A7%A3%E6%B6%88%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E3%81%A9%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%99%A4%E5%A4%96%E3%81%99%E3%82%8C%E3%81%B0%E3%81%84%E3%81%84%E3%81%A7%E3%81%99%E3%81%8B">CPU 使用率の高騰を解消するためにどのファイルを除外すればいいですか？</a></li>
+</ul>
+</li>
+<li><a href="#MDAV-%E3%81%AB%E3%82%88%E3%82%8A-CPU-%E4%BD%BF%E7%94%A8%E7%8E%87%E3%81%8C%E9%AB%98%E9%A8%B0%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">MDAV により CPU 使用率が高騰している場合のトラブルシューティング</a><ul>
+<li><a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%8C-CPU-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%92%E6%B6%88%E8%B2%BB%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1">ウイルス対策スキャンが CPU リソースを消費する理由</a></li>
+<li><a href="#%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%A7-CPU-%E4%BD%BF%E7%94%A8%E7%8E%87%E3%81%8C%E9%AB%98%E9%A8%B0%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">システムで CPU 使用率が高騰している場合の確認ポイント</a></li>
+</ul>
+</li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li>
+</ul>
+<h2 id="ウイルス対策のカスタム除外設定について"><a href="#ウイルス対策のカスタム除外設定について" class="headerlink" title="ウイルス対策のカスタム除外設定について"></a>ウイルス対策のカスタム除外設定について</h2><p>ウイルス対策のカスタム除外設定とは、MDAV のスケジュールスキャン、手動スキャン(オンデマンドスキャン)、およびリアルタイムスキャンから特定の対象を除外するために使用可能な設定です。</p>
+<p>ウイルス対策の除外設定が適切に構成されている場合、対象のファイルは MDAV によるスキャンおよび検出が行われなくなります。</p>
+<h3 id="ウイルス対策の除外設定とは"><a href="#ウイルス対策の除外設定とは" class="headerlink" title="ウイルス対策の除外設定とは"></a>ウイルス対策の除外設定とは</h3><p>ウイルス対策の除外設定は、MDAV が行うスケジュールスキャン、手動スキャン(オンデマンドスキャン)、およびリアルタイムスキャンの対象からファイルを除外できる機能です。</p>
+<p>ウイルス対策の除外設定は、主に特定のファイルの誤検出/過検出を抑制する目的や、システムのパフォーマンスの改善を行う目的で利用されます。</p>
+<p>ただし、ウイルス対策の除外設定はセキュリティレベルの低下をもたらす恐れがある点に注意が必要です。</p>
+<p>ウイルス対策の除外を設定する場合は、除外設定によるリスクを常に評価し、悪意のないと確信しているファイルのみを対象とする必要があります。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-exclusions-microsoft-defender-antivirus#important-points-about-exclusions">Microsoft Defender ウイルス対策のカスタム除外を構成する | Microsoft Learn</a></p>
+<p>MDAV のカスタム除外設定では、大きく分けて以下の 2 つの種類の除外を構成することが可能です。(IP アドレスの除外を除く)</p>
+<ul>
+<li><strong>ファイルとフォルダのパス、もしくは拡張子に基づく除外</strong></li>
+<li><strong>プロセス除外</strong></li>
+</ul>
+<p>「ファイルとフォルダのパス、もしくは拡張子に基づく除外」では、設定した拡張子を持つファイルや、指定したパスに存在するファイルおよびフォルダをウイルス対策のスキャン対象から除外することができます。</p>
+<p>一方、「プロセス除外」では、特定のプロセスによって開かれたファイルをウイルス対策のスキャン対象から除外することができます。</p>
+<p>ウイルス対策の除外を構成する場合は除外の目的や対象に合わせて適切な設定方法を検討する必要があります。</p>
+<h3 id="ウイルス対策除外の主な目的"><a href="#ウイルス対策除外の主な目的" class="headerlink" title="ウイルス対策除外の主な目的"></a>ウイルス対策除外の主な目的</h3><p>ウイルス対策の除外設定は、主に以下の 3 つの用途で利用できます。</p>
+<ul>
+<li><p><strong>MDAV のリアルタイム保護機能に起因するパフォーマンスの問題の軽減</strong></p>
+</li>
+<li><p><strong>特定のアプリケーションとの互換性に関連する問題の解消</strong></p>
+</li>
+<li><p><strong>MDAV のウイルス対策機能による検出の抑制</strong></p>
+</li>
+</ul>
+<div class="alert is-info"><p class="alert-title">Note</p><p></p>
+<p>理想的には、将来発生する可能性がある問題にプロアクティブに対処する目的でウイルス対策の除外を追加しないことをおすすめします。</p>
+<p>ウイルス対策の除外設定は、特定のパフォーマンスやアプリケーションとの互換性の問題に対してのみ使用します。</p></div>
+<div class="alert is-info"><p class="alert-title">Note</p><p></p>
+<p>後述する通り、ウイルス対策の除外は主に MDAV のスケジュールスキャン、手動スキャン(オンデマンドスキャン)、およびリアルタイムスキャンによりスキャンされるファイルに対して機能します。</p>
+<p>特定の検知イベントの抑制を目的として除外を検討する場合は、事前に抑制対象のファイルが MDAV のウイルス対策機能により検出されていることを確認してください。</p>
+<p>また、除外を設定する場合は、除外対象のファイルの安全性を十分に確認するとともに、実施した除外設定のリスクを定期的に評価することをおすすめします。</p></div>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-exclusions-microsoft-defender-antivirus#important-points-about-exclusions">除外に関する重要なポイント | Microsoft Learn</a></p>
+<h3 id="ウイルス対策の除外設定で抑制可能な検知イベントについて"><a href="#ウイルス対策の除外設定で抑制可能な検知イベントについて" class="headerlink" title="ウイルス対策の除外設定で抑制可能な検知イベントについて"></a>ウイルス対策の除外設定で抑制可能な検知イベントについて</h3><p>ウイルス対策の除外機能は、MDAV のスケジュールスキャン、手動スキャン(オンデマンドスキャン)、およびリアルタイムスキャンの対象から特定のファイルを除外することができる機能です。</p>
+<p>ウイルス対策の除外設定を適用した場合には、上記のウイルス対策スキャンによるファイルの検出を抑止することができます。</p>
+<p>一方で、検出対象がファイル以外の場合や、MDE の EDR 保護機能、または SmartScreen などウイルス対策以外の保護機能による検出の場合は、関連するファイルをウイルス対策の除外対象に追加した場合でも引き続き検出が行われる場合があります。</p>
+<p>そのため、Microsoft のセキュリティ保護機能による検出抑制することを目的として除外を追加する場合には、対象の検知イベントに関連する機能を特定することが非常に重要です。</p>
+<p>現在ユーザの環境で発生している検出イベントがウイルス対策の除外で抑制可能なものであるか否かについては、<a href="#%E6%A4%9C%E7%9F%A5%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%8B%E3%82%89%E6%A4%9C%E5%87%BA%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%92%E7%89%B9%E5%AE%9A%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">検知イベントから検出ソースを特定する方法</a> の項を手順を参照してください。</p>
+<h2 id="検知イベントから検出ソースを特定する方法"><a href="#検知イベントから検出ソースを特定する方法" class="headerlink" title="検知イベントから検出ソースを特定する方法"></a>検知イベントから検出ソースを特定する方法</h2><p>MDAV および MDE を利用する Windows マシンでは、ウイルス対策スキャン以外の様々なセキュリティ保護機能によって操作のブロックやアラート検出が発生する場合があります。</p>
+<p>もし特定の検知イベントを抑制する目的でウイルス対策の除外設定を検討している場合は、事前に対象の検知イベントが MDAV のウイルス対策機能により発生したものであるか確認する必要があります。</p>
+<p>現在発生している検出イベントが MDAV のウイルス対策機能により発生したものであるか確認する方法については <a href="#%E6%A4%9C%E7%9F%A5%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%82%92%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AE%E9%99%A4%E5%A4%96%E3%81%A7%E6%8A%91%E5%88%B6%E5%8F%AF%E8%83%BD%E3%81%8B%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">検知イベントをウイルス対策スキャンの除外で抑制可能か確認する方法</a> の記載を参照してください。</p>
+<div class="alert is-success"><p class="alert-title">ヒント</p><p></p>
+<p>例えば、MDAV/MDE を利用する環境では以下の保護機能による操作のブロックやアラート検出が行われる場合があります。</p>
+<ul>
+<li><strong>MDAV のウイルス対策機能によるファイル検出</strong></li>
+<li><strong>MDAV の動作監視機能などによる不審なアクティビティの検出</strong></li>
+<li><strong>MDE の EDR 機能による検出アラート</strong></li>
+<li><strong>MDE のブロックインジケータや自動調査の修復によるファイル検出</strong></li>
+<li><strong>Microsoft Defender SmartScreen によるファイルダウンロード時の警告/ブロック</strong></li>
+<li><strong>Microsoft Defender SmartScreen によるダウンロードされたアプリの実行ブロック</strong></li>
+<li><strong>攻撃面の減少ルール(ASR ルール) の保護規則による動作ブロック</strong></li>
+<li><strong>フォルダアクセスコントロールによる保護されたフォルダへのアクセスブロック</strong></li>
+</ul>
+<p>※ 組織のポリシー設定によっては、上記以外の保護機能や制限によってプログラムの実行やネットワーク接続、リムーバブルメディアやクラウドストレージなどへのファイル転送がブロックされる可能性があります。</p></div>
+<h3 id="検知イベントをウイルス対策スキャンの除外で抑制可能か確認する方法"><a href="#検知イベントをウイルス対策スキャンの除外で抑制可能か確認する方法" class="headerlink" title="検知イベントをウイルス対策スキャンの除外で抑制可能か確認する方法"></a>検知イベントをウイルス対策スキャンの除外で抑制可能か確認する方法</h3><p>MDAV のウイルス対策機能によりファイルが検出された場合、既定では以下の画像のようなデスクトップ通知が行われます。(画面は Windows 11 のものです)</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240902133330401.png" alt="MDAV のウイルス対策による検知が発生した場合の通知"></p>
+<p>また、MDE を利用している場合、MDAV のウイルス対策機能によりファイルが検出された際に生成されるアラートを参照すると、[アラートの詳細]&gt;[検出ソース] が [ウイルス対策] として表示されることを確認できます。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240902162229526.png" alt="MDE アラートから検出ソースを確認する"></p>
+<p>このような検知イベントを MDAV のウイルス対策の除外で抑制可能かどうか確認したい場合、以下の手順で MDAV のイベントログの情報を調査します。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/troubleshoot-microsoft-defender-antivirus">Microsoft Defender ウイルス対策イベントの ID とエラー コード | Microsoft Learn</a></p>
+<ol>
+<li><p>イベントビューアを使用して [アプリケーションとサービスログ]&gt;[Microsoft]&gt;[Windows]&gt;[Windows Defender]&gt;[Operational] を開き、<code>イベント ID 1116：MALWAREPROTECTION_STATE_MALWARE_DETECTED</code> のログを検索します。</p>
+</li>
+<li><p>ID 1116 の検知イベントを特定したら、[パス] に <code>file:_</code> から始まる検出対象のファイルパスが記載されていることを確認します。<br>※ 検知が発生した時刻に ID 1116 の検知イベントが記録されていない場合、検出または操作のブロックは MDAV のウイルス対策以外の保護機能により行われている可能性があります。</p>
+</li>
+<li><p>検知が発生した時刻に記録された ID 1116 の検知イベントとファイルパスを確認したら、[検出元] の情報が [リアルタイム保護] や [システム]、または [ユーザー] などと表示されていることを確認します。<br>※ 対象の検知イベントの [検出元] が [Microsoft Defender for Endpoint] である場合には MDAV のウイルス対策の除外設定を追加してもファイルの検出を抑制することはできない場合があります。</p>
+</li>
+</ol>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240902133641339.png" alt="ウイルス対策機能による検知時のイベントログ"></p>
+<ol start="4">
+<li>イベントログから対象の検知が MDAV のウイルス対策機能によるものであることを確認したら、<a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A8%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%81%AE%E3%83%91%E3%82%B9%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">ファイルとフォルダのパスを使用して除外を構成する</a> または <a href="#%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">プロセス除外を構成する</a>、<a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%8B%A1%E5%BC%B5%E5%AD%90%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">ファイルの拡張子を使用して除外を構成する</a> のいずれか適切な手順にて、対象のファイルを MDAV の検出対象から除外することができます。</li>
+</ol>
+<div class="alert is-important"><p class="alert-title">重要</p><p></p>
+<p>ウイルス対策の除外を構成する場合、除外設定に関連するリスクを常に評価し、悪意のないと確信しているファイルのみを除外する必要があります。</p></div>
+<h3 id="MDE-の-EDR-機能による検出アラートについて"><a href="#MDE-の-EDR-機能による検出アラートについて" class="headerlink" title="MDE の EDR 機能による検出アラートについて"></a>MDE の EDR 機能による検出アラートについて</h3><p>ユーザが MDE を利用している場合、<a target="_blank" rel="noopener" href="https://security.microsoft.com/">Microsoft Defender ポータル</a> の [インシデントとアラート]&gt;[アラート] に、端末で発生した検知アラートが一覧表示されます。</p>
+<p>この時、[検出ソース] に [EDR] と表示されているアラートは通常、MDE の EDR 保護機能により検出されたアラートに該当します。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240902171016489.png" alt="Microsoft Defender ポータルでアラートの検出ソースを確認する"></p>
+<p>MDE の EDR 機能による検出アラートは、本記事で紹介するウイルス対策のカスタム除外設定で抑制することはできません。</p>
+<p>検出ソースが [EDR] であるアラート検出を抑制したい場合には、Microsoft Defender ポータルからアラート調整ルール(アラート抑制ルール) を作成します。</p>
+<div class="alert is-success"><p class="alert-title">ヒント</p><p></p>
+<p>組織内の既知のツールやプロセスなど、無害であることを確認している特定のアラートをポータルに表示させないようにする必要がある場合には抑制ルールを作成できます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-suppression-rules">Microsoft Defender for Endpoint 抑制ルールを管理する | Microsoft Learn</a></p></div>
+<h3 id="MDE-の自動調査機能による検出と修復について"><a href="#MDE-の自動調査機能による検出と修復について" class="headerlink" title="MDE の自動調査機能による検出と修復について"></a>MDE の自動調査機能による検出と修復について</h3><p>ユーザの端末が MDE にオンボードされている場合、特定のファイルをウイルス対策の除外対象としている場合でも、自動調査と修復機能によって除外対象のファイルの検出・隔離が行われる場合があります。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/automated-investigations">自動調査を使用して脅威を調査・修復する | Microsoft Learn</a></p>
+<p>MDE を利用する環境で、ウイルス対策の除外にファイルを追加しても [検出元] が [Microsoft Defender for Endpoint] となる検出が継続する場合には、誤検出であることを確認済みの既存のアラート/インシデントをすべて解決済みに変更した上で、許可したいファイルのファイルハッシュをファイルインジケータに登録してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-indicators">インジケーターの作成 | Microsoft Learn</a></p>
+<h3 id="SmartScreen-によるファイルダウンロード時の警告について"><a href="#SmartScreen-によるファイルダウンロード時の警告について" class="headerlink" title="SmartScreen によるファイルダウンロード時の警告について"></a>SmartScreen によるファイルダウンロード時の警告について</h3><p>ユーザが Microsoft Edge を利用してファイルのダウンロードを行う場合、Microsoft Defender SmartScreen による警告やダウンロードのブロックが行われる場合があります。</p>
+<p>Microsoft Defender SmartScreen はウイルス対策機能の除外設定の影響を受けないため、ウイルス対策の除外設定でファイルダウンロード時の警告を抑制することはできません。</p>
+<div class="alert is-info"><p class="alert-title">Note</p><p></p>
+<p>Microsoft Defender SmartScreen は、ダウンロード トラフィック、ダウンロード履歴、過去のウイルス対策の結果、URL 評判などの多くの基準に基づいて、ダウンロードされたアプリまたはアプリ インストーラーが悪意のある可能性があるかどうかを判断します。</p>
+<p>すべての不明なプログラムが悪意があるとは限りません。不明な警告は、特に警告が予期しないものである場合に、それを必要とするユーザーにコンテキストとガイダンスを提供することを目的としています。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/deployedge/microsoft-edge-security-smartscreen#file-analysis">Microsoft Defender SmartScreen の Microsoft Edge サポート | Microsoft Learn</a></p></div>
+<p>以下は、どちらも SmartScreen によってファイルのダウンロードがブロックされた場合の通知の例です。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240904151834003.png" alt="SmartScreen によるダウンロードブロック 1"></p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240904151805737.png" alt="SmartScreen によるダウンロードブロック 2"></p>
+<p>また、ダウンロードするファイルが既知の安全な、もしくは悪意のあるファイルではない場合、不明なファイルとしてダウンロード時に以下の警告が表示されます。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240904151955351.png" alt="SmartScreen による不明なプログラムに対する警告"></p>
+<p>不明なファイルの警告はユーザへの注意喚起を目的としており、安全なファイルをダウンロードする場合にも通知される場合があります。</p>
+<h3 id="SmartScreen-によるアプリ実行時の警告について"><a href="#SmartScreen-によるアプリ実行時の警告について" class="headerlink" title="SmartScreen によるアプリ実行時の警告について"></a>SmartScreen によるアプリ実行時の警告について</h3><p>ユーザーの端末で Microsoft Defender SmartScreen による [アプリとファイルの確認] の設定が有効化されている場合、インターネットからダウンロードしたプログラムを実行する際に以下の警告が表示される場合があります。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240906164739920.png" alt="SmartScreen によるアプリ実行時の警告画面"></p>
+<p>また、[アプリとファイルの確認] の設定を有効化していない場合でも、ファイルの実行時に以下の警告が表示される場合があります。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240906164819417.png" alt="セキュリティの警告画面"></p>
+<p>これらの警告は MDAV のウイルス対策機能による検出ではないため、ブロック対象のファイルやフォルダを MDAV のウイルス対策除外の対象に登録している場合でも警告が行われます。</p>
+<p>インターネットから取得したプログラムが安全なファイルであることを確認している場合には、警告を無視してプログラムを実行するか、ファイルを実行する前に対象のファイルを右クリックし、[プロパティ] から以下のチェックボックスにチェックを入れてファイルを許可してください。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240906170027594.png" alt="インターネットからダウンロードしたファイルの許可"></p>
+<h3 id="攻撃面の減少ルールにより操作がブロックされた場合のイベントについて"><a href="#攻撃面の減少ルールにより操作がブロックされた場合のイベントについて" class="headerlink" title="攻撃面の減少ルールにより操作がブロックされた場合のイベントについて"></a>攻撃面の減少ルールにより操作がブロックされた場合のイベントについて</h3><p>Windows 端末では、攻撃面の減少ルール(ASR ルール) による端末の保護を有効化することができます。</p>
+<p>ASR ルールは、攻撃者が組織のデバイスやネットワークを侵害する可能性のある攻撃対象を減らすための保護機能です。</p>
+<p>ASR ルールを適切に構成すると、悪意のある攻撃者がデバイスやネットワークを侵害するために悪用する方法(攻撃面) を少なくすることができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/attack-surface-reduction#why-attack-surface-reduction-rules-are-important">攻撃面の縮小ルールの概要 | Microsoft Learn</a></p>
+<div class="alert is-info"><p class="alert-title">Note</p><p></p>
+<p>ASR ルールによりブロックされる操作は、悪意のある攻撃者に悪用される場合があり、一般にリスクがあるとみなされる操作です。</p>
+<p>しかし、このような操作は攻撃者だけでなく正当なアプリケーションも利用する場合があります。</p>
+<p>ASR ルールを適用する場合は、監査モードや除外設定を利用し、生産性を低下させることなくルールを展開できるように評価を行います。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/attack-surface-reduction#audit-mode-for-evaluation">マルウェア感染を防ぐために攻撃面の減少ルールを使用する | Microsoft Learn</a></p></div>
+<p>ASR ルールによるブロックが発生した場合、既定では以下のようなポップアップ通知が行われます。(利用中の OS バージョンによって通知画面の表示が異なる場合があります)</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240902120540538.png" alt="ASR ルールによって Office マクロのブロックが発生した場合の通知"></p>
+<p>また、イベントビューアを使用して [アプリケーションとサービスログ]&gt;[Microsoft]&gt;[Windows]&gt;[Windows Defender]&gt;[Operational] のイベントログを開き、ID 1121 のイベントを参照することで ASR ルールによるブロックされた操作の詳細を確認できます。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240902121306433.png" alt="ASR ルールによるブロック時のイベントログ"></p>
+<p>ASR ルールによる操作のブロックは、MDAV のウイルス対策機能とは異なる機能によるものですが、多くの ASR ルールは MDAV のウイルス対策除外に設定したフォルダやファイルを ASR ルールの除外対象としても利用します。</p>
+<p><strong>しかし、一部の ASR ルールによる検出はウイルス対策除外設定の影響を受けないため、別途 ASR ルールの除外設定を構成する必要があります。</strong></p>
+<p>ウイルス対策の除外設定が <strong>適用されない</strong> ASRルールについては、以下の公開情報の一覧を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/attack-surface-reduction-rules-reference#microsoft-defender-antivirus-exclusions-and-asr-rules">Microsoft Defender ウイルス対策の除外と ASR ルール | Microsoft Learn</a></p>
+<p>なお、ASR ルールの除外を設定する方法については以下を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/enable-attack-surface-reduction#exclude-files-and-folders-from-attack-surface-reduction-rules">攻撃面の縮小ルールからファイルとフォルダーを除外する | Microsoft Learn</a></p>
+<div class="alert is-success"><p class="alert-title">ヒント</p><p></p>
+<p>除外設定によって特定の ASR ルールによる検出を抑制したい場合は通常、ASR ルールの検出イベント内の [パス:] に表示されているファイルを除外設定の対象に含める必要があります。</p></div>
+<h3 id="フォルダアクセスコントロールによる保護されたフォルダへのアクセスブロックについて"><a href="#フォルダアクセスコントロールによる保護されたフォルダへのアクセスブロックについて" class="headerlink" title="フォルダアクセスコントロールによる保護されたフォルダへのアクセスブロックについて"></a>フォルダアクセスコントロールによる保護されたフォルダへのアクセスブロックについて</h3><p>MDAV のリアルタイム保護機能を有効化している Windows 端末では、フォルダアクセスコントロール機能により信頼されていないプログラムから保護されたフォルダ内のデータを保護することができます。</p>
+<p>フォルダアクセスコントロール機能によって保護されたフォルダ内のデータ変更がブロックされた場合、既定では以下のポップアップ通知が行われます。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240925161645398.png" alt="image-20240925161645398"></p>
+<p>また、イベントビューアを使用して [アプリケーションとサービスログ]&gt;[Microsoft]&gt;[Windows]&gt;[Windows Defender]&gt;[Operational] のイベントログを開き、ID 1123 のイベントを参照することでもフォルダーアクセスコントロール機能によるブロックが発生したことを確認できます。</p>
+<p>フォルダアクセスコントロールによる変更のブロックを抑制したい場合、保護されたフォルダにアクセスしているアプリケーションを「信頼されたアプリの一覧」に追加する必要があります。</p>
+<div class="alert is-success"><p class="alert-title">ヒント</p><p></p>
+<p>保護されたフォルダにアクセスしているアプリケーションの実行ファイルがウイルス対策の除外(プロセス除外など)の対象に指定されている場合、そのアプリケーションは信頼されたアプリケーションとみなされ、保護されたフォルダ内のデータへのアクセスが許可される場合があります。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/enable-controlled-folders">フォルダアクセスコントロールを有効にする| Microsoft Learn</a></p></div>
+<h2 id="ファイルとフォルダのパスを使用してウイルス対策の除外を構成する"><a href="#ファイルとフォルダのパスを使用してウイルス対策の除外を構成する" class="headerlink" title="ファイルとフォルダのパスを使用してウイルス対策の除外を構成する"></a>ファイルとフォルダのパスを使用してウイルス対策の除外を構成する</h2><p>この項では、MDAV のウイルス対策除外の詳細と、各管理ツールを用いた設定方法を紹介します。</p>
+<h3 id="ファイルとフォルダのパスを使用するウイルス対策の除外の概要"><a href="#ファイルとフォルダのパスを使用するウイルス対策の除外の概要" class="headerlink" title="ファイルとフォルダのパスを使用するウイルス対策の除外の概要"></a>ファイルとフォルダのパスを使用するウイルス対策の除外の概要</h3><p>ファイルとフォルダのパスを使用した除外を構成すると、特定のフォルダやファイルをウイルス対策のスキャン対象から除外することができます。</p>
+<div class="alert is-important"><p class="alert-title">重要</p><p></p>
+<p>除外を設定する場合は、除外対象のファイルの安全性を十分に確認するとともに、実施した除外設定のリスクを定期的に評価することをおすすめします。</p></div>
+<p>特定のファイルのみをスキャン除外の対象としたい場合、以下の例のように対象ファイルの完全パスを除外対象に追加します。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">C:\TEST\eicar.txt</span><br></pre></td></tr></table></figure>
+
+<p>特定のフォルダ内のファイルをすべて除外対象に含める場合は、対象のフォルダの完全パスを指定します。</p>
+<p>フォルダパスを除外対象に指定した場合、サブフォルダ内のファイルを含む、そのフォルダ内のすべてのファイルが除外対象に含まれます。(以下のフォルダを除外した場合、<code>C:\TEST\eicar.txt</code> や <code>C:\TEST\SUB\eicar.txt</code>、<code>C:\TEST\SUB\SUB2\eicar.txt</code> などのすべてのファイルが除外対象に含まれます。)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># フォルダパスを除外対象に指定する(サブフォルダ内のファイルを含むすべてのファイルが除外対象に含まれる)</span></span><br><span class="line">C:\TEST</span><br></pre></td></tr></table></figure>
+
+<p>なお、上記の例では除外対象の完全パスを指定する際にドライブレター <code>C:\</code> を使用しています。</p>
+<p>しかし、もし除外したいファイルがネットワークフォルダ内に存在している場合には、ドライブレターではなく、<code>\\</code> から始まる UNC パスを除外対象に含める必要がある点に注意が必要です。</p>
+<p>例えば、システムにマップされたネットワークフォルダに <code>E:\</code> などのドライブレターを割り当てている場合でも、<code>E:\Folder</code> のようなパスによる除外設定を行うことはできません。</p>
+<p>このようなネットワークフォルダを除外対象とする場合には <code>\\&lt;ネットワークフォルダのアドレス&gt;\Folder</code> のように実際のネットワークパスを除外対象に指定する必要があります。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-extension-file-exclusions-microsoft-defender-antivirus">拡張機能、名前、または場所に基づいて除外を構成して検証する | Microsoft Learn</a></p>
+<p>また、ファイルとフォルダのパスを使用して除外を構成する場合、除外対象のパスの指定にはワイルドカード(<code>*</code> または <code>?</code>) を使用することができます。</p>
+<p>以下に、ウイルス対策の除外における一般的なワイルドカードの使用例を紹介します。</p>
+<p>この例では、<code>C:\Users</code> フォルダ直下のユーザアカウント名のフォルダ階層をワイルドカードに置換することで、1 つの除外エントリで複数のユーザフォルダ内のファイルを除外対象に指定しています。(<code>C:\Users\user01\Documents\eicar.txt</code> や <code>C:\Users\user02\Documents\eicar.txt</code> などのファイルが除外対象に含まれます。)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ユーザアカウント名をワイルドカードに置き換えてパス除外を指定する</span></span><br><span class="line">C:\Users\*\Documents\eicar.txt</span><br></pre></td></tr></table></figure>
+
+<p>また、以下の例のようにフォルダではなく、ファイル名部分をワイルドカードに置き換えることも可能です。</p>
+<p>このような指定を行った場合、<code>C:\TEST</code> フォルダ直下に配置されている、拡張子が <code>.exe</code> のファイルのみが除外対象に含まれます。(サブフォルダ内のファイルは除外対象に含まれないため、<code>C:\TEST\SUB\program.exe</code> などのファイルは除外されません。)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ファイル名部分のみをワイルドカードに置き換えてパス除外を指定する</span></span><br><span class="line">C:\TEST\*.exe</span><br></pre></td></tr></table></figure>
+
+<p>さらに、ファイル名をワイルドカードに置き換える場合、以下のようにファイル名の一部分のみを置換することも可能です。</p>
+<p>例えば、<code>C:\TEST\program0*.exe</code> を除外エントリに追加した場合、<code>C:\TEST\program001.exe</code> や <code>C:\TEST\program010.exe</code> などのファイルが除外対象に含まれます。一方で、<code>C:\TEST\program100.exe</code> などのファイルは除外されません。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ファイル名の連番部分のみをワイルドカードに置き換えてパス除外を指定する</span></span><br><span class="line">C:\TEST\program0*.exe</span><br></pre></td></tr></table></figure>
+
+<p>ファイルとフォルダのパスを使用する除外設定でワイルドカードを使用する場合の利用例や制限事項については以下の公開情報を参照します。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-extension-file-exclusions-microsoft-defender-antivirus#use-wildcards-in-the-file-name-and-folder-path-or-extension-exclusion-lists">ファイル名とフォルダパスまたは拡張機能の除外リストでワイルドカードを使用する | Microsoft Learn</a></p>
+<div class="alert is-warning"><p class="alert-title">警告</p><p></p>
+<p>ウイルス対策の除外設定にワイルドカードを使用する場合は、ワイルドカードを使用しない場合と比較してより広範なファイルパスが除外対象に含まれる点に注意する必要があります。</p>
+<p>ウイルス対策の除外設定を行う場合には、除外に伴うリスクを常に評価し、除外対象のフォルダやファイルのアクセス権などが適切に管理されていることを確認することをおすすめします。</p></div>
+<h3 id="グループポリシーを使用してパスに基づく除外を構成する"><a href="#グループポリシーを使用してパスに基づく除外を構成する" class="headerlink" title="グループポリシーを使用してパスに基づく除外を構成する"></a>グループポリシーを使用してパスに基づく除外を構成する</h3><p>グループポリシーを使用してパスに基づく除外を構成する場合、コンピュータの構成から、**[管理用テンプレート]&gt;[Windows コンポーネント]&gt;[Microsoft Defender ウイルス対策]&gt;[除外] 内の [パスの除外]** を使用します。</p>
+<p>除外を構成する場合は、[値の名前] 列に除外対象に指定するパスを、[値] 列に 0 を入力します。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240930163501554.png" alt="グループポリシーでパスに基づく除外を構成する"></p>
+<p>なお、グループポリシーでパスに基づく除外を構成する場合、空のエントリを登録しようとすると以下のようなメッセージが表示され、ポリシーの有効化に失敗します。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240930163744806.png" alt="空のエントリを登録しようとした場合"></p>
+<p>もし、ポリシーに登録している除外エントリをすべて削除したい場合は、[パスの除外] ポリシーの設定を [無効] もしくは [未構成] に変更してください。</p>
+<h3 id="Intune-を使用してパスに基づく除外を構成する"><a href="#Intune-を使用してパスに基づく除外を構成する" class="headerlink" title="Intune を使用してパスに基づく除外を構成する"></a>Intune を使用してパスに基づく除外を構成する</h3><p>Intune を使用してウイルス対策のパスに基づく除外を構成する場合、**[エンドポイントセキュリティ]&gt;[ウイルス対策] にて [+ポリシーの作成] をクリックし、Windows プラットフォーム用の [Microsoft Defender ウイルス対策の除外] ポリシーを作成**します。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240930165150602.png" alt="Microsoft Defender ウイルス対策の除外 ポリシーを作成する"></p>
+<p>作成したポリシーの [除外されたパス] に、除外対象のパスのエントリを追加します。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240930165502811.png" alt="Intune で除外されたパスのエントリを追加する"></p>
+<p>作成したポリシーを Intune からデバイスもしくはユーザに割り当てることで除外設定を適用することができます。</p>
+<h3 id="PowerShell-を使用してパスに基づく除外を構成する"><a href="#PowerShell-を使用してパスに基づく除外を構成する" class="headerlink" title="PowerShell を使用してパスに基づく除外を構成する"></a>PowerShell を使用してパスに基づく除外を構成する</h3><p>ポリシーではなく端末側で除外設定の追加を行う場合、PowerShell の <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/module/defender/set-mppreference?view=windowsserver2022-ps">Set-MpPreference</a> コマンドレットか <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/module/defender/add-mppreference?view=windowsserver2022-ps">Add-MpPreference</a> コマンドレットを使用することができます。</p>
+<p>Set-MpPreference コマンドレットを使用してファイルやフォルダのパスを除外に追加するには、以下のコマンドレットを使用します。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set-MpPreference コマンドレットで複数のファイルとフォルダのパスを除外対象に指定する</span></span><br><span class="line"><span class="built_in">Set-MpPreference</span> <span class="literal">-ExclusionPath</span> <span class="selector-tag">@</span>(<span class="string">&quot;C:\TEST\eicar.txt&quot;</span>, <span class="string">&quot;C:\TEST\SUB1&quot;</span>,<span class="string">&quot;C:\Users\*\Documents&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Set-MpPreference コマンドレットを使用して登録した除外リストは、再度 Set-MpPreference コマンドレットによる除外を登録すると、すでに Set-MpPreference コマンドレットにより登録されていた除外リストが上書きされます。(ただし、グループポリシーなど、異なる管理ツールで追加している除外エントリは Set-MpPreference コマンドレットを使用しても上書きされません。)</p>
+<p>そのため、PowerShell を利用して除外を構成している環境にて、既存の除外リストに新しい除外を追加する場合は Add-MpPreference コマンドレットを使用します。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set-MpPreference で作成した除外リストに Add-MpPreference でエントリの追加を行う</span></span><br><span class="line"><span class="built_in">Set-MpPreference</span> <span class="literal">-ExclusionPath</span> <span class="selector-tag">@</span>(<span class="string">&quot;C:\TEST\eicar.txt&quot;</span>)</span><br><span class="line"><span class="built_in">Add-MpPreference</span> <span class="literal">-ExclusionPath</span> <span class="selector-tag">@</span>(<span class="string">&quot;C:\TEST\ADD\eicar.txt&quot;</span>)</span><br><span class="line"><span class="built_in">Add-MpPreference</span> <span class="literal">-ExclusionPath</span> <span class="selector-tag">@</span>(<span class="string">&quot;C:\TEST\ADD2\eicar.txt&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<div class="alert is-info"><p class="alert-title">Note</p><p></p>
+<p>ウイルス対策の除外リストの管理を複数の管理ツール(グループポリシー、Intune、PowerShell など) を使用して実施することは、運用上の観点からおすすめいたしておりません。</p></div>
+<p>なお、Set-MpPreference や Add-MpPreference で追加した除外エントリは Remove-MpPreference コマンドレットを使用することで削除できます。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PowerShell で追加した除外エントリを Remove-MpPreference で削除する</span></span><br><span class="line"><span class="built_in">Remove-MpPreference</span> <span class="literal">-ExclusionPath</span> <span class="selector-tag">@</span>(<span class="string">&quot;C:\TEST\eicar.txt&quot;</span>, <span class="string">&quot;C:\TEST\SUB1&quot;</span>,<span class="string">&quot;C:\Users\*\Documents&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="プロセス除外を構成する"><a href="#プロセス除外を構成する" class="headerlink" title="プロセス除外を構成する"></a>プロセス除外を構成する</h2><h3 id="プロセス除外の概要"><a href="#プロセス除外の概要" class="headerlink" title="プロセス除外の概要"></a>プロセス除外の概要</h3><p>MDAV における「プロセス除外」とは、<strong>「特定のプロセスが開いたファイル」をウイルス対策のスキャン対象から除外する機能</strong>です。</p>
+<p>例えば、<code>C:\sample\test.exe</code> というファイルをプロセス除外の対象に指定すると、「<code>C:\sample\test.exe</code> のプロセスが開いたファイル」がウイルス対策のスキャンから除外されます。</p>
+<p>プロセス除外の対象とする実行ファイルを指定する際には、対象ファイルの完全パスだけでなく、実行ファイルのファイル名のみを指定することも可能です。</p>
+<p>例えば、<code>test.exe</code> を除外対象に指定した場合、<code>C:\sample\test.exe</code> や <code>C:\internal\files\test.exe</code> のプロセスによって開かれたファイルが除外対象となります。</p>
+<p>プロセス除外設定に関する詳細は以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-process-opened-file-exclusions-microsoft-defender-antivirus#examples-of-process-exclusions">特定のプロセスによって開かれたファイルの除外を構成する| Microsoft Learn</a></p>
+<div class="alert is-warning"><p class="alert-title">警告</p><p></p>
+<p>プロセス除外を構成する場合は、特定のプロセスを除外する場合のリスクについて十分に評価する必要があります。</p>
+<p>一般的に、powershell.exe や cmd.exe、python.exe など、任意のユーザがファイルの作成や実行を汎用的に行うことが可能なプロセスの除外は、より大きなセキュリティリスクとなる可能性があるので注意が必要です。</p></div>
+<h3 id="グループポリシーを使用してプロセス除外を構成する"><a href="#グループポリシーを使用してプロセス除外を構成する" class="headerlink" title="グループポリシーを使用してプロセス除外を構成する"></a>グループポリシーを使用してプロセス除外を構成する</h3><p>グループポリシーを使用してプロセス除外を構成する場合、コンピュータの構成から、**[管理用テンプレート]&gt;[Windows コンポーネント]&gt;[Microsoft Defender ウイルス対策]&gt;[除外] 内の [プロセスの除外]** を使用します。</p>
+<p>除外を構成する場合は、[値の名前] 列に除外対象に指定する実行ファイルのパスを、[値] 列に 0 を入力します。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20241003163331782.png" alt="グループポリシーでプロセス除外を構成する"></p>
+<h3 id="Intune-を使用してプロセス除外を構成する"><a href="#Intune-を使用してプロセス除外を構成する" class="headerlink" title="Intune を使用してプロセス除外を構成する"></a>Intune を使用してプロセス除外を構成する</h3><p>Intune を使用してプロセス除外を構成する場合、**[エンドポイントセキュリティ]&gt;[ウイルス対策] にて作成した、Windows プラットフォーム用の [Microsoft Defender ウイルス対策の除外] ポリシーの [除外されたプロセス]** に除外対象のエントリを登録します。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20240930172138632.png" alt="Intune でプロセス除外を構成する"></p>
+<h3 id="PowerShell-を使用してプロセス除外を構成する"><a href="#PowerShell-を使用してプロセス除外を構成する" class="headerlink" title="PowerShell を使用してプロセス除外を構成する"></a>PowerShell を使用してプロセス除外を構成する</h3><p><a href="#PowerShell-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%83%91%E3%82%B9%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%8F%E9%99%A4%E5%A4%96%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">PowerShell を使用してパスに基づく除外を構成する</a> と同じく、Set-MpPreference および Add-MpPreference コマンドレットを使用することでプロセス除外を設定することができます。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set-MpPreference で作成した除外リストに Add-MpPreference でエントリの追加を行う</span></span><br><span class="line"><span class="built_in">Set-MpPreference</span> <span class="literal">-ExclusionProcess</span> <span class="selector-tag">@</span>(<span class="string">&quot;C:\TEST\program.exe&quot;</span>)</span><br><span class="line"><span class="built_in">Add-MpPreference</span> <span class="literal">-ExclusionProcess</span> <span class="selector-tag">@</span>(<span class="string">&quot;C:\TEST2\program.exe&quot;</span>)</span><br><span class="line"><span class="built_in">Add-MpPreference</span> <span class="literal">-ExclusionProcess</span> <span class="selector-tag">@</span>(<span class="string">&quot;C:\TEST3\program.exe&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="ウイルス対策の除外設定に関するよくある問い合わせ"><a href="#ウイルス対策の除外設定に関するよくある問い合わせ" class="headerlink" title="ウイルス対策の除外設定に関するよくある問い合わせ"></a>ウイルス対策の除外設定に関するよくある問い合わせ</h2><p>本項では、MDAV のウイルス対策除外に関するよくあるお問い合わせをご紹介します。</p>
+<h3 id="ウイルス対策除外のベストプラクティスを教えてください"><a href="#ウイルス対策除外のベストプラクティスを教えてください" class="headerlink" title="ウイルス対策除外のベストプラクティスを教えてください"></a>ウイルス対策除外のベストプラクティスを教えてください</h3><p>一般に、MDAV をご利用いただく際にユーザ側で除外を追加する必要はないため、MDAV の観点からベストプラクティスとして除外リストへの追加を推奨している具体的なファイルやプロセスはありません。</p>
+<p>ただし、パフォーマンスやアプリケーションの互換性に関する特定の問題を回避する目的などでウイルス対策の除外を構成する場合は、ウイルス対策の除外によって端末の保護レベルが低下するリスクを常に評価し、無害であることを確認済みのファイルのみが除外対象に含まれるように管理いただくことをおすすめしています。</p>
+<p>その他、弊社からご案内しているウイルス対策除外を追加する場合に考慮いただきたい点については以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-exclusions-microsoft-defender-antivirus#important-points-about-exclusions">除外に関する重要なポイント | Microsoft Learn</a></p>
+<p>また、弊社では一般的に攻撃に悪用されることが多いフォルダや拡張子、プロセスについては<strong>「除外対象に追加しない」</strong>ことを推奨しています。<strong>「除外に追加しない」ことを推奨しているフォルダ、拡張子およびプロセス</strong>については以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/common-exclusion-mistakes-microsoft-defender-antivirus">除外を定義する際に避ける必要のある一般的な間違い</a></p>
+<p>なお、以上の通り MDAV 観点で追加を推奨している除外設定はありませんが、ユーザが利用するアプリケーションによっては、アプリケーション側の要件として、ウイルス対策の除外が推奨されている場合があります。</p>
+<p>そのため、もし特定のアプリケーションを利用する場合に推奨される除外設定を確認したい場合は、ご利用中のアプリケーションの要件や推奨事項に関してアプリケーションベンダが公開している情報をご確認ください。</p>
+<h3 id="ファイルが誤ってマルウェアとして検出された場合の対処方法を教えてください"><a href="#ファイルが誤ってマルウェアとして検出された場合の対処方法を教えてください" class="headerlink" title="ファイルが誤ってマルウェアとして検出された場合の対処方法を教えてください"></a>ファイルが誤ってマルウェアとして検出された場合の対処方法を教えてください</h3><p>検出されたファイルがマルウェアであるか否か不明な場合や、誤って検出されている可能性がある場合は、以下の公開情報に記載の手順で Microsoft Defender ポータルや Microsoft セキュリティ インテリジェンス申請サイトから検体ファイルを弊社にアップロードし、解析を要求することができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/defender-endpoint-false-positives-negatives#part-4-submit-a-file-for-analysis">分析用にファイルを提出する | Microsoft Learn</a></p>
+<h3 id="ウイルス対策の除外設定を追加しても検出が止まりません"><a href="#ウイルス対策の除外設定を追加しても検出が止まりません" class="headerlink" title="ウイルス対策の除外設定を追加しても検出が止まりません"></a>ウイルス対策の除外設定を追加しても検出が止まりません</h3><p>ウイルス対策の除外設定を追加したにも関わらず MDAV による検出が継続する場合、まずはユーザの環境で発生している検出がウイルス対策の除外設定で抑制可能なイベントであるか否かを確認します。</p>
+<p>詳細については、<a href="#%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E9%99%A4%E5%A4%96%E8%A8%AD%E5%AE%9A%E3%81%A7%E6%8A%91%E5%88%B6%E5%8F%AF%E8%83%BD%E3%81%AA%E6%A4%9C%E7%9F%A5%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">ウイルス対策の除外設定で抑制可能な検知イベントについて</a> の記載を参照してください。</p>
+<p>対象の検知イベントがウイルス対策の除外設定で抑制可能なものであるものの、除外を追加しても MDAV によるファイルの検出が継続する場合、ユーザの除外設定が適切に端末に反映されていることを確認してください。</p>
+<p>端末に適用されている除外リストの一覧は、管理者権限で起動した PowerShell で以下のコマンドを実行することで確認できます。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ファイルとフォルダのパスに基づく除外リストを確認する</span></span><br><span class="line">(<span class="built_in">Get-MpPreference</span>).ExclusionPath</span><br><span class="line"></span><br><span class="line"><span class="comment"># プロセス除外リストを確認する</span></span><br><span class="line">(<span class="built_in">Get-MpPreference</span>).ExclusionProcess</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拡張子除外リストを確認する</span></span><br><span class="line">(<span class="built_in">Get-MpPreference</span>).ExclusionExtension</span><br></pre></td></tr></table></figure>
+
+<p>追加した除外設定が上記のコマンドの実行結果に含まれない場合、除外エントリを追加したポリシーが正常に端末に同期されていることを確認してください。</p>
+<p>Windows セキュリティアプリや PowerShell コマンドレットを使用して追加した除外エントリがリストに追加されていない場合は、<a href="#Windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A2%E3%83%97%E3%83%AA%E3%82%84-PowerShell-%E3%81%8B%E3%82%89%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%9B%E3%82%93">Windows セキュリティアプリや PowerShell から除外を追加できません</a> の内容を参照してください。</p>
+<p>もし環境変数を利用した除外エントリを登録している場合は、<a href="#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E3%83%91%E3%82%B9%E9%99%A4%E5%A4%96%E5%BE%8C%E3%82%82%E6%A4%9C%E5%87%BA%E3%81%8C%E6%AD%A2%E3%81%BE%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93">環境変数を使用したパス除外後も検出が止まりません</a> の内容を参照してください。</p>
+<p>また、もしユーザの環境で MDE を利用しており、ウイルス対策の除外に追加したファイルが検出ソース [Microsoft Defender for Endpoint] のイベントにより検出され続ける場合、<a href="#MDE-%E3%81%AE%E8%87%AA%E5%8B%95%E8%AA%BF%E6%9F%BB%E6%A9%9F%E8%83%BD%E3%81%AB%E3%82%88%E3%82%8B%E6%A4%9C%E5%87%BA%E3%81%A8%E4%BF%AE%E5%BE%A9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">MDE の自動調査機能による検出と修復について</a> の項に記載の通り、誤検出であることを確認済みの既存のアラート/インシデントをすべて解決済みに変更した後、許可したいファイルのファイルハッシュをファイルインジケータに登録することで問題が解決するか確認してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-indicators">インジケーターの作成 | Microsoft Learn</a></p>
+<div class="alert is-important"><p class="alert-title">重要</p><p></p>
+<p>アラートのステータスを [解決済み] に変更する場合は、事前に組織のセキュリティ管理者が対象の検出アラートのステータスを [解決済み] に変更できるか評価を行います。</p></div>
+<h3 id="ウイルス対策の除外設定を追加してもプログラムやスクリプトの実行がブロックされます"><a href="#ウイルス対策の除外設定を追加してもプログラムやスクリプトの実行がブロックされます" class="headerlink" title="ウイルス対策の除外設定を追加してもプログラムやスクリプトの実行がブロックされます"></a>ウイルス対策の除外設定を追加してもプログラムやスクリプトの実行がブロックされます</h3><p>プログラムやスクリプトなどの実行時の不正な動作が MDAV により検出されている場合、対象のプログラムやスクリプトをウイルス対策の除外に追加しても検出を抑制できない場合があります。</p>
+<p>その場合は、以下の公開情報に記載の手順で Microsoft Defender ポータルや Microsoft セキュリティ インテリジェンス申請サイトから検体ファイルを弊社にアップロードし、解析を要求してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/defender-endpoint-false-positives-negatives#part-4-submit-a-file-for-analysis">分析用にファイルを提出する | Microsoft Learn</a></p>
+<p>また、プログラムやスクリプトの動作が MDAV により検出されてしまう場合、以下の手順で分析用に Mpsupport.cab ファイルを提出することもできます。</p>
+<ol>
+<li>検知が発生した端末で管理者権限で起動したコマンドプロンプトを起動し、<code>C:\ProgramData\Microsoft\Windows Defender\Platform\&lt;プラットフォームのバージョン&gt;</code> にカレントフォルダを変更した後に <code>MpCmdRun.exe -GetFiles</code>を実行します。</li>
+<li>さまざまな診断ログを含む .cab ファイルが既定で <code>C:\ProgramData\Microsoft\Microsoft Defender\Support\MpSupportFiles.cab</code> に生成されます。 </li>
+<li>取得した .cab ファイルを <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-xdr/submission-guide">Microsoft による分析のためにファイルを送信する</a> に従って Microsoft に送信します。</li>
+</ol>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20241020195551547.png" alt="MpSupportFiles.cab の取得手順"></p>
+<h3 id="ファイルインジケータを登録した後もファイルの検出が行われます"><a href="#ファイルインジケータを登録した後もファイルの検出が行われます" class="headerlink" title="ファイルインジケータを登録した後もファイルの検出が行われます"></a>ファイルインジケータを登録した後もファイルの検出が行われます</h3><p>MDE を利用する環境では、特定のファイルハッシュを持つファイルを対象とするファイルインジケータを作成することで特定のファイルの実行を許可、もしくはブロックすることができます。</p>
+<p>ファイルインジケータの利用要件については下記の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/indicator-file">ファイルのインジケーターを作成 | Microsoft Learn</a></p>
+<p>なお、もし特定のファイルを MDAV のウイルス対策スキャンの対象外としたい場合には、ファイルインジケータの許可ルールのみではなく、ウイルス対策の除外設定を追加することをおすすめします。</p>
+<p>もし、特定のファイルを許可するインジケータを追加しているにも関わらず MDAV のスケジュールされたスキャンなどによる検出が継続する場合は、ファイルやフォルダのパスに基づくウイルス対策除外を追加で構成してください。</p>
+<h3 id="ウイルス対策の除外を追加しても-MDE-のアラート検出が行われます"><a href="#ウイルス対策の除外を追加しても-MDE-のアラート検出が行われます" class="headerlink" title="ウイルス対策の除外を追加しても MDE のアラート検出が行われます"></a>ウイルス対策の除外を追加しても MDE のアラート検出が行われます</h3><p>Microsoft Defender ポータルから確認可能なアラートのうち、サービスソースが Microsoft Defender for Endpoint であり、かつ検出ソースが EDR のアラートは通常、MDE の EDR 検出機能により端末内で不審なアクティビティが検出されたことを示しています。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20241016122739335.png" alt="MDE の EDR 検知アラート"></p>
+<p>このような種類のアラートはウイルス対策の除外を追加しても抑制することはできないため、同様のアラートを発生させたくない場合にはアラート調整ルール(アラート抑制ルール)を追加する必要があります。</p>
+<p>アラートの抑制ルールの設定方法については下記の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-suppression-rules">Microsoft Defender for Endpoint 抑制ルールを管理する | Microsoft Learn</a></p>
+<h3 id="Windows-セキュリティアプリや-PowerShell-から除外を追加できません"><a href="#Windows-セキュリティアプリや-PowerShell-から除外を追加できません" class="headerlink" title="Windows セキュリティアプリや PowerShell から除外を追加できません"></a>Windows セキュリティアプリや PowerShell から除外を追加できません</h3><p>Windows セキュリティアプリや PowerShell コマンドレットを使用してウイルス対策の除外を追加できない場合、「一覧に関するローカル管理者の統合動作を構成する(DisableLocalAdminMerge)」が構成されている可能性があります。</p>
+<p>端末に適用されている DisableLocalAdminMerge の設定値が 1 である場合、ローカル管理者は Windows セキュリティアプリや PowerShell コマンドレットを使用してウイルス対策や ASR の除外エントリを追加することができません。</p>
+<p>もし DisableLocalAdminMerge の制限を解除したい場合は、適用しているポリシー設定を解除した上で OS の再起動を実施してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-local-policy-overrides-microsoft-defender-antivirus#configure-how-locally-and-globally-defined-threat-remediation-and-exclusions-lists-are-merged">ローカルおよびグローバルに定義された脅威の修復と除外リストのマージ方法を構成する | Microsoft Learn</a></p>
+<div class="alert is-warning"><p class="alert-title">警告</p><p></p>
+<p>グループポリシーで「一覧に関するローカル管理者の統合動作を構成する(DisableLocalAdminMerge)」を構成する場合、使用するテンプレートのバージョンによってポリシーを有効化した場合に端末に反映される値が異なる点に注意が必要です。</p>
+<p>“Administrative Templates (.admx) for Windows 11 2022 Update (22H2)” や “Administrative Templates (.admx) for Windows 10 November 2021 Update (21H2)” など、最新の管理用テンプレートを使用している場合、「一覧に関するローカル管理者の統合動作を構成する」の設定を [有効] に設定することでローカル管理者による除外エントリの追加が禁止されます。</p></div>
+<h3 id="環境変数を使用したパス除外が有効に動作しません"><a href="#環境変数を使用したパス除外が有効に動作しません" class="headerlink" title="環境変数を使用したパス除外が有効に動作しません"></a>環境変数を使用したパス除外が有効に動作しません</h3><p>MDAV では、ファイルとフォルダのパスに基づくウイルス対策の除外を構成する際に環境変数を使用することができます。</p>
+<p>しかし、MDAV のサービスは LocalSystem アカウントを使用して実行されているシステムサービスであるため、除外パスに環境変数を使用した場合、MDAV はユーザ環境変数ではなくシステム環境変数から情報を取得します。</p>
+<p>そのため、例えば環境変数 <code>%USERPROFILE%</code> を除外リストに追加した場合、実際にウイルス対策の除外対象となるパスは <code>C:\Users\&lt;ユーザ名&gt;</code> ではなく <code>C:\Windows\system32\config\systemprofile</code> となる点に注意が必要です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/common-exclusion-mistakes-microsoft-defender-antivirus#using-incorrect-environment-variables-as-wildcards-in-the-file-name-and-folder-path-or-extension-exclusion-lists">ファイル名とフォルダー パスまたは拡張機能の除外リストで不適切な環境変数をワイルドカードとして使用する| Microsoft Learn</a></p>
+<p>パスに基づくウイルス対策の除外に使用可能なシステム環境変数の一覧については以下の公開情報にてご案内しております。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-extension-file-exclusions-microsoft-defender-antivirus#system-environment-variables">システム環境変数 | Microsoft Learn</a></p>
+<h3 id="CPU-使用率の高騰を解消するためにどのファイルを除外すればいいですか？"><a href="#CPU-使用率の高騰を解消するためにどのファイルを除外すればいいですか？" class="headerlink" title="CPU 使用率の高騰を解消するためにどのファイルを除外すればいいですか？"></a>CPU 使用率の高騰を解消するためにどのファイルを除外すればいいですか？</h3><p>MDAV のリアルタイムスキャンの動作に起因して CPU 使用率の高騰が発生している場合、ユーザはパフォーマンスアナライザーなどのツールを利用してスキャン結果を分析し、パフォーマンスの改善のために除外が必要なファイルやフォルダを特定することができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/tune-performance-defender-antivirus">Microsoft Defender ウイルス対策用のパフォーマンス アナライザー | Microsoft Learn</a></p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/troubleshoot-performance-issues">パフォーマンスに関する問題のトラブルシューティング | Microsoft Learn</a></p>
+<p>なお、ユーザの環境で発生している問題の種類によっては、ウイルス対策の除外でパフォーマンスが改善しない場合や、問題の解消のために除外を追加する必要がない場合があります。</p>
+<p>詳細については <a href="#MDAV-%E3%81%AB%E3%82%88%E3%82%8A-CPU-%E4%BD%BF%E7%94%A8%E7%8E%87%E3%81%8C%E9%AB%98%E9%A8%B0%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">MDAV により CPU 使用率が高騰している場合のトラブルシューティング</a> の記載を参照してください。</p>
+<h2 id="MDAV-により-CPU-使用率が高騰している場合のトラブルシューティング"><a href="#MDAV-により-CPU-使用率が高騰している場合のトラブルシューティング" class="headerlink" title="MDAV により CPU 使用率が高騰している場合のトラブルシューティング"></a>MDAV により CPU 使用率が高騰している場合のトラブルシューティング</h2><h3 id="ウイルス対策スキャンが-CPU-リソースを消費する理由"><a href="#ウイルス対策スキャンが-CPU-リソースを消費する理由" class="headerlink" title="ウイルス対策スキャンが CPU リソースを消費する理由"></a>ウイルス対策スキャンが CPU リソースを消費する理由</h3><p>MDAV がシステムの CPU リソースを消費する理由の多くはウイルス対策スキャンの動作によるものです。</p>
+<p>MDAV は、端末の設定や端末内の他のサービスやアプリケーションの動作などをきっかけに、短時間により多くのデータをスキャンする場合があります。</p>
+<p>ウイルス対策ソフトウェアがデータのスキャンを行う際には CPU やメモリなどのシステムリソースを必要とするため、端末内で短時間に多くのデータのスキャンが発生した場合、システムリソースの消費量を一時的に増大させる場合があります。</p>
+<p>なお、MDAV のウイルス対策スキャンには大きく分けて「リアルタイム保護機能によるスキャン」と「手動、もしくはスケジュール実行されたスキャン」の 2 つの種類があります。</p>
+<p>リアルタイム保護機能によるスキャンは主に、端末内で利用しているサービスやアプリケーションがデータの読み書きを行う際に実施されます。</p>
+<p>一方で、手動スキャンやスケジュールスキャンは、ユーザが Windows セキュリティアプリや Microsoft Defender ポータルなどからスキャンを要求した場合や、グループポリシーなどで事前定義されたポリシーによりトリガーされます。</p>
+<div class="alert is-info"><p class="alert-title">Note</p><p></p>
+<p>MDAV などのウイルス対策ソフトウェアはその特性上、他の種類のアプリケーションと比較して多くのシステムリソース(CPU やメモリなど)を使用する傾向にあります。</p>
+<p>特に、リアルタイム保護機能を有効化している環境で短時間に多くのデータの読み書きを伴う操作を実施した場合、一時的に MDAV のリソース消費量が増加することを確認できます。</p>
+<p>このように一時的に MDAV が利用するリソース消費量が増加することは製品の期待される動作であり、通常は要求されたスキャンの完了後、すぐにリソースの消費量も元に戻ります。</p>
+<p>万が一、大量のデータの読み書きに伴う MDAV のリソース消費量の増加によって、サービスの遅延などの無視できない影響が発生している場合は、ウイルス対策の除外設定によりパフォーマンスが改善するかを確認することができます。</p></div>
+<h3 id="システムで-CPU-使用率が高騰している場合の確認ポイント"><a href="#システムで-CPU-使用率が高騰している場合の確認ポイント" class="headerlink" title="システムで CPU 使用率が高騰している場合の確認ポイント"></a>システムで CPU 使用率が高騰している場合の確認ポイント</h3><p>システムの CPU 使用率が高騰している問題のトラブルシューティングを行う場合、まずはタスクマネージャーなどのツールを利用して、システム内でより多くの CPU リソースを消費しているプロセスを特定する必要があります。</p>
+<p>Microsoft Defender Antivirus Service(MsMpEng.exe) が平均的に多くの CPU リソースを消費している場合、MDAV のウイルス対策スキャンの動作が関連しており、ウイルス対策の除外の追加が有効な軽減策となる可能性があります。</p>
+<p><img src="../images/Endpoint-MDAV-2024-08-19/image-20241020195851352.png" alt="MDAV のプロセスが CPU リソースを消費している"></p>
+<p>もし Microsoft Defender Antivirus Service(MsMpEng.exe) が平均的に多くの CPU リソースを消費していることを特定した場合、続けて以下の点を確認します。</p>
+<ol>
+<li><strong>システム内に MDAV と同等、もしくはそれ以上にシステムリソースを消費しているプロセスが存在するか</strong></li>
+<li><strong>システム内で、多くのデータの読み書きを伴うサービスやアプリケーション、バッチジョブなどを実行しているか</strong></li>
+<li><strong>システムリソース消費量の高騰時に、手動もしくはスケジュールされたフルスキャンを実施しているか</strong></li>
+</ol>
+<p>他のサービスやアプリケーションなどが多くのデータの読み書きを伴う操作を頻繁に行っている場合、MDAV 以外のアプリケーションの動作に伴いトリガーされるリアルタイムスキャンにより、MDAV の消費するシステムリソースが増加している可能性が考えられます。</p>
+<p>このようなリアルタイムスキャンの動作に伴う CPU 使用率が上昇自体は製品の期待される動作であり、異常を示すものではありませんが、必要に応じて適切なウイルス対策の除外設定を追加することでパフォーマンスを改善することが可能です。</p>
+<p>一方で、ウイルス対策ソフトウェアのフルスキャンはシステム全体のファイルスキャンを行う機能であり、実施時には多くの時間とシステムリソースが消費されます。</p>
+<p>もしフルスキャンに伴う CPU 使用率の高騰を解消したい場合、フルスキャンの代わりにリソース消費量の少ないクイックスキャンを使用するか、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/mdav-scan-best-practices#scanning-and-cpu-throttling">Microsoft Defender ウイルス対策のフルスキャンに関する考慮事項とベストプラクティス</a> の情報を参照し、フルスキャン時に使用する CPU 使用率の上限を変更することを検討してください。</p>
+<p>なお、フルスキャン時に使用可能な CPU 使用率の上限を低く設定することでシステムのパフォーマンスは改善する可能性がありますが、相対的にフルスキャンの完了までに要する時間が長くなる点に注意が必要です。</p>
+<div class="alert is-important"><p class="alert-title">重要</p><p></p>
+<p>フルスキャンは、スキャンする必要があるデータの量と種類に応じて、完了までに数時間または数日以上の時間を要します。</p>
+<p>フルスキャンは多くの時間とシステムリソースを消費するため、一般に、フルスキャンを頻繁にスケジュール実行することは推奨しておりません。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/schedule-antivirus-scans">Microsoft Defender ウイルス対策を使用して定期的なクイック スキャンとフル スキャンをスケジュールする | Microsoft Learn</a></p></div>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、MDAV のウイルス対策の除外設定を中心に、各種保護機能による検出動作やその抑制方法などについて紹介しました。</p>
+<p>最新の情報については、リンク先の公開情報をご参照ください。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li></ul>
+
+        
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/Endpoint-MDAV-2024-08-19.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../how-to-create-supportcase/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">お問い合わせの発行方法について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</a>
+          </li>
+        
+          <li>
+            <a href="../how-to-create-supportcase/">お問い合わせの発行方法について</a>
+          </li>
+        
+          <li>
+            <a href="../Hiring-AboutSecurity-01/">&lt;第 1 弾&gt; Security &amp; Compliance サポートチームについて</a>
+          </li>
+        
+          <li>
+            <a href="../Hiring-AboutSecurity-02/">&lt;第 2 弾&gt; CPC チームの製品紹介</a>
+          </li>
+        
+          <li>
+            <a href="../Hiring-AboutSecurity-03/">&lt;第 3 弾&gt; リモートワークでの働き方について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Active-Directory-Rithts-Management-Service/" rel="tag">Active Directory Rithts Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-AdvancedThreat-Protection/" rel="tag">Azure AdvancedThreat Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-Information-Protection/" rel="tag">Azure Information Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-Linux/" rel="tag">MDE on Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-macOS/" rel="tag">MDE on macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" rel="tag">Microsoft AdvancedThreat Analytics(ATA)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Rights-Management-Service/" rel="tag">Rights Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" rel="tag">セキュリティインテリジェンス</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" rel="tag">マルウェア対策プラットフォーム</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/">Information</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../tags/Active-Directory-Rithts-Management-Service/" style="font-size: 10px;">Active Directory Rithts Management Service</a> <a href="../tags/Azure-AdvancedThreat-Protection/" style="font-size: 10px;">Azure AdvancedThreat Protection</a> <a href="../tags/Azure-Information-Protection/" style="font-size: 16.67px;">Azure Information Protection</a> <a href="../tags/General/" style="font-size: 15px;">General</a> <a href="../tags/Identity-Manager/" style="font-size: 13.33px;">Identity Manager</a> <a href="../tags/Information/" style="font-size: 10px;">Information</a> <a href="../tags/MDE-on-Linux/" style="font-size: 11.67px;">MDE on Linux</a> <a href="../tags/MDE-on-macOS/" style="font-size: 11.67px;">MDE on macOS</a> <a href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" style="font-size: 10px;">Microsoft AdvancedThreat Analytics(ATA)</a> <a href="../tags/Microsoft-Defender-for-Endpoint/" style="font-size: 20px;">Microsoft Defender for Endpoint</a> <a href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" style="font-size: 18.33px;">Microsoft Defender ウイルス対策</a> <a href="../tags/Rights-Management-Service/" style="font-size: 10px;">Rights Management Service</a> <a href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" style="font-size: 10px;">セキュリティインテリジェンス</a> <a href="../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 15px;">チーム紹介</a> <a href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" style="font-size: 10px;">マルウェア対策プラットフォーム</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="https://privacy.microsoft.com/ja-jp/privacystatement" target="_blank" rel=”noopener”>Privacy & Cookies</a> |  
+      <a href="https://www.microsoft.com/ja-jp/legal/intellectualproperty/copyright" target="_blank" rel=”noopener”>Terms of use</a> |
+      <a href="https://www.microsoft.com/ja-jp/legal/intellectualproperty/trademarks" target="_blank" rel=”noopener”>Trademarks</a> |
+      &copy; 2024 CSS Japan Secuirty team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
