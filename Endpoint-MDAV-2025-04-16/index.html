@@ -4,28 +4,23 @@
   <meta charset="utf-8">
   
   
-  <title>Japan CSS Security Support Blog</title>
+  <title>KB5007651 が何度も再オファーされる事象へのトラブルシューティング | Japan CSS Security Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="本記事では、Windows セキュリティアプリの更新プログラムである KB5007651 が繰り返し配信され、正常にインストールできない事象についての対処方法をご案内しております。 本記事の内容 事象の概要 問題の発生原因 問題の解決方法  事象の概要一部の環境において、KB5007651 が正常にインストールされず、Windows セキュリティアプリのバージョンが最新に更新されない事象を確認して">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Japan CSS Security Support Blog">
+<meta property="og:title" content="KB5007651 が何度も再オファーされる事象へのトラブルシューティング">
 <meta property="og:url" content="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-04-16/index.html">
 <meta property="og:site_name" content="Japan CSS Security Support Blog">
 <meta property="og:description" content="本記事では、Windows セキュリティアプリの更新プログラムである KB5007651 が繰り返し配信され、正常にインストールできない事象についての対処方法をご案内しております。 本記事の内容 事象の概要 問題の発生原因 問題の解決方法  事象の概要一部の環境において、KB5007651 が正常にインストールされず、Windows セキュリティアプリのバージョンが最新に更新されない事象を確認して">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-16-01">
-<meta property="article:published_time" content="2025-04-16T09:13:12.324Z">
-<meta property="article:modified_time" content="2025-04-16T09:13:08.915Z">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-16-01.png">
+<meta property="article:published_time" content="2025-04-16T09:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-16T09:21:23.246Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
+<meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta property="article:tag" content="Microsoft Defender for Endpoint">
-<meta property="article:tag" content="Microsoft Defender for Identity">
-<meta property="article:tag" content="Microsoft Cloud App Security">
-<meta property="article:tag" content="Information Protection">
-<meta property="article:tag" content="Microsoft Identity Manager">
-<meta property="article:tag" content="Azure Sentinel">
-<meta property="article:tag" content="Azure Security Center">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-16-01">
+<meta name="twitter:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-16-01.png">
   
     <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
   
@@ -93,6 +88,28 @@
     
     
     
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      KB5007651 が何度も再オファーされる事象へのトラブルシューティング
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Published: 
+        <a href="" class="article-date-single">
+  <time datetime="2025-04-16T09:00:00.000Z" itemprop="datePublished">2025-04-16</time>
+</a>
+        
+        
+        
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+45d10dcb-4fe2-56ef-9e81-ef3ec25a0c9c%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BKB5007651+%E3%81%8C%E4%BD%95%E5%BA%A6%E3%82%82%E5%86%8D%E3%82%AA%E3%83%95%E3%82%A1%E3%83%BC%E3%81%95%E3%82%8C%E3%82%8B%E4%BA%8B%E8%B1%A1%E3%81%B8%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2025-04-16%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2025-04-16.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2025-04-16.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-04-16/" data-id="cm9jq2cf0000x0nrx06p23dk2" class="article-share-link">共有</a>
+      </div>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <p>本記事では、Windows セキュリティアプリの更新プログラムである KB5007651 が繰り返し配信され、正常にインストールできない事象についての対処方法をご案内しております。</p>
@@ -102,7 +119,7 @@
 <li><a href="#%E5%95%8F%E9%A1%8C%E3%81%AE%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95">問題の解決方法</a></li>
 </ul>
 <h2 id="事象の概要"><a href="#事象の概要" class="headerlink" title="事象の概要"></a>事象の概要</h2><p>一部の環境において、KB5007651 が正常にインストールされず、Windows セキュリティアプリのバージョンが最新に更新されない事象を確認しております。<br>本事象では、KB5007651 の更新が繰り返し試行された出力が Windows Update に記録される特徴がございます。</p>
-<p><img src="../images/Endpoint-MDAV-2025-04-16-01" alt="問題の発生画面"></p>
+<p><img src="../images/Endpoint-MDAV-2025-04-16-01.png" alt="問題の発生画面"></p>
 <h2 id="問題の発生原因"><a href="#問題の発生原因" class="headerlink" title="問題の発生原因"></a>問題の発生原因</h2><p>本事象は、何らかの理由により残存していた古い “SecurityHealthSetup.exe” が原因で、KB5007651 の更新時に「HKLM\SOFTWARE\Microsoft\Windows Security Health\Updates」パス内の “wu” レジストリ値が正しく更新されず、”CopyError” として判定されることに起因します。</p>
 <h2 id="問題の解決方法"><a href="#問題の解決方法" class="headerlink" title="問題の解決方法"></a>問題の解決方法</h2><p>本事象の対処には、”SecurityHealthSetup.exe” の削除と、一部レジストリ値の修正が必要です。</p>
 <p>問題の解消のためには以下の手順をご実施ください。</p>
@@ -190,6 +207,8 @@
     <footer class="article-footer">
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li></ul>
+
         
         <a href="https://github.com/jp-sec/blog/edit/main/articles/Endpoint-MDAV-2025-04-16.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
@@ -221,7 +240,7 @@
       <ul>
         
           <li>
-            <a href="">(no title)</a>
+            <a href="">KB5007651 が何度も再オファーされる事象へのトラブルシューティング</a>
           </li>
         
           <li>
