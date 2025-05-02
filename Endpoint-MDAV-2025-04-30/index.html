@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-10.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-08.png">
 <meta property="article:published_time" content="2025-05-02T06:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-02T06:07:21.097Z">
+<meta property="article:modified_time" content="2025-05-02T06:10:38.366Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta property="article:tag" content="Microsoft Defender for Endpoint">
@@ -116,7 +116,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+692caa5d-5843-5234-b725-85212fa19725%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMicrosoft+Defender+for+Endpoint%28MDE%29+%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%97%E3%81%9F%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%8C%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%A4%E3%83%B3%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%81%AB%E7%99%BB%E9%8C%B2%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84%E5%95%8F%E9%A1%8C%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%89%8B%E9%A0%86%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2025-04-30%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2025-04-30.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2025-04-30.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-04-30/" data-id="cma6e6g93003b0nrp2cnb9pqj" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-04-30/" data-id="cma6eaody00390nm68maz22xh" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -242,7 +242,7 @@
 <p>[Common endpoints] シート内には、上記の例のようにアクセス許可が必要な通信先の FQDN とポート番号、接続先の用途に関する概要情報などが記載されています。</p>
 <blockquote>
 <p> [!NOTE]</p>
-<p><code>*.endpoint.security.microsoft.com</code> のようにワイルドカード(<code>*</code>) を含む FQDN が指定されている通信先については、 <code>endpoint.security.microsoft.com</code> に対するサブドメインを含むすべての通信を許可するように構成いただく必要があります。</p>
+<p><em>.endpoint.security.microsoft.com のようにワイルドカード(</em>) を含む FQDN が指定されている通信先については、 endpoint.security.microsoft.com に対するサブドメインを含むすべての通信を許可するように構成いただく必要があります。</p>
 </blockquote>
 <p>スプレッドシート内の [OS] 列には、対象の FQDN へのアクセス許可が必要な OS プラットフォームが示されています。</p>
 <p>例えば Windows マシンを MDE にオンボードする場合には、 [OS] 列が <code>All</code> の行と <code>Windows</code> の行に記載の FQDN に対するアクセス許可を構成する必要があります。</p>
