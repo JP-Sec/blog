@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Microsoft Defender for Endpoint(MDE) にオンボードしたデバイスがデバイスインベントリに登録されない問題のトラブルシューティング手順 | Japan CSS Security Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本記事では、Windows デバイスの Microsoft Defender for Endpoint(MDE) へのオンボード操作を実施したものの、Microsoft Defender ポータルの [アセット]&gt;[デバイス] ページにデバイスが登録されない場合の一般的なトラブルシューティング手順をご案内します。 本記事では、MDE の最小要件を満たす Windows 10 &#x2F; 11 および">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Microsoft Defender for Endpoint(MDE) にオンボードしたデバイスがデバイスインベントリに登録されない問題のトラブルシューティング手順">
+<meta property="og:url" content="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-04-30/index.html">
+<meta property="og:site_name" content="Japan CSS Security Support Blog">
+<meta property="og:description" content="本記事では、Windows デバイスの Microsoft Defender for Endpoint(MDE) へのオンボード操作を実施したものの、Microsoft Defender ポータルの [アセット]&gt;[デバイス] ページにデバイスが登録されない場合の一般的なトラブルシューティング手順をご案内します。 本記事では、MDE の最小要件を満たす Windows 10 &#x2F; 11 および">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-01.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-02.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-03.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-04.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-05.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-06.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-07.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-09.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-10.png">
+<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-08.png">
+<meta property="article:published_time" content="2025-05-02T06:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-02T04:58:20.067Z">
+<meta property="article:author" content="CSS Japan Secuirty team">
+<meta property="article:tag" content="Microsoft Defender ウイルス対策">
+<meta property="article:tag" content="Microsoft Defender for Endpoint">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-01.png">
+  
+    <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-sec.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../index.html" id="logo">Japan CSS Security Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../index.html" id="subtitle">日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Endpoint-MDAV-2025-04-30" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Microsoft Defender for Endpoint(MDE) にオンボードしたデバイスがデバイスインベントリに登録されない問題のトラブルシューティング手順
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Published: 
+        <a href="" class="article-date-single">
+  <time datetime="2025-05-02T06:00:00.000Z" itemprop="datePublished">2025-05-02</time>
+</a>
+        
+        
+        
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+692caa5d-5843-5234-b725-85212fa19725%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMicrosoft+Defender+for+Endpoint%28MDE%29+%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%97%E3%81%9F%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%8C%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%A4%E3%83%B3%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%81%AB%E7%99%BB%E9%8C%B2%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84%E5%95%8F%E9%A1%8C%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%89%8B%E9%A0%86%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2025-04-30%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2025-04-30.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2025-04-30.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-04-30/" data-id="cma6bpok2003b0nqce9rhae2r" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本記事では、Windows デバイスの Microsoft Defender for Endpoint(MDE) へのオンボード操作を実施したものの、Microsoft Defender ポータルの [アセット]&gt;[デバイス] ページにデバイスが登録されない場合の一般的なトラブルシューティング手順をご案内します。</p>
+<p>本記事では、MDE の最小要件を満たす Windows 10 / 11 および Windows Server 2016 / 2019 / 2022  / 2025 を対象としています。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/minimum-requirements">Microsoft Defender for Endpoint の最小要件 | Microsoft Learn</a></p>
+<!-- omit in toc -->
+<h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul>
+<li><a href="#%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B9%E3%83%86%E3%83%83%E3%83%97">一般的なトラブルシューティングステップ</a></li>
+<li><a href="#Sense-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">Sense サービスの実行ステータスを確認する</a><ul>
+<li><a href="#%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E5%AE%9F%E6%96%BD%E3%81%97%E3%81%A6%E3%82%82-Sense-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%8C%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88">オンボード操作を実施しても Sense サービスが起動しない場合</a></li>
+<li><a href="#Sense-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%8C%E7%AB%AF%E6%9C%AB%E3%81%AB%E5%AD%98%E5%9C%A8%E3%81%97%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88">Sense サービスが端末に存在しない場合</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AB%AF%E6%9C%AB%E3%81%8C-MDE-%E3%81%AE%E9%80%9A%E4%BF%A1%E8%A6%81%E4%BB%B6%E3%82%92%E6%BA%80%E3%81%9F%E3%81%99%E3%81%93%E3%81%A8%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">端末が MDE の通信要件を満たすことを確認する</a><ul>
+<li><a href="#MDE-%E3%81%AE%E9%80%9A%E4%BF%A1%E8%A6%81%E4%BB%B6%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">MDE の通信要件について</a></li>
+<li><a href="#%E5%90%88%E7%90%86%E5%8C%96%E3%81%95%E3%82%8C%E3%81%9F%E6%8E%A5%E7%B6%9A%E6%96%B9%E5%BC%8F%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E9%80%9A%E4%BF%A1%E8%A6%81%E4%BB%B6FQDN-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88">合理化された接続方式を使用する場合の通信要件(FQDN を使用する場合)</a></li>
+<li><a href="#%E5%90%88%E7%90%86%E5%8C%96%E3%81%95%E3%82%8C%E3%81%9F%E6%8E%A5%E7%B6%9A%E6%96%B9%E5%BC%8F%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E9%80%9A%E4%BF%A1%E8%A6%81%E4%BB%B6IP-%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88">合理化された接続方式を使用する場合の通信要件(IP アドレスを使用する場合)</a></li>
+<li><a href="#%E6%A8%99%E6%BA%96%E3%81%AE%E6%8E%A5%E7%B6%9A%E6%96%B9%E5%BC%8F%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E9%80%9A%E4%BF%A1%E8%A6%81%E4%BB%B6">標準の接続方式を使用する場合の通信要件</a></li>
+<li><a href="#%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%92%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88">プロキシサービスを利用する場合</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AB%AF%E6%9C%AB%E3%81%AE%E9%80%9A%E4%BF%A1%E3%83%86%E3%82%B9%E3%83%88%E3%82%92%E8%A1%8C%E3%81%86">端末の通信テストを行う</a><ul>
+<li><a href="#MDE-Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AE%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95">MDE Client Analyzer ツールの実行方法</a></li>
+<li><a href="#%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%8B%E3%82%89%E9%80%9A%E4%BF%A1%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">レポートから通信テストの結果を確認する方法</a></li>
+<li><a href="#%E7%AB%AF%E6%9C%AB%E3%81%8C%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%A7%E3%81%82%E3%82%8B%E3%81%93%E3%81%A8%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">端末がプロキシサーバーを使用可能であることを確認する</a></li>
+<li><a href="#%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%8B%E3%82%89%E7%AB%AF%E6%9C%AB%E3%81%AE%E6%8E%A5%E7%B6%9A%E6%96%B9%E5%BC%8F%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">レポートから端末の接続方式を確認する</a></li>
+</ul>
+</li>
+<li><a href="#%E5%95%8F%E9%A1%8C%E3%81%8C%E8%A7%A3%E6%B6%88%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">問題が解消されない場合の確認ポイント</a><ul>
+<li><a href="#MDAV-%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E7%A8%BC%E5%83%8D%E7%8A%B6%E6%B3%81%E3%81%AE%E7%A2%BA%E8%AA%8D">MDAV のサービス稼働状況の確認</a></li>
+<li><a href="#%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E6%9B%B4%E6%96%B0">エージェントプログラムの更新</a></li>
+<li><a href="#%E7%AB%AF%E6%9C%AB%E6%83%85%E5%A0%B1%E3%81%AE%E5%89%8A%E9%99%A4%E3%81%A8%E5%86%8D%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89">端末情報の削除と再オンボード</a></li>
+</ul>
+</li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li>
+</ul>
+<h2 id="一般的なトラブルシューティングステップ"><a href="#一般的なトラブルシューティングステップ" class="headerlink" title="一般的なトラブルシューティングステップ"></a>一般的なトラブルシューティングステップ</h2><p>Windows デバイスの MDE にオンボード操作を実施したものの、Microsoft Defender ポータルの [アセット]&gt;[デバイス] ページにデバイスが登録されない問題が発生した場合の一般的なトラブルシューティング手順は以下の通りです。</p>
+<ol>
+<li><p>事前に、オンボードデバイスが <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/minimum-requirements">MDE の最小要件</a> を満たしていることを確認します。</p>
+</li>
+<li><p>関連する MDE および MDAV のコンポーネントが最新バージョンに更新されていることを確認します。(詳細については <a href="#%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E6%9B%B4%E6%96%B0">エージェントプログラムの更新</a> をご参照ください)</p>
+</li>
+<li><p>[Sense サービスの実行ステータスを確認する](#Sense サービスの実行ステータスを確認する) の手順で、MDE へのオンボード操作を実行した端末でサービスが起動していることを確認します。</p>
+</li>
+<li><p>MDE のサービス(Sense サービス) が正常に稼働していない場合、実施したオンボード手順に誤りがないことを確認の上、再オンボードを試します。</p>
+</li>
+<li><p>MDE のサービス(Sense サービス) が正常に稼働している場合、[端末が MDE の通信要件を満たすことを確認する](#端末が MDE の通信要件を満たすことを確認する) の手順で通信テストを行い、端末が MDE のクラウドサービスと正常に疎通できる構成であることを確認します。</p>
+</li>
+<li><p>上記のすべてを確認しても問題が解消しない場合、<a href="#%E7%AB%AF%E6%9C%AB%E6%83%85%E5%A0%B1%E3%81%AE%E5%89%8A%E9%99%A4%E3%81%A8%E5%86%8D%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89">端末情報の削除と再オンボード</a> の手順でデバイスの再オンボードをお試しください。</p>
+</li>
+</ol>
+<p>以下に、各手順の詳細についてご案内します。</p>
+<h2 id="Sense-サービスの実行ステータスを確認する"><a href="#Sense-サービスの実行ステータスを確認する" class="headerlink" title="Sense サービスの実行ステータスを確認する"></a>Sense サービスの実行ステータスを確認する</h2><p>MDE へのオンボード操作を実施したデバイスが Microsoft Defender ポータルに登録されない場合、まずは問題の発生した端末の Sense サービス(MDE のサービス) の稼働状況を確認します。</p>
+<p>サービスの稼働状況は以下のコマンドを実行することで確認できます。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.exe query Sense</span><br></pre></td></tr></table></figure>
+
+<p>MDE へのオンボード操作が成功している場合、Sense サービスは自動的に起動するため、上記コマンドを実行することでサービスが実行中(<code>STATE: 4 RUNNING</code>) であることを確認することができます。</p>
+<p>一方で、MDE へのオンボード操作が行われていない場合や、何らかの理由でオンボード操作に失敗した場合には、Sense サービスは停止中のままとなります。</p>
+<p><img src="../images/Endpoint-MDAV-2025-04-30-01.png" alt="Sense サービスが停止している場合"></p>
+<p>Sense サービスは端末の情報を MDE のクラウドサービスと連携する機能を持つため、このサービスが停止している場合、対象の端末は Microsoft Defender ポータルにオンボード済みデバイスとして登録されません。</p>
+<p>そのため、Sense サービスが起動していないことを確認した場合には、再度オンボード手順を実行するとともに、問題が継続する場合はオンボード手順に問題がないかを確認します。</p>
+<h3 id="オンボード操作を実施しても-Sense-サービスが起動しない場合"><a href="#オンボード操作を実施しても-Sense-サービスが起動しない場合" class="headerlink" title="オンボード操作を実施しても Sense サービスが起動しない場合"></a>オンボード操作を実施しても Sense サービスが起動しない場合</h3><p>オンボード操作を再実行しても Sense サービスが起動しない場合、オンボード操作が端末で実行されているか否かや、オンボード操作時に何らかの問題が発生しているか否かを確認します。</p>
+<ol>
+<li><strong>オンボードスクリプトを使用する場合</strong></li>
+</ol>
+<p>ローカルスクリプトやグループポリシー、Microsoft Endpoint Configuration Manager(MECM) を使用してオンボード操作を行う場合、以下の公開情報を参照してアプリケーションイベントログから問題の原因を調査します。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/troubleshoot-onboarding#troubleshoot-onboarding-when-deploying-with-a-script">スクリプトを使用してデプロイするときのオンボードのトラブルシューティング | Microsoft Learn</a></p>
+<ol start="2">
+<li><strong>Intune を使用する場合</strong></li>
+</ol>
+<p>また、Intune を使用してオンボード操作を行う場合、以下の公開情報の手順でトラブルシューティングを行います。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/troubleshoot-onboarding#troubleshoot-onboarding-issues-using-microsoft-intune">Microsoft Intuneを使用したオンボードの問題のトラブルシューティング | Microsoft Learn</a></p>
+<ol start="3">
+<li><strong>Microsoft Defender for Cloud(MDfC) の MDE 統合機能を利用する場合</strong></li>
+</ol>
+<p>MDE 統合機能を利用したオンボードが行われない場合、対象のマシンに MDE.Windows 拡張機能がインストールされているか否かを確認します。</p>
+<p>MDE.Windows 拡張機能がインストールされていない場合、以下の公開情報の内容を確認します。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/defender-for-cloud/enable-defender-for-endpoint">Microsoft Defender for Cloud で Defender for Endpoint 統合を有効にする | Microsoft Learn</a></p>
+<h3 id="Sense-サービスが端末に存在しない場合"><a href="#Sense-サービスが端末に存在しない場合" class="headerlink" title="Sense サービスが端末に存在しない場合"></a>Sense サービスが端末に存在しない場合</h3><p>対象の端末には Sense サービスがインストールされていない場合、<code>sc.exe query Sense</code> コマンドを実行した際に「指定されたサービスはインストールされたサービスとして存在しません。」というエラーが出力されます。</p>
+<p><img src="../images/Endpoint-MDAV-2025-04-30-02.png" alt="Sense サービスが端末に存在しない場合"></p>
+<ol>
+<li><strong>問題が Windows Server 2016 で発生している場合</strong></li>
+</ol>
+<p>問題が発生している端末が Windows Server 2016 に該当する場合、インストールパッケージ(md4ws.msi) による統合エージェントがサーバーにインストールされていないか、何らかの理由でインストールに失敗している可能性があります。</p>
+<p>Windows Server 2016 で問題が発生している場合は下記公開情報を参照いただき、サーバーに MDE 用の統合エージェントをインストールした後に再度オンボード操作を実施してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/onboard-server">Microsoft Defender for Endpointのオンボード エクスペリエンスを使用してサーバーをオンボードする | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-09-26/">Windows Server 2012 R2 または Windows Server 2016 を MDE にオンボードする手順と確認ポイント</a></p>
+<ol start="2">
+<li><strong>問題が Windows 11 で発生している場合</strong></li>
+</ol>
+<p>Windows 11 24H2 では OS のベースイメージから Sense サービスが削除されています。</p>
+<p>そのため、以下のいずれかに該当する端末で MDE を利用するには、オンボード操作の前に Sense サービスを手動でインストールする必要があります。</p>
+<ul>
+<li><strong>Windows 11 24H2 Home をインストールした後に、Pro や Enterprise などのエディションにアップグレードした場合</strong></li>
+<li><strong>ユーザーが購入したデバイスに OEM が必要な機能をインストールしていない場合</strong></li>
+</ul>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://support.microsoft.com/ja-jp/topic/kb5043950-%E6%97%A2%E7%9F%A5%E3%81%AE%E5%95%8F%E9%A1%8Cmicrosoft-defender-for-endpoint-2fd719b6-8c26-469f-99fe-832eb1b702d7">KB5043950: 既知の問題Microsoft Defender for Endpoint - Microsoft サポート</a></p>
+<p>Windows 11 24H2 以降のバージョンを使用する端末に Sense サービスがインストールされていない場合、管理者権限で起動したコマンドプロンプトで以下のコマンドを実行して Sense クライアントのインストールを行います。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DISM /online /<span class="built_in">Add-Capability</span> /CapabilityName:Microsoft.Windows.Sense.Client~~~~</span><br></pre></td></tr></table></figure>
+
+<p>上記のコマンドを実行して Sense サービスをインストールした後、OS を再起動してから再度オンボード操作を実施してください。</p>
+<h2 id="端末が-MDE-の通信要件を満たすことを確認する"><a href="#端末が-MDE-の通信要件を満たすことを確認する" class="headerlink" title="端末が MDE の通信要件を満たすことを確認する"></a>端末が MDE の通信要件を満たすことを確認する</h2><p>オンボード操作後に端末の Sense サービスが正常に稼働しているにも関わらず Microsoft Defender ポータルにデバイス情報が登録されない問題が発生している場合、端末がインターネット経由での MDE のクラウドサービスへの接続に失敗している可能性が考えられます。</p>
+<p>問題が発生している端末が MDE の通信要件を満たしているかについては、<a href="#%E7%AB%AF%E6%9C%AB%E3%81%AE%E9%80%9A%E4%BF%A1%E3%83%86%E3%82%B9%E3%83%88%E3%82%92%E8%A1%8C%E3%81%86">端末の通信テストを行う</a> の項に記載の手順でテストを行うことができます。</p>
+<p>テストの結果、端末の通信要件に問題が発生している可能性があることを確認した場合には、問題の解消のために、端末が MDE のオンボードに必要な通信要件を満たすように構成を変更する必要があります。</p>
+<div class="alert is-important"><p class="alert-title">重要</p><p></p>
+<p>MDE の稼働に必要な暗号化通信の復号はサポートされておりません。</p>
+<p>そのため、ユーザーの環境で TLS(SSL) インスペクションのような HTTPS 通信を復号するシステムを利用する場合は、必ず MDE の通信要件にリストされている通信先を復号の対象から除外してください。</p></div>
+<h3 id="MDE-の通信要件について"><a href="#MDE-の通信要件について" class="headerlink" title="MDE の通信要件について"></a>MDE の通信要件について</h3><p>端末を MDE にオンボードする際に許可する必要がある通信先については、下記公開情報の表からダウンロード可能な [統合 Microsoft Defender for Endpoint URL リスト (合理化)] および [商用のお客様向けのMicrosoft Defender for Endpoint URL リスト (Standard)] のスプレッドシートから確認することができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-environment#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">Defender for Endpoint サービスとの接続を確保するようにネットワーク環境を構成する | Microsoft Learn</a></p>
+<p>どのスプレッドシートに記載の URL を許可する必要があるかについては、ご利用中の端末をオンボードする際に選択した接続方式(標準 もしくは 合理化)によって決定されます。</p>
+<p>標準および合理化オンボードが混在する環境の場合には、各スプレッドシートに記載の URL をすべて許可します。</p>
+<p>合理化オンボードの概要および最小要件については以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-device-connectivity">Microsoft Defender for Endpointの合理化された接続を使用したデバイスのオンボード | Microsoft Learn</a></p>
+<p>また、現在ご利用中の端末がどちらの接続方式を使用しているかについては、MDE Client Analyzer ツールを使用することで確認することができます。</p>
+<p>参考情報：<a href="#%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%8B%E3%82%89%E7%AB%AF%E6%9C%AB%E3%81%AE%E6%8E%A5%E7%B6%9A%E6%96%B9%E5%BC%8F%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">MDE Client Analyzer  レポートから端末の接続方式を確認する方法</a></p>
+<h3 id="合理化された接続方式を使用する場合の通信要件-FQDN-を使用する場合"><a href="#合理化された接続方式を使用する場合の通信要件-FQDN-を使用する場合" class="headerlink" title="合理化された接続方式を使用する場合の通信要件(FQDN を使用する場合)"></a>合理化された接続方式を使用する場合の通信要件(FQDN を使用する場合)</h3><p>合理化された接続方式を使用する場合、<a target="_blank" rel="noopener" href="https://aka.ms/MDE-streamlined-urls">https://aka.ms/MDE-streamlined-urls</a> からダウンロード可能なスプレッドシートに記載の通信先との接続を許可する必要があります。</p>
+<p>このスプレッドシートは、下記ページに記載の表の [統合 Microsoft Defender for Endpoint URL リスト (合理化)] 行からもダウンロードすることができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-environment#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">Defender for Endpoint サービスとの接続を確保するようにネットワーク環境を構成する | Microsoft Learn</a></p>
+<p>FQDN ベースでのアクセス許可を行う場合、ダウンロードしたスプレッドシートの [Common endpoints] シートを参照します。</p>
+<p><img src="../images/Endpoint-MDAV-2025-04-30-03.png" alt="MDE の通信要件"></p>
+<p>[Common endpoints] シート内には、上記の例のようにアクセス許可が必要な通信先の FQDN とポート番号、接続先の用途に関する概要情報などが記載されています。</p>
+<blockquote>
+<p> [!NOTE]</p>
+<p><code>*.endpoint.security.microsoft.com</code> のようにワイルドカード(<code>*</code>) を含む FQDN が指定されている通信先については、 <code>endpoint.security.microsoft.com</code> に対するサブドメインを含むすべての通信を許可するように構成いただく必要があります。</p>
+</blockquote>
+<p>スプレッドシート内の [OS] 列には、対象の FQDN へのアクセス許可が必要な OS プラットフォームが示されています。</p>
+<p>例えば Windows マシンを MDE にオンボードする場合には、 [OS] 列が <code>All</code> の行と <code>Windows</code> の行に記載の FQDN に対するアクセス許可を構成する必要があります。</p>
+<p>また、[Type] 列には、対象の FQDN の許可が必須(<code>Required</code>)か任意(<code>Optional</code>)かを示します。</p>
+<p>MDE を利用する場合には、[Type] 列が必須(<code>Required</code>)の通信先については必ず許可いただく必要があります。</p>
+<p>[Type] 列が任意(<code>Optional</code>)の FQDN については、その通信先を使用する機能(SmartScreen など)を利用しない環境では必ずしも許可いただく必要はありませんが、特別な理由がない場合には任意(<code>Optional</code>)の FQDN についてもアクセス許可を構成することをおすすめします。</p>
+<h3 id="合理化された接続方式を使用する場合の通信要件-IP-アドレスを使用する場合"><a href="#合理化された接続方式を使用する場合の通信要件-IP-アドレスを使用する場合" class="headerlink" title="合理化された接続方式を使用する場合の通信要件(IP アドレスを使用する場合)"></a>合理化された接続方式を使用する場合の通信要件(IP アドレスを使用する場合)</h3><p>合理化された接続方式を使用する場合、静的 IP アドレスを用いたアクセス許可を構成することも可能です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-device-connectivity#option-2-configure-connectivity-using-static-ip-ranges">オプション 2: 静的 IP 範囲を使用して接続を構成する | Microsoft Learn</a></p>
+<p>静的 IP アドレスを用いたアクセス管理を行う場合、<a target="_blank" rel="noopener" href="https://aka.ms/MDE-streamlined-urls">https://aka.ms/MDE-streamlined-urls</a> からダウンロード可能なスプレッドシートの [IP addresses] シートに記載の通り、<a target="_blank" rel="noopener" href="https://azureipranges.azurewebsites.net/">Azure IP Ranges</a> で公開されている IP アドレス範囲の内、サービスタグ <code>MicrosoftDefenderForEndpoint</code> および <code>OneDsCollector</code> と対応する IP アドレスを許可してください。</p>
+<div class="alert is-important"><p class="alert-title">重要</p><p></p>
+<p>静的 IP アドレスを用いたアクセス許可を構成する場合、SmartScreen、Windows Update、CRL などの MDE 以外のサービスとの接続を維持する必要があります。</p></div>
+<h3 id="標準の接続方式を使用する場合の通信要件"><a href="#標準の接続方式を使用する場合の通信要件" class="headerlink" title="標準の接続方式を使用する場合の通信要件"></a>標準の接続方式を使用する場合の通信要件</h3><p>標準の接続方式を利用する場合、<a target="_blank" rel="noopener" href="https://aka.ms/MDE-standard-urls">https://aka.ms/MDE-standard-urls</a> からダウンロード可能なスプレッドシートに記載の通信先との接続を許可する必要があります。</p>
+<p>このスプレッドシートは、下記ページに記載の表の [商用のお客様向けのMicrosoft Defender for Endpoint URL リスト (Standard)] 行からもダウンロードすることができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-environment#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">Defender for Endpoint サービスとの接続を確保するようにネットワーク環境を構成する | Microsoft Learn</a></p>
+<p>標準の接続方式を利用して端末を MDE にオンボードする場合、ダウンロードしたスプレッドシートの [Microsoft Defender URLs] シートに記載の FQDN に対する接続を許可する必要があります。</p>
+<p><img src="../images/Endpoint-MDAV-2025-04-30-04.png" alt="Microsoft Defender URLs シート"></p>
+<p>上記のスプレッドシートからアクセス許可が必要な通信先を特定する場合には、以下の列の情報を確認します。</p>
+<table>
+<thead>
+<tr>
+<th align="center">列名</th>
+<th align="center">確認ポイント</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Endpoint/URL</td>
+<td align="center">MDE の利用時に許可する必要がある通信先の FQDN</td>
+</tr>
+<tr>
+<td align="center">Port</td>
+<td align="center">通信に使用する宛先ポート番号</td>
+</tr>
+<tr>
+<td align="center">Geography</td>
+<td align="center">指定の通信先を使用するリージョン(WW の行はすべてのリージョンで使用する)</td>
+</tr>
+<tr>
+<td align="center">Required / Optional</td>
+<td align="center">指定の通信が必須(<code>Required</code>)もしくは任意(<code>Optional</code>)であるかを示す</td>
+</tr>
+<tr>
+<td align="center">対応 OS プラットフォーム</td>
+<td align="center">Windows バージョンや Linux、macOS など、指定の通信を使用する OS プラットフォームを示す</td>
+</tr>
+</tbody></table>
+<div class="alert is-info"><p class="alert-title">Note</p><p></p>
+<p><code>Endpoint/URL</code> 列で <code>*.endpoint.security.microsoft.com</code> のようにワイルドカード(<code>*</code>) を含む FQDN が指定されている通信先については、 <code>endpoint.security.microsoft.com</code> に対するサブドメインを含むすべての通信を許可するように構成いただく必要があります。</p></div>
+<div class="alert is-info"><p class="alert-title">Note</p><p></p>
+<p><code>Required / Optional</code> 列が任意(<code>Optional</code>)の FQDN については、その通信先を使用する機能(SmartScreen など)を利用しない環境では必ずしも許可いただく必要はありませんが、特別な理由がない場合には任意(<code>Optional</code>)の FQDN についてもアクセス許可を構成することをおすすめします。</p></div>
+<p>なお、MDE を利用するテナントのデータが保存されているリージョンについては Microsoft Defender ポータルの [設定]&gt;[Microsoft Defender XDR]&gt;[アカウント] ページから確認することができます。</p>
+<p><img src="../images/Endpoint-MDAV-2025-04-30-05.png" alt="テナントのリージョン確認方法"></p>
+<h3 id="プロキシサービスを利用する場合"><a href="#プロキシサービスを利用する場合" class="headerlink" title="プロキシサービスを利用する場合"></a>プロキシサービスを利用する場合</h3><p>MDE にオンボードする端末がインターネットに直接接続できない構成の場合、プロキシサービスを利用して MDE の利用に必要な宛先との接続を維持する必要があります。</p>
+<p>MDE が利用可能なプロキシ設定と設定方法については以下の公開情報の記載を確認します。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-proxy-internet">プロキシを使用して Defender for Endpoint サービスに接続するようにデバイスを構成する | Microsoft Learn</a></p>
+<h2 id="端末の通信テストを行う"><a href="#端末の通信テストを行う" class="headerlink" title="端末の通信テストを行う"></a>端末の通信テストを行う</h2><p>MDE Client Analyzer を使用することで端末が MDE の利用に必要なサービスに接続することが可能か否かをテストすることができます。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/overview-client-analyzer">Microsoft Defender for Endpoint Client Analyzer を使用してセンサーの正常性のトラブルシューティングを行う | Microsoft Learn</a></p>
+<div class="alert is-important"><p class="alert-title">重要</p><p></p>
+<p>Windows マシンで MDE Client Analyzer を使用して通信テストを行うには、テストを行う端末で SysInternals PsExec.exe を実行できるようにする必要があります。</p>
+<p>Windows マシンで <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/attack-surface-reduction-rules-reference#block-process-creations-originating-from-psexec-and-wmi-commands">PSExec および WMI コマンドからのプロセスの作成をブロックする</a> 攻撃面の縮小ルール(ASR ルール)を利用している場合、MDE Client Analyzer を使用して通信テストを行うためには一時的に当該ルールを監査モードに変更するか、ASR の除外設定を追加する必要があります。</p></div>
+<p>MDE にオンボードした端末が Microsoft Defender ポータルに登録されない問題が発生する場合、以下の手順で通信テストを行い、通信の問題の有無を確認します。</p>
+<h3 id="MDE-Client-Analyzer-ツールの実行方法"><a href="#MDE-Client-Analyzer-ツールの実行方法" class="headerlink" title="MDE Client Analyzer ツールの実行方法"></a>MDE Client Analyzer ツールの実行方法</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://aka.ms/MDEClientAnalyzer">https://aka.ms/MDEClientAnalyzer</a> から最新の MDEClientAnalyzer.zip をダウンロードし、テストを行う端末で展開します。</li>
+<li>続いて、展開したフォルダ内に含まれる MDEClientAnalyzer.cmd を管理者権限で実行します。(ツールを初めて実行する場合は EULA に同意します。)</li>
+<li>MDEClientAnalyzer.cmd の実行後、ツールによるテストが完了するまでコマンドプロンプトを停止せずに待ちます。</li>
+<li>ツールの実行後、コマンドプロンプトに <code>Your input:</code> というテキストが表示されたら Enter キーを押下してスキップします。</li>
+<li>ツールの実行が完了すると、自動的に既定のブラウザで MDEClientAnalyzer.htm レポートが表示されます。レポートが表示されない場合は、ツールを展開したフォルダ内の<code>MDEClientAnalyzerResult/MDEClientAnalyzer.htm</code> ファイルをダブルクリックしてください。</li>
+<li>ブラウザでレポートを開いた後、[Detailed Results] 欄の情報を確認します。</li>
+</ol>
+<h3 id="レポートから通信テストの結果を確認する方法"><a href="#レポートから通信テストの結果を確認する方法" class="headerlink" title="レポートから通信テストの結果を確認する方法"></a>レポートから通信テストの結果を確認する方法</h3><p>レポート(MDEClientAnalyzer.htm) から通信テストの結果を確認する場合は、レポートの [Detailed Results] 欄の情報を確認します。</p>
+<p>サーバが MDE の通信要件をすべて満たしている場合、以下の例のように通信テストの結果(Category: Connectivity)がすべて  [Informational] として表示されます。</p>
+<p><img src="../images/Endpoint-MDAV-2025-04-30-06.png" alt="通信テスト結果の確認①"></p>
+<p>一方で、MDE Client Analyzer ツールによる通信テストに失敗した項目が存在する場合には、以下のように通信テストの結果に [Error] として表示されます。</p>
+<p>特に、[EDRCloud CnC] の通信エラーが記録される場合、通信要件を満たしていないことが MDE にオンボードしたデバイスが Microsoft Defender ポータルに登録されない問題の原因である可能性が高いと考えられます。</p>
+<p><img src="../images/Endpoint-MDAV-2025-04-30-07.png" alt="通信テスト結果の確認②"></p>
+<p>もし MDE Client Analyzer ツールによる通信テスト結果で MDE の通信テストに失敗していることを確認した場合は、MDE の動作に必要な通信を許可するよう、利用環境のファイアウォールやプロキシの設定をご確認ください。</p>
+<h3 id="端末がプロキシサーバーを使用可能であることを確認する"><a href="#端末がプロキシサーバーを使用可能であることを確認する" class="headerlink" title="端末がプロキシサーバーを使用可能であることを確認する"></a>端末がプロキシサーバーを使用可能であることを確認する</h3><p>MDE が使用可能なプロキシサーバーを設定しているにも関わらず MDE Client Analyzer ツールによる通信テストに失敗する場合、端末にプロキシサーバーの設定が適切に反映されていることを確認します。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-proxy-internet">プロキシを使用して Defender for Endpoint サービスに接続するようにデバイスを構成する | Microsoft Learn</a></p>
+<p>デバイスで netsh コマンドを使用して構成された WinHTTP Proxy もしくはレジストリベースの静的プロキシを構成している場合は、端末に設定されているプロキシサーバーのアドレスをレポート結果から確認することができます。</p>
+<p>netsh コマンドを使用して構成された WinHTTP Proxy を登録している場合、[General Device Details] 内の [System-wide WinHTTP proxy] に設定したプロキシサーバーのアドレスが表示されることを確認します。</p>
+<p><img src="../images/Endpoint-MDAV-2025-04-30-09.png" alt="WinHTTP プロキシの設定確認"></p>
+<p>また、レジストリベースの静的プロキシを構成している場合は [EDR Component Details] 内の [Sense Service Discovered Proxy] を確認します。</p>
+<p><img src="../images/Endpoint-MDAV-2025-04-30-10.png" alt="静的レジストリプロキシ設定の確認"></p>
+<h3 id="レポートから端末の接続方式を確認する"><a href="#レポートから端末の接続方式を確認する" class="headerlink" title="レポートから端末の接続方式を確認する"></a>レポートから端末の接続方式を確認する</h3><p>MDE にオンボードしたデバイスがどの接続方式を利用しているかについても、MDE Client Analyzer  のレポート(MDEClientAnalyzer.htm) から確認することができます。</p>
+<p>デバイスの接続方式を確認するには、レポート結果の [EDR Component Details] 内の [Device Onboarded via Streamlined Connectivity] の項目を参照します。</p>
+<p>デバイスが合理化された接続方式でオンボードされている場合、[Device Onboarded via Streamlined Connectivity] 欄に YES と表示されます。</p>
+<p><img src="../images/Endpoint-MDAV-2025-04-30-08.png" alt="デバイスの接続方式の確認"></p>
+<p>一方で、[Device Onboarded via Streamlined Connectivity] 欄に NO が表示されている場合、対象のデバイスは標準の接続方式でオンボードされていると判断できます。</p>
+<h2 id="問題が解消されない場合の確認ポイント"><a href="#問題が解消されない場合の確認ポイント" class="headerlink" title="問題が解消されない場合の確認ポイント"></a>問題が解消されない場合の確認ポイント</h2><p>Sense サービスが稼働し、端末が MDE の通信要件を満たしているにもかかわらず Microsoft Defender ポータルにデバイスが登録されない問題が継続する場合、以下の各手順をお試しください。</p>
+<h3 id="MDAV-のサービス稼働状況の確認"><a href="#MDAV-のサービス稼働状況の確認" class="headerlink" title="MDAV のサービス稼働状況の確認"></a>MDAV のサービス稼働状況の確認</h3><p>Microsoft Defender ポータルにデバイスが登録されない問題が継続する場合、MDE と連携して動作する MDAV のサービスの稼働状況を確認します。</p>
+<p>MDAV のサービス(WinDefend サービス)の稼働状況は以下のコマンドで確認することができます。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.exe query WinDefend</span><br></pre></td></tr></table></figure>
+
+<p>もし MDAV のサービス(WinDefend サービス)が停止していることを確認した場合、以下のコマンドを実行して端末に DisableAntiSpyware もしくは DisableAntiVirus の値が存在し、0x1 が設定されていないことを確認します。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reg.exe query <span class="string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender&quot;</span> /v DisableAntiSpyware</span><br><span class="line">reg.exe query <span class="string">&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender&quot;</span> /v DisableAntiVirus</span><br></pre></td></tr></table></figure>
+
+<p>もし DisableAntiSpyware もしくは DisableAntiVirus の値が 0x1 に設定されている場合は、これらの設定を解除する必要があります。</p>
+<p>設定の解除のため、グループポリシーおよびローカルグループポリシーで <code>[コンピューターの構成]&gt;[管理用テンプレート]&gt;[Windows コンポーネント]&gt;[Microsoft Defender ウイルス対策]&gt;[Microsoft Defender ウイルス対策を無効にする]</code> のポリシー設定を解除してください。</p>
+<p>※ Microsoft Defender ウイルス対策 ではなく Windows Defender ウイルス対策や Endpoint Protection と表示される場合があります。</p>
+<p>グループポリシーおよびローカルグループポリシーで MDAV の無効化設定を登録いただいていない場合は、設定変更を行うレジストリ値が直接追加されている可能性が考えられます。</p>
+<p>その場合には、<code>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</code> 内の DisableAntiSpyware および DisableAntiVirus のレジストリ値を手動で削除した後、OS の再起動後に MDAV のサービスが起動状態となることをご確認ください。</p>
+<h3 id="エージェントプログラムの更新"><a href="#エージェントプログラムの更新" class="headerlink" title="エージェントプログラムの更新"></a>エージェントプログラムの更新</h3><p>Microsoft Defender ポータルにデバイスが登録されない問題が継続する場合、MDE および MDAV の関連コンポーネントをすべて最新バージョンに更新する必要があります。</p>
+<p>特に、MDE のバージョン(Sense version) が <code>10.8500.xx.xx</code> 未満の場合には、MDE の利用はサポートされず、クラウドサービスとのデータ連携に問題が発生するため、必ず更新を実施いただく必要があります。</p>
+<p>MDE および MDAV のコンポーネントを最新化するには、Microsoft Update(推奨) もしくはその他の手順により以下の更新プログラムをすべてアップデートしてください。</p>
+<ul>
+<li><strong>最新の Windows 累積的更新プログラム(LCU)</strong></li>
+<li><strong>MDAV のプラットフォーム更新プログラム(KB4052623)</strong></li>
+<li><strong>MDAV のセキュリティインテリジェンス(KB2267602)</strong></li>
+<li><strong>(Windows Server 2012 R2 / 2016 のみ) 統合ソリューションパッケージに含まれる EDR センサーの更新プログラム(KB5005292)</strong></li>
+</ul>
+<p>MDAV のプラットフォームおよびセキュリティインテリジェンス更新プログラムについては以下の公開情報を参照してください。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/microsoft-defender-antivirus-updates">Microsoft Defenderウイルス対策セキュリティ インテリジェンスと製品更新プログラム - Microsoft Defender for Endpoint | Microsoft Learn</a></p>
+<p>また、統合ソリューションパッケージに含まれる EDR センサーの更新プログラム(KB5005292) は Windows Server 2012 R2 および 2016 で MDE を利用する場合にのみ更新が必要なプログラムです。</p>
+<p>そのため、Windows Server 2019 以降のバージョンを使用する場合は KB5005292 の更新は不要です。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://support.microsoft.com/ja-jp/topic/edr-%E3%82%BB%E3%83%B3%E3%82%B5%E3%83%BC%E3%81%AE-microsoft-defender-for-endpoint-%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0-f8f69773-f17f-420f-91f4-a8e5167284ac">EDR センサーの Microsoft Defender for Endpoint 更新プログラム - Microsoft サポート</a></p>
+<h3 id="端末情報の削除と再オンボード"><a href="#端末情報の削除と再オンボード" class="headerlink" title="端末情報の削除と再オンボード"></a>端末情報の削除と再オンボード</h3><p>端末が MDE の通信要件を含むすべての要件を満たしているにも関わらず、上記のすべての手順を実行しても問題が解消されない場合、以下の手順で端末を MDE に再オンボードすることで問題が解消できる場合があります。</p>
+<ol>
+<li>以下の公開情報で案内しているいずれかの手順を使用してデバイスを MDE からオフボードします。</li>
+</ol>
+<ul>
+<li>手順1：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-script?view=o365-worldwide#offboard-devices-using-a-local-script">ローカル スクリプトを使用してデバイスをオフボードする | Microsoft Learn</a></li>
+<li>手順2：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-gp?view=o365-worldwide#offboard-devices-using-group-policy">グループ ポリシーを使用してデバイスをオフボードする | Microsoft Learn</a></li>
+<li>手順3：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-mdm?view=o365-worldwide#offboard-devices-using-mobile-device-management-tools">モバイル デバイス管理ツールを使用してデバイスをオフボードする | Microsoft Learn</a></li>
+</ul>
+<ol start="2">
+<li>デバイスのオフボード完了後、コマンドプロンプトで以下のコマンドを実行し、 sense のサービスが停止していることを確認します。</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.exe query Sense</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p><a target="_blank" rel="noopener" href="https://download.sysinternals.com/files/PSTools.zip">https://download.sysinternals.com/files/PSTools.zip</a> から、PsExec.exe ツールをダウンロードし、展開します。</p>
+</li>
+<li><p>管理者権限でコマンドプロンプトを起動し、PsExec.exe ツールを使用して以下のコマンドを実行します。</p>
+</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PsExec.exe <span class="literal">-s</span> cmd.exe</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>[4.] の手順により SYSTEM アカウントで起動したコマンドプロンプト画面にて、以下のコマンドを順に実行します。</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="string">&quot;C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection\Cyber&quot;</span></span><br><span class="line"><span class="built_in">del</span> *.* /f /s /q</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection&quot;</span> /v senseGuid /f</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection&quot;</span> /v <span class="number">7</span>DC0B629<span class="literal">-D7F6</span><span class="literal">-4DB3</span><span class="literal">-9BF7</span><span class="literal">-64D5AAF50F1A</span> /f</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection\48A68F11-7A16-4180-B32C-7F974C7BD783&quot;</span> /f</span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+
+<p>※ 誤ったファイルやレジストリキーを削除しないようご留意ください。また、事前にバックアップを取得いただくことを推奨いたします。</p>
+<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-endpoints-vdi#updating-virtual-desktop-infrastructure-vdi-images-persistent-or-non-persistent">非永続的な仮想デスクトップ インフラストラクチャ (VDI) デバイスのオンボード | Microsoft Learn</a></p>
+<ol start="6">
+<li>ダウンロードした PsExec.exe ツールを含むファイルを必要に応じて削除し、OS を再起動後に端末を再度 MDE にオンボードします。</li>
+</ol>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>Windows デバイスの MDE にオンボード操作を実施したものの、Microsoft Defender ポータルの [アセット]&gt;[デバイス] ページにデバイスが登録されない場合の一般的なトラブルシューティング手順をご案内しました。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li></ul>
+
+        
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/Endpoint-MDAV-2025-04-30.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../Endpoint-MDAV-2025-04-16/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">KB5007651 が何度も再オファーされる事象へのトラブルシューティング</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Microsoft Defender for Endpoint(MDE) にオンボードしたデバイスがデバイスインベントリに登録されない問題のトラブルシューティング手順</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2025-04-16/">KB5007651 が何度も再オファーされる事象へのトラブルシューティング</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2025-02-19/">Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2024-08-19/">Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</a>
+          </li>
+        
+          <li>
+            <a href="../how-to-create-supportcase/">お問い合わせの発行方法について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Active-Directory-Rithts-Management-Service/" rel="tag">Active Directory Rithts Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-AdvancedThreat-Protection/" rel="tag">Azure AdvancedThreat Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-Information-Protection/" rel="tag">Azure Information Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-Linux/" rel="tag">MDE on Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-macOS/" rel="tag">MDE on macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" rel="tag">Microsoft AdvancedThreat Analytics(ATA)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Rights-Management-Service/" rel="tag">Rights Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" rel="tag">セキュリティインテリジェンス</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" rel="tag">マルウェア対策プラットフォーム</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/">Information</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../tags/Active-Directory-Rithts-Management-Service/" style="font-size: 10px;">Active Directory Rithts Management Service</a> <a href="../tags/Azure-AdvancedThreat-Protection/" style="font-size: 10px;">Azure AdvancedThreat Protection</a> <a href="../tags/Azure-Information-Protection/" style="font-size: 16.67px;">Azure Information Protection</a> <a href="../tags/General/" style="font-size: 15px;">General</a> <a href="../tags/Identity-Manager/" style="font-size: 13.33px;">Identity Manager</a> <a href="../tags/Information/" style="font-size: 10px;">Information</a> <a href="../tags/MDE-on-Linux/" style="font-size: 11.67px;">MDE on Linux</a> <a href="../tags/MDE-on-macOS/" style="font-size: 11.67px;">MDE on macOS</a> <a href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" style="font-size: 10px;">Microsoft AdvancedThreat Analytics(ATA)</a> <a href="../tags/Microsoft-Defender-for-Endpoint/" style="font-size: 20px;">Microsoft Defender for Endpoint</a> <a href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" style="font-size: 18.33px;">Microsoft Defender ウイルス対策</a> <a href="../tags/Rights-Management-Service/" style="font-size: 10px;">Rights Management Service</a> <a href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" style="font-size: 10px;">セキュリティインテリジェンス</a> <a href="../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 15px;">チーム紹介</a> <a href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" style="font-size: 10px;">マルウェア対策プラットフォーム</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="https://privacy.microsoft.com/ja-jp/privacystatement" target="_blank" rel=”noopener”>Privacy & Cookies</a> |  
+      <a href="https://www.microsoft.com/ja-jp/legal/intellectualproperty/copyright" target="_blank" rel=”noopener”>Terms of use</a> |
+      <a href="https://www.microsoft.com/ja-jp/legal/intellectualproperty/trademarks" target="_blank" rel=”noopener”>Trademarks</a> |
+      &copy; 2025 CSS Japan Secuirty team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
