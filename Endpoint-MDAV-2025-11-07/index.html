@@ -33,10 +33,10 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/image-20251105135621124.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/image-20251106112557454.png">
 <meta property="article:published_time" content="2025-11-07T06:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-17T05:08:14.839Z">
+<meta property="article:modified_time" content="2026-03-13T04:04:29.178Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
-<meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta property="article:tag" content="Microsoft Defender for Endpoint">
+<meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jp-sec.github.io/blog/images/image-20251007124810120.png">
   
@@ -58,7 +58,7 @@
 <link rel="stylesheet" href="../css/style.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -76,7 +76,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -125,7 +125,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+6ae02b69-83c2-53c7-b90e-9c4311409df0%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMicrosoft+Defender+%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%28MDAV%29%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E4%BF%9D%E8%AD%B7%E3%81%A8%E6%94%B9%E3%81%96%E3%82%93%E9%98%B2%E6%AD%A2%E6%A9%9F%E8%83%BD%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%A8%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2025-11-07%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2025-11-07.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2025-11-07.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-11-07/" data-id="cmlq57bwt003f0nlf17va6bik" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-11-07/" data-id="cuidOC79zFYH-bGmff1H-yawJ" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -185,17 +185,17 @@
 <p>MDAV はクラウド保護機能を使用して Microsoft のクラウドサービスと連携することで、機械学習モデルを利用した高度なスキャンや詳細分析などを行う保護レイヤーをリアルタイム保護機能に追加することができます。</p>
 <p>そのため、クラウド保護機能を利用することで、最新の脅威や未知の脅威に対する MDAV の保護機能が強化される利点があります。</p>
 <p>クラウド保護機能を有効化することで利用可能になる保護機能については下記リンク先の公開情報におまとめしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/enable-cloud-protection-microsoft-defender-antivirus#why-cloud-protection-should-be-turned-on">クラウド保護を有効にする必要がある理由 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/enable-cloud-protection-microsoft-defender-antivirus#why-cloud-protection-should-be-turned-on">クラウド保護を有効にする必要がある理由 | Microsoft Learn</a></p>
 <h3 id="クラウド保護機能の設定を変更する方法"><a href="#クラウド保護機能の設定を変更する方法" class="headerlink" title="クラウド保護機能の設定を変更する方法"></a>クラウド保護機能の設定を変更する方法</h3><p>クラウド保護機能は既定で有効化されており、グループポリシーや Intune、PowerShell コマンドレットなどを利用して設定を変更することができます。</p>
 <p>クラウド保護機能の設定をオンもしくはオフにするために使用可能な方法については以下の公開情報におまとめしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/enable-cloud-protection-microsoft-defender-antivirus#methods-to-configure-cloud-protection">クラウド保護を構成する方法 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/enable-cloud-protection-microsoft-defender-antivirus#methods-to-configure-cloud-protection">クラウド保護を構成する方法 | Microsoft Learn</a></p>
 <p>グループポリシーを使用する場合には、[コンピューターの構成]&gt;[管理用テンプレート]&gt;[Windows コンポーネント]&gt;[Microsoft Defender ウイルス対策]&gt;[MAPS] から [Microsoft MAPS に参加する] ポリシーを使用することでクラウド保護機能を有効化できます。</p>
 <p><img src="../images/image-20251007124810120.png" alt="グループポリシーを使用してクラウド保護機能を有効化する"></p>
 <div class="alert is-info"><p class="alert-title">Note</p><p></p>
 <p>クラウド保護機能を有効化する際に選択可能な「MAPS 基本メンバーシップ」と「MAPS 上級メンバーシップ」のオプションは従来の設定であり、Windows 10 および 11 ではどちらのオプションを使用した場合でも同じレベルのクラウド保護が提供されます。</p></div>
 <h3 id="クラウド保護機能のクラウド保護レベルについて"><a href="#クラウド保護機能のクラウド保護レベルについて" class="headerlink" title="クラウド保護機能のクラウド保護レベルについて"></a>クラウド保護機能のクラウド保護レベルについて</h3><p>MDAV のクラウド保護機能は、既定で正当なファイルを検出するリスクを高めることなく、クラウドサービスとの連携による強力な保護機能を提供しますが、クラウド保護レベルの設定を変更することでより強力な保護を適用することが可能です。</p>
 <p>クラウド保護機能のクラウド保護レベルは、下記公開情報におまとめしている手順にてグループポリシーや Intune を使用して変更することができます。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/specify-cloud-protection-level-microsoft-defender-antivirus">Microsoft Defender ウイルス対策のクラウド保護レベルを指定する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/specify-cloud-protection-level-microsoft-defender-antivirus">Microsoft Defender ウイルス対策のクラウド保護レベルを指定する | Microsoft Learn</a></p>
 <p>クラウド保護レベル「High(高いブロックレベル)」 を使用する場合、クライアントのパフォーマンスを最適化しながら不明なファイルを積極的にブロックすることができますが、一方で正当なファイルを誤検出するリスクが高まります。</p>
 <p>また、クラウド保護レベル「High+(さらに高いブロックレベル)」を使用する場合には、より積極的に安全性が不明なファイルをブロックするようになるため、誤検出のリスクやシステムパフォーマンスに影響を与える可能性がさらに高まります。</p>
 <h3 id="サンプル送信機能について"><a href="#サンプル送信機能について" class="headerlink" title="サンプル送信機能について"></a>サンプル送信機能について</h3><p>MDAV のサンプル送信機能は、クラウド保護機能が端末から送信されたファイルのメタデータから脅威の有無を判定できない場合に、ファイルのサンプルを Microsoft のクラウドサービスに送信し、さらなる調査を要求することができる機能です。</p>
@@ -226,22 +226,22 @@
 <p><img src="../images/image-20251007135921872.png" alt="グループポリシーでサンプル送信機能のオプションを指定する"></p>
 <div class="alert is-success"><p class="alert-title">ヒント</p><p></p>
 <p>端末のセキュリティ向上の観点からは、サンプル送信を有効化して「すべてのサンプルを自動的に送信する」のオプションを使用することをおすすめします。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/cloud-protection-microsoft-antivirus-sample-submission">Microsoft Defender ウイルス対策でのクラウド保護とサンプル提出 | Microsoft Learn</a></p></div>
-<h3 id="BAFS-機能について"><a href="#BAFS-機能について" class="headerlink" title="BAFS 機能について"></a>BAFS 機能について</h3><p>Block at first sight(BAFS)機能とは、クラウド保護機能とサンプル送信機能を利用して新しいマルウェアを検出/ブロックするための保護機能です。</p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/cloud-protection-microsoft-antivirus-sample-submission">Microsoft Defender ウイルス対策でのクラウド保護とサンプル提出 | Microsoft Learn</a></p></div>
+<h3 id="BAFS-機能について"><a href="#BAFS-機能について" class="headerlink" title="BAFS 機能について"></a>BAFS 機能について</h3><p>Block at first sight(BAFS)機能とは、クラウド保護機能とサンプル送信機能を利用して新しいマルウェアを検出&#x2F;ブロックするための保護機能です。</p>
 <p>Microsoft のクラウドサービスがファイルのハッシュ値などの情報から脅威の有無を判断できない場合、MDAV は一時的にファイルをロックし、サンプル送信機能を用いて詳細分析を行います。</p>
 <p>送信されたサンプルファイルに対する詳細分析の結果により、ファイルの実行が許可されるか、ブロックされるかが決定されます。</p>
 <p>BAFS 機能の詳細については以下の公開情報にておまとめしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-block-at-first-sight-microsoft-defender-antivirus">事前ブロックを有効にして、マルウェアを数秒で検出する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-block-at-first-sight-microsoft-defender-antivirus">事前ブロックを有効にして、マルウェアを数秒で検出する | Microsoft Learn</a></p>
 <div class="alert is-warning"><p class="alert-title">警告</p><p></p>
 <p>BAFS 機能を無効化すると端末の保護が低下するため、この機能は有効化することを推奨します。</p></div>
 <h2 id="改ざん防止機能について"><a href="#改ざん防止機能について" class="headerlink" title="改ざん防止機能について"></a>改ざん防止機能について</h2><h3 id="改ざん防止機能の概要"><a href="#改ざん防止機能の概要" class="headerlink" title="改ざん防止機能の概要"></a>改ざん防止機能の概要</h3><p>MDAV の改ざん防止機能(Tamper Protection) は、悪意のある攻撃者による端末のセキュリティ保護機能の設定変更もしくは無効化を防止するための機能です。</p>
 <p>端末で改ざん防止機能を有効化することで、端末のリアルタイム保護機能やクラウド保護機能などの主要な保護機能を無効化が禁止されます。</p>
 <p>改ざん防止機能の詳細については以下の公開情報におまとめしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection">改ざん防止機能を使用してセキュリティ設定を保護する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection">改ざん防止機能を使用してセキュリティ設定を保護する | Microsoft Learn</a></p>
 <h3 id="Windows-端末で改ざん防止機能を有効化する方法"><a href="#Windows-端末で改ざん防止機能を有効化する方法" class="headerlink" title="Windows 端末で改ざん防止機能を有効化する方法"></a>Windows 端末で改ざん防止機能を有効化する方法</h3><p>Windows 端末で改ざん防止機能を有効化する方法は、端末の利用環境により異なります。</p>
 <p>なお、本記事では主に Microsoft Defender for Endpoint(MDE) や Microsoft Intune により端末を管理している環境で改ざん防止機能を有効化する方法をおまとめしております。</p>
 <p>Microsoft Endpoint Configuration Manager(MECM) を利用する場合には下記の公開情報の記載をご参照ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection#how-do-i-configure-or-manage-tamper-protection">改ざん防止機能を使用してセキュリティ設定を保護する</a> </p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection#how-do-i-configure-or-manage-tamper-protection">改ざん防止機能を使用してセキュリティ設定を保護する</a> </p>
 <ol>
 <li><strong>端末が MDE や Intune により管理されていない場合</strong></li>
 </ol>
@@ -253,7 +253,7 @@
 <p>端末が MDE にオンボードされており、Intune により管理されていない場合、Microsoft Defender ポータルの [設定]&gt;[エンドポイント]&gt;[高度な機能] から [改ざん防止] の設定を有効化することで、MDE にオンボードされた要件を満たす端末で改ざん防止機能を有効化することができます。</p>
 <p><img src="../images/image-20251021121016215.png" alt="Microsoft Defender ポータルで改ざん防止機能を有効化する"></p>
 <p>Microsoft Defender ポータルを使用して改ざん防止機能を有効化するための詳しい要件については以下の公開情報におまとめしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-microsoft-365-defender#requirements-for-managing-tamper-protection-in-the-microsoft-defender-portal">Microsoft Defender XDRを使用してorganizationの改ざん防止を管理する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-microsoft-365-defender#requirements-for-managing-tamper-protection-in-the-microsoft-defender-portal">Microsoft Defender XDRを使用してorganizationの改ざん防止を管理する | Microsoft Learn</a></p>
 <div class="alert is-warning"><p class="alert-title">警告</p><p></p>
 <p>Microsoft Defender ポータルから改ざん防止機能を有効化する場合、MDE にオンボードされた端末でクラウド保護機能が有効化されており、Microsoft のクラウドサービスに接続できる必要があります。</p>
 <p>詳細については <a href="#%E6%94%B9%E3%81%96%E3%82%93%E9%98%B2%E6%AD%A2%E6%A9%9F%E8%83%BD%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">改ざん防止機能を有効化できない場合のトラブルシューティング</a> の項を参照してください。</p></div>
@@ -262,7 +262,7 @@
 </ol>
 <p>端末が MDE にオンボードされており、かつ Intune により管理されている場合、端末の改ざん防止機能は MDE もしくは Intune ポリシーのいずれかの方法で有効化することが可能です。</p>
 <p>Intune で改ざん防止機能を管理するためのすべての要件については以下の公開情報の記載をご確認ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-intune#requirements-for-managing-tamper-protection-in-intune">Intune で改ざん防止を管理するための要件 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-intune#requirements-for-managing-tamper-protection-in-intune">Intune で改ざん防止を管理するための要件 | Microsoft Learn</a></p>
 <p>要件を満たす端末で Intune ポリシーを使用して改ざん防止機能を有効化する場合は、Intune 管理ポータルの [エンドポイント セキュリティ]&gt;[ウイルス対策] にて [+ポリシーの作成] をクリックし、Windows プラットフォーム用の Windows Security Experience ポリシーを新規に作成し、[Tamper Protection(Device)] を [オン] に設定します。</p>
 <p><img src="../images/image-20251021121513917.png" alt="Intune ポリシーで改ざん防止機能を有効化する"></p>
 <div class="alert is-success"><p class="alert-title">ヒント</p><p></p>
@@ -274,7 +274,7 @@
 <div class="alert is-warning"><p class="alert-title">警告</p><p></p>
 <p>Windows 端末が Intune に登録された場合、端末の改ざん防止機能は自動的に無効化されます。</p>
 <p>また、Intune に登録した端末で改ざん防止機能を有効化するためには、端末を MDE にオンボードする必要があります。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-intune#requirements-for-managing-tamper-protection-in-intune">Intune で改ざん防止を管理するための要件 | Microsoft Learn</a></p></div>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-intune#requirements-for-managing-tamper-protection-in-intune">Intune で改ざん防止を管理するための要件 | Microsoft Learn</a></p></div>
 <h3 id="改ざん防止機能の設定値を確認する方法"><a href="#改ざん防止機能の設定値を確認する方法" class="headerlink" title="改ざん防止機能の設定値を確認する方法"></a>改ざん防止機能の設定値を確認する方法</h3><p>端末で改ざん防止機能が有効化されているか否かを確認したい場合、Power Shell で以下のコマンドを実行します。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-MpComputerStatus</span> | <span class="built_in">Select-Object</span> IsTamperProtected,TamperProtectionSource</span><br></pre></td></tr></table></figure>
 
@@ -283,7 +283,7 @@
 <p><img src="../images/image-20251027144652624.png" alt="MDE により改ざん防止機能が有効化されている場合"></p>
 <h3 id="ウイルス対策の除外を改ざん防止機能で保護する方法"><a href="#ウイルス対策の除外を改ざん防止機能で保護する方法" class="headerlink" title="ウイルス対策の除外を改ざん防止機能で保護する方法"></a>ウイルス対策の除外を改ざん防止機能で保護する方法</h3><p>要件を満たす端末が MDE にオンボードされており、かつ Intune もしくは Configuration Manager のみにより管理されている場合、ウイルス対策の除外設定を改ざん防止機能により保護することができます。</p>
 <p>端末でウイルス対策の除外に対する改ざん防止機能を利用するために満たす必要があるすべての要件については以下の公開情報におまとめしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-intune#tamper-protection-for-antivirus-exclusions">ウイルス対策の除外に対する改ざん防止 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-intune#tamper-protection-for-antivirus-exclusions">ウイルス対策の除外に対する改ざん防止 | Microsoft Learn</a></p>
 <p>要件を満たす、MDE にオンボード済みかつ Intune のみにより管理されている端末でウイルス対策の除外に対する改ざん防止機能を有効化する場合は、以下の設定を行います。</p>
 <ol>
 <li>端末で「ローカル管理者マージ」の無効化を行います。Intune を使用する場合は、[エンドポイントセキュリティ]&gt;[ウイルス対策] から作成可能な Windows プラットフォーム用の [Microsoft Defender ウイルス対策] ポリシーを使用できます。</li>
@@ -302,7 +302,7 @@
 <ol start="4">
 <li><p>ウイルス対策の除外に対する改ざん防止機能が動作している場合、除外設定の追加が改ざん防止機能により無視されたことをイベント ID 5013 のイベントより確認することができます。</p>
 <p>MDAVのイベントログの詳細については以下の公開情報にてご案内いたしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策イベントの ID とエラー コード</a></p>
+<p>参考情報：<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策イベントの ID とエラー コード</a></p>
 </li>
 </ol>
 <p><img src="../images/image-20251028180600665.png" alt="除外設定の追加が改ざん防止機能により無視されたことを示すイベント"></p>
@@ -312,26 +312,26 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">Get-MpPreference</span>).MAPSReporting</span><br></pre></td></tr></table></figure>
 
 <p>クラウド保護機能の設定をオンに変更するために使用可能な方法については以下の公開情報におまとめしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/enable-cloud-protection-microsoft-defender-antivirus#methods-to-configure-cloud-protection">クラウド保護を構成する方法 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/enable-cloud-protection-microsoft-defender-antivirus#methods-to-configure-cloud-protection">クラウド保護を構成する方法 | Microsoft Learn</a></p>
 <h3 id="クラウド保護機能の接続テストを行う方法"><a href="#クラウド保護機能の接続テストを行う方法" class="headerlink" title="クラウド保護機能の接続テストを行う方法"></a>クラウド保護機能の接続テストを行う方法</h3><p>端末でクラウド保護機能を有効化しているにも関わらず問題が発生する場合、管理者権限で起動したコマンドプロンプトで以下のコマンドを実行することでクラウド保護機能のテストを行います。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;%ProgramFiles%\Windows Defender\MpCmdRun.exe&quot;</span> <span class="literal">-ValidateMapsConnection</span></span><br></pre></td></tr></table></figure>
 
 <p>クラウド保護機能のテストに成功する場合、「ValidateMapsConnection successfully established a connection to MAPS」というメッセージが表示されます。</p>
 <p><img src="../images/image-20251029160954918.png" alt="クラウド保護機能のテストに成功した場合"></p>
 <p>クラウド保護機能のテスト方法の詳細については以下の公開情報をご参考ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#use-the-cmdline-tool-to-validate-cloud-delivered-protection">cmdline ツールを使用してクラウド提供の保護を検証する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#use-the-cmdline-tool-to-validate-cloud-delivered-protection">cmdline ツールを使用してクラウド提供の保護を検証する | Microsoft Learn</a></p>
 <p>なお、上記のテストコマンドがエラーコード 0x80070005 で失敗する場合は、管理者権限で起動したコマンドプロンプトでテストコマンドを実行しているかを今一度ご確認ください。</p>
 <p>また、エラーコード 0x80508015 でテストコマンドが失敗する場合は、<a href="#%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E4%BF%9D%E8%AD%B7%E6%A9%9F%E8%83%BD%E3%81%AE%E8%A8%AD%E5%AE%9A%E5%80%A4%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">クラウド保護機能の設定値を確認する</a> の手順でクラウド保護機能が有効化されていることをご確認ください。</p>
 <p>その他のエラーコードでテストコマンドが失敗する場合には、以下のトラブルシューティング手順をお試しください。</p>
 <h3 id="クラウド保護機能の通信要件を確認する"><a href="#クラウド保護機能の通信要件を確認する" class="headerlink" title="クラウド保護機能の通信要件を確認する"></a>クラウド保護機能の通信要件を確認する</h3><p>クラウド保護機能を有効化しているにも関わらずテストコマンドの実行時にエラーが発生する場合には、まず端末がインターネットに接続可能であるか否かを確認します。</p>
 <p>端末がインターネットに接続可能である場合には、下記公開情報の [サービスと URL] に記載の通信先への接続が、組織のファイアウォールなどによりブロックされていないことをご確認ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#services-and-urls">サービスと URL | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#services-and-urls">サービスと URL | Microsoft Learn</a></p>
 <p>端末がインターネットへの接続にプロキシサーバーを必要とする場合は、システム全体の WinHTTP プロキシを構成することをおすすめいたします。(端末は、指定したプロキシサーバーを経由して前述の [サービスと URL] に記載の通信先と HTTPS 接続できる必要があります。)</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#root-causes">Microsoft Defender ウイルス対策 ネットワーク接続を構成および検証する | Microsoft Learn</a></p>
-<p>WinHTTP プロキシの設定を手動で変更する方法については、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-proxy-internet#configure-the-proxy-server-manually-using-netsh-command">プロキシを使用して Defender for Endpoint サービスに接続するようにデバイスを構成する</a> の記載をご参考ください。</p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#root-causes">Microsoft Defender ウイルス対策 ネットワーク接続を構成および検証する | Microsoft Learn</a></p>
+<p>WinHTTP プロキシの設定を手動で変更する方法については、<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-proxy-internet#configure-the-proxy-server-manually-using-netsh-command">プロキシを使用して Defender for Endpoint サービスに接続するようにデバイスを構成する</a> の記載をご参考ください。</p>
 <div class="alert is-warning"><p class="alert-title">警告</p><p></p>
 <p>端末にシステム全体のプロキシが構成されていない場合、Windows はプロキシを認識せず CRL をフェッチできないため、<code>http://cp.wd.microsoft.com/</code> などの URL への TLS 接続に失敗します。</p></div>
-<p>上記の仕様によりクラウド保護機能に必要な TLS 接続に失敗する問題は、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-proxy-internet#configure-a-static-proxy-for-microsoft-defender-antivirus">Microsoft Defender ウイルス対策(MDAV)の静的プロキシを構成する</a> でご案内している MDAV の静的プロキシのみを利用する端末でも発生する可能性があります。</p>
+<p>上記の仕様によりクラウド保護機能に必要な TLS 接続に失敗する問題は、<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-proxy-internet#configure-a-static-proxy-for-microsoft-defender-antivirus">Microsoft Defender ウイルス対策(MDAV)の静的プロキシを構成する</a> でご案内している MDAV の静的プロキシのみを利用する端末でも発生する可能性があります。</p>
 <p>その場合は、前述の通りシステム全体の WinHTTP プロキシを構成することをおすすめいたしますが、非推奨の回避策としてクラウド保護機能の通信のみ CRL のチェックを無効化するオプションを使用する方法があります。</p>
 <p>この方法でクラウド保護機能の通信のみ CRL のチェックを無効化する場合は、<code>HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet</code> に DWORD 値 SSLOptions を作成し、値を 2 に設定します。</p>
 <p>コマンドを使用してレジストリキーを変更する場合は、管理者権限で起動したコマンドプロンプトで以下のコマンドを実行します。</p>
@@ -339,9 +339,9 @@
 
 <div class="alert is-success"><p class="alert-title">ヒント</p><p></p>
 <p>このオプションの変更は、MDAV のクラウド保護機能の通信にのみ影響し、他のサービスには影響しません。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#solutions">ソリューション | Microsoft Learn</a></p></div>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#solutions">ソリューション | Microsoft Learn</a></p></div>
 <div class="alert is-warning"><p class="alert-title">警告</p><p></p>
-<p>組織で TLS インスペクション機能を持つ製品を利用している場合、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#services-and-urls">サービスと URL</a> に記載の接続先を TLS インスペクションの除外対象に登録することが必要となる場合があります。</p>
+<p>組織で TLS インスペクション機能を持つ製品を利用している場合、<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#services-and-urls">サービスと URL</a> に記載の接続先を TLS インスペクションの除外対象に登録することが必要となる場合があります。</p>
 <p>また、TLS インスペクション機能の影響でクラウド保護機能の通信が失敗している可能性がある場合は、SSLOptions の値を 0 もしくは 1 に変更します。</p></div>
 <h2 id="改ざん防止機能を有効化できない場合のトラブルシューティング"><a href="#改ざん防止機能を有効化できない場合のトラブルシューティング" class="headerlink" title="改ざん防止機能を有効化できない場合のトラブルシューティング"></a>改ざん防止機能を有効化できない場合のトラブルシューティング</h2><p>この項では、改ざん防止機能を有効化できない場合のトラブルシューティング方法をおまとめします。</p>
 <h3 id="問題の発生環境が改ざん防止機能の要件を満たすことを確認する"><a href="#問題の発生環境が改ざん防止機能の要件を満たすことを確認する" class="headerlink" title="問題の発生環境が改ざん防止機能の要件を満たすことを確認する"></a>問題の発生環境が改ざん防止機能の要件を満たすことを確認する</h3><p>ほとんどの場合、改ざん防止機能を有効化できない問題は、その端末が改ざん防止機能の要件を満たしていない場合に発生します。</p>
@@ -351,7 +351,7 @@
 </ol>
 <p>端末が Intune により管理されている場合には、改ざん防止機能を有効化したい端末が MDE にオンボードされていることを確認してください。</p>
 <p>端末が MDE にオンボードされていない場合、Intune により管理されている端末の改ざん防止機能を有効化することはできません。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-intune#requirements-for-managing-tamper-protection-in-intune">Intune で改ざん防止を管理するための要件 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-intune#requirements-for-managing-tamper-protection-in-intune">Intune で改ざん防止を管理するための要件 | Microsoft Learn</a></p>
 <ol start="2">
 <li><strong>端末が MDE にオンボードされている場合</strong></li>
 </ol>
@@ -367,7 +367,7 @@
 <p>クラウド保護機能を利用すると、MDAV は最新の脅威からリアルタイムに端末を保護できるようになります。</p>
 <p>また、MDAV のサンプル送信機能を有効化している場合、クラウド保護機能は未知の脅威や<br> ウイルス対策製品のすり抜けを目的とした悪意のあるファイルの実行を速やかにブロックし、端末の保護レベルを向上します。</p>
 <p>以下は、クラウド保護とサンプル送信機能が端末の保護を行う際の動作を簡略化した説明です。</p>
-<p>より詳細な内容については、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/cloud-protection-microsoft-antivirus-sample-submission#how-cloud-protection-and-sample-submission-work-together">クラウド保護とサンプル提出のしくみ</a> の記載をご参考ください。</p>
+<p>より詳細な内容については、<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/cloud-protection-microsoft-antivirus-sample-submission#how-cloud-protection-and-sample-submission-work-together">クラウド保護とサンプル提出のしくみ</a> の記載をご参考ください。</p>
 <ol>
 <li>MDAV によるリアルタイムファイルスキャン時に、端末内のセキュリティインテリジェンス(定義ファイル) などの情報から脅威の有無を明確に判断できない場合には、より高度な分析のためにファイルのメタデータがクラウドサービスに送信されます。(この時送信されるデータにはファイルのデータや個人情報などは含まれず、脅威判定に利用されるハッシュ化された情報などの非常に小さなデータが送信されます。)</li>
 <li>送信されたメタデータを Microsoft のクラウドサービスで解析した結果、さらなる分析が必要と判断された場合には、端末にサンプルファイルの送信が要求されます。</li>
@@ -376,13 +376,13 @@
 <li>クラウド保護機能によるスキャンの結果が端末に提供され、スキャン結果に応じてファイルのブロックなどの処理が行われます。</li>
 </ol>
 <h3 id="クラウド保護機能が利用する通信先のアドレスを教えてください"><a href="#クラウド保護機能が利用する通信先のアドレスを教えてください" class="headerlink" title="クラウド保護機能が利用する通信先のアドレスを教えてください"></a>クラウド保護機能が利用する通信先のアドレスを教えてください</h3><p>クラウド保護機能を含む MDAV が利用する通信先は下記公開情報にてご案内しております。</p>
-<p>クラウド保護機能が使用するアドレスについては、「Microsoft Defenderウイルス対策クラウド配信保護サービス / Microsoft Active Protection Service (MAPS) 」の項をご確認ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#services-and-urls">Microsoft Defender ウイルス対策 ネットワーク接続を構成および検証する | Microsoft Learn</a></p>
+<p>クラウド保護機能が使用するアドレスについては、「Microsoft Defenderウイルス対策クラウド配信保護サービス &#x2F; Microsoft Active Protection Service (MAPS) 」の項をご確認ください。</p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-network-connections-microsoft-defender-antivirus#services-and-urls">Microsoft Defender ウイルス対策 ネットワーク接続を構成および検証する | Microsoft Learn</a></p>
 <h3 id="アプリケーションの初回実行時のみ起動が遅い場合があるのはなぜですか"><a href="#アプリケーションの初回実行時のみ起動が遅い場合があるのはなぜですか" class="headerlink" title="アプリケーションの初回実行時のみ起動が遅い場合があるのはなぜですか"></a>アプリケーションの初回実行時のみ起動が遅い場合があるのはなぜですか</h3><p>端末が BAFS 機能を有効化している場合、MDAV は未知のファイルの実行を一時的にロックし、クラウドサービスの詳細分析を待機する場合があります。</p>
 <p>そのため、BAFS 機能を有効化している場合には、アプリケーションの初回起動時のみ起動が遅延する事象が発生する場合があります。</p>
 <p>なお、クラウド保護とサンプル送信機能および BAFS 機能は、端末の保護の観点からいずれも有効化いただくことを推奨しております。</p>
 <p>そのため、アプリケーションの初回起動時の遅延を回避する目的でこれらの機能を無効化いただくことはおすすめしません。</p>
-<p>もし、BAFS 機能によるアプリケーション起動時の遅延を許容できない場合には、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-cloud-block-timeout-period-microsoft-defender-antivirus">クラウド ブロックのタイムアウト期間を構成する</a> に記載の手順に従いファイルブロックのタイムアウト期間を変更するか、ウイルス対策の除外設定の利用を検討してください。</p>
+<p>もし、BAFS 機能によるアプリケーション起動時の遅延を許容できない場合には、<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-cloud-block-timeout-period-microsoft-defender-antivirus">クラウド ブロックのタイムアウト期間を構成する</a> に記載の手順に従いファイルブロックのタイムアウト期間を変更するか、ウイルス対策の除外設定の利用を検討してください。</p>
 <div class="alert is-important"><p class="alert-title">重要</p><p></p>
 <p>スキャン除外の設定はセキュリティレベルの低下をもたらす恐れがあるため、弊社では原則として不必要な除外設定の実施を推奨しておりません。</p>
 <p>また、MDAV の除外設定を行う際には、除外に伴うセキュリティリスクの評価や、組織のセキュリティポリシーに合わせた設定の検討および定期的なレビューなどの実施をおすすめしております。</p></div>
@@ -393,13 +393,13 @@
 <p><img src="../images/image-20250924163922821.png" alt="グループポリシーで MAPS を有効化する"></p>
 <h2 id="改ざん防止機能に関するよくある質問"><a href="#改ざん防止機能に関するよくある質問" class="headerlink" title="改ざん防止機能に関するよくある質問"></a>改ざん防止機能に関するよくある質問</h2><p>本項では、MDAV の改ざん防止機能に関するよくある質問についておまとめいたします。</p>
 <h3 id="改ざん防止機能により保護される設定は何ですか"><a href="#改ざん防止機能により保護される設定は何ですか" class="headerlink" title="改ざん防止機能により保護される設定は何ですか"></a>改ざん防止機能により保護される設定は何ですか</h3><p>改ざん防止機能が有効化されている場合に変更から保護される設定については以下の公開情報にておまとめしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection#what-happens-when-tamper-protection-is-turned-on">改ざん防止が有効になっているとどうなりますか? | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection#what-happens-when-tamper-protection-is-turned-on">改ざん防止が有効になっているとどうなりますか? | Microsoft Learn</a></p>
 <div class="alert is-info"><p class="alert-title">Note</p><p></p>
-<p>ウイルス対策の除外に対する改ざん防止は、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-intune#tamper-protection-for-antivirus-exclusions">ウイルス対策の除外に対する改ざん防止</a> に記載の要件を満たす場合にのみ適用されます。</p></div>
+<p>ウイルス対策の除外に対する改ざん防止は、<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/manage-tamper-protection-intune#tamper-protection-for-antivirus-exclusions">ウイルス対策の除外に対する改ざん防止</a> に記載の要件を満たす場合にのみ適用されます。</p></div>
 <p>改ざん防止機能により、組織の端末に配布している設定の変更がブロックもしくは無視されたことを確認する場合は、MDAV のイベントログから ID 5013 のイベントを確認します。</p>
 <p><img src="../images/image-20251104154916375.png" alt="改ざん防止による設定変更のブロックイベント"></p>
 <p>MDAVのイベントログの詳細については以下の公開情報にてご案内いたしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策イベントの ID とエラー コード</a></p>
+<p>参考情報：<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策イベントの ID とエラー コード</a></p>
 <h3 id="トラブルシューティングのために改ざん防止機能で保護された設定を変更する方法はありますか"><a href="#トラブルシューティングのために改ざん防止機能で保護された設定を変更する方法はありますか" class="headerlink" title="トラブルシューティングのために改ざん防止機能で保護された設定を変更する方法はありますか"></a>トラブルシューティングのために改ざん防止機能で保護された設定を変更する方法はありますか</h3><p>特定の端末でのトラブルシューティングを目的として一時的に改ざん防止機能を無効化し、保護された設定を変更したい場合には、MDE のトラブルシューティングモードを利用することができます。</p>
 <p>MDE にオンボードされている端末でトラブルシューティングモードを有効化するには、Microsoft Defender ポータルで対象の端末の詳細画面を開き、右上のメニューから [トラブルシューティングモードをオンにする] を選択します。</p>
 <p><img src="../images/image-20251104174816214.png" alt="トラブルシューティングモードを有効化する"></p>
@@ -408,14 +408,14 @@
 
 <p>端末のトラブルシューティングモードを有効化すると、既定の有効期限が経過するまで、端末の改ざん防止機能を無効化して保護された設定を変更できるようになります。</p>
 <p>詳細については下記公開情報の記載をご確認ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/enable-troubleshooting-mode">Microsoft Defender for Endpointでのトラブルシューティング モードの概要 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/enable-troubleshooting-mode">Microsoft Defender for Endpointでのトラブルシューティング モードの概要 | Microsoft Learn</a></p>
 <div class="alert is-info"><p class="alert-title">Note</p><p></p>
 <p>端末が MDE にオンボードされていない場合、Windows セキュリティアプリから改ざん防止機能を無効化することができます。</p></div>
 <h3 id="Windows-セキュリティアプリに改ざん防止の項目が表示されません"><a href="#Windows-セキュリティアプリに改ざん防止の項目が表示されません" class="headerlink" title="Windows セキュリティアプリに改ざん防止の項目が表示されません"></a>Windows セキュリティアプリに改ざん防止の項目が表示されません</h3><p>ご利用中の OS が下記公開情報にてご案内しているバージョンの Windows Server OS である場合、Windows セキュリティアプリに改ざん防止の項目は表示されません。</p>
 <p>Windows Server で改ざん防止機能が有効化されているか否かを確認したい場合は、PowerShell で以下のコマンドを実行してください。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-MpComputerStatus</span> | <span class="built_in">Select-Object</span> IsTamperProtected,TamperProtectionSource</span><br></pre></td></tr></table></figure>
 
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection#tamper-protection-on-windows-server-2012-r2-2016-or-windows-version-1709-1803-or-1809">Windows Server 2012 R2、2016、または Windows バージョン 1709、1803、または 1809 での改ざん防止 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection#tamper-protection-on-windows-server-2012-r2-2016-or-windows-version-1709-1803-or-1809">Windows Server 2012 R2、2016、または Windows バージョン 1709、1803、または 1809 での改ざん防止 | Microsoft Learn</a></p>
 <p>また、トラブルシューティングモードを有効化した後に Windows Server  の改ざん防止機能を無効化したい場合は、管理者権限で起動した PowerShell で以下のコマンドを実行してください。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-MPPreference</span> <span class="literal">-DisableTamperProtection</span> <span class="variable">$true</span></span><br></pre></td></tr></table></figure>
 
@@ -425,7 +425,7 @@
 <h3 id="Windows-Server-でパッシブモードへの切り替えができません"><a href="#Windows-Server-でパッシブモードへの切り替えができません" class="headerlink" title="Windows Server でパッシブモードへの切り替えができません"></a>Windows Server でパッシブモードへの切り替えができません</h3><p>MDAV がアクティブモードで稼働する Windows Server を MDE にオンボードして改ざん防止機能を有効化した場合、レジストリキーを追加して ForceDefenderPassiveMode を 1 に設定した場合でも MDAV の動作モードはパッシブモードには切り替わりません。</p>
 <p>そのため、Windows Server でサードパーティのウイルス対策製品と MDE を併用する場合には、端末を MDE にオンボードする前に、MDAV の動作モードをパッシブモードに変更しておく必要があります。</p>
 <p>Windows Server でパッシブモードを使用する方法の詳細については下記公開情報をご参考ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/microsoft-defender-antivirus-compatibility#windows-server-and-passive-mode">Windows Serverモードとパッシブ モード | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/microsoft-defender-antivirus-compatibility#windows-server-and-passive-mode">Windows Serverモードとパッシブ モード | Microsoft Learn</a></p>
 <h3 id="改ざん防止機能をグループポリシーで管理することはできますか"><a href="#改ざん防止機能をグループポリシーで管理することはできますか" class="headerlink" title="改ざん防止機能をグループポリシーで管理することはできますか"></a>改ざん防止機能をグループポリシーで管理することはできますか</h3><p>本記事作成時点では、改ざん防止機能をグループポリシーで有効化もしくは無効化することはできません。</p>
 <h3 id="改ざん防止機能をレジストリキーで管理することはできますか"><a href="#改ざん防止機能をレジストリキーで管理することはできますか" class="headerlink" title="改ざん防止機能をレジストリキーで管理することはできますか"></a>改ざん防止機能をレジストリキーで管理することはできますか</h3><p>本記事作成時点では、改ざん防止機能をグループポリシーで有効化もしくは無効化することはできません。</p>
 <div class="alert is-warning"><p class="alert-title">警告</p><p></p>
@@ -487,7 +487,7 @@
 </ol>
 <div class="alert is-info"><p class="alert-title">Note</p><p></p>
 <p>ヘッドレス UI モードが有効化されており、Windows セキュリティアプリを使用できない場合には、ヘッドレス UI モードを無効化するか、組織の管理者にご確認ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/prevent-end-user-interaction-microsoft-defender-antivirus">Microsoft Defenderウイルス対策インターフェイスを非表示にする | Microsoft Learn</a></p></div>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/prevent-end-user-interaction-microsoft-defender-antivirus">Microsoft Defenderウイルス対策インターフェイスを非表示にする | Microsoft Learn</a></p></div>
 <h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、MDAV のクラウド保護と改ざん防止機能に関するよくある質問とトラブルシューティング手順をおまとめしました。</p>
 
       
@@ -506,6 +506,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="../Endpoint-MDAV-2026-03-06/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング
+        
+      </div>
+    </a>
   
   
     <a href="../Endpoint-MDAV-2025-04-30/" id="article-nav-older" class="article-nav-link-wrap">
@@ -529,6 +538,10 @@
       <ul>
         
           <li>
+            <a href="../Endpoint-MDAV-2026-03-06/">ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</a>
+          </li>
+        
+          <li>
             <a href="">Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</a>
           </li>
         
@@ -542,10 +555,6 @@
         
           <li>
             <a href="../Endpoint-MDAV-2025-02-19/">Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</a>
-          </li>
-        
-          <li>
-            <a href="../Endpoint-MDAV-2024-08-19/">Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</a>
           </li>
         
       </ul>
@@ -568,7 +577,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2026/03/">2026 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
     </div>
   </div>
 

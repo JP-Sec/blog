@@ -6,12 +6,12 @@
   
   <title>Microsoft Defender ウイルス対策のセキュリティインテリジェンス(定義ファイル)を手動で更新・ロールバック・削除する方法 | Japan CSS Security Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは Azure Security サポートチームです。 本記事ではMicrosoft  Defender ウイルス対策(MDAV)のセキュリティインテリジェンスの更新プログラム(定義ファイル&#x2F;エンジン)を手動で更新する方法についてご案内いたします。 ※ 本記事の内容はWindow 10 21H2環境にて動作を確認いたしております。  本記事の内容 MDAVのセキュリティインテリジェンスにつ">
+  <meta name="description" content="こんにちは Azure Security サポートチームです。 本記事ではMicrosoft  Defender ウイルス対策(MDAV)のセキュリティインテリジェンスの更新プログラム(定義ファイル&#x2F;エンジン)を手動で更新する方法についてご案内いたします。 ※ 本記事の内容はWindow 10 21H2環境にて動作を確認いたしております。  本記事の内容 MDAVのセキュリティインテリジ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Microsoft Defender ウイルス対策のセキュリティインテリジェンス(定義ファイル)を手動で更新・ロールバック・削除する方法">
 <meta property="og:url" content="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-07-29/index.html">
 <meta property="og:site_name" content="Japan CSS Security Support Blog">
-<meta property="og:description" content="こんにちは Azure Security サポートチームです。 本記事ではMicrosoft  Defender ウイルス対策(MDAV)のセキュリティインテリジェンスの更新プログラム(定義ファイル&#x2F;エンジン)を手動で更新する方法についてご案内いたします。 ※ 本記事の内容はWindow 10 21H2環境にて動作を確認いたしております。  本記事の内容 MDAVのセキュリティインテリジェンスにつ">
+<meta property="og:description" content="こんにちは Azure Security サポートチームです。 本記事ではMicrosoft  Defender ウイルス対策(MDAV)のセキュリティインテリジェンスの更新プログラム(定義ファイル&#x2F;エンジン)を手動で更新する方法についてご案内いたします。 ※ 本記事の内容はWindow 10 21H2環境にて動作を確認いたしております。  本記事の内容 MDAVのセキュリティインテリジ">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-07-29-001.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-07-29-002.png">
@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-07-29-005.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-07-29-006.png">
 <meta property="article:published_time" content="2022-08-04T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-17T05:08:14.838Z">
+<meta property="article:modified_time" content="2026-03-13T04:04:29.176Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta property="article:tag" content="セキュリティインテリジェンス">
@@ -45,7 +45,7 @@
 <link rel="stylesheet" href="../css/style.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -63,7 +63,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -112,13 +112,13 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7f863124-677b-573f-a0c9-dcf1777f13e6%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMicrosoft+Defender+%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9%28%E5%AE%9A%E7%BE%A9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%29%E3%82%92%E6%89%8B%E5%8B%95%E3%81%A7%E6%9B%B4%E6%96%B0%E3%83%BB%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%90%E3%83%83%E3%82%AF%E3%83%BB%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2022-07-29%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2022-07-29.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2022-07-29.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-07-29/" data-id="cmlq57bvc000k0nlf8xry2p5a" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-07-29/" data-id="cuidWK70q_F99dIfqWkAiTB5x" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>こんにちは Azure Security サポートチームです。</p>
-<p>本記事ではMicrosoft  Defender ウイルス対策(MDAV)のセキュリティインテリジェンスの更新プログラム(定義ファイル/エンジン)を手動で更新する方法についてご案内いたします。</p>
+<p>本記事ではMicrosoft  Defender ウイルス対策(MDAV)のセキュリティインテリジェンスの更新プログラム(定義ファイル&#x2F;エンジン)を手動で更新する方法についてご案内いたします。</p>
 <p>※ 本記事の内容はWindow 10 21H2環境にて動作を確認いたしております。</p>
 <!-- omit in toc -->
 <h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul>
@@ -138,10 +138,10 @@
 </li>
 <li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li>
 </ul>
-<h2 id="MDAVのセキュリティインテリジェンスについて"><a href="#MDAVのセキュリティインテリジェンスについて" class="headerlink" title="MDAVのセキュリティインテリジェンスについて"></a>MDAVのセキュリティインテリジェンスについて</h2><p>MDAVにより端末に最新の脅威からの保護を提供するためには、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#security-intelligence-updates">セキュリティインテリジェンスの更新プログラム</a>と<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#product-updates">製品の更新プログラム</a>を常に最新に保つことが重要です。</p>
+<h2 id="MDAVのセキュリティインテリジェンスについて"><a href="#MDAVのセキュリティインテリジェンスについて" class="headerlink" title="MDAVのセキュリティインテリジェンスについて"></a>MDAVのセキュリティインテリジェンスについて</h2><p>MDAVにより端末に最新の脅威からの保護を提供するためには、<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#security-intelligence-updates">セキュリティインテリジェンスの更新プログラム</a>と<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#product-updates">製品の更新プログラム</a>を常に最新に保つことが重要です。</p>
 <p>MDAVのセキュリティインテリジェンスの更新プログラムは、2022年8月時点では「KB2267602」にてリリースされております。</p>
-<p>また、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/cloud-protection-microsoft-defender-antivirus?view=o365-worldwide">クラウド保護(MAPS )</a>をご利用中の環境の場合は、「KB2267602」で配信される通常のセキュリティインテリジェンスの更新プログラムに加えて、動的なセキュリティインテリジェンス更新プログラムを取得し、端末に最新の保護を提供します。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#security-intelligence-updates">セキュリティインテリジェンスの更新プログラム</a></p>
+<p>また、<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/cloud-protection-microsoft-defender-antivirus?view=o365-worldwide">クラウド保護(MAPS )</a>をご利用中の環境の場合は、「KB2267602」で配信される通常のセキュリティインテリジェンスの更新プログラムに加えて、動的なセキュリティインテリジェンス更新プログラムを取得し、端末に最新の保護を提供します。</p>
+<p>参考情報：<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#security-intelligence-updates">セキュリティインテリジェンスの更新プログラム</a></p>
 <p>本記事では、MDAVのセキュリティインテリジェンスの更新プログラムを手動で更新する方法についてご紹介いたします。</p>
 <p>また、トラブルシューティングの目的で、MDAVのセキュリティインテリジェンスおよび動的なセキュリティインテリジェンスを手動でロールバック・削除する方法についてもご紹介いたします。</p>
 <h2 id="MDAVのセキュリティインテリジェンスを手動で更新する方法"><a href="#MDAVのセキュリティインテリジェンスを手動で更新する方法" class="headerlink" title="MDAVのセキュリティインテリジェンスを手動で更新する方法"></a>MDAVのセキュリティインテリジェンスを手動で更新する方法</h2><p>MDAVのセキュリティインテリジェンスを手動で更新する場合、以下のいずれかの方法が利用できます。</p>
@@ -158,18 +158,18 @@
 <h3 id="Windows-セキュリティアプリを使用して更新する"><a href="#Windows-セキュリティアプリを使用して更新する" class="headerlink" title="Windows セキュリティアプリを使用して更新する"></a>Windows セキュリティアプリを使用して更新する</h3><p>Windows セキュリティアプリを開き、[ウイルスと脅威の防止]&gt;[ウイルスと脅威の防止の更新]&gt;[更新プログラムのチェック]を開きます。</p>
 <p>ここで、[更新プログラムのチェック]をクリックすることで、セキュリティインテリジェンスの更新プログラムを手動更新することが可能です。</p>
 <p><img src="../images/Endpoint-MDAV-2022-07-29-002.png" alt="Endpoint-MDAV-2022-07-29-002"></p>
-<p>この時に使用されるセキュリティインテリジェンスの更新元は、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#fallback-order">フォールバック順序</a>の設定によって決定されます。</p>
-<h3 id="Power-Shell-コマンドレットを使用して更新する"><a href="#Power-Shell-コマンドレットを使用して更新する" class="headerlink" title="Power Shell コマンドレットを使用して更新する"></a>Power Shell コマンドレットを使用して更新する</h3><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/powershell/module/defender/update-mpsignature?view=windowsserver2022-ps">Update-MpSignature</a>コマンドレットを使用することで、Power Shellから手動でセキュリティインテリジェンスの更新を実施することが可能です。</p>
+<p>この時に使用されるセキュリティインテリジェンスの更新元は、<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#fallback-order">フォールバック順序</a>の設定によって決定されます。</p>
+<h3 id="Power-Shell-コマンドレットを使用して更新する"><a href="#Power-Shell-コマンドレットを使用して更新する" class="headerlink" title="Power Shell コマンドレットを使用して更新する"></a>Power Shell コマンドレットを使用して更新する</h3><p><a href="https://docs.microsoft.com/ja-jp/powershell/module/defender/update-mpsignature?view=windowsserver2022-ps">Update-MpSignature</a>コマンドレットを使用することで、Power Shellから手動でセキュリティインテリジェンスの更新を実施することが可能です。</p>
 <p>セキュリティインテリジェンスを更新するためには、端末でPower Shellを起動し、以下のコマンドレットを実行します。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\&gt; <span class="built_in">Update-MpSignature</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="../images/Endpoint-MDAV-2022-07-29-003.png" alt="Endpoint-MDAV-2022-07-29-003"></p>
-<p>この時に使用されるセキュリティインテリジェンスの更新元は、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#fallback-order">フォールバック順序</a>の設定によって決定されます。</p>
+<p>この時に使用されるセキュリティインテリジェンスの更新元は、<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#fallback-order">フォールバック順序</a>の設定によって決定されます。</p>
 <p>特定の更新元を指定する場合は、<code>-UpdateSource</code>オプションを使用します。</p>
 <p>以下の例では、Microsoft Malware Protection Center (MMPC)からセキュリティインテリジェンスの更新元として使用します。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\&gt; <span class="built_in">Update-MpSignature</span> <span class="literal">-UpdateSource</span> <span class="string">&quot;MMPC&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>その他のオプションについては<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/powershell/module/defender/update-mpsignature?view=windowsserver2022-ps">こちら</a>を参照してください。</p>
+<p>その他のオプションについては<a href="https://docs.microsoft.com/ja-jp/powershell/module/defender/update-mpsignature?view=windowsserver2022-ps">こちら</a>を参照してください。</p>
 <h3 id="MpCmdRun-ユーティリティを使用して更新する"><a href="#MpCmdRun-ユーティリティを使用して更新する" class="headerlink" title="MpCmdRun ユーティリティを使用して更新する"></a>MpCmdRun ユーティリティを使用して更新する</h3><p>コマンドライン ツール<code>MpCmdRun.exe</code>を使用して手動でセキュリティインテリジェンスの更新を実施することができます。</p>
 <p><code>MpCmdRun.exe</code>は、システムの以下のフォルダに存在します。<br>(使用するためには、管理者権限でPower Shellかコマンドプロンプトを起動する必要があります)</p>
 <ul>
@@ -179,48 +179,48 @@
 <p><code>MpCmdRun.exe</code>を用いてセキュリティインテリジェンスを手動更新するためには、管理者権限で起動したPower Shellにて以下のコマンドを実行します。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Program Files\Windows Defender&gt; .\MpCmdRun.exe <span class="literal">-SignatureUpdate</span></span><br></pre></td></tr></table></figure>
 
-<p>この時に使用されるセキュリティインテリジェンスの更新元についても、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#fallback-order">フォールバック順序</a>の設定によって決定されます。</p>
+<p>この時に使用されるセキュリティインテリジェンスの更新元についても、<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#fallback-order">フォールバック順序</a>の設定によって決定されます。</p>
 <p>更新元を指定する場合は、</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Program Files\Windows Defender&gt; .\MpCmdRun.exe <span class="literal">-SignatureUpdate</span></span><br></pre></td></tr></table></figure>
 
 <p><code>MpCmdRun.exe</code>の詳細については以下の公開情報をご参照ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/command-line-arguments-microsoft-defender-antivirus?view=o365-worldwide">コマンドラインを使用して Microsoft Defender ウイルス対策を管理する</a></p>
+<p>参考情報：<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/command-line-arguments-microsoft-defender-antivirus?view=o365-worldwide">コマンドラインを使用して Microsoft Defender ウイルス対策を管理する</a></p>
 <h3 id="手動更新パッケージを取得して更新する"><a href="#手動更新パッケージを取得して更新する" class="headerlink" title="手動更新パッケージを取得して更新する"></a>手動更新パッケージを取得して更新する</h3><p>以下のURLにて公開しているページから、セキュリティインテリジェンスの手動更新用プログラムをダウンロードすることが可能です。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/wdsi/defenderupdates">セキュリティインテリジェンスの更新</a></p>
+<p>参考情報：<a href="https://www.microsoft.com/en-us/wdsi/defenderupdates">セキュリティインテリジェンスの更新</a></p>
 <p>上記のページにアクセスし、[Antimalware solution]の表から、更新対象のプラットフォームに対応したリンクをクリックします。</p>
-<p>例：Intel CPU / Windows 10 21h2 の場合は、[Microsoft Defender Antivirus for Windows 11, Windows 10, Windows 8.1, and Windows Server]の行の[64-bit]のリンクをクリックします</p>
+<p>例：Intel CPU &#x2F; Windows 10 21h2 の場合は、[Microsoft Defender Antivirus for Windows 11, Windows 10, Windows 8.1, and Windows Server]の行の[64-bit]のリンクをクリックします</p>
 <p><img src="../images/Endpoint-MDAV-2022-07-29-004.png" alt="Endpoint-MDAV-2022-07-29-004"></p>
 <p>ダウンロードしたファイルを右クリックして[管理者として実行]をクリックすることで、バックグラウンドでセキュリティインテリジェンスの更新が完了します。</p>
-<h2 id="MDAVのセキュリティインテリジェンスを手動で削除する方法"><a href="#MDAVのセキュリティインテリジェンスを手動で削除する方法" class="headerlink" title="MDAVのセキュリティインテリジェンスを手動で削除する方法"></a>MDAVのセキュリティインテリジェンスを手動で削除する方法</h2><p>続いて、トラブルシューティングを目的としてMDAVのセキュリティインテリジェンスをロールバック/削除する方法についてご紹介いたします。</p>
+<h2 id="MDAVのセキュリティインテリジェンスを手動で削除する方法"><a href="#MDAVのセキュリティインテリジェンスを手動で削除する方法" class="headerlink" title="MDAVのセキュリティインテリジェンスを手動で削除する方法"></a>MDAVのセキュリティインテリジェンスを手動で削除する方法</h2><p>続いて、トラブルシューティングを目的としてMDAVのセキュリティインテリジェンスをロールバック&#x2F;削除する方法についてご紹介いたします。</p>
 <p>セキュリティインテリジェンスのリストア・削除は、コマンドライン ツール<code>MpCmdRun.exe</code>を使用することで実施することが可能です。</p>
 <p><code>MpCmdRun.exe</code>は、システムの以下のフォルダに存在します。<br>(使用するためには、管理者権限でPower Shellかコマンドプロンプトを起動する必要があります)</p>
 <ul>
 <li>C:\Program Files\Windows Defender</li>
 <li>C:\ProgramData\Microsoft\Windows Defender\Platform\&lt;最新のプラットフォームバージョン&gt;</li>
 </ul>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/command-line-arguments-microsoft-defender-antivirus?view=o365-worldwide">コマンドラインを使用して Microsoft Defender ウイルス対策を管理する</a></p>
+<p>参考情報：<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/command-line-arguments-microsoft-defender-antivirus?view=o365-worldwide">コマンドラインを使用して Microsoft Defender ウイルス対策を管理する</a></p>
 <h3 id="セキュリティインテリジェンスのロールバック・削除方法"><a href="#セキュリティインテリジェンスのロールバック・削除方法" class="headerlink" title="セキュリティインテリジェンスのロールバック・削除方法"></a>セキュリティインテリジェンスのロールバック・削除方法</h3><p><strong>注意：セキュリティインテリジェンスを削除するとMDAVによる保護が提供できなくなりますためご留意ください。</strong></p>
-<p><code>-RemoveDefinitions</code>オプションを使用してコマンドを実行することで、セキュリティインテリジェンス(定義ファイル/エンジン)を更新前のバージョンにロールバックできます。</p>
+<p><code>-RemoveDefinitions</code>オプションを使用してコマンドを実行することで、セキュリティインテリジェンス(定義ファイル&#x2F;エンジン)を更新前のバージョンにロールバックできます。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Program Files\Windows Defender&gt; .\MpCmdRun.exe <span class="literal">-RemoveDefinitions</span></span><br></pre></td></tr></table></figure>
 
 <p>また、<code>-All</code>オプションを付与することで、MDAVのセキュリティインテリジェンスを完全に削除することが可能です。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Program Files\Windows Defender&gt; .\MpCmdRun.exe <span class="literal">-RemoveDefinitions</span> <span class="literal">-All</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>注意：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection?view=o365-worldwide">改ざん防止機能</a>が有効な場合、MDAVのセキュリティインテリジェンスを完全に削除することはできません。</strong></p>
+<p><strong>注意：<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection?view=o365-worldwide">改ざん防止機能</a>が有効な場合、MDAVのセキュリティインテリジェンスを完全に削除することはできません。</strong></p>
 <p>セキュリティインテリジェンスが削除されたことを確認するためには、Power Shellを起動して<code>Get-MpComputerStatus | Select-Object AMEngineVersion,AntivirusSignatureVersion</code>コマンドレットを実行します。</p>
 <p>セキュリティインテリジェンスが完全に削除されている場合、<code>0.0.0.0</code>が出力されます。</p>
 <p><img src="../images/Endpoint-MDAV-2022-07-29-005.png" alt="Endpoint-MDAV-2022-07-29-005"></p>
-<h3 id="動的セキュリティインテリジェンスの手動削除方法"><a href="#動的セキュリティインテリジェンスの手動削除方法" class="headerlink" title="動的セキュリティインテリジェンスの手動削除方法"></a>動的セキュリティインテリジェンスの手動削除方法</h3><p>コマンドライン ツール<code>MpCmdRun.exe</code>を使用することで、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/cloud-protection-microsoft-defender-antivirus?view=o365-worldwide">クラウド保護(MAPS )</a>が利用する動的セキュリティインテリジェンスを手動で削除することが可能です。</p>
+<h3 id="動的セキュリティインテリジェンスの手動削除方法"><a href="#動的セキュリティインテリジェンスの手動削除方法" class="headerlink" title="動的セキュリティインテリジェンスの手動削除方法"></a>動的セキュリティインテリジェンスの手動削除方法</h3><p>コマンドライン ツール<code>MpCmdRun.exe</code>を使用することで、<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/cloud-protection-microsoft-defender-antivirus?view=o365-worldwide">クラウド保護(MAPS )</a>が利用する動的セキュリティインテリジェンスを手動で削除することが可能です。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Program Files\Windows Defender&gt; .\MpCmdRun.exe <span class="literal">-RemoveDefinitions</span> <span class="literal">-DynamicSignatures</span></span><br></pre></td></tr></table></figure>
 
 <p>動的セキュリティインテリジェンスが削除されたことを確認するためには、MDAVのイベントログにイベントID:2013のイベントの出力を確認します。</p>
 <p><img src="../images/Endpoint-MDAV-2022-07-29-006.png" alt="Endpoint-MDAV-2022-07-29-006"></p>
 <p>MDAVのイベントログの詳細については以下の公開情報にてご案内いたしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策イベントの ID とエラー コード</a></p>
+<p>参考情報：<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策イベントの ID とエラー コード</a></p>
 <p>また、Power Shellにて以下のコマンドレットを実行することで、動的セキュリティインテリジェンスが最後に削除されたイベントを取得することができます。</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">PS</span> C:\&gt; <span class="built_in">Get-WinEvent</span> <span class="selector-tag">@</span>&#123;ProviderName=<span class="string">&#x27;Microsoft-Windows-Windows Defender&#x27;</span>;ID=<span class="number">2013</span>&#125; <span class="literal">-MaxEvents</span> <span class="number">1</span></span><br><span class="line">TimeCreated                      Id LevelDisplayName Message</span><br><span class="line">-----------                      -- ---------------- -------</span><br><span class="line"><span class="number">2022</span>/<span class="number">08</span>/<span class="number">03</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">14</span>            <span class="number">2013</span> 情報             Microsoft Defender ウイルス対策 ですべての動的セキュリティ インテリジェンスが破棄されました。...</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">PS</span> C:\&gt; <span class="built_in">Get-WinEvent</span> <span class="selector-tag">@</span>&#123;ProviderName=<span class="string">&#x27;Microsoft-Windows-Windows Defender&#x27;</span>;ID=<span class="number">2013</span>&#125; <span class="literal">-MaxEvents</span> <span class="number">1</span></span><br><span class="line">TimeCreated                      Id LevelDisplayName Message</span><br><span class="line"><span class="literal">-----------</span>                      <span class="literal">--</span> <span class="literal">----------------</span> <span class="literal">-------</span></span><br><span class="line"><span class="number">2022</span>/<span class="number">08</span>/<span class="number">03</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">14</span>            <span class="number">2013</span> 情報             Microsoft Defender ウイルス対策 ですべての動的セキュリティ インテリジェンスが破棄されました。...</span><br></pre></td></tr></table></figure>
 
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事ではMicrosoft  Defender ウイルス対策(MDAV)のセキュリティインテリジェンスの更新プログラム(定義ファイル/エンジン)を手動で更新・ロールバック・削除する方法についてご紹介いたしました。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事ではMicrosoft  Defender ウイルス対策(MDAV)のセキュリティインテリジェンスの更新プログラム(定義ファイル&#x2F;エンジン)を手動で更新・ロールバック・削除する方法についてご紹介いたしました。</p>
 <p>※ 本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合がありますことご了承ください。</p>
 
       
@@ -271,6 +271,10 @@
       <ul>
         
           <li>
+            <a href="../Endpoint-MDAV-2026-03-06/">ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</a>
+          </li>
+        
+          <li>
             <a href="../Endpoint-MDAV-2025-11-07/">Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</a>
           </li>
         
@@ -284,10 +288,6 @@
         
           <li>
             <a href="../Endpoint-MDAV-2025-02-19/">Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</a>
-          </li>
-        
-          <li>
-            <a href="../Endpoint-MDAV-2024-08-19/">Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</a>
           </li>
         
       </ul>
@@ -310,7 +310,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2026/03/">2026 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
     </div>
   </div>
 

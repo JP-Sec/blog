@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Azure_Information_Protection_2021_12_8_2.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Azure_Information_Protection_2021_12_8_3.png">
 <meta property="article:published_time" content="2022-08-26T06:13:00.000Z">
-<meta property="article:modified_time" content="2026-02-17T05:08:14.838Z">
+<meta property="article:modified_time" content="2026-03-13T04:04:29.176Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Azure Information Protection">
 <meta name="twitter:card" content="summary">
@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="../css/style.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -59,7 +59,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -108,7 +108,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+fca12b48-4b52-54a8-a1d8-5909f3afaf0d%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAIP+%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%8A%E3%83%BC%E3%81%8C%E5%AF%BE%E8%B1%A1%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E5%86%85%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E7%A0%B4%E6%90%8D%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%86%E4%BA%8B%E4%BE%8B%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FAzure_Information_Protection_2021_12_8%2F%29%0A*+Content+Source%3A+%5Barticles%2FAzure_Information_Protection_2021_12_8.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FAzure_Information_Protection_2021_12_8.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Azure_Information_Protection_2021_12_8/" data-id="cmlq57bv300050nlfcmvjbxai" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Azure_Information_Protection_2021_12_8/" data-id="cuidMWUaAczfx9chXcWnGcLr5" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -117,13 +117,13 @@
 <p>AIP スキャナーによるスキャンによって対象ファイルが破損するシナリオ</p>
 <h2 id="1-スキャナー-ノードの記憶域の空き領域が逼迫している状態でラベル付け処理を行うとファイルが故障します。"><a href="#1-スキャナー-ノードの記憶域の空き領域が逼迫している状態でラベル付け処理を行うとファイルが故障します。" class="headerlink" title="1.スキャナー ノードの記憶域の空き領域が逼迫している状態でラベル付け処理を行うとファイルが故障します。"></a>1.スキャナー ノードの記憶域の空き領域が逼迫している状態でラベル付け処理を行うとファイルが故障します。</h2><p>AIP スキャナーはスキャン対象のファイルを検査・ラベル付け処理を行う際に、スキャナー コンピューターの一時領域に対象ファイル データを転送し、秘密度ラベルの適用処理後に<br>スキャン対象のリポジトリ パスにある原本と差し替えます。<br>現状の仕様ではスキャナー ノードの記憶域が十分に確保されていない場合にもコンテンツ スキャン ジョブは実行されてしまいます。この場合、スキャナー本体の記憶域の範囲内で<br>不完全なデータの状態で対象のコンテンツをラベル付けし、元のリポジトリ パスにあるファイルを差し替えるため、結果としてラベル付けされたファイルが故障してしまう場合があります。</p>
 <p>&lt;回避策&gt;<br>スキャナー ノードの記憶域は十分な空き領域を確保いただくようにお願いいたします。<br>公開されている AIP スキャナーの前提条件では一時ファイルとして 10 GB は確保いただくことをお勧めしております。</p>
-<p>&lt;参考&gt;<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/information-protection/deploy-aip-scanner-prereqs#windows-server-requirements">Azure Information Protection (AIP) 統合ラベルスキャナーの前提条件</a></p>
+<p>&lt;参考&gt;<br><a href="https://docs.microsoft.com/ja-jp/azure/information-protection/deploy-aip-scanner-prereqs#windows-server-requirements">Azure Information Protection (AIP) 統合ラベルスキャナーの前提条件</a></p>
 <p><img src="/blog/images/Azure_Information_Protection_2021_12_8_1.png"></p>
 <h2 id="2-異なるスキャナー-クラスターに参加する複数の-AIP-スキャナーで同一のリポジトリをラベル付け処理するよう構成するとファイルが故障する場合があります。"><a href="#2-異なるスキャナー-クラスターに参加する複数の-AIP-スキャナーで同一のリポジトリをラベル付け処理するよう構成するとファイルが故障する場合があります。" class="headerlink" title="2.異なるスキャナー クラスターに参加する複数の AIP スキャナーで同一のリポジトリをラベル付け処理するよう構成するとファイルが故障する場合があります。"></a>2.異なるスキャナー クラスターに参加する複数の AIP スキャナーで同一のリポジトリをラベル付け処理するよう構成するとファイルが故障する場合があります。</h2><p>同一のリポジトリを対象にしたコンテンツ スキャン ジョブを設定した別々のクラスターに参加するノードでスキャンを実行すると、コンテンツ スキャンのタイミングがノード間でバッティングしてしまう場合があります。同一のコンテンツに対して複数のノードによるコンテンツ スキャンのタイミングがバッティングしてしまうと、最初のスキャン ジョブによるラベリング処理途中のコンテンツを後続のスキャン ジョブによってキャプチャしてしまう場合があり、この場合にも AIP スキャナーが 1. のシナリオと同様に不完全なデータをキャプチャして元のリポジトリに返すことでラベル付け処理されたコンテンツが故障する場合があります。</p>
 <p>&lt;回避策&gt;<br>AIP スキャナーをスケールアウトする場合、単一のスキャナー クラスターに複数のノードを参加させて構成します。複数のノードで構成されているスキャナー クラスターは共有するデータベースによって、スキャン対象のリポジトリのスキャンに関するデータが共有され、各ノードが効率的にスキャンを行うよう動作します。<br>※以下の図は代表的なスキャナーのアーキテクチャの概要図になります。</p>
 <p><img src="/blog/images/Azure_Information_Protection_2021_12_8_2.png"><br>図 1: Security,Compliance,and Identity に公開された “Best practices for deploying and using the AIP UL scanner“ より抜粋</p>
 <p>上記を踏まえ、スキャナーのパフォーマンス向上の観点でスキャナーのノードの増設を検討する場合には、別々のリポジトリをスキャンするよう複数のクラスターを構成するか、同一のクラスターに<br>複数のノードを参加させるよう構成いただくことを検討ください。</p>
-<p>&lt;参考&gt;<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/information-protection/deploy-aip-scanner-configure-install?tabs=azure-portal-only#optimize-scanner-performance">Azure Information Protection (AIP) 統合ラベル スキャナーをインストールして構成する</a></p>
+<p>&lt;参考&gt;<br><a href="https://docs.microsoft.com/ja-jp/azure/information-protection/deploy-aip-scanner-configure-install?tabs=azure-portal-only#optimize-scanner-performance">Azure Information Protection (AIP) 統合ラベル スキャナーをインストールして構成する</a></p>
 <p><img src="/blog/images/Azure_Information_Protection_2021_12_8_3.png"></p>
 <h2 id="3-対象のリポジトリ内のコンテンツが-DFS-レプリケーション等で複数のファイル-サーバーと同期途中の状態でラベル付け処理を行うとファイルが故障する可能性があります。"><a href="#3-対象のリポジトリ内のコンテンツが-DFS-レプリケーション等で複数のファイル-サーバーと同期途中の状態でラベル付け処理を行うとファイルが故障する可能性があります。" class="headerlink" title="3.対象のリポジトリ内のコンテンツが DFS レプリケーション等で複数のファイル サーバーと同期途中の状態でラベル付け処理を行うとファイルが故障する可能性があります。"></a>3.対象のリポジトリ内のコンテンツが DFS レプリケーション等で複数のファイル サーバーと同期途中の状態でラベル付け処理を行うとファイルが故障する可能性があります。</h2><p>スキャン対象のコンテンツが DFS レプリケーションなど複数のファイル サーバー間でデータの同期を行うよう構成されている場合、レプリケーション途中のファイルを AIP スキャナーがキャプチャしてしまう場合があります。<br>この場合にも 1. のシナリオと同様のメカニズムにより AIP スキャナーが不完全な状態のデータをキャプチャしラベル付けした上で元のリポジトリにあるファイルと差し替えをしてしまいファイルが故障してしまう場合があります。</p>
 <p>&lt;回避策&gt;<br>DFS レプリケーションを構成している環境では、レプリケーションのスケジュール調整ならびにコンテンツ スキャン ジョブのスケジュールを “手動” に設定いただき、レプリケーションを実施する時間とコンテンツ スキャン ジョブが実行される時間帯が重複しないように調整いただくことを検討ください。</p>
@@ -131,7 +131,7 @@
 <p>&lt;回避策&gt;<br>実際の環境でスキャン ジョブによる処理と AIP クライアントによるラベル付け処理がバッティングしてしまう可能性は現実的には低いと考えられますが、理論上はファイルが破損するリスクがあります。<br>AIP クライアントの GUI や PowerShell コマンド (Set-AIPFileLable) コマンドによって一括ラベル付け処理を計画される場合には、対象のフォルダ パスが AIP スキャナーのコンテンツ スキャン ジョブと重複していないか事前に確認いただくなど、運用によってリスクを低減することを検討ください。</p>
 <h2 id="5-スキャン対象のリポジトリのファイル容量が逼迫している場合、スキャン対象のファイルが破損する可能性があります。"><a href="#5-スキャン対象のリポジトリのファイル容量が逼迫している場合、スキャン対象のファイルが破損する可能性があります。" class="headerlink" title="5. スキャン対象のリポジトリのファイル容量が逼迫している場合、スキャン対象のファイルが破損する可能性があります。"></a>5. スキャン対象のリポジトリのファイル容量が逼迫している場合、スキャン対象のファイルが破損する可能性があります。</h2><p>AIP スキャナーのローカルにある一時記憶域にてラベル付け処理が完了したファイルは、最終的にスキャン対象の元のリポジトリのファイル パスにあるデータと差し替えられます。<br>スキャナーがリポジトリ先の記憶域の逼迫を検出できた場合には、スキャン処理が失敗しますが、リポジトリ側の記憶域の逼迫の検出タイミング等の何らかの要因により、スキャナーがラベル付けを行ったファイルの差し替え処理の継続を試みる可能性があります。<br>対象リポジトリの記憶域が逼迫していることでデータの差し替えに失敗し、スキャン対象のファイルが破損する可能性があります。</p>
 <p>&lt;回避策&gt;<br>スキャナー コンピューター自体の記憶域だけでなく、スキャン対象のリポジトリの記憶の空き容量にも十分注意いただくようお願いいたします。</p>
-<p>AIP スキャナーにはラベル付け処理によって壊れてしまったファイルを復元する機能はありません。<br>今回の記事でご案内させていただいた各シナリオの情報が、AIP スキャナーを適切に展開/運用いただくことに寄与しましたら幸いです。</p>
+<p>AIP スキャナーにはラベル付け処理によって壊れてしまったファイルを復元する機能はありません。<br>今回の記事でご案内させていただいた各シナリオの情報が、AIP スキャナーを適切に展開&#x2F;運用いただくことに寄与しましたら幸いです。</p>
 <p>※本ブログ記事化にあたり、弊社サポートによる調査にご協力いただきましたお客様に深く感謝いたします。<br>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
 
       
@@ -182,6 +182,10 @@
       <ul>
         
           <li>
+            <a href="../Endpoint-MDAV-2026-03-06/">ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</a>
+          </li>
+        
+          <li>
             <a href="../Endpoint-MDAV-2025-11-07/">Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</a>
           </li>
         
@@ -195,10 +199,6 @@
         
           <li>
             <a href="../Endpoint-MDAV-2025-02-19/">Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</a>
-          </li>
-        
-          <li>
-            <a href="../Endpoint-MDAV-2024-08-19/">Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</a>
           </li>
         
       </ul>
@@ -221,7 +221,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2026/03/">2026 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
     </div>
   </div>
 

@@ -15,11 +15,11 @@
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-09-28-01.png">
 <meta property="article:published_time" content="2022-09-28T06:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-17T05:08:14.838Z">
+<meta property="article:modified_time" content="2026-03-13T04:04:29.177Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
-<meta property="article:tag" content="Microsoft Defender for Endpoint">
 <meta property="article:tag" content="MDE on Linux">
 <meta property="article:tag" content="MDE on macOS">
+<meta property="article:tag" content="Microsoft Defender for Endpoint">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-09-28-01.png">
   
@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="../css/style.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -59,7 +59,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -108,15 +108,15 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+21bfc6a3-0e23-53f6-8ea0-e065d61e793c%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BmacOS+%E3%81%8A%E3%82%88%E3%81%B3+Linux+%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%A7+Client+Analyzer+%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AB%E3%82%88%E3%82%8B%E6%AD%A3%E5%B8%B8%E6%80%A7%E8%A8%BA%E6%96%AD%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2022-09-28%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2022-09-28.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2022-09-28.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/" data-id="cmlq57bwk002q0nlf0857e6g9" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/" data-id="cuidVtJASO7Dbp2Fum95CdNjD" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>こんにちは Azure Security サポートチームです。</p>
-<p>この記事では Microsoft Defender for Endpoint on mac(MDE on mac) および Microsoft Defender for Endpoint on Linux(MDE on Linux) のデバイス正常性の評価に役立つ <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide">Microsoft Defender for Endpoint Client Analyzer(MDECA)</a> の使用方法についてご紹介します。</p>
+<p>この記事では Microsoft Defender for Endpoint on mac(MDE on mac) および Microsoft Defender for Endpoint on Linux(MDE on Linux) のデバイス正常性の評価に役立つ <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide">Microsoft Defender for Endpoint Client Analyzer(MDECA)</a> の使用方法についてご紹介します。</p>
 <p>Client Analyzer ツールの詳細については、以下の公開情報にてご案内いたしております。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide">Microsoft Defender for Endpoint クライアント アナライザーを使用したセンサーの正常性のトラブルシューティング</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide">Microsoft Defender for Endpoint クライアント アナライザーを使用したセンサーの正常性のトラブルシューティング</a></p>
 <!-- omit in toc -->
 <h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul>
 <li><a href="#Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB">Client Analyzer ツールを使用する前に</a></li>
@@ -135,16 +135,16 @@
 </ul>
 <h2 id="Client-Analyzer-ツールを使用する前に"><a href="#Client-Analyzer-ツールを使用する前に" class="headerlink" title="Client Analyzer ツールを使用する前に"></a>Client Analyzer ツールを使用する前に</h2><p>macOS または Linux 端末にてClient Analyzer ツールを使用してデバイスの診断を行う前に、デバイスが以下の前提要件を満たしていることを確認する必要があります。</p>
 <ol>
-<li>プロキシまたはファイアウォールの構成で <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-proxy-internet?view=o365-worldwide#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">Microsoft Defender for Endpoint サービスの使用する URL</a> へのアクセス許可が構成されていることを確認します。</li>
-<li>デバイスが MDE へのオンボードに必要な <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/minimum-requirements?view=o365-worldwide">最小要件</a> を満たしていることを確認します。</li>
+<li>プロキシまたはファイアウォールの構成で <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-proxy-internet?view=o365-worldwide#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">Microsoft Defender for Endpoint サービスの使用する URL</a> へのアクセス許可が構成されていることを確認します。</li>
+<li>デバイスが MDE へのオンボードに必要な <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/minimum-requirements?view=o365-worldwide">最小要件</a> を満たしていることを確認します。</li>
 </ol>
 <p>Client Analyzer ツールを使用する場合の前提要件に関する最新の情報は以下のページより確認いただくことができます。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide#requirements">Microsoft Defender for Endpoint クライアント アナライザーを使用したセンサーの正常性のトラブルシューティング | 前提要件</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide#requirements">Microsoft Defender for Endpoint クライアント アナライザーを使用したセンサーの正常性のトラブルシューティング | 前提要件</a></p>
 <h2 id="macOS-で-Client-Analyzer-ツールを使用する"><a href="#macOS-で-Client-Analyzer-ツールを使用する" class="headerlink" title="macOS で Client Analyzer ツールを使用する"></a>macOS で Client Analyzer ツールを使用する</h2><p>※ 本記事の手順は Intelベースの macOS Big Sur(Version 11.7) にて動作確認を実施しています。</p>
 <p>Client Analyzer ツールを使用する手順に関する最新の情報については、以下の公開情報ページをご参照くださいますようお願いいたします。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-macos-linux?view=o365-worldwide#running-the-analyzer-through-gui-scenario">macOS または Linux でのクライアント アナライザーの実行</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-macos-linux?view=o365-worldwide#running-the-analyzer-through-gui-scenario">macOS または Linux でのクライアント アナライザーの実行</a></p>
 <h3 id="macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用する"><a href="#macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用する" class="headerlink" title="macOS での Client Analyzer ツールの実行方法 (Python3を使用する)"></a>macOS での Client Analyzer ツールの実行方法 (Python3を使用する)</h3><p>このセクションでは、コマンドラインインターフェース(CLI)を使用した Client Analyzer ツールの実行方法について紹介します。</p>
-<p>このセクションで紹介する手順を使用するためには、デバイスで <code>python3</code> コマンドと Python パッケージ <a target="_blank" rel="noopener" href="https://pypi.org/search/?q=lxml">lxml</a> が利用可能である必要があります。</p>
+<p>このセクションで紹介する手順を使用するためには、デバイスで <code>python3</code> コマンドと Python パッケージ <a href="https://pypi.org/search/?q=lxml">lxml</a> が利用可能である必要があります。</p>
 <p>※ <code>python3</code> コマンドが使用できないデバイスで Client Analyzer ツールを実行する手順については、<a href="#macOS-%E3%81%A7%E3%81%AE-Client-Analyzer-%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AE%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95-Python3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%AA%E3%81%84">macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)</a> のセクションを参照してください。</p>
 <ol>
 <li>デバイスで ターミナルを起動し、任意のディレクトリで以下のコマンドを順に実行します。</li>
@@ -159,7 +159,7 @@
 <ol start="3">
 <li>以下のコマンドを実行して、<code>mde_support_tool.sh</code>に実行権限を付与します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x mde_support_tool.sh</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li><code>mde_support_tool.sh</code>を実行し、必要なコンポーネントをインストールします。</li>
@@ -171,14 +171,14 @@
 <ol start="5">
 <li>上記のコマンド実行によりコンポーネントのインストールに成功した後、以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2022-09-28 03:47:45.646][INFO] Archive created at: /tmp/28_09_2022_03_47_45_output.zip</span><br></pre></td></tr></table></figure>
 
-<h3 id="macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用しない"><a href="#macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用しない" class="headerlink" title="macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)"></a>macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)</h3><p>このセクションでは、<code>python3</code>コマンドまたは Python パッケージ <a target="_blank" rel="noopener" href="https://pypi.org/search/?q=lxml">lxml</a> が使用できない環境にてClient Analyzer ツールを実行する方法について紹介します。</p>
+<h3 id="macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用しない"><a href="#macOS-での-Client-Analyzer-ツールの実行方法-Python3を使用しない" class="headerlink" title="macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)"></a>macOS での Client Analyzer ツールの実行方法 (Python3を使用しない)</h3><p>このセクションでは、<code>python3</code>コマンドまたは Python パッケージ <a href="https://pypi.org/search/?q=lxml">lxml</a> が使用できない環境にてClient Analyzer ツールを実行する方法について紹介します。</p>
 <ol>
 <li>デバイスで ターミナルを起動し、任意のディレクトリで以下のコマンドを順に実行します。</li>
 </ol>
@@ -197,12 +197,12 @@
 <ol start="4">
 <li>以下のコマンドを実行して、展開された<code>MDESupportTool</code>に実行権限を付与します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x MDESupportTool</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x MDESupportTool</span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
@@ -211,9 +211,9 @@
 
 <h2 id="Linux-で-Client-Analyzer-ツールを使用する"><a href="#Linux-で-Client-Analyzer-ツールを使用する" class="headerlink" title="Linux で Client Analyzer ツールを使用する"></a>Linux で Client Analyzer ツールを使用する</h2><p>※ 本記事の手順は Ubuntu 22.04.5 LTS にて動作確認を実施しています。</p>
 <p>Client Analyzer ツールを使用する手順に関する最新の情報については、以下の公開情報ページをご参照ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-macos-linux?view=o365-worldwide#running-the-analyzer-through-gui-scenario">macOS または Linux でのクライアント アナライザーの実行</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-macos-linux?view=o365-worldwide#running-the-analyzer-through-gui-scenario">macOS または Linux でのクライアント アナライザーの実行</a></p>
 <h3 id="September-2025-Build-以降のバージョンで-Client-Analyzer-ツールを使用する-2025-10-追記"><a href="#September-2025-Build-以降のバージョンで-Client-Analyzer-ツールを使用する-2025-10-追記" class="headerlink" title="September-2025 Build 以降のバージョンで Client Analyzer ツールを使用する(2025-10 追記)"></a>September-2025 Build 以降のバージョンで Client Analyzer ツールを使用する(2025-10 追記)</h3><p>2025 年 9 月にリリースされたバージョン 101.25082.0003 以降の mdatp を使用している場合、Client Analyzer ツールを使用するためにツールをダウンロードする必要がなくなりました。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/linux-whatsnew#september-2025-build-101250820003--release-version-3012508200030">2025 年 9 月ビルド: 101.25082.0003 |リリース バージョン: 30.125082.0003.0</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/linux-whatsnew#september-2025-build-101250820003--release-version-3012508200030">2025 年 9 月ビルド: 101.25082.0003 |リリース バージョン: 30.125082.0003.0</a></p>
 <p>そのため、最新バージョンのエージェントを使用している端末で Client Analyzer ツールによる情報採取を行う場合には、以下のいずれかの手順でインストールディレクトリ内のツールを使用できます。</p>
 <p><strong>a. Python3 を使用する場合</strong></p>
 <ol>
@@ -224,12 +224,12 @@
 <ol start="2">
 <li>root ユーザーもしくは sudo を使用して以下のコマンドを実行し、必要な依存関係をインストールします。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ./mde_support_tool.sh</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>root ユーザーもしくは sudo を使用して以下のコマンドを実行し、Client Analyzer ツールによる情報採取を開始します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
@@ -245,7 +245,7 @@
 <ol start="2">
 <li>root ユーザーもしくは sudo を使用して以下のコマンドを実行し、Client Analyzer ツールによる情報採取を開始します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
@@ -254,7 +254,7 @@
 
 <h3 id="Linux-での-Client-Analyzer-ツールの実行方法-Python3を使用する"><a href="#Linux-での-Client-Analyzer-ツールの実行方法-Python3を使用する" class="headerlink" title="Linux での Client Analyzer ツールの実行方法 (Python3を使用する)"></a>Linux での Client Analyzer ツールの実行方法 (Python3を使用する)</h3><p>※ September-2025 Build 以前のバージョンを利用している場合は以下の手順を使用します。</p>
 <p>このセクションでは、コマンドラインインターフェース(CLI)を使用した Client Analyzer ツールの実行方法について紹介します。</p>
-<p>このセクションで紹介する手順を使用するためには、デバイスで <code>python3</code> コマンドと Python パッケージ <a target="_blank" rel="noopener" href="https://pypi.org/search/?q=lxml">lxml</a> が利用可能である必要があります。</p>
+<p>このセクションで紹介する手順を使用するためには、デバイスで <code>python3</code> コマンドと Python パッケージ <a href="https://pypi.org/search/?q=lxml">lxml</a> が利用可能である必要があります。</p>
 <p>※ <code>python3</code> コマンドが使用できないデバイスで Client Analyzer ツールを実行する手順については、[Linux での Client Analyzer ツールの実行方法 (Python3を使用しない)][#Linux での Client Analyzer ツールの実行方法 (Python3を使用しない)] のセクションを参照してください。</p>
 <ol>
 <li>デバイスの CLI を使用し、任意のディレクトリで以下のコマンドを順に実行します。</li>
@@ -269,7 +269,7 @@
 <ol start="3">
 <li>以下のコマンドを実行して、<code>mde_support_tool.sh</code>に実行権限を付与します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x mde_support_tool.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x mde_support_tool.sh</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li><code>mde_support_tool.sh</code>を実行し、必要なコンポーネントをインストールします。</li>
@@ -280,7 +280,7 @@
 <ol start="5">
 <li>上記のコマンド実行によりコンポーネントのインストールに成功した後、以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ./mde_support_tool.sh -d</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
@@ -288,7 +288,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2022-09-28 02:27:45.636][INFO] Archive created at: /tmp/28_09_2022_02_26_53_output.zip</span><br></pre></td></tr></table></figure>
 
 <h3 id="Linux-での-Client-Analyzer-ツールの実行方法-Python3を使用しない"><a href="#Linux-での-Client-Analyzer-ツールの実行方法-Python3を使用しない" class="headerlink" title="Linux での Client Analyzer ツールの実行方法 (Python3を使用しない)"></a>Linux での Client Analyzer ツールの実行方法 (Python3を使用しない)</h3><p>※ September-2025 Build 以前のバージョンを利用している場合は以下の手順を使用します。</p>
-<p>このセクションでは、<code>python3</code>コマンドまたは Python パッケージ <a target="_blank" rel="noopener" href="https://pypi.org/search/?q=lxml">lxml</a> が使用できない環境にてClient Analyzer ツールを実行する方法について紹介します。</p>
+<p>このセクションでは、<code>python3</code>コマンドまたは Python パッケージ <a href="https://pypi.org/search/?q=lxml">lxml</a> が使用できない環境にてClient Analyzer ツールを実行する方法について紹介します。</p>
 <ol>
 <li>デバイスの CLI を使用し、任意のディレクトリで以下のコマンドを順に実行します。</li>
 </ol>
@@ -307,20 +307,20 @@
 <ol start="4">
 <li>以下のコマンドを実行して、展開された<code>MDESupportTool</code>に実行権限を付与します。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x MDESupportTool</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x MDESupportTool</span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>以下のコマンドで Client Analyzer ツールを実行します。(プロンプトが表示された場合は <code>y</code> と入力して Enter を押下します)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>Client Analyzer ツールの実行に成功すると、下記出力例の通り、Client Analyzer ツールによって収集された情報が含まれるファイルのパスが表示されます。</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2022-09-28 02:40:51.848][INFO] Archive created at: /tmp/28_09_2022_02_40_00_output.zip</span><br></pre></td></tr></table></figure>
 
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>この記事では、 MDE にオンボードされた macOS および Linux デバイスの正常性の評価に役立つ <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide">Microsoft Defender for Endpoint Client Analyzer(MDECA)</a> の使用方法についてご紹介しました。</p>
-<p>Client Analyzer ツールによって作成されたパッケージファイルに含まれる情報の概要については<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-macos-linux?view=o365-worldwide#result-package-contents-on-macos-and-linux">macOS と Linux のパッケージの内容</a> にてご案内いたしております。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>この記事では、 MDE にオンボードされた macOS および Linux デバイスの正常性の評価に役立つ <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-client-analyzer?view=o365-worldwide">Microsoft Defender for Endpoint Client Analyzer(MDECA)</a> の使用方法についてご紹介しました。</p>
+<p>Client Analyzer ツールによって作成されたパッケージファイルに含まれる情報の概要については<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/run-analyzer-macos-linux?view=o365-worldwide#result-package-contents-on-macos-and-linux">macOS と Linux のパッケージの内容</a> にてご案内いたしております。</p>
 
       
       
@@ -370,6 +370,10 @@
       <ul>
         
           <li>
+            <a href="../Endpoint-MDAV-2026-03-06/">ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</a>
+          </li>
+        
+          <li>
             <a href="../Endpoint-MDAV-2025-11-07/">Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</a>
           </li>
         
@@ -383,10 +387,6 @@
         
           <li>
             <a href="../Endpoint-MDAV-2025-02-19/">Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</a>
-          </li>
-        
-          <li>
-            <a href="../Endpoint-MDAV-2024-08-19/">Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</a>
           </li>
         
       </ul>
@@ -409,7 +409,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2026/03/">2026 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
     </div>
   </div>
 
