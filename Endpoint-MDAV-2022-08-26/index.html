@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-08-26-02.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-08-26-03.png">
 <meta property="article:published_time" content="2022-09-08T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-17T05:08:14.838Z">
+<meta property="article:modified_time" content="2026-03-13T04:04:29.176Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta property="article:tag" content="マルウェア対策プラットフォーム">
@@ -42,7 +42,7 @@
 <link rel="stylesheet" href="../css/style.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -60,7 +60,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -109,7 +109,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+07000ddd-9a36-511f-82b0-963603a56272%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMicrosoft+Defender+%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%E3%81%AE%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%82%92%E6%89%8B%E5%8B%95%E3%81%A7%E6%9B%B4%E6%96%B0%E3%83%BB%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%90%E3%83%83%E3%82%AF%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2022-08-26%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2022-08-26.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2022-08-26.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-08-26/" data-id="cmlq57bwi002n0nlfgln58ev9" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-08-26/" data-id="cuid1GhOkVkUC5KKbO9nhXdHU" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -135,8 +135,8 @@
 <li><a href="#%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%90%E3%83%83%E3%82%AF%E6%89%8B%E9%A0%86">更新プログラムのロールバック手順</a></li>
 <li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li>
 </ul>
-<h2 id="MDAVのマルウェア対策プラットフォームについて"><a href="#MDAVのマルウェア対策プラットフォームについて" class="headerlink" title="MDAVのマルウェア対策プラットフォームについて"></a>MDAVのマルウェア対策プラットフォームについて</h2><p>MDAVにより端末に最新の脅威からの保護を提供するためには、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#security-intelligence-updates">セキュリティインテリジェンスの更新プログラム</a>と<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#product-updates">製品の更新プログラム(マルウェア対策プラットフォーム)</a>を常に最新に保つことが重要です。</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#monthly-platform-and-engine-versions">月次プラットフォームとエンジンのバージョン</a>に記載の通り、MDAVのマルウェア対策プラットフォームは公開している最新バージョンから 2 世代前より古いバージョンのサポートはアップグレードに関するサポートのみに縮小されます。</p>
+<h2 id="MDAVのマルウェア対策プラットフォームについて"><a href="#MDAVのマルウェア対策プラットフォームについて" class="headerlink" title="MDAVのマルウェア対策プラットフォームについて"></a>MDAVのマルウェア対策プラットフォームについて</h2><p>MDAVにより端末に最新の脅威からの保護を提供するためには、<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#security-intelligence-updates">セキュリティインテリジェンスの更新プログラム</a>と<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#product-updates">製品の更新プログラム(マルウェア対策プラットフォーム)</a>を常に最新に保つことが重要です。</p>
+<p><a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus?view=o365-worldwide#monthly-platform-and-engine-versions">月次プラットフォームとエンジンのバージョン</a>に記載の通り、MDAVのマルウェア対策プラットフォームは公開している最新バージョンから 2 世代前より古いバージョンのサポートはアップグレードに関するサポートのみに縮小されます。</p>
 <p>MDAVのマルウェア対策プラットフォーム更新プログラムは、2022年8月時点では「KB4052623」にてリリースされております。</p>
 <p>この更新プログラムは通常、 Windows Update によってインターネットまたは WSUS などの更新元から取得され、自動的に更新されます。</p>
 <p>本記事では、トラブルシューティングなどの目的で、MDAVのマルウェア対策プラットフォームを手動で更新する方法についてご紹介いたします。</p>
@@ -151,10 +151,10 @@
 <p>PowerShell またはコマンドプロンプトで以下のコマンドを実行し、[STATE] に [4  RUNNING] と表示されることを確認します。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.exe query WinDefend</span><br></pre></td></tr></table></figure>
 
-<p>もし Windows Server 2016/ 2019 /2022 などのサーバ OS で MDAV のサービスが停止している場合、グループポリシーまたはレジストリの設定によってMDAVが無効化されているか否かを確認し、無効化されている場合は設定を解除する必要があります。</p>
-<p>上記のサーバ OS を使用している場合は、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/use-group-policy-microsoft-defender-antivirus?view=o365-worldwide#configure-microsoft-defender-antivirus-using-group-policy">グループ ポリシーを使用して Microsoft Defender ウイルス対策を構成する</a>に記載の手順に従って、[Microsoft Defender ウイルス対策を無効にする] の設定を [未構成] または [無効] に変更します。</p>
-<p>レジストリ設定により MDAV を無効化している場合は、 <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware">DisableAntiSpyware</a> のレジストリ値を削除します。</p>
-<p>なお、バージョン<code>4.18.2108.4</code>以上のマルウェア対策プラットフォームが適用されている Windows 10 / 11 などのクライアント OS では、前述のグループポリシーや <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware">DisableAntiSpyware</a> を用いた MDAV の無効化設定はサポートされていません。</p>
+<p>もし Windows Server 2016&#x2F; 2019 &#x2F;2022 などのサーバ OS で MDAV のサービスが停止している場合、グループポリシーまたはレジストリの設定によってMDAVが無効化されているか否かを確認し、無効化されている場合は設定を解除する必要があります。</p>
+<p>上記のサーバ OS を使用している場合は、<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/use-group-policy-microsoft-defender-antivirus?view=o365-worldwide#configure-microsoft-defender-antivirus-using-group-policy">グループ ポリシーを使用して Microsoft Defender ウイルス対策を構成する</a>に記載の手順に従って、[Microsoft Defender ウイルス対策を無効にする] の設定を [未構成] または [無効] に変更します。</p>
+<p>レジストリ設定により MDAV を無効化している場合は、 <a href="https://docs.microsoft.com/ja-jp/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware">DisableAntiSpyware</a> のレジストリ値を削除します。</p>
+<p>なお、バージョン<code>4.18.2108.4</code>以上のマルウェア対策プラットフォームが適用されている Windows 10 &#x2F; 11 などのクライアント OS では、前述のグループポリシーや <a href="https://docs.microsoft.com/ja-jp/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware">DisableAntiSpyware</a> を用いた MDAV の無効化設定はサポートされていません。</p>
 <p>これらのクライアント OS では、サードパーティ製のアンチマルウェアソフトがインストールされた際に、 MDAV が自動的に無効化されます。</p>
 <p>そのため、上記のクライアント OS で MDAV を有効化するためには、サードパーティ製のアンチマルウェアソフトを一時的にアンインストールする必要があります。</p>
 <ol start="2">
@@ -180,7 +180,7 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-ComputerInfo</span> | <span class="built_in">Select-Object</span> WindowsBuildLabEx,CsSystemType</span><br></pre></td></tr></table></figure>
 
 <h3 id="使用するモジュールのダウンロード"><a href="#使用するモジュールのダウンロード" class="headerlink" title="使用するモジュールのダウンロード"></a>使用するモジュールのダウンロード</h3><p>端末情報を確認した後、更新に使用するモジュールを取得して端末にコピーします。</p>
-<p>更新プログラムは<a target="_blank" rel="noopener" href="https://www.catalog.update.microsoft.com/Search.aspx?q=KB4052623">Microsoft Update カタログ</a>からダウンロードできます。</p>
+<p>更新プログラムは<a href="https://www.catalog.update.microsoft.com/Search.aspx?q=KB4052623">Microsoft Update カタログ</a>からダウンロードできます。</p>
 <p><img src="../images/Endpoint-MDAV-2022-08-26-01.png" alt="Endpoint-MDAV-2022-08-26-01"></p>
 <ol>
 <li><strong>バージョン<code>4.18.2001.10</code>の取得(端末のバージョンが<code>4.18.2001.10</code>未満である場合のみ)</strong></li>
@@ -217,7 +217,7 @@
 <li><strong>最新バージョンの取得</strong></li>
 </ol>
 <p>次に、最新の更新プログラムを取得します。</p>
-<p>[1.] の手順と同様に、<a target="_blank" rel="noopener" href="https://www.catalog.update.microsoft.com/Search.aspx?q=KB4052623">Microsoft Update カタログ</a>にてタイトルが最新バージョンを指す行の右側 [ダウンロード] ボタンをクリックします。</p>
+<p>[1.] の手順と同様に、<a href="https://www.catalog.update.microsoft.com/Search.aspx?q=KB4052623">Microsoft Update カタログ</a>にてタイトルが最新バージョンを指す行の右側 [ダウンロード] ボタンをクリックします。</p>
 <p>※ 本記事執筆時点では<code>4.18.2205.7</code>が最新バージョンです。</p>
 <p>端末のCPUプラットフォームに対応したモジュールをダウンロードするために、3つすべてのモジュールをダウンロードします。</p>
 <p>ダウンロードしたモジュールを右クリックして [プロパティ]&gt;[詳細] を開き、[ファイルの説明] 欄の情報から更新対象のプラットフォームに対応したモジュールを特定し、不要なファイルを端末から削除します。</p>
@@ -240,11 +240,11 @@
 <li>C:\Program Files\Windows Defender</li>
 <li>C:\ProgramData\Microsoft\Windows Defender\Platform&lt;最新のプラットフォームバージョン&gt;</li>
 </ul>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/command-line-arguments-microsoft-defender-antivirus?view=o365-worldwide">コマンドラインを使用して Microsoft Defender ウイルス対策を管理する</a></p>
+<p>参考情報：<a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/command-line-arguments-microsoft-defender-antivirus?view=o365-worldwide">コマンドラインを使用して Microsoft Defender ウイルス対策を管理する</a></p>
 <p>以下のコマンドで、コマンドラインツール<code>MpCmdRun.exe</code>を使用してマルウェア対策プラットフォームをロールバックすることができます。</p>
-<p>※ <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection?view=o365-worldwide">改ざん防止機能</a>が有効な場合、これらのコマンド実行がブロックされる場合があります。</p>
+<p>※ <a href="https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection?view=o365-worldwide">改ざん防止機能</a>が有効な場合、これらのコマンド実行がブロックされる場合があります。</p>
 <p>※ 公開している最新バージョンより 3 世代以上古いバージョンのサポートはアップグレードに関するサポートのみに縮小されるため、ロールバック後は必ずマルウェア対策プラットフォームを更新いただくようお願いいたします。</p>
-<p>※ Windows 10 1809 / Windows Server 2016 以前のバージョンではロールバックはサポートされていません。</p>
+<p>※ Windows 10 1809 &#x2F; Windows Server 2016 以前のバージョンではロールバックはサポートされていません。</p>
 <ol>
 <li><strong>以前のバージョンにロールバックする方法</strong></li>
 </ol>
@@ -308,6 +308,10 @@
       <ul>
         
           <li>
+            <a href="../Endpoint-MDAV-2026-03-06/">ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</a>
+          </li>
+        
+          <li>
             <a href="../Endpoint-MDAV-2025-11-07/">Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</a>
           </li>
         
@@ -321,10 +325,6 @@
         
           <li>
             <a href="../Endpoint-MDAV-2025-02-19/">Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</a>
-          </li>
-        
-          <li>
-            <a href="../Endpoint-MDAV-2024-08-19/">Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</a>
           </li>
         
       </ul>
@@ -347,7 +347,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2026/03/">2026 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
     </div>
   </div>
 

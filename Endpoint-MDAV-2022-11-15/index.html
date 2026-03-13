@@ -15,7 +15,7 @@
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2022-11-15-01.png">
 <meta property="article:published_time" content="2022-11-16T09:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-17T05:08:14.838Z">
+<meta property="article:modified_time" content="2026-03-13T04:04:29.177Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Microsoft Defender for Endpoint">
 <meta name="twitter:card" content="summary">
@@ -39,7 +39,7 @@
 <link rel="stylesheet" href="../css/style.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -57,7 +57,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -106,13 +106,13 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+294ebdfa-78b2-5920-96e8-9f777fb291dd%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMicrosoft+Defender+for+Endpoint%28MDE%29+%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%95%E3%82%8C%E3%81%9F%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%92%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E5%8C%96%E3%83%BB%E8%A4%87%E8%A3%BD%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2022-11-15%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2022-11-15.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2022-11-15.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-11-15/" data-id="cmlq57bve000n0nlf8o2qhjuk" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-11-15/" data-id="cuidlpGsDQEKLTbr2u989LTM9" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>こんにちは Azure Security サポートチームです。</p>
-<p>この記事では <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-endpoint">Microsoft Defender for Endpoint(MDE)</a>にオンボードされたデバイスをイメージ化して展開したり、複製する場合に実施いただく必要がある手順と注意事項についてまとめます。</p>
+<p>この記事では <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-endpoint">Microsoft Defender for Endpoint(MDE)</a>にオンボードされたデバイスをイメージ化して展開したり、複製する場合に実施いただく必要がある手順と注意事項についてまとめます。</p>
 <p>この手順は、主に以下の例に挙げるシナリオで重要になる場合があります。</p>
 <ul>
 <li><strong>MDE にオンボードしたことがあるデバイスをイメージ化し、複数のマシンに展開して使用する場合</strong></li>
@@ -127,16 +127,16 @@
 <p>そのため、MDE にオンボードしたデバイスをイメージ化いただく場合には、以下の手順にて MDE のオフボードと端末情報の削除を実施いただく必要があります。</p>
 <p>※ すでに MDE からオフボード済みのデバイスをイメージ化する場合にも以下の手順を実施する必要があります。</p>
 <p>※ 以下の手順を実施せずにデバイスを複製いただいた場合、ご利用環境で問題が発生した場合の復旧に時間を要する可能性がありますこと、ご留意くださいますようお願いいたします。</p>
-<p>※ 仮想デスクトップインフラストラクチャ (VDI) 用のイメージを作成いただく場合は、  <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-vdi?view=o365-worldwide#updating-virtual-desktop-infrastructure-vdi-images-persistent-or-non-persistent">非永続的な仮想デスクトップ インフラストラクチャ (VDI) デバイスのオンボード</a> の記載も併せてご参照ください。</p>
+<p>※ 仮想デスクトップインフラストラクチャ (VDI) 用のイメージを作成いただく場合は、  <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-vdi?view=o365-worldwide#updating-virtual-desktop-infrastructure-vdi-images-persistent-or-non-persistent">非永続的な仮想デスクトップ インフラストラクチャ (VDI) デバイスのオンボード</a> の記載も併せてご参照ください。</p>
 <h2 id="デバイスのオフボードと端末情報の削除手順"><a href="#デバイスのオフボードと端末情報の削除手順" class="headerlink" title="デバイスのオフボードと端末情報の削除手順"></a>デバイスのオフボードと端末情報の削除手順</h2><h3 id="Windows-OS-を-MDE-からオフボードして情報を削除する"><a href="#Windows-OS-を-MDE-からオフボードして情報を削除する" class="headerlink" title="Windows OS を MDE からオフボードして情報を削除する"></a>Windows OS を MDE からオフボードして情報を削除する</h3><p>Windows OS を MDE からオフボードして情報を削除する場合は以下の手順を実施します。</p>
 <ol>
 <li><strong>以下の公開情報で案内しているいずれかの手順を使用してデバイスを MDE からオフボードします。</strong></li>
 </ol>
 <p>※ すでにデバイスがオフボードされている場合、この手順をスキップします。</p>
 <ul>
-<li>手順1：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-script?view=o365-worldwide#offboard-devices-using-a-local-script">ローカル スクリプトを使用してデバイスをオフボードする | Microsoft Learn</a></li>
-<li>手順2：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-gp?view=o365-worldwide#offboard-devices-using-group-policy">グループ ポリシーを使用してデバイスをオフボードする | Microsoft Learn</a></li>
-<li>手順3：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-mdm?view=o365-worldwide#offboard-devices-using-mobile-device-management-tools">モバイル デバイス管理ツールを使用してデバイスをオフボードする | Microsoft Learn</a></li>
+<li>手順1：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-script?view=o365-worldwide#offboard-devices-using-a-local-script">ローカル スクリプトを使用してデバイスをオフボードする | Microsoft Learn</a></li>
+<li>手順2：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-gp?view=o365-worldwide#offboard-devices-using-group-policy">グループ ポリシーを使用してデバイスをオフボードする | Microsoft Learn</a></li>
+<li>手順3：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-mdm?view=o365-worldwide#offboard-devices-using-mobile-device-management-tools">モバイル デバイス管理ツールを使用してデバイスをオフボードする | Microsoft Learn</a></li>
 </ul>
 <ol start="2">
 <li><strong>デバイスのオフボード完了後、コマンドプロンプトで以下のコマンドを実行し、 sense のサービスが停止していることを確認します。</strong></li>
@@ -146,7 +146,7 @@
 <p>デバイスが正常にオフボードされ、サービスが停止している場合、以下の出力例のように [STATE] 行に [STOPPED] と表示されます。</p>
 <p><img src="../images/Endpoint-MDAV-2022-11-15-01.png" alt="sense サービスが停止している場合の出力結果"></p>
 <ol start="3">
-<li><p><strong><a target="_blank" rel="noopener" href="https://download.sysinternals.com/files/PSTools.zip">https://download.sysinternals.com/files/PSTools.zip</a> から、PsExec.exe ツールをダウンロードし、展開します。</strong></p>
+<li><p><strong><a href="https://download.sysinternals.com/files/PSTools.zip">https://download.sysinternals.com/files/PSTools.zip</a> から、PsExec.exe ツールをダウンロードし、展開します。</strong></p>
 </li>
 <li><p><strong>管理者権限でコマンドプロンプトを起動し、PsExec.exe ツールを使用して以下のコマンドを実行します。</strong></p>
 </li>
@@ -156,20 +156,20 @@
 <ol start="5">
 <li><strong>[4.] の手順により SYSTEM アカウントで起動したコマンドプロンプト画面にて、以下のコマンドを順に実行します。</strong></li>
 </ol>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="string">&quot;C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection\Cyber&quot;</span></span><br><span class="line"><span class="built_in">del</span> *.* /f /s /q</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection&quot;</span> /v senseGuid /f</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection&quot;</span> /v <span class="number">7</span>DC0B629<span class="literal">-D7F6</span><span class="literal">-4DB3</span><span class="literal">-9BF7</span><span class="literal">-64D5AAF50F1A</span> /f</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection\48A68F11-7A16-4180-B32C-7F974C7BD783&quot;</span> /f</span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="string">&quot;C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection\Cyber&quot;</span></span><br><span class="line"><span class="built_in">del</span> *.* /f /s /q</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection&quot;</span> /v senseGuid /f</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection&quot;</span> /v <span class="number">7</span>DC0B629<span class="literal">-D7F6-4DB3-9BF7-64D5AAF50F1A</span> /f</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection\48A68F11-7A16-4180-B32C-7F974C7BD783&quot;</span> /f</span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
 
 <p>※ 誤ったファイルやレジストリキーを削除しないようご留意ください。また、事前にバックアップを取得いただくことを推奨いたします。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-endpoints-vdi#updating-virtual-desktop-infrastructure-vdi-images-persistent-or-non-persistent">非永続的な仮想デスクトップ インフラストラクチャ (VDI) デバイスのオンボード | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-endpoints-vdi#updating-virtual-desktop-infrastructure-vdi-images-persistent-or-non-persistent">非永続的な仮想デスクトップ インフラストラクチャ (VDI) デバイスのオンボード | Microsoft Learn</a></p>
 <ol start="8">
 <li><strong>ダウンロードした PsExec.exe ツールを含むファイルを必要に応じて削除し、OS を再起動します。</strong></li>
 </ol>
 <p>以上が、MDE にオンボードしたデバイスをイメージ化または複製いただく前に実施いただく必要のある作業です。</p>
 <p>なお、本記事の内容は、作成時点でのものであり、予告なく変更される場合があります。</p>
 <p>MDE にオンボードしたデバイスのイメージ化や複製についてのご不明点については、弊社サポート窓口までお問い合わせください。</p>
-<h2 id="参考情報：Microsoft-Defender-のセキュリティ強化について"><a href="#参考情報：Microsoft-Defender-のセキュリティ強化について" class="headerlink" title="参考情報：Microsoft Defender のセキュリティ強化について"></a>参考情報：Microsoft Defender のセキュリティ強化について</h2><p>Microsoft は、2022 年 3 月に <a target="_blank" rel="noopener" href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-23278">CVE-2022-23278</a> に対処する更新プログラムをリリースしました。</p>
+<h2 id="参考情報：Microsoft-Defender-のセキュリティ強化について"><a href="#参考情報：Microsoft-Defender-のセキュリティ強化について" class="headerlink" title="参考情報：Microsoft Defender のセキュリティ強化について"></a>参考情報：Microsoft Defender のセキュリティ強化について</h2><p>Microsoft は、2022 年 3 月に <a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-23278">CVE-2022-23278</a> に対処する更新プログラムをリリースしました。</p>
 <p>この更新プログラムは、悪意のある攻撃者がクライアントになりすましをして、クラウド上の MDE サービスと接続を行う攻撃に対するセキュリティを強化します。</p>
 <p>このセキュリティ強化には、クラウド上の MDE サービスに対する疑わしいクライアント通信を検出する機能が含まれます。このような疑わしいクライアント通信は、デバイスのなりすましや重複したデバイス ID が原因で発生する可能性があります。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://msrc-blog.microsoft.com/2022/03/08/guidance-for-cve-2022-23278-spoofing-in-microsoft-defender-for-endpoint/">Guidance for CVE-2022-23278 spoofing in Microsoft Defender for Endpoint – Microsoft Security Response Center</a></p>
+<p>参考情報：<a href="https://msrc-blog.microsoft.com/2022/03/08/guidance-for-cve-2022-23278-spoofing-in-microsoft-defender-for-endpoint/">Guidance for CVE-2022-23278 spoofing in Microsoft Defender for Endpoint – Microsoft Security Response Center</a></p>
 
       
       
@@ -219,6 +219,10 @@
       <ul>
         
           <li>
+            <a href="../Endpoint-MDAV-2026-03-06/">ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</a>
+          </li>
+        
+          <li>
             <a href="../Endpoint-MDAV-2025-11-07/">Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</a>
           </li>
         
@@ -232,10 +236,6 @@
         
           <li>
             <a href="../Endpoint-MDAV-2025-02-19/">Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</a>
-          </li>
-        
-          <li>
-            <a href="../Endpoint-MDAV-2024-08-19/">Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</a>
           </li>
         
       </ul>
@@ -258,7 +258,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2026/03/">2026 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
     </div>
   </div>
 

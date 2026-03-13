@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-02-28-04.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-02-28-05.png">
 <meta property="article:published_time" content="2023-02-28T09:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-17T05:08:14.838Z">
+<meta property="article:modified_time" content="2026-03-13T04:04:29.177Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta name="twitter:card" content="summary">
@@ -43,7 +43,7 @@
 <link rel="stylesheet" href="../css/style.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -61,7 +61,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -110,13 +110,13 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7c5da456-7cbc-53ae-9d47-10efad971f62%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BWindows+%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%AE+Microsoft+Defender+%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%28MDAV%29+%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E8%A8%AD%E5%AE%9A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2023-02-28%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2023-02-28.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2023-02-28.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-02-28/" data-id="cmlq57bwp00360nlf5az2bnbp" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-02-28/" data-id="cuidO9459k1XR3VD5zCTKCim3" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>こんにちは Azure Security サポートチームです。</p>
-<p>この記事では <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-windows?view=o365-worldwide">Microsoft Defender ウイルス対策(MDAV)</a> のスケジュールスキャンについてまとめます。</p>
+<p>この記事では <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-windows?view=o365-worldwide">Microsoft Defender ウイルス対策(MDAV)</a> のスケジュールスキャンについてまとめます。</p>
 <p>スケジュールスキャンを構成する際の参考情報としてご利用ください。</p>
 <p>※ 本記事の内容は 2023年 2月 28 日時点で最新の Windows 10 22H2 環境で動作確認を実施しています。</p>
 <!-- omit in toc -->
@@ -161,14 +161,14 @@
 <h2 id="MDAV-のスケジュールスキャン設定について"><a href="#MDAV-のスケジュールスキャン設定について" class="headerlink" title="MDAV のスケジュールスキャン設定について"></a>MDAV のスケジュールスキャン設定について</h2><p>MDAV はスケジュール設定に基づいて定期的なウイルススキャンを実行することができます。</p>
 <p>ユーザは、スケジュール設定に基づいて実行されるスキャンの種類や実行タイミングを構成することができます。</p>
 <p>スケジュールスキャンの設定には、グループポリシーや Intune、Power Shell コマンドレットなどを使用することが可能です。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans?view=o365-worldwide">Microsoft Defender ウイルス対策を使用して定期的なクイック スキャンとフル スキャンをスケジュールする | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans?view=o365-worldwide">Microsoft Defender ウイルス対策を使用して定期的なクイック スキャンとフル スキャンをスケジュールする | Microsoft Learn</a></p>
 <h3 id="設定可能なスケジュールスキャンの種類について"><a href="#設定可能なスケジュールスキャンの種類について" class="headerlink" title="設定可能なスケジュールスキャンの種類について"></a>設定可能なスケジュールスキャンの種類について</h3><p>MDAV で設定可能なスケジュールスキャンは、大きく以下の 2 つに分類されます。</p>
 <ul>
 <li><strong>クイックスキャン：マルウェアが登録されている可能性のある対象をスキャンします</strong></li>
 <li><strong>フルスキャン：端末にマウントされているドライブ内のすべてのファイルをスキャンします</strong></li>
 </ul>
 <p>スキャンの種類に関する詳細な情報については以下の公開情報を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans?view=o365-worldwide#quick-scan-full-scan-and-custom-scan">クイック スキャン、フル スキャン、カスタム スキャン | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans?view=o365-worldwide#quick-scan-full-scan-and-custom-scan">クイック スキャン、フル スキャン、カスタム スキャン | Microsoft Learn</a></p>
 <p>グループポリシーや Intune を使用してスケジュールスキャンを構成する場合、ユーザは任意のスキャンの種類を指定することができます。</p>
 <p>ただし、MDAV のスケジュールスキャン設定項目には以下の 2 つが存在しているため、それぞれの設定項目について事前に確認しておく必要があります。</p>
 <ol>
@@ -208,11 +208,11 @@
 <p>スケジュールスキャンの設定はグループポリシーや Intune など、複数の管理ツールで構成することが可能です。</p>
 <p>しかし、複数の管理ツールからスケジュールスキャンの設定を行う場合、設定が競合し意図しない動作となる可能性があります。</p>
 <p>そのため、複数の管理ツールを用いてスケジュールスキャンの設定を行う場合は、重複する設定が配信されないようにご留意ください。</p>
-<h2 id="グループポリシーを使用してスケジュールスキャンを構成する"><a href="#グループポリシーを使用してスケジュールスキャンを構成する" class="headerlink" title="グループポリシーを使用してスケジュールスキャンを構成する"></a>グループポリシーを使用してスケジュールスキャンを構成する</h2><p>Windows マシンでスケジュールスキャンを構成する場合、GPOもしくはローカルグループポリシーにて、**[管理用テンプレート]&gt;[Windows コンポーネント]&gt;[Microsoft Defender ウイルス対策]&gt;[スキャン]** 配下の設定を変更します。</p>
+<h2 id="グループポリシーを使用してスケジュールスキャンを構成する"><a href="#グループポリシーを使用してスケジュールスキャンを構成する" class="headerlink" title="グループポリシーを使用してスケジュールスキャンを構成する"></a>グループポリシーを使用してスケジュールスキャンを構成する</h2><p>Windows マシンでスケジュールスキャンを構成する場合、GPOもしくはローカルグループポリシーにて、<strong>[管理用テンプレート]&gt;[Windows コンポーネント]&gt;[Microsoft Defender ウイルス対策]&gt;[スキャン]</strong> 配下の設定を変更します。</p>
 <p>※ Windows Server 2016 の場合は、<code>[Microsoft Defender ウイルス対策]</code>ではなく<code>[Endpoint Protection]</code>の設定を変更します。</p>
 <p>一般的によく使用される設定項目について以下に記載します。</p>
 <p>なお、グループポリシーを使用してスケジュールスキャンを構成する方法の詳細については、以下の公開情報の記載を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-group-policy?view=o365-worldwide#configure-antivirus-scans-using-group-policy">グループ ポリシーを使用してウイルス対策スキャンをスケジュールする | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-group-policy?view=o365-worldwide#configure-antivirus-scans-using-group-policy">グループ ポリシーを使用してウイルス対策スキャンをスケジュールする | Microsoft Learn</a></p>
 <h3 id="クイックスキャンをスケジュールする"><a href="#クイックスキャンをスケジュールする" class="headerlink" title="クイックスキャンをスケジュールする"></a>クイックスキャンをスケジュールする</h3><p>クイックスキャンの実行をスケジュールする場合、ユーザは以下の 3 つの設定を使用することができます。</p>
 <ul>
 <li><p><strong><a href="#%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AB%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B">スケジュールスキャンに使用するスキャンの種類を変更する</a></strong></p>
@@ -249,12 +249,12 @@
 <p>また、スケジュールスキャンの時刻については午前 0 時からの分数でスケジュールされます。</p>
 <p>120 が設定された場合は午前 2 時、780 が設定された場合は午後 1 時のようにスケジュールを設定できます。</p>
 <p>詳細な設定方法については 以下の公開情報を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-group-policy?view=o365-worldwide#group-policy-settings-for-scheduling-scans">スキャンのスケジュール設定 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-group-policy?view=o365-worldwide#group-policy-settings-for-scheduling-scans">スキャンのスケジュール設定 | Microsoft Learn</a></p>
 <h3 id="毎日のクイックスキャンの時刻を指定する"><a href="#毎日のクイックスキャンの時刻を指定する" class="headerlink" title="毎日のクイックスキャンの時刻を指定する"></a>毎日のクイックスキャンの時刻を指定する</h3><p>スケジュールされたクイックスキャンを設定する場合、[スキャン]&gt;[毎日のクイックスキャンの時刻を指定する] の設定を使用することができます。</p>
 <p>この設定では、午前 0 時からの分数でスケジュールを構成できます。</p>
 <p>120 が設定された場合は午前 2 時、780 が設定された場合は午後 1 時のようにスケジュールを設定できます。</p>
 <p>詳細な設定方法については 以下の公開情報を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-group-policy?view=o365-worldwide#group-policy-settings-for-scheduling-daily-scans">毎日のスキャンをスケジュールするためのグループ ポリシー設定 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-group-policy?view=o365-worldwide#group-policy-settings-for-scheduling-daily-scans">毎日のスキャンをスケジュールするためのグループ ポリシー設定 | Microsoft Learn</a></p>
 <h3 id="1-日にクイックスキャンを実行する間隔を指定する"><a href="#1-日にクイックスキャンを実行する間隔を指定する" class="headerlink" title="1 日にクイックスキャンを実行する間隔を指定する"></a>1 日にクイックスキャンを実行する間隔を指定する</h3><p>1 日に実行するクイックスキャンの間隔を設定する場合、[スキャン]&gt;[1 日にクイックスキャンを実行する間隔を指定する] の設定を使用することができます。</p>
 <p>この設定は [スケジュールされたスキャンを実行する時刻を指定する] や [毎日のクイックスキャンの時刻を指定する] の設定と同時に構成することが可能です。</p>
 <p>この設定では、1 日のクイックスキャンの実行間隔を 1 時間から 24 時間の範囲で設定できます。</p>
@@ -262,12 +262,12 @@
 <p>この設定でスケジュールされたクイックスキャンは、起点となるスケジュールスキャンが実行されてからの間隔でトリガーされます。</p>
 <p>起点となるクイックスキャンは、例えば [1 日にクイックスキャンを実行する間隔を指定する] の設定を変更した直後や、シャットダウンされていた端末を起動したタイミングなどで実行される場合があります。</p>
 <p>詳細な設定方法については 以下の公開情報を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-group-policy?view=o365-worldwide#group-policy-settings-for-scheduling-daily-scans">毎日のスキャンをスケジュールするためのグループ ポリシー設定 | Microsoft Learn</a></p>
-<h2 id="Intune-を使用してスケジュールスキャンを構成する"><a href="#Intune-を使用してスケジュールスキャンを構成する" class="headerlink" title="Intune を使用してスケジュールスキャンを構成する"></a>Intune を使用してスケジュールスキャンを構成する</h2><p>Intune からスケジュールスキャンの開始時刻を設定する場合、**[エンドポイントセキュリティ]&gt;[ウイルス対策] から作成可能な [Microsoft Defender ウイルス対策] ポリシー**や、構成プロファイルから作成可能な [管理用テンプレート] ポリシーを使用することが可能です。</p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-group-policy?view=o365-worldwide#group-policy-settings-for-scheduling-daily-scans">毎日のスキャンをスケジュールするためのグループ ポリシー設定 | Microsoft Learn</a></p>
+<h2 id="Intune-を使用してスケジュールスキャンを構成する"><a href="#Intune-を使用してスケジュールスキャンを構成する" class="headerlink" title="Intune を使用してスケジュールスキャンを構成する"></a>Intune を使用してスケジュールスキャンを構成する</h2><p>Intune からスケジュールスキャンの開始時刻を設定する場合、<strong>[エンドポイントセキュリティ]&gt;[ウイルス対策] から作成可能な [Microsoft Defender ウイルス対策] ポリシー</strong>や、構成プロファイルから作成可能な [管理用テンプレート] ポリシーを使用することが可能です。</p>
 <p>[管理用テンプレート] ポリシーを利用する場合は、<a href="#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">グループポリシーを使用してスケジュールスキャンを構成する</a>の記載を参照し、対応するポリシーを構成します。</p>
 <p>[Microsoft Defender ウイルス対策] ポリシーを使用する場合は、以下の項目を参照してください。</p>
 <p>※ [Microsoft Defender ウイルス対策] ポリシーを構成する場合、プラットフォームは [Windows 10、Windows 11、Windows Server] を選択します。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/mem/Intune/protect/endpoint-security-antivirus-policy">Microsoft Intuneでエンドポイント セキュリティ ポリシーを使用してウイルス対策設定を管理する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/mem/Intune/protect/endpoint-security-antivirus-policy">Microsoft Intuneでエンドポイント セキュリティ ポリシーを使用してウイルス対策設定を管理する | Microsoft Learn</a></p>
 <h3 id="Intune-でクイックスキャンをスケジュールする"><a href="#Intune-でクイックスキャンをスケジュールする" class="headerlink" title="Intune でクイックスキャンをスケジュールする"></a>Intune でクイックスキャンをスケジュールする</h3><p>Intune からクイックスキャンをスケジュールする場合、[Microsoft Defender ウイルス対策] ポリシーの以下の設定を使用することが可能です。</p>
 <ul>
 <li><p><a href="#%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%81%A8%E5%AE%9F%E8%A1%8C%E6%99%82%E5%88%BB%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">スキャンの種類と実行時刻を構成する</a></p>
@@ -291,7 +291,7 @@
 <p><img src="../images/Endpoint-MDAV-2023-02-28-03.png" alt="Endpoint-MDAV-2023-02-28-03"></p>
 <p>スキャンパラメーター(ScanParameter)の設定はクイックスキャンまたはフルスキャンのいずれかを選択することが可能です。</p>
 <p>各設定項目の詳細については、以下の公開情報を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows/client-management/mdm/policy-csp-Defender">Defender Policy CSP - Windows Client Management | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/windows/client-management/mdm/policy-csp-Defender">Defender Policy CSP - Windows Client Management | Microsoft Learn</a></p>
 <h3 id="クイック-スキャンの実行時刻をスケジュールする"><a href="#クイック-スキャンの実行時刻をスケジュールする" class="headerlink" title="クイック スキャンの実行時刻をスケジュールする"></a>クイック スキャンの実行時刻をスケジュールする</h3><p>Intune  の [Microsoft Defender ウイルス対策] ポリシーを使用してクイックスキャンを構成する場合、以下の設定を変更します。</p>
 <ul>
 <li><strong>クイックスキャンの実行時刻のスケジュール(ScheduleQuickScanTime)</strong></li>
@@ -300,7 +300,7 @@
 <p><img src="../images/Endpoint-MDAV-2023-02-28-04.png" alt="Endpoint-MDAV-2023-02-28-04"></p>
 <p>この設定は、<a href="#%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%81%A8%E5%AE%9F%E8%A1%8C%E6%99%82%E5%88%BB%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B">スキャンの種類と実行時刻を構成する</a>で構成したクイックスキャンまたはフルスキャンの設定と同時に構成することができます。</p>
 <p>設定項目の詳細については、以下の公開情報を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows/client-management/mdm/policy-csp-Defender">Defender Policy CSP - Windows Client Management | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/windows/client-management/mdm/policy-csp-Defender">Defender Policy CSP - Windows Client Management | Microsoft Learn</a></p>
 <h2 id="スケジュールスキャンの設定と実行履歴を確認する"><a href="#スケジュールスキャンの設定と実行履歴を確認する" class="headerlink" title="スケジュールスキャンの設定と実行履歴を確認する"></a>スケジュールスキャンの設定と実行履歴を確認する</h2><h3 id="端末にスケジュールスキャンの設定が適用されていることを確認する"><a href="#端末にスケジュールスキャンの設定が適用されていることを確認する" class="headerlink" title="端末にスケジュールスキャンの設定が適用されていることを確認する"></a>端末にスケジュールスキャンの設定が適用されていることを確認する</h3><p>MDAV が稼働する Windows マシンで Power Shell を起動して<code>Get-MpPreference</code>コマンドレットを実行することで、端末に適用されているスケジュールスキャンの設定を確認することが可能です。</p>
 <p>各設定項目と出力結果の対応について以下に記載します。</p>
 <ul>
@@ -391,7 +391,7 @@
 </tr>
 </tbody></table>
 <p>詳細およびその他のイベントについては以下の公開情報を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策イベントの ID とエラー コード | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策イベントの ID とエラー コード | Microsoft Learn</a></p>
 <h2 id="スケジュールスキャンに関するよくあるお問い合わせ"><a href="#スケジュールスキャンに関するよくあるお問い合わせ" class="headerlink" title="スケジュールスキャンに関するよくあるお問い合わせ"></a>スケジュールスキャンに関するよくあるお問い合わせ</h2><p>MDAV でスケジュールスキャンを構成する場合のよくあるお問い合わせについて記載します。</p>
 <h3 id="Q1-設定した時刻にスケジュールスキャンが開始されません"><a href="#Q1-設定した時刻にスケジュールスキャンが開始されません" class="headerlink" title="Q1 設定した時刻にスケジュールスキャンが開始されません"></a>Q1 設定した時刻にスケジュールスキャンが開始されません</h3><p>スケジュールされたスキャンは、端末側のシステム時間に従って開始されます。</p>
 <p>そのため、例えばシステムの時刻設定が UTC や JST(UTC+9) である端末にてそれぞれ同一のスケジュール設定を行った場合には、スケジュールスキャンの開始時刻に差異が発生する点に留意してください。</p>
@@ -425,7 +425,7 @@
 <p>また、フルスキャンの実行時には多くのシステムリソースを消費します。</p>
 <p>そのため、一般的にはフルスキャンの実行をスケジュールし、高頻度で運用することは推奨しておりません。</p>
 <p>詳細については以下の公開情報を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans?view=o365-worldwide#quick-scan-full-scan-and-custom-scan">クイック スキャン、フル スキャン、カスタム スキャン | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans?view=o365-worldwide#quick-scan-full-scan-and-custom-scan">クイック スキャン、フル スキャン、カスタム スキャン | Microsoft Learn</a></p>
 <p>なお、[コンピュータ－が起動しているが使用中でないときにのみスケジュールされたスキャンを開始する] 設定を無効化している場合には、端末で構成されているスケジュールスキャン時の CPU 使用率の上限設定に従ってスキャンを行います。</p>
 <p>スケジュールされたフルスキャンまたはクイックスキャンの実行時に MDAV が使用する CPU 使用率は既定で 50 % を上限に設定されています。</p>
 <p>この設定はグループポリシーまたは Intune の [Microsoft Defender ウイルス対策] ポリシーから変更することが可能です。</p>
@@ -445,7 +445,7 @@
 </ul>
 <p>なお、上記の設定を有効化した環境でフルスキャン時にスキャンされるネットワークドライブは、システムレベルでマップされているネットワークドライブが対象になります。</p>
 <p>ユーザレベルでマップされたネットワークドライブ(ユーザが自分のセッション内で独自の資格情報を使用して手動でマッピングしたドライブ)については対象に含まれません。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-advanced-scan-types-microsoft-defender-antivirus?view=o365-worldwide#scanning-mapped-network-drives">マップされたネットワーク ドライブのスキャン | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-advanced-scan-types-microsoft-defender-antivirus?view=o365-worldwide#scanning-mapped-network-drives">マップされたネットワーク ドライブのスキャン | Microsoft Learn</a></p>
 <p>フルスキャンの実行時にネットワークドライブ内のファイルがスキャンされることを抑制する場合には、[マップされたネットワークドライブでフルスキャンを実行する] 設定に加えて以下の設定を無効化する必要があります。</p>
 <ul>
 <li><strong>グループポリシー：[Microsoft Defender ウイルス対策]&gt;[スキャン]&gt;[ネットワークファイルをスキャンする]</strong></li>
@@ -454,15 +454,15 @@
 <!-- ※ 弊社では [ネットワークファイルをスキャンする] 設定を無効化することは推奨しておらず、システムで[改ざん防止機能](https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection?view=o365-worldwide)を有効化している場合には、無効化設定は適用されない点にご留意ください。-->
 
 <h3 id="Q4-Microsoft-365-Defender-ポータルからスケジュールスキャンの設定はできますか"><a href="#Q4-Microsoft-365-Defender-ポータルからスケジュールスキャンの設定はできますか" class="headerlink" title="Q4 Microsoft 365 Defender ポータルからスケジュールスキャンの設定はできますか"></a>Q4 Microsoft 365 Defender ポータルからスケジュールスキャンの設定はできますか</h3><p>Microsoft Defender for Endpoint(MDE) を使用しているデバイスの場合、Microsoft 365 Defender ポータルにデバイス情報が登録されますが、Microsoft 365 Defender ポータルから Windows マシンのスケジュールスキャンを構成することはできません。</p>
-<p>※ 上記は本記事執筆時点(2023 年 2 月)の情報です。最新の情報については <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/?view=o365-worldwide">Microsoft Defender for Endpoint ドキュメント | Microsoft Learn</a> を参照してください。</p>
+<p>※ 上記は本記事執筆時点(2023 年 2 月)の情報です。最新の情報については <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/?view=o365-worldwide">Microsoft Defender for Endpoint ドキュメント | Microsoft Learn</a> を参照してください。</p>
 <h3 id="Q5-クイックスキャンの実行がスキップされる場合があるのはなぜですか"><a href="#Q5-クイックスキャンの実行がスキップされる場合があるのはなぜですか" class="headerlink" title="Q5 クイックスキャンの実行がスキップされる場合があるのはなぜですか"></a>Q5 クイックスキャンの実行がスキップされる場合があるのはなぜですか</h3><p>MDAV ではパフォーマンスの最適化のため、状況によってスケジュールされたクイックスキャンの実行をスキップする場合があります。</p>
 <p>詳細については以下の公開情報を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans?view=o365-worldwide#scheduled-quick-scan-performance-optimization">スケジュールされたクイック スキャンのパフォーマンスの最適化 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans?view=o365-worldwide#scheduled-quick-scan-performance-optimization">スケジュールされたクイック スキャンのパフォーマンスの最適化 | Microsoft Learn</a></p>
 <h3 id="Q6-タスクスケジューラーを使用してスケジュールスキャンを構成することはできますか"><a href="#Q6-タスクスケジューラーを使用してスケジュールスキャンを構成することはできますか" class="headerlink" title="Q6 タスクスケジューラーを使用してスケジュールスキャンを構成することはできますか"></a>Q6 タスクスケジューラーを使用してスケジュールスキャンを構成することはできますか</h3><p>タスクスケジューラーを使用してユーザがスケジュールスキャンを構成することは非推奨です。</p>
 <p>ユーザがスケジュールスキャンを構成する場合、グループポリシーや Intune、Power Shell コマンドレットや Windows Management Instrumentation(WMI) を利用できます。</p>
 <p>Power Shell コマンドレットや Windows Management Instrumentation(WMI) の使用については以下の公開情報を参照してください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-powershell?view=o365-worldwide">PowerShell を使用してウイルス対策スキャンをスケジュールする | Microsoft Learn</a></p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-wmi?view=o365-worldwide">Windows Management Instrumentation を使用してウイルス対策スキャンをスケジュールする | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-powershell?view=o365-worldwide">PowerShell を使用してウイルス対策スキャンをスケジュールする | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/schedule-antivirus-scans-wmi?view=o365-worldwide">Windows Management Instrumentation を使用してウイルス対策スキャンをスケジュールする | Microsoft Learn</a></p>
 <h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>この記事では、Windows のデバイスでスケジュールスキャンを構成する主な手順とよくあるお問い合わせについてご紹介しました。</p>
 <p>なお、本記事の内容は執筆時点の情報を基にしておりますので、MDAV のスキャンに関する最新情報については公開情報をご確認ください。</p>
 
@@ -514,6 +514,10 @@
       <ul>
         
           <li>
+            <a href="../Endpoint-MDAV-2026-03-06/">ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</a>
+          </li>
+        
+          <li>
             <a href="../Endpoint-MDAV-2025-11-07/">Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</a>
           </li>
         
@@ -527,10 +531,6 @@
         
           <li>
             <a href="../Endpoint-MDAV-2025-02-19/">Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</a>
-          </li>
-        
-          <li>
-            <a href="../Endpoint-MDAV-2024-08-19/">Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</a>
           </li>
         
       </ul>
@@ -553,7 +553,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2026/03/">2026 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
     </div>
   </div>
 

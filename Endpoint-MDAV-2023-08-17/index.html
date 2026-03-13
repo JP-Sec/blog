@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-08-17-018.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2023-08-17-019.png">
 <meta property="article:published_time" content="2023-09-06T06:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-17T05:08:14.838Z">
+<meta property="article:modified_time" content="2026-03-13T04:04:29.177Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Microsoft Defender ウイルス対策">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
 <link rel="stylesheet" href="../css/style.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -74,7 +74,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -123,13 +123,13 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+26461ad8-579a-5902-8700-e478423fa37d%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BWindows+%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%AE+Microsoft+Defender+%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96%28MDAV%29+%E3%81%AE%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9%28%E5%AE%9A%E7%BE%A9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%29%E6%9B%B4%E6%96%B0%E8%A8%AD%E5%AE%9A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2023-08-17%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2023-08-17.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2023-08-17.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-08-17/" data-id="cmlq57bwt003e0nlf4ut19kh9" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2023-08-17/" data-id="cuidpYkJwgKstwPRshdVC1-YA" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>こんにちは Azure Security サポートチームです。</p>
-<p>この記事では <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-windows?view=o365-worldwide">Microsoft Defender ウイルス対策(MDAV)</a> のセキュリティインテリジェンスの更新管理についておまとめします。</p>
+<p>この記事では <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-windows?view=o365-worldwide">Microsoft Defender ウイルス対策(MDAV)</a> のセキュリティインテリジェンスの更新管理についておまとめします。</p>
 <p>MDAV のセキュリティインテリジェンスの概要や手動更新手順については以下の記事にておまとめしておりますので、参考情報としてご利用ください。</p>
 <p>関連記事：<a href="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-07-29/">Microsoft Defender ウイルス対策のセキュリティインテリジェンス(定義ファイル)を手動で更新・ロールバック・削除する方法 | Japan CSS Security Support Blog</a></p>
 <p>※ 本記事の内容は 2023 年 9 月 5 日時点で最新の Windows 10 22H2 環境で動作確認を実施しています。</p>
@@ -187,27 +187,27 @@
 <li><strong>Microsoft Defende ウイルス対策およびその他の Microsoft マルウェア対策のセキュリティ インテリジェンス更新プログラム(MMPC)</strong></li>
 </ul>
 <p>Microsoft Defender ウイルス対策が指定可能な更新ソースの詳細については以下の公開情報にてご案内しています。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策が更新プログラムを受け取る方法と場所を管理する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策が更新プログラムを受け取る方法と場所を管理する | Microsoft Learn</a></p>
 <h3 id="セキュリティインテリジェンスの更新ソースを決定するしくみ"><a href="#セキュリティインテリジェンスの更新ソースを決定するしくみ" class="headerlink" title="セキュリティインテリジェンスの更新ソースを決定するしくみ"></a>セキュリティインテリジェンスの更新ソースを決定するしくみ</h3><p>Microsoft Defender ウイルス対策がセキュリティインテリジェンスの更新を行う場合、使用する更新元は既定では「フォールバック順序」の定義に従います。</p>
 <p>例えば、最新の Windows 10 デバイスではフォールバック順序が既定で <code>MicrosoftUpdateServer|MMPC</code> に設定されています。</p>
 <p>この場合、Microsoft Defender ウイルス対策はセキュリティインテリジェンスの更新を行う際に、まず Microsoft Update を使用して更新を行います。</p>
 <p>何らかの理由で Microsoft Update サービスを利用できなかった場合には、代替更新元として 2 番目に設定されている MMPC を使用した更新を試みます。</p>
 <p>「フォールバック順序」の詳細については以下の公開情報の記載を参照ください。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#fallback-order">フォールバック順序 | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#fallback-order">フォールバック順序 | Microsoft Learn</a></p>
 <h3 id="セキュリティインテリジェンス自動更新のトリガーに設定可能な項目"><a href="#セキュリティインテリジェンス自動更新のトリガーに設定可能な項目" class="headerlink" title="セキュリティインテリジェンス自動更新のトリガーに設定可能な項目"></a>セキュリティインテリジェンス自動更新のトリガーに設定可能な項目</h3><p>Microsoft Defender ウイルス対策 のセキュリティインテリジェンス更新は、複数の機能や設定によってトリガーされます。</p>
 <p>このような仕組みによって、最新の脅威に対応するためのセキュリティインテリジェンスを定期的に端末に適用することができます。</p>
 <p>一般にセキュリティインテリジェンスの更新に利用される機能や設定については以下の通りです。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide#security-intelligence-updates">Microsoft Update による更新</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-update-schedule-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策によってスケジュールされた更新</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-outdated-endpoints-microsoft-defender-antivirus?view=o365-worldwide">キャッチアップ更新プログラムの取得</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-event-based-updates-microsoft-defender-antivirus?view=o365-worldwide">特定のイベントをトリガーとする更新</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/mem/configmgr/protect/deploy-use/endpoint-definitions-configmgr">Configration Manager を使用した更新</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide#security-intelligence-updates">Microsoft Update による更新</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-update-schedule-microsoft-defender-antivirus?view=o365-worldwide">Microsoft Defender ウイルス対策によってスケジュールされた更新</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-outdated-endpoints-microsoft-defender-antivirus?view=o365-worldwide">キャッチアップ更新プログラムの取得</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-event-based-updates-microsoft-defender-antivirus?view=o365-worldwide">特定のイベントをトリガーとする更新</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/mem/configmgr/protect/deploy-use/endpoint-definitions-configmgr">Configration Manager を使用した更新</a></li>
 </ul>
 <p>各項目の詳細については、上記のリンク先の公開情報を参照してください。</p>
 <h3 id="セキュリティインテリジェンスの手動更新方法について"><a href="#セキュリティインテリジェンスの手動更新方法について" class="headerlink" title="セキュリティインテリジェンスの手動更新方法について"></a>セキュリティインテリジェンスの手動更新方法について</h3><p>セキュリティインテリジェンスを手動で更新、ロールバックする方法については以下の公開ブログにておまとめしております。</p>
 <p>参考情報：<a href="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-07-29/">Microsoft Defender ウイルス対策のセキュリティインテリジェンス(定義ファイル)を手動で更新・ロールバック・削除する方法 | Japan CSS Security Support Blog</a></p>
-<h2 id="グループポリシーを使用してセキュリティインテリジェンスの自動更新を設定する"><a href="#グループポリシーを使用してセキュリティインテリジェンスの自動更新を設定する" class="headerlink" title="グループポリシーを使用してセキュリティインテリジェンスの自動更新を設定する"></a>グループポリシーを使用してセキュリティインテリジェンスの自動更新を設定する</h2><p>Windows マシンでスケジュールスキャンを構成する場合、GPOもしくはローカルグループポリシーにて、**[管理用テンプレート]&gt;[Windows コンポーネント]&gt;[Microsoft Defender ウイルス対策]&gt;[セキュリティインテリジェンスの更新]** 下の設定を変更します。</p>
+<h2 id="グループポリシーを使用してセキュリティインテリジェンスの自動更新を設定する"><a href="#グループポリシーを使用してセキュリティインテリジェンスの自動更新を設定する" class="headerlink" title="グループポリシーを使用してセキュリティインテリジェンスの自動更新を設定する"></a>グループポリシーを使用してセキュリティインテリジェンスの自動更新を設定する</h2><p>Windows マシンでスケジュールスキャンを構成する場合、GPOもしくはローカルグループポリシーにて、<strong>[管理用テンプレート]&gt;[Windows コンポーネント]&gt;[Microsoft Defender ウイルス対策]&gt;[セキュリティインテリジェンスの更新]</strong> 下の設定を変更します。</p>
 <p>※ ご利用環境によっては、グループポリシーエディタ上のポリシー名が [Microsoft Defender ウイルス対策] ではなく[Windows Defender ウイルス対策] もしくは [Endpoint Protection] と表示されている場合があります。</p>
 <p>セキュリティインテリジェンスの定期更新をスケジュールする場合、ユーザは以下の 3 つの設定を利用できます。</p>
 <ul>
@@ -218,7 +218,7 @@
 <p><a href="#%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9%E3%81%AE%E6%9B%B4%E6%96%B0%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B">セキュリティインテリジェンスの更新ソースを設定する</a> の設定は前述のフォールバック順序の設定に該当しており、Microsoft Defender ウイルス対策によってトリガーされるすべての更新に影響します。</p>
 <p>上記の 3 つの設定は、同時に構成することも可能です。</p>
 <p>また、キャッチアップ更新やイベントベースなど、<a href="#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%9D%A1%E4%BB%B6%E3%81%A7%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9%E3%82%92%E6%9B%B4%E6%96%B0%E3%81%99%E3%82%8B">特定の条件でセキュリティインテリジェンスを更新する</a> ことも可能です。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-update-schedule-microsoft-defender-antivirus?view=o365-worldwide#use-group-policy-to-schedule-protection-updates">ウイルス対策の更新プログラムMicrosoft Defenderスケジュールする | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-update-schedule-microsoft-defender-antivirus?view=o365-worldwide#use-group-policy-to-schedule-protection-updates">ウイルス対策の更新プログラムMicrosoft Defenderスケジュールする | Microsoft Learn</a></p>
 <h3 id="セキュリティインテリジェンスの更新ソースを設定する"><a href="#セキュリティインテリジェンスの更新ソースを設定する" class="headerlink" title="セキュリティインテリジェンスの更新ソースを設定する"></a>セキュリティインテリジェンスの更新ソースを設定する</h3><p>Microsoft Defender ウイルス対策がセキュリティインテリジェンスの更新を行う場合の更新ソースは、前述の通り「フォールバック順序」の定義によって決定されます。</p>
 <p>既定値では、フォールバック順序は「Microsoft Update -&gt; MMPC(<code>MicrosoftUpdateServer|MMPC</code>)」に設定されています。</p>
 <p>そのため、インターネットに接続可能なマシンで、セキュリティインテリジェンスの更新にも Microsoft Update サービスや MMPC を利用する場合には、フォールバック順序の設定変更は不要です。</p>
@@ -247,7 +247,7 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-MpPreference</span> | <span class="built_in">Select-Object</span> SignatureScheduleDay,SignatureScheduleTime</span><br></pre></td></tr></table></figure>
 
 <p>上記コマンドの実行結果が以下となる場合、セキュリティインテリジェンスの更新は「毎日、午前 2 時」に試行されると判断することができます。</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SignatureScheduleDay SignatureScheduleTime</span><br><span class="line">-------------------- ---------------------</span><br><span class="line">                   <span class="number">0</span> <span class="number">02</span>:<span class="number">00</span>:<span class="number">00</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SignatureScheduleDay SignatureScheduleTime</span><br><span class="line"><span class="literal">--------------------</span> <span class="literal">---------------------</span></span><br><span class="line">                   <span class="number">0</span> <span class="number">02</span>:<span class="number">00</span>:<span class="number">00</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="セキュリティインテリジェンスの更新間隔を指定する"><a href="#セキュリティインテリジェンスの更新間隔を指定する" class="headerlink" title="セキュリティインテリジェンスの更新間隔を指定する"></a>セキュリティインテリジェンスの更新間隔を指定する</h3><p>ユーザは、Microsoft Defender ウイルス対策がセキュリティインテリジェンスの更新を試行する間隔を指定することができます。</p>
 <p>セキュリティインテリジェンスの更新間隔は、[管理用テンプレート]&gt;[Windows コンポーネント]&gt;[Microsoft Defender ウイルス対策]&gt;[セキュリティインテリジェンスの更新] のうち、以下のポリシーを使用して設定します。</p>
@@ -268,30 +268,30 @@
 </ol>
 <p>この設定を有効化すると、Microsoft Defender ウイルス対策のスタートアップ時に新しいセキュリティインテリジェンスの更新が試行されます。</p>
 <p><img src="../images/Endpoint-MDAV-2023-08-17-007.png" alt="グループポリシー：UpdateOnStartUp"></p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-event-based-updates-microsoft-defender-antivirus?view=o365-worldwide#check-for-protection-updates-on-startup">起動時に保護の更新プログラムを確認する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-event-based-updates-microsoft-defender-antivirus?view=o365-worldwide#check-for-protection-updates-on-startup">起動時に保護の更新プログラムを確認する | Microsoft Learn</a></p>
 <ol start="2">
 <li><strong>[セキュリティインテリジェンスのキャッチアップ更新が必要になるまでの日数を定義する]</strong></li>
 </ol>
 <p>この設定を有効化すると、端末で一定期間セキュリティインテリジェンスの更新が行われていない場合、次回のサインイン時に自動的にセキュリティインテリジェンスの更新がトリガーされます。</p>
 <p>既定では、1 日以上セキュリティインテリジェンスの更新が行われていない場合、この設定によってキャッチアップ更新が実施されます。</p>
 <p><img src="../images/Endpoint-MDAV-2023-08-17-008.png" alt="グループポリシー：SignatureUpdateCatchupInterval "></p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-outdated-endpoints-microsoft-defender-antivirus?view=o365-worldwide#use-group-policy-to-enable-and-configure-the-catch-up-update-feature">グループ ポリシーを使用してキャッチアップ更新機能を有効にして構成する | Microsoft Learn</a></p>
-<h2 id="Intune-を使用してセキュリティインテリジェンスの自動更新を設定する"><a href="#Intune-を使用してセキュリティインテリジェンスの自動更新を設定する" class="headerlink" title="Intune を使用してセキュリティインテリジェンスの自動更新を設定する"></a>Intune を使用してセキュリティインテリジェンスの自動更新を設定する</h2><p>Intune からセキュリティインテリジェンスの自動更新を設定する場合、**[エンドポイントセキュリティ]&gt;[ウイルス対策] から作成可能な [Microsoft Defender ウイルス対策] ポリシー**や、構成プロファイルから作成可能な [管理用テンプレート] ポリシーを使用することが可能です。</p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-outdated-endpoints-microsoft-defender-antivirus?view=o365-worldwide#use-group-policy-to-enable-and-configure-the-catch-up-update-feature">グループ ポリシーを使用してキャッチアップ更新機能を有効にして構成する | Microsoft Learn</a></p>
+<h2 id="Intune-を使用してセキュリティインテリジェンスの自動更新を設定する"><a href="#Intune-を使用してセキュリティインテリジェンスの自動更新を設定する" class="headerlink" title="Intune を使用してセキュリティインテリジェンスの自動更新を設定する"></a>Intune を使用してセキュリティインテリジェンスの自動更新を設定する</h2><p>Intune からセキュリティインテリジェンスの自動更新を設定する場合、<strong>[エンドポイントセキュリティ]&gt;[ウイルス対策] から作成可能な [Microsoft Defender ウイルス対策] ポリシー</strong>や、構成プロファイルから作成可能な [管理用テンプレート] ポリシーを使用することが可能です。</p>
 <p>[管理用テンプレート] ポリシーを利用する場合は、グループポリシーを使用してセキュリティインテリジェンスの自動更新を構成する方法に関する手順を参照し、対応するポリシーを構成します。</p>
 <p>[Microsoft Defender ウイルス対策] ポリシーを使用する場合は、以下の項目を参照してください。</p>
 <p>※ [Microsoft Defender ウイルス対策] ポリシーを構成する場合、プラットフォームは [Windows 10、Windows 11、Windows Server] を選択します。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/mem/Intune/protect/endpoint-security-antivirus-policy">Microsoft Intuneでエンドポイント セキュリティ ポリシーを使用してウイルス対策設定を管理する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/mem/Intune/protect/endpoint-security-antivirus-policy">Microsoft Intuneでエンドポイント セキュリティ ポリシーを使用してウイルス対策設定を管理する | Microsoft Learn</a></p>
 <h3 id="Intune-でセキュリティインテリジェンスの更新ソースを設定する"><a href="#Intune-でセキュリティインテリジェンスの更新ソースを設定する" class="headerlink" title="Intune でセキュリティインテリジェンスの更新ソースを設定する"></a>Intune でセキュリティインテリジェンスの更新ソースを設定する</h3><p>Intune の [Microsoft Defender ウイルス対策] ポリシーでセキュリティインテリジェンスの更新ソースを設定する場合、[定義更新のフォールバック順序] のトグルボタンを有効化した上で、設定したい更新ソースをパイプ区切りで入力します。</p>
 <p>既定値では、フォールバック順序は「Microsoft Update -&gt; MMPC(<code>MicrosoftUpdateServer|MMPC</code>)」に設定されています。</p>
 <p>そのため、インターネットに接続可能なマシンで、セキュリティインテリジェンスの更新にも Microsoft Update サービスや MMPC を利用する場合には、フォールバック順序の設定変更は不要です。</p>
 <p>一方で、WSUS を主な更新元に利用する場合には、フォールバック順序に <code>InternalDefinitionUpdateServer</code> を加える必要があります。</p>
 <p>以下の画面キャプチャは、セキュリティインテリジェンスの主要な更新元を WSUS、代替更新元を MMPC に指定する場合の設定例です。</p>
 <p><img src="../images/Endpoint-MDAV-2023-08-17-002.png" alt="Intune でフォールバック順序を設定する"></p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows/client-management/mdm/policy-csp-Defender?WT.mc_id=Portal-fx#signatureupdatefallbackorder">SignatureUpdateFallbackOrder | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/windows/client-management/mdm/policy-csp-Defender?WT.mc_id=Portal-fx#signatureupdatefallbackorder">SignatureUpdateFallbackOrder | Microsoft Learn</a></p>
 <h3 id="Intune-でセキュリティインテリジェンスの更新間隔を指定する"><a href="#Intune-でセキュリティインテリジェンスの更新間隔を指定する" class="headerlink" title="Intune でセキュリティインテリジェンスの更新間隔を指定する"></a>Intune でセキュリティインテリジェンスの更新間隔を指定する</h3><p>Intune のウイルス対策ポリシーを使用する場合、<a href="#%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9%E3%81%AE%E6%9B%B4%E6%96%B0%E9%96%93%E9%9A%94%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%99%E3%82%8B">セキュリティインテリジェンスの更新間隔を指定する</a> と同じく、SignatureUpdateInterval の設定を変更して Microsoft Defender ウイルス対策は 3 時間ごとにセキュリティインテリジェンスの更新を試行するように構成することができます。</p>
 <p><img src="../images/Endpoint-MDAV-2023-08-17-009.png" alt="Intune：SignatureUpdateInterval"></p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows/client-management/mdm/policy-csp-Defender?WT.mc_id=Portal-fx#signatureupdateinterval">Defender Policy CSP - Windows Client Management | Microsoft Learn</a></p>
-<h2 id="ローカルネットワークファイル共有を更新ソースとして設定する"><a href="#ローカルネットワークファイル共有を更新ソースとして設定する" class="headerlink" title="ローカルネットワークファイル共有を更新ソースとして設定する"></a>ローカルネットワークファイル共有を更新ソースとして設定する</h2><p>この項では、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#unc-share">セキュリティ インテリジェンスとプラットフォーム更新プログラム用の UNC 共有を作成する</a> の記載に従ってローカルネットワークファイル共有をセキュリティインテリジェンスの更新元に設定する方法を紹介します。</p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/windows/client-management/mdm/policy-csp-Defender?WT.mc_id=Portal-fx#signatureupdateinterval">Defender Policy CSP - Windows Client Management | Microsoft Learn</a></p>
+<h2 id="ローカルネットワークファイル共有を更新ソースとして設定する"><a href="#ローカルネットワークファイル共有を更新ソースとして設定する" class="headerlink" title="ローカルネットワークファイル共有を更新ソースとして設定する"></a>ローカルネットワークファイル共有を更新ソースとして設定する</h2><p>この項では、<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#unc-share">セキュリティ インテリジェンスとプラットフォーム更新プログラム用の UNC 共有を作成する</a> の記載に従ってローカルネットワークファイル共有をセキュリティインテリジェンスの更新元に設定する方法を紹介します。</p>
 <p>具体的には、以下の図のように、インターネットからサーバが配布用のセキュリティインテリジェンスの更新プログラムを取得し(①)、各クライアント端末はそのサーバからネットワークファイル共有を通して更新プログラムを取得(②)します。</p>
 <p><img src="../images/Endpoint-MDAV-2023-08-17-013.png" alt="ローカルネットワークファイル共有"></p>
 <h3 id="サーバで更新プログラムを取得し、ネットワークファイル共有を行う"><a href="#サーバで更新プログラムを取得し、ネットワークファイル共有を行う" class="headerlink" title="サーバで更新プログラムを取得し、ネットワークファイル共有を行う"></a>サーバで更新プログラムを取得し、ネットワークファイル共有を行う</h3><p>※ 本記事では、セキュリティインテリジェンス更新プログラムの配布サーバとして Windows Server 2019 を使用します。</p>
@@ -301,7 +301,7 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">MD</span> C:\Tool\PS<span class="literal">-Scripts</span>\</span><br><span class="line"><span class="built_in">MD</span> C:\Temp\TempSigs\x64</span><br><span class="line"><span class="built_in">MD</span> C:\Temp\TempSigs\x86</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
-<li><a target="_blank" rel="noopener" href="https://www.powershellgallery.com/packages/SignatureDownloadCustomTask/1.4">SignatureDownloadCustomTask 1.4</a> の配布サイトにアクセスして [Manual Download] のタブを開き、[Download the raw nupkg file] ボタンをクリックして <code>signaturedownloadcustomtask.1.4.0.nupkg</code> をダウンロードします。</li>
+<li><a href="https://www.powershellgallery.com/packages/SignatureDownloadCustomTask/1.4">SignatureDownloadCustomTask 1.4</a> の配布サイトにアクセスして [Manual Download] のタブを開き、[Download the raw nupkg file] ボタンをクリックして <code>signaturedownloadcustomtask.1.4.0.nupkg</code> をダウンロードします。</li>
 <li>任意の解凍ツールを使用して <code>signaturedownloadcustomtask.1.4.0.nupkg</code> を展開し、取得した<code>SignatureDownloadCustomTask.ps1</code> を作成したスクリプト用フォルダ(<code>C:\Tool\PS-Scripts\</code>) に配置します。</li>
 <li>続いて、管理者権限で起動した PowerShell で以下のコマンドを順に実行し、更新プログラムを定期的に取得するスケジュールタスクを作成します。</li>
 </ol>
@@ -320,7 +320,7 @@
 </ol>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\windows\system32\windowspowershell\v1.<span class="number">0</span>\powershell.exe <span class="literal">-NoProfile</span> <span class="literal">-executionpolicy</span> RemoteSigned  <span class="literal">-command</span> <span class="string">&quot;&amp;\&quot;</span>C:\Tool\PS<span class="literal">-Scripts</span>\SignatureDownloadCustomTask.ps1\<span class="string">&quot; -action run -arch x64 -isDelta <span class="variable">$False</span> -destDir C:\Temp\TempSigs\x64&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>注意：2023 年 9 月 5 日現在、Windows Server 2016 以下のバージョンを使用している環境で「<code>&quot;2&quot; 個の引数を指定して &quot;DownloadFile&quot; を呼び出し中に例外が発生しました: &quot;要求は中止されました: SSL/TLS のセキュリティで保護されているチャネルを作成できませんでした&quot;</code>」というエラーで更新プログラムのダウンロードに失敗する問題が確認されております。問題の解決のためには、PowerShell で TLS1.2 を利用できるように構成する必要があります。詳細については <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/mem/configmgr/core/plan-design/security/enable-tls-1-2-client#bkmk_net">公開情報</a> を参照するか、弊社までお問い合わせください。</p>
+<p>注意：2023 年 9 月 5 日現在、Windows Server 2016 以下のバージョンを使用している環境で「<code>&quot;2&quot; 個の引数を指定して &quot;DownloadFile&quot; を呼び出し中に例外が発生しました: &quot;要求は中止されました: SSL/TLS のセキュリティで保護されているチャネルを作成できませんでした&quot;</code>」というエラーで更新プログラムのダウンロードに失敗する問題が確認されております。問題の解決のためには、PowerShell で TLS1.2 を利用できるように構成する必要があります。詳細については <a href="https://learn.microsoft.com/ja-jp/mem/configmgr/core/plan-design/security/enable-tls-1-2-client#bkmk_net">公開情報</a> を参照するか、弊社までお問い合わせください。</p>
 <ol start="8">
 <li>[7.] の手順の完了後、<code>C:\Temp\TempSigs\x64</code> に更新用のプログラムが配置されていることを確認します。</li>
 <li>最後に、[5.] で確認したスケジュールタスクを右クリックして手動実行し、<code>C:\Temp\TempSigs</code> 以下のフォルダに更新プログラムが配置されることを確認します。</li>
@@ -340,10 +340,10 @@
 <p>また、ご利用環境や更新のタイミングによっては、通常より多くの更新を取得したり、セキュリティインテリジェンスの差分(デルタ)ではなく、完全な更新プログラムの取得を行う場合があります。</p>
 <p>以上の理由から、セキュリティインテリジェンスの更新に伴う具体的なダウンロードサイズの目安についてはご案内が困難であり、ユーザの環境で実際に確認いただくようお願いいたしております。</p>
 <p>※ なお、セキュリティインテリジェンスの更新に伴うダウンロードサイズは、環境によっては最大で 110 ~ 130 MB 程度になる可能性があります。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#fallback-order">Microsoft Defender ウイルス対策が更新プログラムを受け取る方法と場所を管理する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/manage-protection-updates-microsoft-defender-antivirus?view=o365-worldwide#fallback-order">Microsoft Defender ウイルス対策が更新プログラムを受け取る方法と場所を管理する | Microsoft Learn</a></p>
 <h3 id="セキュリティインテリジェンスの更新に成功したかどうかを確認する方法を教えてください"><a href="#セキュリティインテリジェンスの更新に成功したかどうかを確認する方法を教えてください" class="headerlink" title="セキュリティインテリジェンスの更新に成功したかどうかを確認する方法を教えてください"></a>セキュリティインテリジェンスの更新に成功したかどうかを確認する方法を教えてください</h3><p>セキュリティインテリジェンスの更新に成功した場合、Microsoft Defender ウイルス対策のイベントログ(<code>[アプリケーションとサービスログ]&gt;[Microsoft]&gt;[Windows]&gt;[Windows Defender]&gt;[Operational]</code>) にイベント ID：2000 のイベントが記録されます。</p>
 <p><img src="../images/Endpoint-MDAV-2023-08-17-010.png" alt="イベントログ：セキュリティインテリジェンスの更新"></p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide#-----id-2000">Microsoft Defender ウイルス対策イベントの ID とエラー コード | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide#-----id-2000">Microsoft Defender ウイルス対策イベントの ID とエラー コード | Microsoft Learn</a></p>
 <p>PowerShell を使用して、システムで最後にセキュリティインテリジェンスの更新に成功したイベントログを抽出するには以下のコマンドを使用できます。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-WinEvent</span> <span class="literal">-LogName</span> <span class="string">&quot;Microsoft-Windows-Windows Defender/Operational&quot;</span> <span class="literal">-FilterXPath</span> <span class="string">&quot;*[System[(EventID=2000)]]&quot;</span> <span class="literal">-MaxEvents</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
@@ -383,7 +383,7 @@
 </ol>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-MpComputerStatus</span> | <span class="built_in">Select-Object</span> AntivirusSignatureVersion</span><br></pre></td></tr></table></figure>
 
-<p>※ 現在公開されている最新のセキュリティインテリジェンスのバージョンは <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/wdsi/defenderupdates">Latest security intelligence update</a> から確認できます。</p>
+<p>※ 現在公開されている最新のセキュリティインテリジェンスのバージョンは <a href="https://www.microsoft.com/en-us/wdsi/defenderupdates">Latest security intelligence update</a> から確認できます。</p>
 <p>※ 指定の時刻の前に更新が実行され、すでに最新のセキュリティインテリジェンスが適用されている場合、セキュリティインテリジェンスの更新はスキップされるため、SignatureScheduleTime で指定の時刻に更新は行われません。</p>
 <ol start="3">
 <li>SignatureScheduleTime で指定の時刻となったことを確認の後、再度以下のコマンドを実行してセキュリティインテリジェンスのバージョンが最新バージョンに更新されたことを確認します。</li>
@@ -398,12 +398,12 @@
 <li><a href="#%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9%E3%81%AE%E6%9B%B4%E6%96%B0%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%92%E6%B1%BA%E5%AE%9A%E3%81%99%E3%82%8B%E3%81%97%E3%81%8F%E3%81%BF">セキュリティインテリジェンスの更新ソースを決定するしくみ</a></li>
 </ul>
 <p>既定で構成されている Microsoft Update サービスと MMPC を更新元として利用する場合は、それぞれの更新に利用可能なプロキシ設定を使用する必要があります。</p>
-<p>Microsoft Update サービスが利用可能なプロキシ設定については、<a target="_blank" rel="noopener" href="https://support.microsoft.com/ja-jp/topic/windows-update-%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%81%8C-windows-update-web-%E3%82%B5%E3%82%A4%E3%83%88%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A%E3%81%AB%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92%E6%B1%BA%E5%AE%9A%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95-08612ae5-3722-886c-f1e1-d012516c22a1">公開情報</a> の記載を参照します。</p>
+<p>Microsoft Update サービスが利用可能なプロキシ設定については、<a href="https://support.microsoft.com/ja-jp/topic/windows-update-%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%81%8C-windows-update-web-%E3%82%B5%E3%82%A4%E3%83%88%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A%E3%81%AB%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92%E6%B1%BA%E5%AE%9A%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95-08612ae5-3722-886c-f1e1-d012516c22a1">公開情報</a> の記載を参照します。</p>
 <p>MMPC を更新元として利用する場合には、WinHTTP プロキシや、[ネットワークへ接続するためのプロキシサーバーを定義する] から設定可能な Microsoft Defender ウイルス対策用のプロキシ設定を利用できます。</p>
 <p>グループポリシーを使用する場合は、[管理用テンプレート]&gt;[Windows コンポーネント]&gt;[Microsoft Defender ウイルス対策] 下の [ネットワークへ接続するためのプロキシサーバーを定義する] の設定を [有効] に変更し、プロキシサーバのアドレスとポート番号を指定します。</p>
 <p><img src="../images/Endpoint-MDAV-2023-08-17-012.png" alt="グループポリシー：ProxyServer"></p>
 <p>この方法で設定したプロキシサーバは、Microsoft Defender ウイルス対策のセキュリティインテリジェンス更新やクラウド保護機能に利用されます。</p>
-<p>参考情報：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-proxy-internet?view=o365-worldwide#configure-a-static-proxy-for-microsoft-defender-antivirus">Microsoft Defender ウイルス対策の静的プロキシを構成する | Microsoft Learn</a></p>
+<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-proxy-internet?view=o365-worldwide#configure-a-static-proxy-for-microsoft-defender-antivirus">Microsoft Defender ウイルス対策の静的プロキシを構成する | Microsoft Learn</a></p>
 <h3 id="セキュリティインテリジェンスの更新によってインターネット回線がひっ迫する可能性はありますか"><a href="#セキュリティインテリジェンスの更新によってインターネット回線がひっ迫する可能性はありますか" class="headerlink" title="セキュリティインテリジェンスの更新によってインターネット回線がひっ迫する可能性はありますか"></a>セキュリティインテリジェンスの更新によってインターネット回線がひっ迫する可能性はありますか</h3><p><a href="#%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9%E6%9B%B4%E6%96%B0%E3%81%AB%E4%BC%B4%E3%81%86%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%AE%E7%9B%AE%E5%AE%89%E3%82%92%E6%95%99%E3%81%88%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84">セキュリティインテリジェンス更新に伴うダウンロードサイズの目安を教えてください</a> に記載の通り、定期的に更新が行われている端末では、現在適用されているバージョンと最新のセキュリティインテリジェンスの差分(デルタ)のみをダウンロードするため、セキュリティインテリジェンスの更新に伴うダウンロードサイズは最小限になります。</p>
 <p>しかし、実際に発生する通信量やご利用中の帯域への影響については、環境やタイミングに大きく依存するため、ユーザの環境でご確認いただく必要があります。</p>
 <p>なお、セキュリティインテリジェンスの更新によるインターネット回線のひっ迫を懸念する場合は、インターネット回線の増強や、WSUS やローカルネットワークファイル共有などの更新方法をご利用ください。</p>
@@ -415,7 +415,7 @@
 <p><img src="../images/Endpoint-MDAV-2023-08-17-019.png" alt="グループポリシー：ForceUpdateFromMU"></p>
 <p>上記の設定を利用する場合、端末がインターネット経由で Microsoft Update に接続できることを事前に確認します。</p>
 <p>また、フォールバック順序の設定にて、<code>MicrosoftUpdateServer</code> を優先する更新元に設定します。</p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事ではMicrosoft Defender ウイルス対策(MDAV)のセキュリティインテリジェンスの更新プログラム(定義ファイル/エンジン)の更新に関するよくある質問についておまとめいたしました。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事ではMicrosoft Defender ウイルス対策(MDAV)のセキュリティインテリジェンスの更新プログラム(定義ファイル&#x2F;エンジン)の更新に関するよくある質問についておまとめいたしました。</p>
 <p>※ 本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合がありますことご了承ください。</p>
 
       
@@ -466,6 +466,10 @@
       <ul>
         
           <li>
+            <a href="../Endpoint-MDAV-2026-03-06/">ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</a>
+          </li>
+        
+          <li>
             <a href="../Endpoint-MDAV-2025-11-07/">Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</a>
           </li>
         
@@ -479,10 +483,6 @@
         
           <li>
             <a href="../Endpoint-MDAV-2025-02-19/">Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</a>
-          </li>
-        
-          <li>
-            <a href="../Endpoint-MDAV-2024-08-19/">Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</a>
           </li>
         
       </ul>
@@ -505,7 +505,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2026/03/">2026 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
     </div>
   </div>
 
