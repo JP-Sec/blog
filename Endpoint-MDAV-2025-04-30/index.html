@@ -15,8 +15,6 @@
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-01.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-02.png">
-<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-03.png">
-<meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-04.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-05.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-06.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-07.png">
@@ -24,7 +22,7 @@
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-10.png">
 <meta property="og:image" content="https://jp-sec.github.io/blog/images/Endpoint-MDAV-2025-04-30-08.png">
 <meta property="article:published_time" content="2025-05-02T06:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-13T04:04:29.178Z">
+<meta property="article:modified_time" content="2026-03-23T07:30:23.545Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="Microsoft Defender for Endpoint">
 <meta property="article:tag" content="Microsoft Defender ウイルス対策">
@@ -116,7 +114,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+692caa5d-5843-5234-b725-85212fa19725%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMicrosoft+Defender+for+Endpoint%28MDE%29+%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%97%E3%81%9F%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%8C%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%A4%E3%83%B3%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%81%AB%E7%99%BB%E9%8C%B2%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84%E5%95%8F%E9%A1%8C%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%89%8B%E9%A0%86%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2025-04-30%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2025-04-30.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2025-04-30.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-04-30/" data-id="cuidpcbPb6QICdrTQWO505FpZ" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-04-30/" data-id="cuiduJB9rnkuAvSSF0W1CzGf2" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -226,70 +224,32 @@
 <div class="alert is-important"><p class="alert-title">重要</p><p></p>
 <p>MDE の稼働に必要な暗号化通信の復号はサポートされておりません。</p>
 <p>そのため、ユーザーの環境で TLS(SSL) インスペクションのような HTTPS 通信を復号するシステムを利用する場合は、必ず MDE の通信要件にリストされている通信先を復号の対象から除外してください。</p></div>
-<h3 id="MDE-の通信要件について"><a href="#MDE-の通信要件について" class="headerlink" title="MDE の通信要件について"></a>MDE の通信要件について</h3><p>端末を MDE にオンボードする際に許可する必要がある通信先については、下記公開情報の表からダウンロード可能な [統合 Microsoft Defender for Endpoint URL リスト (合理化)] および [商用のお客様向けのMicrosoft Defender for Endpoint URL リスト (Standard)] のスプレッドシートから確認することができます。</p>
-<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-environment#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">Defender for Endpoint サービスとの接続を確保するようにネットワーク環境を構成する | Microsoft Learn</a></p>
-<p>どのスプレッドシートに記載の URL を許可する必要があるかについては、ご利用中の端末をオンボードする際に選択した接続方式(標準 もしくは 合理化)によって決定されます。</p>
-<p>標準および合理化オンボードが混在する環境の場合には、各スプレッドシートに記載の URL をすべて許可します。</p>
+<h3 id="MDE-の通信要件について"><a href="#MDE-の通信要件について" class="headerlink" title="MDE の通信要件について"></a>MDE の通信要件について</h3><p>端末を MDE にオンボードする際に許可する必要がある通信先については、<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/streamlined-device-connectivity-urls-commercial">Microsoft Defender for Endpoint の合理化された接続 URL - 商用</a> および <a href="https://learn.microsoft.com/ja-jp/defender-endpoint/standard-device-connectivity-urls-commercial">Microsoft Defender for Endpoint の標準接続 URL - 商用</a> にて公開しているページから確認することができます。</p>
+<p>どのページに記載の URL を許可する必要があるかについては、ご利用中の端末をオンボードする際に選択した接続方式(標準 もしくは 合理化)によって決定されます。</p>
+<p>標準および合理化オンボードが混在する環境の場合には、各ページに記載の URL をすべて許可します。</p>
 <p>合理化オンボードの概要および最小要件については以下の公開情報を参照してください。</p>
 <p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-device-connectivity">Microsoft Defender for Endpointの合理化された接続を使用したデバイスのオンボード | Microsoft Learn</a></p>
 <p>また、現在ご利用中の端末がどちらの接続方式を使用しているかについては、MDE Client Analyzer ツールを使用することで確認することができます。</p>
 <p>参考情報：<a href="#%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%8B%E3%82%89%E7%AB%AF%E6%9C%AB%E3%81%AE%E6%8E%A5%E7%B6%9A%E6%96%B9%E5%BC%8F%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">MDE Client Analyzer  レポートから端末の接続方式を確認する方法</a></p>
-<h3 id="合理化された接続方式を使用する場合の通信要件-FQDN-を使用する場合"><a href="#合理化された接続方式を使用する場合の通信要件-FQDN-を使用する場合" class="headerlink" title="合理化された接続方式を使用する場合の通信要件(FQDN を使用する場合)"></a>合理化された接続方式を使用する場合の通信要件(FQDN を使用する場合)</h3><p>合理化された接続方式を使用する場合、<a href="https://aka.ms/MDE-streamlined-urls">https://aka.ms/MDE-streamlined-urls</a> からダウンロード可能なスプレッドシートに記載の通信先との接続を許可する必要があります。</p>
-<p>このスプレッドシートは、下記ページに記載の表の [統合 Microsoft Defender for Endpoint URL リスト (合理化)] 行からもダウンロードすることができます。</p>
-<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-environment#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">Defender for Endpoint サービスとの接続を確保するようにネットワーク環境を構成する | Microsoft Learn</a></p>
-<p>FQDN ベースでのアクセス許可を行う場合、ダウンロードしたスプレッドシートの [Common endpoints] シートを参照します。</p>
-<p><img src="../images/Endpoint-MDAV-2025-04-30-03.png" alt="MDE の通信要件"></p>
-<p>[Common endpoints] シート内には、上記の例のようにアクセス許可が必要な通信先の FQDN とポート番号、接続先の用途に関する概要情報などが記載されています。</p>
+<h3 id="合理化された接続方式を使用する場合の通信要件-FQDN-を使用する場合"><a href="#合理化された接続方式を使用する場合の通信要件-FQDN-を使用する場合" class="headerlink" title="合理化された接続方式を使用する場合の通信要件(FQDN を使用する場合)"></a>合理化された接続方式を使用する場合の通信要件(FQDN を使用する場合)</h3><p>合理化された接続方式を使用する場合、<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/streamlined-device-connectivity-urls-commercial">Microsoft Defender for Endpoint の合理化された接続 URL - 商用</a> からアクセス可能なページに記載の通信先との接続を許可する必要があります。</p>
 <div class="alert is-info"><p class="alert-title">Note</p><p></p>
 <p><em>.endpoint.security.microsoft.com のようにワイルドカード(</em>) を含む FQDN が指定されている通信先については、 endpoint.security.microsoft.com に対するサブドメインを含むすべての通信を許可するように構成いただく必要があります。</p></div>
-<p>スプレッドシート内の [OS] 列には、対象の FQDN へのアクセス許可が必要な OS プラットフォームが示されています。</p>
-<p>例えば Windows マシンを MDE にオンボードする場合には、 [OS] 列が <code>All</code> の行と <code>Windows</code> の行に記載の FQDN に対するアクセス許可を構成する必要があります。</p>
-<p>また、[Type] 列には、対象の FQDN の許可が必須(<code>Required</code>)か任意(<code>Optional</code>)かを示します。</p>
-<p>MDE を利用する場合には、[Type] 列が必須(<code>Required</code>)の通信先については必ず許可いただく必要があります。</p>
-<p>[Type] 列が任意(<code>Optional</code>)の FQDN については、その通信先を使用する機能(SmartScreen など)を利用しない環境では必ずしも許可いただく必要はありませんが、特別な理由がない場合には任意(<code>Optional</code>)の FQDN についてもアクセス許可を構成することをおすすめします。</p>
+<p>リンク先ページ内の表には、対象の FQDN へのアクセス許可が必要な OS プラットフォームが含まれます。</p>
+<p>例えば Windows マシンを MDE にオンボードする場合には、 [OS] 列が <code>はい</code> の行と <code>Windows</code> の行に記載の FQDN に対するアクセス許可を構成する必要があります。</p>
+<p>また、[型] 列には、対象の FQDN の許可が必須か省略可能かを示します。</p>
+<p>MDE を利用する場合には、[型] 列が必須の通信先については必ず許可いただく必要があります。</p>
+<p>[型] 列が省略可能の FQDN については、その通信先を使用する機能(SmartScreen など)を利用しない環境では必ずしも許可いただく必要はありませんが、特別な理由がない場合には省略可能の FQDN についてもアクセス許可を構成することをおすすめします。</p>
 <h3 id="合理化された接続方式を使用する場合の通信要件-IP-アドレスを使用する場合"><a href="#合理化された接続方式を使用する場合の通信要件-IP-アドレスを使用する場合" class="headerlink" title="合理化された接続方式を使用する場合の通信要件(IP アドレスを使用する場合)"></a>合理化された接続方式を使用する場合の通信要件(IP アドレスを使用する場合)</h3><p>合理化された接続方式を使用する場合、静的 IP アドレスを用いたアクセス許可を構成することも可能です。</p>
 <p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-device-connectivity#option-2-configure-connectivity-using-static-ip-ranges">オプション 2: 静的 IP 範囲を使用して接続を構成する | Microsoft Learn</a></p>
-<p>静的 IP アドレスを用いたアクセス管理を行う場合、<a href="https://aka.ms/MDE-streamlined-urls">https://aka.ms/MDE-streamlined-urls</a> からダウンロード可能なスプレッドシートの [IP addresses] シートに記載の通り、<a href="https://azureipranges.azurewebsites.net/">Azure IP Ranges</a> で公開されている IP アドレス範囲の内、サービスタグ <code>MicrosoftDefenderForEndpoint</code> および <code>OneDsCollector</code> と対応する IP アドレスを許可してください。</p>
+<p>静的 IP アドレスを用いたアクセス管理を行う場合、<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/streamlined-device-connectivity-urls-commercial?tabs=Windows#ip-addresses">IP アドレス</a> のページに記載の通り、<a href="https://azureipranges.azurewebsites.net/">Azure IP Ranges</a> で公開されている IP アドレス範囲の内、サービスタグ <code>MicrosoftDefenderForEndpoint</code> および <code>OneDsCollector</code> と対応する IP アドレスを許可してください。</p>
 <div class="alert is-important"><p class="alert-title">重要</p><p></p>
 <p>静的 IP アドレスを用いたアクセス許可を構成する場合、SmartScreen、Windows Update、CRL などの MDE 以外のサービスとの接続を維持する必要があります。</p></div>
-<h3 id="標準の接続方式を使用する場合の通信要件"><a href="#標準の接続方式を使用する場合の通信要件" class="headerlink" title="標準の接続方式を使用する場合の通信要件"></a>標準の接続方式を使用する場合の通信要件</h3><p>標準の接続方式を利用する場合、<a href="https://aka.ms/MDE-standard-urls">https://aka.ms/MDE-standard-urls</a> からダウンロード可能なスプレッドシートに記載の通信先との接続を許可する必要があります。</p>
-<p>このスプレッドシートは、下記ページに記載の表の [商用のお客様向けのMicrosoft Defender for Endpoint URL リスト (Standard)] 行からもダウンロードすることができます。</p>
-<p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-environment#enable-access-to-microsoft-defender-for-endpoint-service-urls-in-the-proxy-server">Defender for Endpoint サービスとの接続を確保するようにネットワーク環境を構成する | Microsoft Learn</a></p>
-<p>標準の接続方式を利用して端末を MDE にオンボードする場合、ダウンロードしたスプレッドシートの [Microsoft Defender URLs] シートに記載の FQDN に対する接続を許可する必要があります。</p>
-<p><img src="../images/Endpoint-MDAV-2025-04-30-04.png" alt="Microsoft Defender URLs シート"></p>
-<p>上記のスプレッドシートからアクセス許可が必要な通信先を特定する場合には、以下の列の情報を確認します。</p>
-<table>
-<thead>
-<tr>
-<th align="center">列名</th>
-<th align="center">確認ポイント</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Endpoint&#x2F;URL</td>
-<td align="center">MDE の利用時に許可する必要がある通信先の FQDN</td>
-</tr>
-<tr>
-<td align="center">Port</td>
-<td align="center">通信に使用する宛先ポート番号</td>
-</tr>
-<tr>
-<td align="center">Geography</td>
-<td align="center">指定の通信先を使用するリージョン(WW の行はすべてのリージョンで使用する)</td>
-</tr>
-<tr>
-<td align="center">Required &#x2F; Optional</td>
-<td align="center">指定の通信が必須(<code>Required</code>)もしくは任意(<code>Optional</code>)であるかを示す</td>
-</tr>
-<tr>
-<td align="center">対応 OS プラットフォーム</td>
-<td align="center">Windows バージョンや Linux、macOS など、指定の通信を使用する OS プラットフォームを示す</td>
-</tr>
-</tbody></table>
+<h3 id="標準の接続方式を使用する場合の通信要件"><a href="#標準の接続方式を使用する場合の通信要件" class="headerlink" title="標準の接続方式を使用する場合の通信要件"></a>標準の接続方式を使用する場合の通信要件</h3><p>標準の接続方式を利用する場合、<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/standard-device-connectivity-urls-commercial">Microsoft Defender for Endpoint の標準接続 URL - 商用</a> にて公開しているページに記載の通信先との接続を許可する必要があります。</p>
+<p>標準の接続方式を利用して端末を MDE にオンボードする場合、上記ページの [MICROSOFT DEFENDER URL] に記載の FQDN に対する接続を許可する必要があります。</p>
 <div class="alert is-info"><p class="alert-title">Note</p><p></p>
 <p><code>Endpoint/URL</code> 列で <code>*.endpoint.security.microsoft.com</code> のようにワイルドカード(<code>*</code>) を含む FQDN が指定されている通信先については、 <code>endpoint.security.microsoft.com</code> に対するサブドメインを含むすべての通信を許可するように構成いただく必要があります。</p></div>
 <div class="alert is-info"><p class="alert-title">Note</p><p></p>
-<p><code>Required / Optional</code> 列が任意(<code>Optional</code>)の FQDN については、その通信先を使用する機能(SmartScreen など)を利用しない環境では必ずしも許可いただく必要はありませんが、特別な理由がない場合には任意(<code>Optional</code>)の FQDN についてもアクセス許可を構成することをおすすめします。</p></div>
+<p>[必須またはオプション] 列が省略可能である FQDN については、その通信先を使用する機能(SmartScreen など)を利用しない環境では必ずしも許可いただく必要はありませんが、特別な理由がない場合には省略可能である FQDN についてもアクセス許可を構成することをおすすめします。</p></div>
 <p>なお、MDE を利用するテナントのデータが保存されているリージョンについては Microsoft Defender ポータルの [設定]&gt;[Microsoft Defender XDR]&gt;[アカウント] ページから確認することができます。</p>
 <p><img src="../images/Endpoint-MDAV-2025-04-30-05.png" alt="テナントのリージョン確認方法"></p>
 <h3 id="プロキシサービスを利用する場合"><a href="#プロキシサービスを利用する場合" class="headerlink" title="プロキシサービスを利用する場合"></a>プロキシサービスを利用する場合</h3><p>MDE にオンボードする端末がインターネットに直接接続できない構成の場合、プロキシサービスを利用して MDE の利用に必要な宛先との接続を維持する必要があります。</p>
