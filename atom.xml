@@ -10,7 +10,27 @@
   <rights>All rights reserved 2026, CSS Japan Secuirty team</rights>
   <subtitle>日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</subtitle>
   <title>Japan CSS Security Support Blog</title>
-  <updated>2026-03-23T07:30:23.545Z</updated>
+  <updated>2026-08-27T01:10:41.733Z</updated>
+  <entry>
+    <author>
+      <name>CSS Japan Secuirty team</name>
+    </author>
+    <category term="Microsoft Defender for Endpoint (MDE)" scheme="https://jp-sec.github.io/blog/tags/Microsoft-Defender-for-Endpoint-MDE/"/>
+    <category term="Microsoft Defender Antivirus (MDAV)" scheme="https://jp-sec.github.io/blog/tags/Microsoft-Defender-Antivirus-MDAV/"/>
+    <category term="Client Analyzer" scheme="https://jp-sec.github.io/blog/tags/Client-Analyzer/"/>
+    <content>
+      <![CDATA[<p>本記事では、Microsoft Defender for Endpoint Client Analyzer (以下、Client Analyzer) が収集する情報の概要をご紹介します。</p><h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul><li>Client Analyzer で診断できること</li><li>収集結果の保存場所</li><li>Windows デバイスで収集される主な情報</li><li>macOS および Linux デバイスで収集される主な情報</li><li>採取時のシステム負荷と必要な空き容量</li><li>高度なトラブルシューティング オプションで追加収集される情報</li></ul><h2 id="Client-Analyzer-で診断できること"><a href="#Client-Analyzer-で診断できること" class="headerlink" title="Client Analyzer で診断できること"></a>Client Analyzer で診断できること</h2><p>Client Analyzer は、MDE にオンボードした Windows、macOS、Linux デバイスで、センサーの正常性や信頼性に関する問題を診断するために使用します。また、実行時にオプションを指定することで、アプリケーション互換性、パフォーマンス、ネットワーク接続、Microsoft Defender ウイルス対策 (MDAV)、エンドポイント データ損失防止 (Endpoint DLP) などの調査に必要な追加情報を収集できます。</p><p>Client Analyzer は、収集した情報とチェック結果をまとめた HTML レポートを生成します。Windows では通常 <code>MDEClientAnalyzer.htm</code>、macOS および Linux の Python 版では <code>report.html</code> が生成されます。</p><p>Client Analyzer の概要と OS ごとの対応範囲は、Microsoft Learn の <a href="https://learn.microsoft.com/ja-jp/defender-endpoint/overview-client-analyzer">Microsoft Defender for Endpoint Client Analyzer を使用してセンサーの正常性のトラブルシューティングを行う</a> をご確認ください。</p><h2 id="収集結果の保存場所"><a href="#収集結果の保存場所" class="headerlink" title="収集結果の保存場所"></a>収集結果の保存場所</h2><p>Client Analyzer の収集結果は、実行したデバイス上に保存されます。既定の保存先は、OS と実行方式によって異なります。</p><ul><li>Windows 版では、<code>MDEClientAnalyzer.cmd</code> を実行したフォルダーの配下に <code>MDEClientAnalyzerResult</code> フォルダーと <code>MDEClientAnalyzerResult.zip</code> が生成されます。</li><li>Linux または macOS でスタンドアロン版を実行した場合は、既定ではツールを実行したディレクトリの配下に結果が生成されます。処理完了時にコンソールへ表示される保存先を確認してください。</li></ul><p>Linux および macOS の Client Analyzer では、<code>--output</code> または <code>--outdir</code> オプションを使用して保存先を指定できる場合があります。利用できるオプションはツールのバージョンによって異なるため、実行前にヘルプをご確認ください。</p><h2 id="Windows-で収集される主な情報"><a href="#Windows-で収集される主な情報" class="headerlink" title="Windows で収集される主な情報"></a>Windows で収集される主な情報</h2><p>Windows で Client Analyzer をオプションなしで実行した場合、主に次の情報が収集されます。</p><ul><li>HTML レポート</li><li>デバイスおよび OS 情報</li><li>MDE オンボーディング情報</li><li>MDE センサーおよびチェック結果</li><li>通信、証明書および TLS 関連情報</li><li>Windows イベント ログ</li><li>セキュリティ構成管理情報</li></ul><p>標準採取でも、構成値だけでなく、イベント ログのエクスポート、MDE サービス URL への接続テスト、証明書検証、製品状態の確認が行われます。最新の一覧は Microsoft Learn の <a href="https://learn.microsoft.com/ja-jp/defender-endpoint/run-analyzer-windows#result-package-contents-on-windows">Windows でクライアント アナライザーを実行する</a> の「Windows 上の結果パッケージの内容」を確認してください。</p><h2 id="macOS-および-Linux-で収集される主な情報"><a href="#macOS-および-Linux-で収集される主な情報" class="headerlink" title="macOS および Linux で収集される主な情報"></a>macOS および Linux で収集される主な情報</h2><p>macOS および Linux では、主に次の情報が収集されます。</p><ul><li>HTML レポートと、その生成に使用される XML</li><li><code>mdatp health</code> に相当する製品の正常性情報</li><li>MDE 関連プロセスの情報</li><li>製品の診断パッケージ</li><li>Client Analyzer の実行ログ</li><li>OS、インストール、構成、サービス、接続性に関する診断情報</li><li>オプションを指定した場合のパフォーマンス情報</li></ul><p>Python に依存しないバイナリ版では HTML レポートが生成されない場合があります。OS とツールのバージョンによる差異があるため、最新の収集内容と実行方法は Microsoft Learn の各 OS 向けページを確認してください。</p><ul><li><a href="https://learn.microsoft.com/ja-jp/defender-endpoint/run-analyzer-linux">Linux でクライアント アナライザーを実行する</a></li><li><a href="https://learn.microsoft.com/ja-jp/defender-endpoint/run-analyzer-macos">macOS でクライアント アナライザーを実行する</a></li><li><a href="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/">macOS および Linux デバイスで Client Analyzer ツールによる正常性診断を実行する方法</a></li></ul><h2 id="採取時のシステム負荷と必要な空き容量について"><a href="#採取時のシステム負荷と必要な空き容量について" class="headerlink" title="採取時のシステム負荷と必要な空き容量について"></a>採取時のシステム負荷と必要な空き容量について</h2><p>Client Analyzer の実行中は、構成や製品状態の照会、イベント ログのエクスポート、接続テスト、結果の圧縮などにより、一時的に CPU、メモリ、ディスク I&#x2F;O、ネットワークを使用します。標準採取と、高度なオプションを使用した採取では負荷と必要な空き容量が異なります。また、採取時間、端末の稼働状況、イベント ログの量、再現操作、指定したオプションによって結果ファイルのサイズが変わるため、すべての環境に共通する固定の必要空き容量をご案内することは難しいこと、ご容赦ください。</p><p>特に、WPR、Process Monitor、ネットワーク トレース、MDAV の詳細トレース、メモリ ダンプを伴う採取では、標準採取より CPU やディスク I&#x2F;O への影響が大きくなり、採取時間に応じてファイル サイズも増加します。実際の負荷と必要な空き容量は環境に依存するため、本番環境で採取する前に、可能な限り同等構成の検証環境で本番環境で使用する予定のオプションと採取時間を指定し、CPU、メモリ、ディスク I&#x2F;O、所要時間、生成されるファイル サイズへの影響をご確認ください。</p><h2 id="高度なトラブルシューティング-オプションで追加収集される情報"><a href="#高度なトラブルシューティング-オプションで追加収集される情報" class="headerlink" title="高度なトラブルシューティング オプションで追加収集される情報"></a>高度なトラブルシューティング オプションで追加収集される情報</h2><p>Windows 版 Client Analyzer は、オプションを指定すると、標準の情報に加えて次のようなデータが収集可能となります。各オプションが呼び出すツール、対象プロセス、利用場面は、Microsoft Learn の <a href="https://learn.microsoft.com/ja-jp/defender-endpoint/data-collection-analyzer">Windows で高度なトラブルシューティングを行うためのデータ収集</a> を確認してください。</p><table><thead><tr><th>調査対象</th><th>オプション例</th><th>追加で収集される情報の例</th></tr></thead><tbody><tr><td>ネットワーク接続</td><td><code>-i</code></td><td>ネットワークおよび Windows ファイアウォールのトレース</td></tr><tr><td>アプリケーション互換性</td><td><code>-c</code></td><td>Process Monitor によるファイル、レジストリ、プロセスおよびスレッドのアクティビティ。</td></tr><tr><td>パフォーマンス</td><td><code>-h</code>、<code>-l</code></td><td>Windows Performance Recorder による詳細なパフォーマンス トレース、または Performance Monitor による軽量なトレース</td></tr><tr><td>MDAV</td><td><code>-a</code>、<code>-v</code></td><td>クラウド接続、CPU 使用率、更新エラーなどの調査に使用するウイルス対策クライアントの詳細トレースや診断サポート ログ</td></tr><tr><td>Endpoint DLP</td><td><code>-t</code></td><td>Endpoint DLP クライアント コンポーネントの詳細トレース、または基本構成と要件の診断結果</td></tr></tbody></table><p>たとえば、ネットワーク関連の問題を調査する場合は <code>MDEClientAnalyzer.cmd -i</code> を実行して、標準の情報に加えてネットワークおよび Windows ファイアウォールのトレースを収集します。非対話形式で採取時間を指定する場合、<code>MDEClientAnalyzer.cmd -r -i -m 5</code> を実行して、標準の情報に加えてネットワークおよび Windows ファイアウォールのトレースを 5 分間採取します。</p><div class="alert is-info"><p class="alert-title">Note</p><p><code>MDEClientAnalyzer.cmd /?</code> で、そのバージョンで利用できるオプションと説明を確認できます。オプションは更新される可能性があるため、過去に案内されたコマンドを別の問題へそのまま流用せず、サポート担当者の案内に従って使用してください。</p></div><h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>Client Analyzer は、単なる接続テスト ツールではなく、MDE および関連コンポーネントの状態、構成、イベント、接続性をまとめて確認する診断ツールであり、Client Analyzer が収集する情報の概要をご案内しました。</p>]]>
+    </content>
+    <id>https://jp-sec.github.io/blog/MDEClientAnalyzer-collected-data-blog/</id>
+    <link href="https://jp-sec.github.io/blog/MDEClientAnalyzer-collected-data-blog/"/>
+    <published>2026-08-26T01:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>本記事では、Microsoft Defender for Endpoint Client Analyzer (以下、Client Analyzer) が収集する情報の概要をご紹介します。</p>
+<h2 id="本記事の内容"><a href="#本記事の内容" class]]>
+    </summary>
+    <title>Microsoft Defender for Endpoint Client Analyzer で収集される情報</title>
+    <updated>2026-08-27T01:10:41.733Z</updated>
+  </entry>
   <entry>
     <author>
       <name>CSS Japan Secuirty team</name>
@@ -28,7 +48,7 @@
 <p>ネットワーク保]]>
     </summary>
     <title>ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
+    <updated>2026-08-27T01:10:41.732Z</updated>
   </entry>
   <entry>
     <author>
@@ -47,7 +67,7 @@
 <!-- omit in toc]]>
     </summary>
     <title>Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
+    <updated>2026-08-27T01:10:41.732Z</updated>
   </entry>
   <entry>
     <author>
@@ -65,7 +85,7 @@
       <![CDATA[<p>本記事では、Windows デバイスの Microsoft Defender for Endpoint(MDE) へのオンボード操作を実施したものの、Microsoft Defender ポータルの [アセット]&gt;[デバイス] ページにデバイスが登録されない場合の一般]]>
     </summary>
     <title>Microsoft Defender for Endpoint(MDE) にオンボードしたデバイスがデバイスインベントリに登録されない問題のトラブルシューティング手順</title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
+    <updated>2026-08-27T01:10:41.732Z</updated>
   </entry>
   <entry>
     <author>
@@ -84,7 +104,7 @@
 <h2 id="本記事の内容"><a href="#本記事の内容" class="h]]>
     </summary>
     <title>KB5007651 が何度も再オファーされる事象へのトラブルシューティング</title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
+    <updated>2026-08-27T01:10:41.732Z</updated>
   </entry>
   <entry>
     <author>
@@ -104,7 +124,7 @@
 <]]>
     </summary>
     <title>Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
+    <updated>2026-08-27T01:10:41.732Z</updated>
   </entry>
   <entry>
     <author>
@@ -123,7 +143,7 @@
 <p>この記事では、Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) の検知機能と、]]>
     </summary>
     <title>Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
+    <updated>2026-08-27T01:10:41.732Z</updated>
   </entry>
   <entry>
     <author>
@@ -141,7 +161,7 @@
       <![CDATA[<p>こんにちは Security &amp; Compliance サポートチームです。<br>この記事では、Microsoft Defender for Endpoint (MDE) のサポートを効果的に利用するためのお問い合わせ(SR、サポートリクエスト) 発行方法について]]>
     </summary>
     <title>お問い合わせの発行方法について</title>
-    <updated>2026-03-23T07:30:23.546Z</updated>
+    <updated>2026-08-27T01:10:41.733Z</updated>
   </entry>
   <entry>
     <author>
@@ -161,7 +181,7 @@
     <title>
       <![CDATA[<第 1 弾> Security & Compliance サポートチームについて]]>
     </title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
+    <updated>2026-08-27T01:10:41.732Z</updated>
   </entry>
   <entry>
     <author>
@@ -181,47 +201,7 @@
     <title>
       <![CDATA[<第 2 弾> CP チームの製品紹介]]>
     </title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>CSS Japan Secuirty team</name>
-    </author>
-    <category term="General" scheme="https://jp-sec.github.io/blog/tags/General/"/>
-    <category term="チーム紹介" scheme="https://jp-sec.github.io/blog/tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/"/>
-    <content>
-      <![CDATA[<p>こんにちは。日本マイクロソフト Security &amp; Compliance サポートチームの沢です。<br>私たちのチームでは、現在 CSS (Customer Service &amp; Support) を盛り上げてくださるサポートエンジニアを募集しております。<br>本記事では、Security &amp; Compliance サポートチームの業務内容やリモートワークでの働き方についてご案内させていただきます。</p><h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul><li><a href="#%E6%A5%AD%E5%8B%99%E5%86%85%E5%AE%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">業務内容について</a></li><li><a href="#%E4%B8%80%E6%97%A5%E3%81%AE%E6%A5%AD%E5%8B%99%E3%81%AE%E6%B5%81%E3%82%8C%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">一日の業務の流れについて</a></li><li><a href="#%E6%A5%AD%E5%8B%99%E7%92%B0%E5%A2%83%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">業務環境について</a><ul><li><a href="#%E5%8B%A4%E5%8B%99%E5%BD%A2%E6%85%8B%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">勤務形態について</a></li><li><a href="#%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E6%89%8B%E6%AE%B5%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">コミュニケーション手段について</a></li><li><a href="#%E6%A5%AD%E5%8B%99%E7%94%A8%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%84%E6%A4%9C%E8%A8%BC%E7%92%B0%E5%A2%83%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">業務用デバイスや検証環境について</a></li></ul></li><li><a href="#%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B">関連記事</a></li></ul><h2 id="業務内容について"><a href="#業務内容について" class="headerlink" title="業務内容について"></a>業務内容について</h2><p>Microsoft のクラウドサービスのサポートは、主にサービス料金内に含まれている無償サポートと別途追加のサポート契約が必要な有償サポートがあります。<br>わたしたちのチームでは主に有償サポート契約を締結されたお客様を中心にサービスを提供しています。</p><p>サービスリクエスト（SR）の受付からクローズまで基本的には担当するメンバーがオーナーシップを持って対応しており、基本的な案件対応の流れとしては、起票 → 調査方針合意 → 調査 → 回答 → クローズとなります。<br>SR の起票から終了までの期間につきましては内容にも依存しますので、一概に決まってはいないですが、大まかに下記のような感じだと認識いただければと思います。</p><ul><li>利用方法に関するお問合せや一般的なトラブルシューティング：１～１０日程度</li><li>類似事例のないトラブルシューティング：３～２０日程度<br>※ 製品不具合の改修が必要な場合も稀にありますので、そのような場合はクローズまで数ヶ月かかる時もあります。</li></ul><p>なお、時期によって増減はありますが、各エンジニアでは平均 10 ~ 20 件ほどのアクティブな SR を受け持ち、同時並行で案件対応を進める場合が多いです。<br>アクティブな SR の中にはお客様確認待ちステータスの SR も多く含まれますので、常に 10 数件の調査を並行して行うわけではございません。</p><br><h2 id="一日の業務の流れについて"><a href="#一日の業務の流れについて" class="headerlink" title="一日の業務の流れについて"></a>一日の業務の流れについて</h2><p>わたしのリモートワークでの 1 日の流れについて紹介いたします！</p><ul><li>09:00 Teams にて業務開始連絡。</li><li>09:00 SR 管理ツールにて担当 SR の対応状況整理及びタスクの洗い出しを実施。</li><li>09:30 新規担当 SR の対応開始。回答可能な内容であれば電話 or メールにて回答実施し、調査が必要な内容が含まれる場合は、次回連絡日程を沿えた上、受付連絡を実施。</li><li>10:30 既存担当 SR の調査を実施。（公開情報調査及び実機動作検証など）</li><li>11:00 SR 相談会に参加。（チームメンバー間の情報交換及び調査方法に関する相談などを目的とした、出入り自由な相談会）</li><li>12:00 お昼休憩。（SR 対応状況に応じて柔軟に取得時間を変更しています）</li><li>13:00 社内ミーティング参加。（社内別製品担当との協業調査など）</li><li>13:30 既存担当 SR の調査を実施。（公開情報調査及び実機動作検証など）</li><li>15:30 お客様からの電話に応対。（割合としては低いですが、メールでの案内内容に不明点がある場合や、急ぎ事情がある場合はお電話での対応もあります）</li><li>16:00 チームミーティング。（チームリーダからの重要事項周知やメンバーからの各種情報共有及び報告を目的としたミーティング）</li><li>17:00 通院のため、少し早めに業務を中断。</li><li>17:30 （サポート窓口が閉まります）</li><li>18:00 帰宅後、業務再開。（翌日分のタスク整理や実機動作検証など）</li><li>19:00 Teams にて業務終了連絡。</li></ul><br><h2 id="業務環境について"><a href="#業務環境について" class="headerlink" title="業務環境について"></a>業務環境について</h2><h3 id="勤務形態について"><a href="#勤務形態について" class="headerlink" title="勤務形態について"></a>勤務形態について</h3><p>わたしたちのチームでは主にリモートワーク中心で業務を行っています。<br>また、チームのメンバー内で話し合いをもって、必須ではありませんが毎週水曜日を推奨出社日とし、オフィスで席をならべて仕事をしている仲間も多いです。</p><br><h3 id="コミュニケーション手段について"><a href="#コミュニケーション手段について" class="headerlink" title="コミュニケーション手段について"></a>コミュニケーション手段について</h3><p>社内のコミュニケーションはほぼすべて Teams を利用して行います。<br>お客様とのコミュニケーション時はお客様にてご用意いただいた電話会議ツールや、電話を利用して行います。<br>社用携帯用の SIM が別途支給されていて、スマートフォンを利用した業務リソース（メール、Teams）へのアクセスも可能です。</p><br><h3 id="業務用デバイスや検証環境のスペックについて"><a href="#業務用デバイスや検証環境のスペックについて" class="headerlink" title="業務用デバイスや検証環境のスペックについて"></a>業務用デバイスや検証環境のスペックについて</h3><p>業務にて利用しているデバイスや検証環境のスペックについても簡単に紹介いたします！</p><ul><li>業務用デバイス１（Ryzen7 PRO 6850U &#x2F; 32GB &#x2F; 1TB）<ul><li>通常業務にて利用します。</li></ul></li></ul><p><img src="../images/AboutSecurity03-01.png" alt="業務用デバイス 1"></p><ul><li>業務用デバイス２（Azure Virtual Desktop）<ul><li>業務用デバイス１が利用できない場合などに、主に利用します。</li></ul></li></ul><p><img src="../images/AboutSecurity03-02.png" alt="業務用デバイス 2"></p><ul><li>検証環境１（サポート部門共用 Azure Subscriptions）<ul><li>主に業務関連検証にて利用します。</li></ul></li><li>検証環境２（個人に紐づく Azure Subscriptions）<ul><li>最大１０台までの VM が作成可能で、主に業務関連検証にて利用します。</li></ul></li><li>検証環境３（社員特典の Visual Studio Subscriptions 及び Subscriptions 付随 Azure Subscriptions 無償枠）<ul><li>業務以外の用途でも利用可能もので、担当外製品の検証や趣味のFPS ゲームサーバをホスティングする用途などで利用しています。</li></ul></li><li>チーム共用検証環境<ul><li>macOS デバイス及び Android &#x2F; iOS デバイスが複数台ずつチーム共用デバイスとして用意されており、デバイス依存事象の調査の際に利用可能です。</li></ul></li><li>個人検証機１（Core i9-10900K &#x2F; 128GB &#x2F; 5TB）</li></ul><p><img src="../images/AboutSecurity03-03.png" alt="個人検証機 1"></p><ul><li>個人検証機２（Ryzen 5 PRO 3400GE &#x2F; 64GB &#x2F; 3TB）</li></ul><p><img src="../images/AboutSecurity03-04.png" alt="個人検証機 2"></p><br><h3 id="関連記事"><a href="#関連記事" class="headerlink" title="関連記事"></a>関連記事</h3><p>Security &amp; Compliance チームの紹介記事は第 1 弾から第 5 弾まで公開しています。<br>以下のリンクから、その他の記事も是非一緒にご覧ください！</p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-01/">&lt;第 1 弾&gt; Security &amp; Compliance サポートチームについて</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-02/">&lt;第 2 弾&gt; CP チームの製品紹介</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-03/">&lt;第 3 弾&gt; リモートワークでの働き方について</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-04/">&lt;第 4 弾&gt; チームの様子、雰囲気について</a>  </p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-05/">&lt;第 5 弾&gt; Security &amp; Compliance チームの多様性について</a></p><p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>]]>
-    </content>
-    <id>https://jp-sec.github.io/blog/Hiring-AboutSecurity-03/</id>
-    <link href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-03/"/>
-    <published>2024-05-16T00:00:00.000Z</published>
-    <summary>
-      <![CDATA[<p>こんにちは。日本マイクロソフト Security &amp; Compliance サポートチームの沢です。<br>私たちのチームでは、現在 CSS (Customer Service &amp; Support) を盛り上げてくださるサポートエンジニアを募集しております。]]>
-    </summary>
-    <title>
-      <![CDATA[<第 3 弾> リモートワークでの働き方について]]>
-    </title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>CSS Japan Secuirty team</name>
-    </author>
-    <category term="General" scheme="https://jp-sec.github.io/blog/tags/General/"/>
-    <category term="チーム紹介" scheme="https://jp-sec.github.io/blog/tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/"/>
-    <content>
-      <![CDATA[<p>こんにちは。日本マイクロソフト Security &amp; Compliance サポートチームの岡田です。<br>私たちのチームでは、現在 CSS (Customer Service &amp; Support) を盛り上げてくださるサポートエンジニアを募集しております。<br>本記事では、Security &amp; Compliance サポートチームの様子や雰囲気についてご案内させていただきます。</p><h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul><li><a href="#Security-amp-Compliance-%E3%83%81%E3%83%BC%E3%83%A0%E3%81%AE%E6%A7%98%E5%AD%90%E3%80%81%E9%9B%B0%E5%9B%B2%E6%B0%97">Security &amp; Compliance チームの様子、雰囲気</a></li><li><a href="#%E5%85%A5%E7%A4%BE%E5%89%8D%E3%81%AE-Microsoft-%E3%81%AE%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8">入社前の Microsoft のイメージ</a></li><li><a href="#%E3%83%81%E3%83%BC%E3%83%A0%E3%83%A1%E3%83%B3%E3%83%90%E3%83%BC%E3%81%AE%E6%80%9D%E3%81%86-Security-amp-Compliance-%E3%83%81%E3%83%BC%E3%83%A0%E3%81%AE%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8">チームメンバーの思う Security &amp; Compliance チームのイメージ</a></li><li><a href="#Security-amp-Compliance-%E3%83%81%E3%83%BC%E3%83%A0%E3%82%92%E9%81%B8%E3%82%93%E3%81%A0%E7%90%86%E7%94%B1">Security &amp; Compliance チームを選んだ理由</a></li><li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li><li><a href="#%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B">関連記事</a></li></ul><h2 id="Security-Compliance-チームの様子、雰囲気"><a href="#Security-Compliance-チームの様子、雰囲気" class="headerlink" title="Security &amp; Compliance チームの様子、雰囲気"></a>Security &amp; Compliance チームの様子、雰囲気</h2><p>Security &amp; Compliance チームではそれぞれの自宅からのリモート勤務が可能です。<br>出社頻度などにルールや制限はなく、自分のライフスタイルに合わせてリモート勤務と出社を組み合わせることが可能です。<br>私は月に 1,2 回程度出社しており、それ以外は自宅からリモート勤務を行っております。<br>チームメンバーの中には札幌からフルリモートで勤務されている方もいます。<br>そのため、普段のやり取りは Teams のチャットや電話がメインとなります。<br>私も入社して約 2 年ほどたちますが、チームメンバーとのやり取りで困ったことはありません。</p><p>なお、フルリモートされている方が年に 1,2 回ほど品川のオフィスに出社されることがあります。<br>※ 交通費は会社持ちです。笑<br>その際には Security &amp; Compliance チーム全体で飲み会を開き普段会う機会がないチームメンバーと実際に会って会話をすることができます。<br>また、チームに新しく join された方の歓迎会や新年会、忘年会が Security &amp; Compliance チーム全体で行われます。<br>歓迎会や新年会、忘年会は品川オフィスで開催されることもありますが、外部の施設を利用することもあります。<br>参加は完全に自由となっておりますので、無理に参加する必要はなく、自分の予定に合わせて参加&#x2F;不参加を決めることができます。<br>ちなみにですが、2024 年の 3 月に開催された歓迎会はダーツバーで行いました！</p><br><h2 id="入社前の-Microsoft-のイメージ"><a href="#入社前の-Microsoft-のイメージ" class="headerlink" title="入社前の Microsoft のイメージ"></a>入社前の Microsoft のイメージ</h2><p>皆さんは Microsoft と聞くとどのようなイメージを持たれるでしょうか。<br>私は Microsoft と言えば外資系ということもあり、実力主義でチームメンバー間のやり取りもなく冷たいイメージを持っておりました。笑<br>チームメンバーの方々に入社前の Microsoft に対するイメージについてアンケートを取りましたのでメンバーの思う Microsoft のイメージを確認してみましょう！</p><p>アンケート結果からも個人主義であったり、成果主義のためチームメンバー間のフォローがなく、冷たいイメージを持たれていた方が多くいました。。。<br>Microsoft 入社後の今だからこそわかる Security &amp; Compliance チームのイメージについても確認してみましょう！</p><p>◆ アンケート結果<br>・ 実力、成果主義のイメージ<br>・ あまり周りと関わらず、1人で黙々と仕事を進めるイメージ<br>・ 各々自分の仕事は人に助けを求めず自分の力で遂行しているイメージ<br>・ 個人主義<br>・ 入社後のトレーニング等もあまりないイメージ<br>・ 固く厳しいイメージ<br>・ エリートばかりで、知識が薄いとバカにされるかもしれないイメージ<br>・ 周りをフォローしない、冷たいイメージ<br>・ 明るくて活発なイメージ<br>・ 開発経験バリバリあってずっと IT の第一線を走ってきたような人たちばかりのイメージ<br>・ 残業まみれでワークライフバランスが無い会社のイメージ<br>・ 全員英語はネイティブレベルで人間関係がドライのイメージ</p><br><h2 id="チームメンバーの思う-Security-Compliance-チームのイメージ"><a href="#チームメンバーの思う-Security-Compliance-チームのイメージ" class="headerlink" title="チームメンバーの思う Security &amp; Compliance チームのイメージ"></a>チームメンバーの思う Security &amp; Compliance チームのイメージ</h2><p>Microsoft 入社前のイメージでは冷たいイメージを持たれていた方が多くいる結果となりましたが、今度は Security &amp; Compliance チームで働いている現在の Security &amp; Compliance チーム に対するイメージを紹介します。<br>Security &amp; Compliance チームのイメージについてもアンケートを取りましたので見てみましょう！</p><p>アンケートの結果、入社前のイメージとは変わり、お互いにフォローし合い暖かいイメージを持たれている方が多くいました！<br>私自身も普段の業務では多くの方にフォローいただいており、相談の際に嫌な顔をされたことは一度もありません！<br>困った時は支え合い、教え合う文化が根付いているため、入社歴に関係なく自分の知識を共有し業務に活かしています。<br>わからないことを互いに教え合う環境が整っていますので、知識がないから。。。と思わず、Security &amp; Compliance チームに少しでも興味を持たれた方は <a href="https://www.microsoft.com/ja-jp/mscorp/college/mskk-entry">こちら</a>からお申込みを検討いただけると嬉しいです！</p><p>◆ アンケート結果<br>・ お客様へのサポートに限らずメンバーのサポートもしっかりしているチーム。<br>・ 助け合いながら仕事が進められる<br>・ 困ったときに助けあえている<br>・ 分からないことは教えあう文化<br>・ 入社後のトレーニングも充実しており、手厚く育成してくれる<br>・ 様々なバックグラウンドを持つメンバーが集まっているが、相互に理解や配慮が感じられる素晴らしいチーム<br>・ 仕事には真面目に取り組むが、チームとしては仲良し<br>・ お互いにフォローしあう<br>・ みんな優しい<br>・ それぞれの得意分野を生かして協力しあっている<br>・ チームワークがよくて仕事がしやすい<br>・ 心理的安全性が高い<br>・ とにかく優しい人たちがたくさんいるため、相談もしやすく働きやすい</p><br><h2 id="Security-Compliance-チームを選んだ理由"><a href="#Security-Compliance-チームを選んだ理由" class="headerlink" title="Security &amp; Compliance チームを選んだ理由"></a>Security &amp; Compliance チームを選んだ理由</h2><p>Microsoft には多くの製品があり、多くの担当チームが存在します。<br>その中で Security &amp; Compliance チームを選んだ理由についてもメンバーにアンケートを取りましたので見てみましょう！</p><p>アンケートの結果、前職でセキュリティ関連のお仕事をされていた方が多くいらっしゃいましたが、中にはセキュリティ未経験で入社された方もいらっしゃいました！<br>セキュリティ未経験でもお互いに教え合う文化により活躍できる環境が整っています。<br>セキュリティ未経験でも臆せず <a href="https://www.microsoft.com/ja-jp/mscorp/college/mskk-entry">こちら</a>からお申込みを検討いただけると嬉しいです！</p><p>◆ アンケート結果<br>・ セキュリティ分野に興味があったから<br>・ セキュリティは未経験だったが、今後も需要が高まる分野だと考えたため<br>・ 前職でセキュリティ関連の業務をしており、興味があったため<br>・ 前職でセキュリティ関連の業務をしたこともあるが、Microsoft のセキュリティ製品に興味があったため<br>・ ここしかない！ と閃いたため<br>・ IT の括りの中で一番面白いと思っていて、知識をさらに深めたかったから<br>・ 前職でサイバー セキュリティの業務に従事していたため、貢献できると思ったため<br>・ サポート業務に従事することで Security 業界や製品に関する知見や対応経験が得られると思ったため<br>・ 前職で Security に関連する業務に携わっており、更にスキルアップを目指したいと思っていたため<br>・ 前職でユーザー部門セキュリティ担当をしており、Microsoft 製品の運用しており製品スキルを高めたかったため</p><br><h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>皆さん、いかがだったでしょうか。<br>Security &amp; Compliance チームの雰囲気やイメージについて少しでもイメージがわきましたでしょうか。<br>入社前はメンバー間のフォローが希薄であり、冷たいイメージを持たれている方が多くいましたが、入社後のイメージではメンバー間のフォローが充実しており、安心して業務が行える環境であると回答した方が多くいました！<br>セキュリティ分野未経験の方でも日々切磋することで活躍することができるチームですので Security &amp; Compliance チームに少しでも興味を持たれた方は <a href="https://www.microsoft.com/ja-jp/mscorp/college/mskk-entry">こちら</a>からお申込みを検討いただけると嬉しいです！</p><br><h3 id="関連記事"><a href="#関連記事" class="headerlink" title="関連記事"></a>関連記事</h3><p>Security &amp; Compliance チームの紹介記事は第 1 弾から第 5 弾まで公開しています。<br>以下のリンクから、その他の記事も是非一緒にご覧ください！</p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-01/">&lt;第 1 弾&gt; Security &amp; Compliance サポートチームについて</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-02/">&lt;第 2 弾&gt; CP チームの製品紹介</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-03/">&lt;第 3 弾&gt; リモートワークでの働き方について</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-04/">&lt;第 4 弾&gt; チームの様子、雰囲気について</a>  </p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-05/">&lt;第 5 弾&gt; Security &amp; Compliance チームの多様性について</a></p><p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>]]>
-    </content>
-    <id>https://jp-sec.github.io/blog/Hiring-AboutSecurity-04/</id>
-    <link href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-04/"/>
-    <published>2024-05-16T00:00:00.000Z</published>
-    <summary>
-      <![CDATA[<p>こんにちは。日本マイクロソフト Security &amp; Compliance サポートチームの岡田です。<br>私たちのチームでは、現在 CSS (Customer Service &amp; Support) を盛り上げてくださるサポートエンジニアを募集しております]]>
-    </summary>
-    <title>
-      <![CDATA[<第 4 弾> チームの様子、雰囲気について]]>
-    </title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
+    <updated>2026-08-27T01:10:41.732Z</updated>
   </entry>
   <entry>
     <author>
@@ -241,7 +221,47 @@
     <title>
       <![CDATA[<第 5 弾> Security & Compliance チームの多様性について]]>
     </title>
-    <updated>2026-03-23T07:30:23.545Z</updated>
+    <updated>2026-08-27T01:10:41.732Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>CSS Japan Secuirty team</name>
+    </author>
+    <category term="General" scheme="https://jp-sec.github.io/blog/tags/General/"/>
+    <category term="チーム紹介" scheme="https://jp-sec.github.io/blog/tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/"/>
+    <content>
+      <![CDATA[<p>こんにちは。日本マイクロソフト Security &amp; Compliance サポートチームの沢です。<br>私たちのチームでは、現在 CSS (Customer Service &amp; Support) を盛り上げてくださるサポートエンジニアを募集しております。<br>本記事では、Security &amp; Compliance サポートチームの業務内容やリモートワークでの働き方についてご案内させていただきます。</p><h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul><li><a href="#%E6%A5%AD%E5%8B%99%E5%86%85%E5%AE%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">業務内容について</a></li><li><a href="#%E4%B8%80%E6%97%A5%E3%81%AE%E6%A5%AD%E5%8B%99%E3%81%AE%E6%B5%81%E3%82%8C%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">一日の業務の流れについて</a></li><li><a href="#%E6%A5%AD%E5%8B%99%E7%92%B0%E5%A2%83%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">業務環境について</a><ul><li><a href="#%E5%8B%A4%E5%8B%99%E5%BD%A2%E6%85%8B%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">勤務形態について</a></li><li><a href="#%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E6%89%8B%E6%AE%B5%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">コミュニケーション手段について</a></li><li><a href="#%E6%A5%AD%E5%8B%99%E7%94%A8%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%84%E6%A4%9C%E8%A8%BC%E7%92%B0%E5%A2%83%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">業務用デバイスや検証環境について</a></li></ul></li><li><a href="#%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B">関連記事</a></li></ul><h2 id="業務内容について"><a href="#業務内容について" class="headerlink" title="業務内容について"></a>業務内容について</h2><p>Microsoft のクラウドサービスのサポートは、主にサービス料金内に含まれている無償サポートと別途追加のサポート契約が必要な有償サポートがあります。<br>わたしたちのチームでは主に有償サポート契約を締結されたお客様を中心にサービスを提供しています。</p><p>サービスリクエスト（SR）の受付からクローズまで基本的には担当するメンバーがオーナーシップを持って対応しており、基本的な案件対応の流れとしては、起票 → 調査方針合意 → 調査 → 回答 → クローズとなります。<br>SR の起票から終了までの期間につきましては内容にも依存しますので、一概に決まってはいないですが、大まかに下記のような感じだと認識いただければと思います。</p><ul><li>利用方法に関するお問合せや一般的なトラブルシューティング：１～１０日程度</li><li>類似事例のないトラブルシューティング：３～２０日程度<br>※ 製品不具合の改修が必要な場合も稀にありますので、そのような場合はクローズまで数ヶ月かかる時もあります。</li></ul><p>なお、時期によって増減はありますが、各エンジニアでは平均 10 ~ 20 件ほどのアクティブな SR を受け持ち、同時並行で案件対応を進める場合が多いです。<br>アクティブな SR の中にはお客様確認待ちステータスの SR も多く含まれますので、常に 10 数件の調査を並行して行うわけではございません。</p><br><h2 id="一日の業務の流れについて"><a href="#一日の業務の流れについて" class="headerlink" title="一日の業務の流れについて"></a>一日の業務の流れについて</h2><p>わたしのリモートワークでの 1 日の流れについて紹介いたします！</p><ul><li>09:00 Teams にて業務開始連絡。</li><li>09:00 SR 管理ツールにて担当 SR の対応状況整理及びタスクの洗い出しを実施。</li><li>09:30 新規担当 SR の対応開始。回答可能な内容であれば電話 or メールにて回答実施し、調査が必要な内容が含まれる場合は、次回連絡日程を沿えた上、受付連絡を実施。</li><li>10:30 既存担当 SR の調査を実施。（公開情報調査及び実機動作検証など）</li><li>11:00 SR 相談会に参加。（チームメンバー間の情報交換及び調査方法に関する相談などを目的とした、出入り自由な相談会）</li><li>12:00 お昼休憩。（SR 対応状況に応じて柔軟に取得時間を変更しています）</li><li>13:00 社内ミーティング参加。（社内別製品担当との協業調査など）</li><li>13:30 既存担当 SR の調査を実施。（公開情報調査及び実機動作検証など）</li><li>15:30 お客様からの電話に応対。（割合としては低いですが、メールでの案内内容に不明点がある場合や、急ぎ事情がある場合はお電話での対応もあります）</li><li>16:00 チームミーティング。（チームリーダからの重要事項周知やメンバーからの各種情報共有及び報告を目的としたミーティング）</li><li>17:00 通院のため、少し早めに業務を中断。</li><li>17:30 （サポート窓口が閉まります）</li><li>18:00 帰宅後、業務再開。（翌日分のタスク整理や実機動作検証など）</li><li>19:00 Teams にて業務終了連絡。</li></ul><br><h2 id="業務環境について"><a href="#業務環境について" class="headerlink" title="業務環境について"></a>業務環境について</h2><h3 id="勤務形態について"><a href="#勤務形態について" class="headerlink" title="勤務形態について"></a>勤務形態について</h3><p>わたしたちのチームでは主にリモートワーク中心で業務を行っています。<br>また、チームのメンバー内で話し合いをもって、必須ではありませんが毎週水曜日を推奨出社日とし、オフィスで席をならべて仕事をしている仲間も多いです。</p><br><h3 id="コミュニケーション手段について"><a href="#コミュニケーション手段について" class="headerlink" title="コミュニケーション手段について"></a>コミュニケーション手段について</h3><p>社内のコミュニケーションはほぼすべて Teams を利用して行います。<br>お客様とのコミュニケーション時はお客様にてご用意いただいた電話会議ツールや、電話を利用して行います。<br>社用携帯用の SIM が別途支給されていて、スマートフォンを利用した業務リソース（メール、Teams）へのアクセスも可能です。</p><br><h3 id="業務用デバイスや検証環境のスペックについて"><a href="#業務用デバイスや検証環境のスペックについて" class="headerlink" title="業務用デバイスや検証環境のスペックについて"></a>業務用デバイスや検証環境のスペックについて</h3><p>業務にて利用しているデバイスや検証環境のスペックについても簡単に紹介いたします！</p><ul><li>業務用デバイス１（Ryzen7 PRO 6850U &#x2F; 32GB &#x2F; 1TB）<ul><li>通常業務にて利用します。</li></ul></li></ul><p><img src="../images/AboutSecurity03-01.png" alt="業務用デバイス 1"></p><ul><li>業務用デバイス２（Azure Virtual Desktop）<ul><li>業務用デバイス１が利用できない場合などに、主に利用します。</li></ul></li></ul><p><img src="../images/AboutSecurity03-02.png" alt="業務用デバイス 2"></p><ul><li>検証環境１（サポート部門共用 Azure Subscriptions）<ul><li>主に業務関連検証にて利用します。</li></ul></li><li>検証環境２（個人に紐づく Azure Subscriptions）<ul><li>最大１０台までの VM が作成可能で、主に業務関連検証にて利用します。</li></ul></li><li>検証環境３（社員特典の Visual Studio Subscriptions 及び Subscriptions 付随 Azure Subscriptions 無償枠）<ul><li>業務以外の用途でも利用可能もので、担当外製品の検証や趣味のFPS ゲームサーバをホスティングする用途などで利用しています。</li></ul></li><li>チーム共用検証環境<ul><li>macOS デバイス及び Android &#x2F; iOS デバイスが複数台ずつチーム共用デバイスとして用意されており、デバイス依存事象の調査の際に利用可能です。</li></ul></li><li>個人検証機１（Core i9-10900K &#x2F; 128GB &#x2F; 5TB）</li></ul><p><img src="../images/AboutSecurity03-03.png" alt="個人検証機 1"></p><ul><li>個人検証機２（Ryzen 5 PRO 3400GE &#x2F; 64GB &#x2F; 3TB）</li></ul><p><img src="../images/AboutSecurity03-04.png" alt="個人検証機 2"></p><br><h3 id="関連記事"><a href="#関連記事" class="headerlink" title="関連記事"></a>関連記事</h3><p>Security &amp; Compliance チームの紹介記事は第 1 弾から第 5 弾まで公開しています。<br>以下のリンクから、その他の記事も是非一緒にご覧ください！</p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-01/">&lt;第 1 弾&gt; Security &amp; Compliance サポートチームについて</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-02/">&lt;第 2 弾&gt; CP チームの製品紹介</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-03/">&lt;第 3 弾&gt; リモートワークでの働き方について</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-04/">&lt;第 4 弾&gt; チームの様子、雰囲気について</a>  </p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-05/">&lt;第 5 弾&gt; Security &amp; Compliance チームの多様性について</a></p><p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>]]>
+    </content>
+    <id>https://jp-sec.github.io/blog/Hiring-AboutSecurity-03/</id>
+    <link href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-03/"/>
+    <published>2024-05-16T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>こんにちは。日本マイクロソフト Security &amp; Compliance サポートチームの沢です。<br>私たちのチームでは、現在 CSS (Customer Service &amp; Support) を盛り上げてくださるサポートエンジニアを募集しております。]]>
+    </summary>
+    <title>
+      <![CDATA[<第 3 弾> リモートワークでの働き方について]]>
+    </title>
+    <updated>2026-08-27T01:10:41.732Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>CSS Japan Secuirty team</name>
+    </author>
+    <category term="General" scheme="https://jp-sec.github.io/blog/tags/General/"/>
+    <category term="チーム紹介" scheme="https://jp-sec.github.io/blog/tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/"/>
+    <content>
+      <![CDATA[<p>こんにちは。日本マイクロソフト Security &amp; Compliance サポートチームの岡田です。<br>私たちのチームでは、現在 CSS (Customer Service &amp; Support) を盛り上げてくださるサポートエンジニアを募集しております。<br>本記事では、Security &amp; Compliance サポートチームの様子や雰囲気についてご案内させていただきます。</p><h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul><li><a href="#Security-amp-Compliance-%E3%83%81%E3%83%BC%E3%83%A0%E3%81%AE%E6%A7%98%E5%AD%90%E3%80%81%E9%9B%B0%E5%9B%B2%E6%B0%97">Security &amp; Compliance チームの様子、雰囲気</a></li><li><a href="#%E5%85%A5%E7%A4%BE%E5%89%8D%E3%81%AE-Microsoft-%E3%81%AE%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8">入社前の Microsoft のイメージ</a></li><li><a href="#%E3%83%81%E3%83%BC%E3%83%A0%E3%83%A1%E3%83%B3%E3%83%90%E3%83%BC%E3%81%AE%E6%80%9D%E3%81%86-Security-amp-Compliance-%E3%83%81%E3%83%BC%E3%83%A0%E3%81%AE%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8">チームメンバーの思う Security &amp; Compliance チームのイメージ</a></li><li><a href="#Security-amp-Compliance-%E3%83%81%E3%83%BC%E3%83%A0%E3%82%92%E9%81%B8%E3%82%93%E3%81%A0%E7%90%86%E7%94%B1">Security &amp; Compliance チームを選んだ理由</a></li><li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li><li><a href="#%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B">関連記事</a></li></ul><h2 id="Security-Compliance-チームの様子、雰囲気"><a href="#Security-Compliance-チームの様子、雰囲気" class="headerlink" title="Security &amp; Compliance チームの様子、雰囲気"></a>Security &amp; Compliance チームの様子、雰囲気</h2><p>Security &amp; Compliance チームではそれぞれの自宅からのリモート勤務が可能です。<br>出社頻度などにルールや制限はなく、自分のライフスタイルに合わせてリモート勤務と出社を組み合わせることが可能です。<br>私は月に 1,2 回程度出社しており、それ以外は自宅からリモート勤務を行っております。<br>チームメンバーの中には札幌からフルリモートで勤務されている方もいます。<br>そのため、普段のやり取りは Teams のチャットや電話がメインとなります。<br>私も入社して約 2 年ほどたちますが、チームメンバーとのやり取りで困ったことはありません。</p><p>なお、フルリモートされている方が年に 1,2 回ほど品川のオフィスに出社されることがあります。<br>※ 交通費は会社持ちです。笑<br>その際には Security &amp; Compliance チーム全体で飲み会を開き普段会う機会がないチームメンバーと実際に会って会話をすることができます。<br>また、チームに新しく join された方の歓迎会や新年会、忘年会が Security &amp; Compliance チーム全体で行われます。<br>歓迎会や新年会、忘年会は品川オフィスで開催されることもありますが、外部の施設を利用することもあります。<br>参加は完全に自由となっておりますので、無理に参加する必要はなく、自分の予定に合わせて参加&#x2F;不参加を決めることができます。<br>ちなみにですが、2024 年の 3 月に開催された歓迎会はダーツバーで行いました！</p><br><h2 id="入社前の-Microsoft-のイメージ"><a href="#入社前の-Microsoft-のイメージ" class="headerlink" title="入社前の Microsoft のイメージ"></a>入社前の Microsoft のイメージ</h2><p>皆さんは Microsoft と聞くとどのようなイメージを持たれるでしょうか。<br>私は Microsoft と言えば外資系ということもあり、実力主義でチームメンバー間のやり取りもなく冷たいイメージを持っておりました。笑<br>チームメンバーの方々に入社前の Microsoft に対するイメージについてアンケートを取りましたのでメンバーの思う Microsoft のイメージを確認してみましょう！</p><p>アンケート結果からも個人主義であったり、成果主義のためチームメンバー間のフォローがなく、冷たいイメージを持たれていた方が多くいました。。。<br>Microsoft 入社後の今だからこそわかる Security &amp; Compliance チームのイメージについても確認してみましょう！</p><p>◆ アンケート結果<br>・ 実力、成果主義のイメージ<br>・ あまり周りと関わらず、1人で黙々と仕事を進めるイメージ<br>・ 各々自分の仕事は人に助けを求めず自分の力で遂行しているイメージ<br>・ 個人主義<br>・ 入社後のトレーニング等もあまりないイメージ<br>・ 固く厳しいイメージ<br>・ エリートばかりで、知識が薄いとバカにされるかもしれないイメージ<br>・ 周りをフォローしない、冷たいイメージ<br>・ 明るくて活発なイメージ<br>・ 開発経験バリバリあってずっと IT の第一線を走ってきたような人たちばかりのイメージ<br>・ 残業まみれでワークライフバランスが無い会社のイメージ<br>・ 全員英語はネイティブレベルで人間関係がドライのイメージ</p><br><h2 id="チームメンバーの思う-Security-Compliance-チームのイメージ"><a href="#チームメンバーの思う-Security-Compliance-チームのイメージ" class="headerlink" title="チームメンバーの思う Security &amp; Compliance チームのイメージ"></a>チームメンバーの思う Security &amp; Compliance チームのイメージ</h2><p>Microsoft 入社前のイメージでは冷たいイメージを持たれていた方が多くいる結果となりましたが、今度は Security &amp; Compliance チームで働いている現在の Security &amp; Compliance チーム に対するイメージを紹介します。<br>Security &amp; Compliance チームのイメージについてもアンケートを取りましたので見てみましょう！</p><p>アンケートの結果、入社前のイメージとは変わり、お互いにフォローし合い暖かいイメージを持たれている方が多くいました！<br>私自身も普段の業務では多くの方にフォローいただいており、相談の際に嫌な顔をされたことは一度もありません！<br>困った時は支え合い、教え合う文化が根付いているため、入社歴に関係なく自分の知識を共有し業務に活かしています。<br>わからないことを互いに教え合う環境が整っていますので、知識がないから。。。と思わず、Security &amp; Compliance チームに少しでも興味を持たれた方は <a href="https://www.microsoft.com/ja-jp/mscorp/college/mskk-entry">こちら</a>からお申込みを検討いただけると嬉しいです！</p><p>◆ アンケート結果<br>・ お客様へのサポートに限らずメンバーのサポートもしっかりしているチーム。<br>・ 助け合いながら仕事が進められる<br>・ 困ったときに助けあえている<br>・ 分からないことは教えあう文化<br>・ 入社後のトレーニングも充実しており、手厚く育成してくれる<br>・ 様々なバックグラウンドを持つメンバーが集まっているが、相互に理解や配慮が感じられる素晴らしいチーム<br>・ 仕事には真面目に取り組むが、チームとしては仲良し<br>・ お互いにフォローしあう<br>・ みんな優しい<br>・ それぞれの得意分野を生かして協力しあっている<br>・ チームワークがよくて仕事がしやすい<br>・ 心理的安全性が高い<br>・ とにかく優しい人たちがたくさんいるため、相談もしやすく働きやすい</p><br><h2 id="Security-Compliance-チームを選んだ理由"><a href="#Security-Compliance-チームを選んだ理由" class="headerlink" title="Security &amp; Compliance チームを選んだ理由"></a>Security &amp; Compliance チームを選んだ理由</h2><p>Microsoft には多くの製品があり、多くの担当チームが存在します。<br>その中で Security &amp; Compliance チームを選んだ理由についてもメンバーにアンケートを取りましたので見てみましょう！</p><p>アンケートの結果、前職でセキュリティ関連のお仕事をされていた方が多くいらっしゃいましたが、中にはセキュリティ未経験で入社された方もいらっしゃいました！<br>セキュリティ未経験でもお互いに教え合う文化により活躍できる環境が整っています。<br>セキュリティ未経験でも臆せず <a href="https://www.microsoft.com/ja-jp/mscorp/college/mskk-entry">こちら</a>からお申込みを検討いただけると嬉しいです！</p><p>◆ アンケート結果<br>・ セキュリティ分野に興味があったから<br>・ セキュリティは未経験だったが、今後も需要が高まる分野だと考えたため<br>・ 前職でセキュリティ関連の業務をしており、興味があったため<br>・ 前職でセキュリティ関連の業務をしたこともあるが、Microsoft のセキュリティ製品に興味があったため<br>・ ここしかない！ と閃いたため<br>・ IT の括りの中で一番面白いと思っていて、知識をさらに深めたかったから<br>・ 前職でサイバー セキュリティの業務に従事していたため、貢献できると思ったため<br>・ サポート業務に従事することで Security 業界や製品に関する知見や対応経験が得られると思ったため<br>・ 前職で Security に関連する業務に携わっており、更にスキルアップを目指したいと思っていたため<br>・ 前職でユーザー部門セキュリティ担当をしており、Microsoft 製品の運用しており製品スキルを高めたかったため</p><br><h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>皆さん、いかがだったでしょうか。<br>Security &amp; Compliance チームの雰囲気やイメージについて少しでもイメージがわきましたでしょうか。<br>入社前はメンバー間のフォローが希薄であり、冷たいイメージを持たれている方が多くいましたが、入社後のイメージではメンバー間のフォローが充実しており、安心して業務が行える環境であると回答した方が多くいました！<br>セキュリティ分野未経験の方でも日々切磋することで活躍することができるチームですので Security &amp; Compliance チームに少しでも興味を持たれた方は <a href="https://www.microsoft.com/ja-jp/mscorp/college/mskk-entry">こちら</a>からお申込みを検討いただけると嬉しいです！</p><br><h3 id="関連記事"><a href="#関連記事" class="headerlink" title="関連記事"></a>関連記事</h3><p>Security &amp; Compliance チームの紹介記事は第 1 弾から第 5 弾まで公開しています。<br>以下のリンクから、その他の記事も是非一緒にご覧ください！</p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-01/">&lt;第 1 弾&gt; Security &amp; Compliance サポートチームについて</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-02/">&lt;第 2 弾&gt; CP チームの製品紹介</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-03/">&lt;第 3 弾&gt; リモートワークでの働き方について</a></p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-04/">&lt;第 4 弾&gt; チームの様子、雰囲気について</a>  </p><p><a href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-05/">&lt;第 5 弾&gt; Security &amp; Compliance チームの多様性について</a></p><p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>]]>
+    </content>
+    <id>https://jp-sec.github.io/blog/Hiring-AboutSecurity-04/</id>
+    <link href="https://jp-sec.github.io/blog/Hiring-AboutSecurity-04/"/>
+    <published>2024-05-16T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>こんにちは。日本マイクロソフト Security &amp; Compliance サポートチームの岡田です。<br>私たちのチームでは、現在 CSS (Customer Service &amp; Support) を盛り上げてくださるサポートエンジニアを募集しております]]>
+    </summary>
+    <title>
+      <![CDATA[<第 4 弾> チームの様子、雰囲気について]]>
+    </title>
+    <updated>2026-08-27T01:10:41.732Z</updated>
   </entry>
   <entry>
     <author>
@@ -260,7 +280,7 @@
 <p>この記事では、Microsoft Defender for Endpoint(MDE) を使用する Windows マシンでデバイスコントロール機能を使用してリムーバブルメデ]]>
     </summary>
     <title>デバイスコントロール機能を使用してリムーバブルメディアアクセス制御を構成する手順と確認ポイント</title>
-    <updated>2026-03-23T07:30:23.544Z</updated>
+    <updated>2026-08-27T01:10:41.731Z</updated>
   </entry>
   <entry>
     <author>
@@ -279,7 +299,7 @@
 <p>この記事では、Windows Server 2012 R2 と Windows Server 2016 を Microsoft Defender for Endpoint(MDE) にオンボード]]>
     </summary>
     <title>Windows Server 2012 R2 または Windows Server 2016 を MDE にオンボードする手順と確認ポイント</title>
-    <updated>2026-03-23T07:30:23.544Z</updated>
+    <updated>2026-08-27T01:10:41.731Z</updated>
   </entry>
   <entry>
     <author>
@@ -297,7 +317,7 @@
       <![CDATA[<h2 id="Active-Directory-Rithts-Management-Service-AD-RMS-の役割は-Azure-IaaS-を含めパブリック-クラウドへの移行は許諾されません。"><a href="#Active-Directory-Rithts-Mana]]>
     </summary>
     <title>Active Directory Rithts Management Service (AD RMS) の役割は Azure IaaS を含めパブリック クラウドへの移行は許諾されません。</title>
-    <updated>2026-03-23T07:30:23.543Z</updated>
+    <updated>2026-08-27T01:10:41.729Z</updated>
   </entry>
   <entry>
     <author>
@@ -315,7 +335,7 @@
 <p>この記事では <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microso]]>
     </summary>
     <title>Windows デバイスの Microsoft Defender ウイルス対策(MDAV) のセキュリティインテリジェンス(定義ファイル)更新設定について</title>
-    <updated>2026-03-23T07:30:23.544Z</updated>
+    <updated>2026-08-27T01:10:41.731Z</updated>
   </entry>
   <entry>
     <author>
@@ -333,7 +353,7 @@
 <p>この記事では、<a href="https://security.microsoft.com/">Microsoft 365 Defender ポータル</a> の「デバイスのインベントリ」に関す]]>
     </summary>
     <title>Microsoft 365 Defender ポータルの「デバイスのインベントリ」に関するよくあるご質問</title>
-    <updated>2026-03-23T07:30:23.544Z</updated>
+    <updated>2026-08-27T01:10:41.731Z</updated>
   </entry>
   <entry>
     <author>
@@ -350,7 +370,7 @@
       <![CDATA[<p>この記事では <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/respond-machine-alerts?view=o365-worldwide#iso]]>
     </summary>
     <title>Microsoft Defender for Endpoint(MDE) デバイス分離機能の解除ができない場合のトラブルシューティング</title>
-    <updated>2026-03-23T07:30:23.544Z</updated>
+    <updated>2026-08-27T01:10:41.731Z</updated>
   </entry>
   <entry>
     <author>
@@ -368,24 +388,6 @@
 <p>この記事では <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microso]]>
     </summary>
     <title>Windows デバイスの Microsoft Defender ウイルス対策(MDAV) スケジュールスキャン設定について</title>
-    <updated>2026-03-23T07:30:23.544Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>CSS Japan Secuirty team</name>
-    </author>
-    <category term="Microsoft Defender for Endpoint" scheme="https://jp-sec.github.io/blog/tags/Microsoft-Defender-for-Endpoint/"/>
-    <content>
-      <![CDATA[<p>こんにちは Azure Security サポートチームです。</p><p>この記事では <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microsoft-defender-endpoint">Microsoft Defender for Endpoint(MDE)</a>にオンボードされたデバイスをイメージ化して展開したり、複製する場合に実施いただく必要がある手順と注意事項についてまとめます。</p><p>この手順は、主に以下の例に挙げるシナリオで重要になる場合があります。</p><ul><li><strong>MDE にオンボードしたことがあるデバイスをイメージ化し、複数のマシンに展開して使用する場合</strong></li><li><strong>MDE にオンボードしたことがあるデバイスをゴールデン イメージとして VDI にデプロイする場合</strong></li><li><strong>MDE にオンボードしたことがあるデバイスにて、ホスト名やドメイン名の変更を伴う構成変更を実施する場合</strong></li><li><strong>MDE にオンボードしたことがあるデバイスにて、Sysprep ツールなどによる一般化を行った場合</strong></li><li><strong>MDE にオンボード済みの仮想マシンをクローンする場合</strong></li></ul><h2 id="MDE-にオンボードしたデバイスをイメージ化する場合の留意事項"><a href="#MDE-にオンボードしたデバイスをイメージ化する場合の留意事項" class="headerlink" title="MDE にオンボードしたデバイスをイメージ化する場合の留意事項"></a>MDE にオンボードしたデバイスをイメージ化する場合の留意事項</h2><p>Microsoft は、お客様の環境を保護するために、セキュリティの強化に継続して取り組んでいます。</p><p>Microsoft Defender は、悪意ある攻撃者によるクライアントのなりすましを防止するために、不審な通信を検出するセキュリティ対策機能をご用意いたしております。(<a href="#%E5%8F%82%E8%80%83%E6%83%85%E5%A0%B1%EF%BC%9AMicrosoft-Defender-%E3%81%AE%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E5%BC%B7%E5%8C%96%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">参考情報：Microsoft Defender のセキュリティ強化について</a>)</p><p>ここで、MDE にオンボードしたデバイスをイメージ化して展開したり複製したりする場合、展開されたデバイスの通信が、疑わしいクライアント通信として MDE に検出される問題が発生する既知の制限事項があります。</p><p>そのため、MDE にオンボードしたデバイスをイメージ化いただく場合には、以下の手順にて MDE のオフボードと端末情報の削除を実施いただく必要があります。</p><p>※ すでに MDE からオフボード済みのデバイスをイメージ化する場合にも以下の手順を実施する必要があります。</p><p>※ 以下の手順を実施せずにデバイスを複製いただいた場合、ご利用環境で問題が発生した場合の復旧に時間を要する可能性がありますこと、ご留意くださいますようお願いいたします。</p><p>※ 仮想デスクトップインフラストラクチャ (VDI) 用のイメージを作成いただく場合は、  <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-vdi?view=o365-worldwide#updating-virtual-desktop-infrastructure-vdi-images-persistent-or-non-persistent">非永続的な仮想デスクトップ インフラストラクチャ (VDI) デバイスのオンボード</a> の記載も併せてご参照ください。</p><h2 id="デバイスのオフボードと端末情報の削除手順"><a href="#デバイスのオフボードと端末情報の削除手順" class="headerlink" title="デバイスのオフボードと端末情報の削除手順"></a>デバイスのオフボードと端末情報の削除手順</h2><h3 id="Windows-OS-を-MDE-からオフボードして情報を削除する"><a href="#Windows-OS-を-MDE-からオフボードして情報を削除する" class="headerlink" title="Windows OS を MDE からオフボードして情報を削除する"></a>Windows OS を MDE からオフボードして情報を削除する</h3><p>Windows OS を MDE からオフボードして情報を削除する場合は以下の手順を実施します。</p><ol><li><strong>以下の公開情報で案内しているいずれかの手順を使用してデバイスを MDE からオフボードします。</strong></li></ol><p>※ すでにデバイスがオフボードされている場合、この手順をスキップします。</p><ul><li>手順1：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-script?view=o365-worldwide#offboard-devices-using-a-local-script">ローカル スクリプトを使用してデバイスをオフボードする | Microsoft Learn</a></li><li>手順2：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-gp?view=o365-worldwide#offboard-devices-using-group-policy">グループ ポリシーを使用してデバイスをオフボードする | Microsoft Learn</a></li><li>手順3：<a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/configure-endpoints-mdm?view=o365-worldwide#offboard-devices-using-mobile-device-management-tools">モバイル デバイス管理ツールを使用してデバイスをオフボードする | Microsoft Learn</a></li></ul><ol start="2"><li><strong>デバイスのオフボード完了後、コマンドプロンプトで以下のコマンドを実行し、 sense のサービスが停止していることを確認します。</strong></li></ol><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sc</span> query sense</span><br></pre></td></tr></table></figure><p>デバイスが正常にオフボードされ、サービスが停止している場合、以下の出力例のように [STATE] 行に [STOPPED] と表示されます。</p><p><img src="../images/Endpoint-MDAV-2022-11-15-01.png" alt="sense サービスが停止している場合の出力結果"></p><ol start="3"><li><p><strong><a href="https://download.sysinternals.com/files/PSTools.zip">https://download.sysinternals.com/files/PSTools.zip</a> から、PsExec.exe ツールをダウンロードし、展開します。</strong></p></li><li><p><strong>管理者権限でコマンドプロンプトを起動し、PsExec.exe ツールを使用して以下のコマンドを実行します。</strong></p></li></ol><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PsExec.exe <span class="literal">-s</span> cmd.exe</span><br></pre></td></tr></table></figure><ol start="5"><li><strong>[4.] の手順により SYSTEM アカウントで起動したコマンドプロンプト画面にて、以下のコマンドを順に実行します。</strong></li></ol><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="string">&quot;C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection\Cyber&quot;</span></span><br><span class="line"><span class="built_in">del</span> *.* /f /s /q</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection&quot;</span> /v senseGuid /f</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection&quot;</span> /v <span class="number">7</span>DC0B629<span class="literal">-D7F6-4DB3-9BF7-64D5AAF50F1A</span> /f</span><br><span class="line">REG DELETE <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection\48A68F11-7A16-4180-B32C-7F974C7BD783&quot;</span> /f</span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure><p>※ 誤ったファイルやレジストリキーを削除しないようご留意ください。また、事前にバックアップを取得いただくことを推奨いたします。</p><p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-endpoints-vdi#updating-virtual-desktop-infrastructure-vdi-images-persistent-or-non-persistent">非永続的な仮想デスクトップ インフラストラクチャ (VDI) デバイスのオンボード | Microsoft Learn</a></p><ol start="8"><li><strong>ダウンロードした PsExec.exe ツールを含むファイルを必要に応じて削除し、OS を再起動します。</strong></li></ol><p>以上が、MDE にオンボードしたデバイスをイメージ化または複製いただく前に実施いただく必要のある作業です。</p><p>なお、本記事の内容は、作成時点でのものであり、予告なく変更される場合があります。</p><p>MDE にオンボードしたデバイスのイメージ化や複製についてのご不明点については、弊社サポート窓口までお問い合わせください。</p><h2 id="参考情報：Microsoft-Defender-のセキュリティ強化について"><a href="#参考情報：Microsoft-Defender-のセキュリティ強化について" class="headerlink" title="参考情報：Microsoft Defender のセキュリティ強化について"></a>参考情報：Microsoft Defender のセキュリティ強化について</h2><p>Microsoft は、2022 年 3 月に <a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-23278">CVE-2022-23278</a> に対処する更新プログラムをリリースしました。</p><p>この更新プログラムは、悪意のある攻撃者がクライアントになりすましをして、クラウド上の MDE サービスと接続を行う攻撃に対するセキュリティを強化します。</p><p>このセキュリティ強化には、クラウド上の MDE サービスに対する疑わしいクライアント通信を検出する機能が含まれます。このような疑わしいクライアント通信は、デバイスのなりすましや重複したデバイス ID が原因で発生する可能性があります。</p><p>参考情報：<a href="https://msrc-blog.microsoft.com/2022/03/08/guidance-for-cve-2022-23278-spoofing-in-microsoft-defender-for-endpoint/">Guidance for CVE-2022-23278 spoofing in Microsoft Defender for Endpoint – Microsoft Security Response Center</a></p>]]>
-    </content>
-    <id>https://jp-sec.github.io/blog/Endpoint-MDAV-2022-11-15/</id>
-    <link href="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-11-15/"/>
-    <published>2022-11-16T09:00:00.000Z</published>
-    <summary>
-      <![CDATA[<p>こんにちは Azure Security サポートチームです。</p>
-<p>この記事では <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microso]]>
-    </summary>
-    <title>Microsoft Defender for Endpoint(MDE) にオンボードされたデバイスをイメージ化・複製する場合の注意事項</title>
-    <updated>2026-03-23T07:30:23.544Z</updated>
+    <updated>2026-08-27T01:10:41.731Z</updated>
   </entry>
 </feed>
