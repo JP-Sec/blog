@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MDE Client Analyzer を使用した初動調査とセルフサービスの範囲 | Japan CSS Security Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本記事では、Microsoft Defender for Endpoint Client Analyzer (以下、Client Analyzer) を使用したセルフサービスで対応できる範囲をご案内します。 本記事の内容 セルフサービスで確認できる範囲 Client Analyzer の実行前に記録する情報 Windows、Linux、macOS での採取例 よくある問題の切り分け例  セルフサー">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MDE Client Analyzer を使用した初動調査とセルフサービスの範囲">
+<meta property="og:url" content="https://jp-sec.github.io/blog/MDEClientAnalyzer-self-service-blog/index.html">
+<meta property="og:site_name" content="Japan CSS Security Support Blog">
+<meta property="og:description" content="本記事では、Microsoft Defender for Endpoint Client Analyzer (以下、Client Analyzer) を使用したセルフサービスで対応できる範囲をご案内します。 本記事の内容 セルフサービスで確認できる範囲 Client Analyzer の実行前に記録する情報 Windows、Linux、macOS での採取例 よくある問題の切り分け例  セルフサー">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2026-08-27T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-27T01:26:33.106Z">
+<meta property="article:author" content="CSS Japan Secuirty team">
+<meta property="article:tag" content="Client Analyzer">
+<meta property="article:tag" content="Microsoft Defender Antivirus (MDAV)">
+<meta property="article:tag" content="Microsoft Defender for Endpoint (MDE)">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="../atom.xml" title="Japan CSS Security Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-sec.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../index.html" id="logo">Japan CSS Security Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../index.html" id="subtitle">日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-MDEClientAnalyzer-self-service-blog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MDE Client Analyzer を使用した初動調査とセルフサービスの範囲
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Published: 
+        <a href="" class="article-date-single">
+  <time datetime="2026-08-27T01:00:00.000Z" itemprop="datePublished">2026-08-27</time>
+</a>
+        
+        
+        
+        <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+bddb6d83-504e-5318-ab4b-13907f39a848%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMDE+Client+Analyzer+%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E5%88%9D%E5%8B%95%E8%AA%BF%E6%9F%BB%E3%81%A8%E3%82%BB%E3%83%AB%E3%83%95%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AE%E7%AF%84%E5%9B%B2%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FMDEClientAnalyzer-self-service-blog%2F%29%0A*+Content+Source%3A+%5Barticles%2FMDEClientAnalyzer-self-service-blog.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FMDEClientAnalyzer-self-service-blog.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-sec.github.io/blog/MDEClientAnalyzer-self-service-blog/" data-id="cuidFUxVon2kaC4GtBkQ2zbY7" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本記事では、Microsoft Defender for Endpoint Client Analyzer (以下、Client Analyzer) を使用したセルフサービスで対応できる範囲をご案内します。</p>
+<h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul>
+<li>セルフサービスで確認できる範囲</li>
+<li>Client Analyzer の実行前に記録する情報</li>
+<li>Windows、Linux、macOS での採取例</li>
+<li>よくある問題の切り分け例</li>
+</ul>
+<h2 id="セルフサービスで確認できる範囲"><a href="#セルフサービスで確認できる範囲" class="headerlink" title="セルフサービスで確認できる範囲"></a>セルフサービスで確認できる範囲</h2><p>Client Analyzer を使用したセルフサービスでは、主に次の項目を確認できます。</p>
+<ul>
+<li>オンボードしたデバイスがデバイス インベントリに登録されない場合の、Sense サービス、接続性、証明書、プロキシ、前提条件の状態</li>
+<li>オンボードに失敗する場合の、OS とオンボーディング方式の対応状況、Sense サービス、ポリシー、更新プログラムの状態</li>
+<li>Microsoft Defender for Endpoint (以下、MDE) の必須 URL への接続に失敗する場合の、接続先、接続方式、ポート、プロキシ、TLS インスペクション、証明書失効確認の状態</li>
+<li>デバイスが想定と異なるテナントへオンボードされている場合の、デバイス ID、Org ID、オンボーディング情報</li>
+<li>プロキシ設定が想定と異なる場合の、WinHTTP プロキシと MDE センサーが検出したプロキシの状態</li>
+<li>MDE または Microsoft Defender ウイルス対策 (以下、MDAV) コンポーネントが古い、または停止している場合の、OS、センサー、プラットフォーム、エンジン、セキュリティ インテリジェンスの状態</li>
+<li>ポリシーが想定どおりに適用されていない場合の、管理経路、割り当て、対象グループ、競合、適用優先順位、同期状態</li>
+</ul>
+<p>また、採取いただいた Client Analyzer 内の <code>MpSupportFiles.cab</code>、<code>FullSenseClient.etl</code>、MDAV の詳細トレース、WPR、メモリ ダンプなどには、製品内部の診断イベントが含まれており、イベント ID、フィールド、戻り値、内部状態の定義や解析方法が公開されているわけではありません。<br>個々のログ出力、イベント、フィールド、戻り値、内部状態の意味や、解析方法そのものを目的として弊社サポートサービスへお問い合わせいただいても、ご回答が叶わない形となりますので、ご容赦ください。</p>
+<p>HTML レポートの各セクションと表示内容は、Microsoft Learn の <a href="https://learn.microsoft.com/ja-jp/defender-endpoint/analyzer-report">クライアント アナライザー HTML レポートについて</a> を参照してください。</p>
+<h2 id="実行前に記録する情報"><a href="#実行前に記録する情報" class="headerlink" title="実行前に記録する情報"></a>実行前に記録する情報</h2><p>Client Analyzer を実行する前に、次の情報を記録してください。</p>
+<ol>
+<li>発生している事象と期待する動作</li>
+<li>事象が発生した日時、タイム ゾーン、頻度</li>
+<li>対象デバイス名、OS、再現の有無</li>
+<li>直前に行ったポリシー、ネットワーク、プロキシ、製品更新の変更</li>
+<li>Microsoft Defender ポータル上のデバイス名、最終確認日時、センサー正常性状態</li>
+</ol>
+<p>Client Analyzer 収集中に事象を再現できたかどうかもご確認ください。採取時間と事象発生時間が一致しない場合、詳細調査が困難になる可能性がございますので、ご留意ください。</p>
+<h2 id="Client-Analyzer-を実行する"><a href="#Client-Analyzer-を実行する" class="headerlink" title="Client Analyzer を実行する"></a>Client Analyzer を実行する</h2><p>以下に OS ごとの Client Analyzer の実行例を示します。ツールの画面、ファイル名、プロンプトはバージョンによって変わる場合があります。</p>
+<h3 id="Windows-での採取例"><a href="#Windows-での採取例" class="headerlink" title="Windows での採取例"></a>Windows での採取例</h3><div class="alert is-important"><p class="alert-title">重要</p><p>次の <code>-i -v -c -a</code> は、ネットワーク、MDAV、アプリケーション互換性、パフォーマンスに関する情報を同時に採取するコマンド例です。必要なオプションは発生している事象によって異なります。常にすべてのオプションを指定するのではなく、Microsoft Learn の <a href="https://learn.microsoft.com/ja-jp/defender-endpoint/use-client-analyzer">クライアント アナライザーに関する問題を診断する</a> またはサポート担当者の案内に従ってください。</p></div>
+<ol>
+<li><p><a href="https://aka.ms/mdatpanalyzer">MDE Client Analyzer</a> をダウンロードし、任意のフォルダーへ展開します。</p>
+</li>
+<li><p>管理者権限でコマンド プロンプトを起動します。</p>
+</li>
+<li><p>カレント フォルダーを <code>MDEClientAnalyzer.cmd</code> の格納先へ移動し、調査対象に応じたコマンドを実行します。次は採取コマンドの一例です。</p>
+ <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MDEClientAnalyzer.<span class="built_in">cmd</span> -i -v -c -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>次の Problem Steps Recorder (PSR) のプロンプトが表示された場合は、スクリーンショットの採取を許可する場合に <code>Y</code> を入力し、Enter キーを押します。画面に機密情報が表示される可能性も考慮し、組織の情報管理ルールに従って選択してください。</p>
+ <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Type &#x27;Y&#x27; and press ENTER to allow Problem Steps Recorder to capture screenshots. Use any other key or ENTER to disable PSR.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Enter the number of minutes to collect traces:</code> と表示された場合は、採取時間の例として <code>10</code> を入力し、Enter キーを押します。必要な採取時間も事象とオプションによって異なります。</p>
+</li>
+<li><p>コマンド プロンプト上で 10 分のタイマー カウントが開始するまで待ち、タイマーが終了するまでに対象の事象を再現します。</p>
+</li>
+<li><p>タイマー終了後も、情報採取と結果の圧縮が完了するまでコマンドを停止せずに待ちます。すべてのデータが生成されるまで 15 分以上かかる場合があります。赤字のエラーや黄色字の警告が表示された場合も、処理が継続している間はコマンド プロンプトを閉じないでください。</p>
+</li>
+<li><p>コマンド実行フォルダー配下に生成された <code>MDEClientAnalyzerResult</code> フォルダーまたは結果 ZIP ファイルを確認します。再採取で上書きしないよう、採取日時やデバイス名を含む名前で元の結果を保管します。</p>
+</li>
+</ol>
+<h3 id="Linux-での採取例"><a href="#Linux-での採取例" class="headerlink" title="Linux での採取例"></a>Linux での採取例</h3><ol>
+<li><p>事象再現時に次のコマンドを実行し、<code>mdatp health</code> の出力と実行日時を記録します。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdatp health</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>OS に <code>/var/log/messages</code> が存在する場合は、このファイルを採取します。ディストリビューションによってログの保存先が異なるため、存在しない場合は、その OS で利用している systemd journal または syslog の該当時間帯のログを採取します。</p>
+</li>
+<li><p>Client Analyzer には Python 版とバイナリ版があります。Python 版を使用する場合は、次のコマンドで <code>XMDEClientAnalyzer.zip</code> をダウンロードします。Python 版では Python 3 と追加の Python パッケージが必要になるため、実行前に <a href="https://learn.microsoft.com/ja-jp/defender-endpoint/run-analyzer-linux">Linux でクライアント アナライザーを実行する</a> の前提条件を確認してください。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --quiet -O XMDEClientAnalyzer.zip https://aka.ms/XMDEClientAnalyzer</span><br></pre></td></tr></table></figure>
+
+<p> Python 版の展開方法と実行方法は、上記の Microsoft Learn または <a href="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/">macOS および Linux デバイスで Client Analyzer ツールによる正常性診断を実行する方法</a> を参照してください。以降は、Python への依存がないバイナリ版の採取例です。</p>
+</li>
+<li><p>Python への依存を避ける場合は、<a href="https://aka.ms/XMDEClientAnalyzerBinary">XMDE Client Analyzer Binary</a> から <code>XMDEClientAnalyzerBinary.zip</code> をダウンロードし、任意のディレクトリで展開します。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unzip -q XMDEClientAnalyzerBinary.zip -d XMDEClientAnalyzerBinary</span><br><span class="line"><span class="built_in">cd</span> XMDEClientAnalyzerBinary</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>展開された Linux 用 ZIP のうち、デバイスのアーキテクチャに対応するファイルを展開します。ファイル名はツールのバージョンによって異なる場合があります。たとえば x64 用は次のように展開します。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -q SupportToolLinuxamd64Binary.zip</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>MDESupportTool</code> に実行権限を付与し、診断パッケージを採取します。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x MDESupportTool</span><br><span class="line"><span class="built_in">sudo</span> ./MDESupportTool -d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>処理中に <code>Do you wish to continue?</code> と表示された場合は、内容を確認して <code>y</code> を入力します。</p>
+</li>
+<li><p>処理完了後にコンソールへ表示される保存先を確認し、生成された <code>*_output.zip</code> などの結果 ZIP ファイルを保管します。</p>
+</li>
+</ol>
+<p>最新の手順は Microsoft Learn の <a href="https://learn.microsoft.com/ja-jp/defender-endpoint/run-analyzer-linux">Linux でクライアント アナライザーを実行する</a> を参照してください。</p>
+<h3 id="macOS-での採取例"><a href="#macOS-での採取例" class="headerlink" title="macOS での採取例"></a>macOS での採取例</h3><ol>
+<li><p>事象再現時に <code>mdatp health</code> を実行し、出力と実行日時を記録します。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdatp health</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://aka.ms/XMDEClientAnalyzerBinary">XMDE Client Analyzer Binary</a> をダウンロードして展開し、macOS 用の <code>SupportToolMacOSBinary.zip</code> を展開します。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -s -L -o XMDEClientAnalyzerBinary.zip <span class="string">&quot;https://aka.ms/XMDEClientAnalyzerBinary&quot;</span></span><br><span class="line">unzip -q XMDEClientAnalyzerBinary.zip -d XMDEClientAnalyzerBinary</span><br><span class="line"><span class="built_in">cd</span> XMDEClientAnalyzerBinary/XMDEClientAnalyzer</span><br><span class="line">unzip -q SupportToolMacOSBinary.zip</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>MDESupportTool</code> に実行権限を付与し、診断パッケージを採取します。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x MDESupportTool</span><br><span class="line"><span class="built_in">sudo</span> ./MDESupportTool -d --mdatp-log debug</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>処理完了後に生成された結果 ZIP ファイルを保管します。</p>
+</li>
+</ol>
+<p>最新の手順は Microsoft Learn の <a href="https://learn.microsoft.com/ja-jp/defender-endpoint/run-analyzer-macos">macOS でクライアント アナライザーを実行する</a> および <a href="https://jp-sec.github.io/blog/Endpoint-MDAV-2022-09-28/">macOS および Linux デバイスで Client Analyzer ツールによる正常性診断を実行する方法</a> を参照してください。</p>
+<h2 id="よくある問題の切り分け例"><a href="#よくある問題の切り分け例" class="headerlink" title="よくある問題の切り分け例"></a>よくある問題の切り分け例</h2><h3 id="オンボードしたデバイスがデバイス-インベントリに登録されない"><a href="#オンボードしたデバイスがデバイス-インベントリに登録されない" class="headerlink" title="オンボードしたデバイスがデバイス インベントリに登録されない"></a>オンボードしたデバイスがデバイス インベントリに登録されない</h3><p>オンボーディング操作が完了してもデバイスが Microsoft Defender ポータルのデバイス インベントリに表示されない場合は、次の情報を順に確認します。</p>
+<ol>
+<li><p>HTML レポートの <strong>Device Information</strong> で、採取対象のデバイス名、OS、デバイス識別子が想定した端末のものか確認します。</p>
+</li>
+<li><p>管理者権限のコマンド プロンプトで次のコマンドを実行し、Sense サービスが <code>STATE: 4 RUNNING</code> であることを確認します。</p>
+ <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.exe query Sense</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTML レポートの <strong>Detailed Results</strong> で、EDR Cloud CnC など MDE の必須 URL への接続テスト、証明書、プロキシに関する Error または Warning を確認します。</p>
+</li>
+<li><p>OS とオンボーディング方式がサポート対象であり、必要な更新プログラムとオンボーディング ポリシーが適用されているか確認します。</p>
+</li>
+</ol>
+<p>Sense サービスの停止、接続テスト失敗、プロキシ誤構成などが見つかった場合は、公開手順に従って修正し、Client Analyzer を再実行します。Sense サービスの確認方法を含む具体的な手順は、Japan CSS Security Support Blog の <a href="https://jp-sec.github.io/blog/Endpoint-MDAV-2025-04-30/#Sense-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">Microsoft Defender for Endpoint (MDE) にオンボードしたデバイスがデバイス インベントリに登録されない問題のトラブルシューティング手順</a> を参照してください。</p>
+<p>一方、センサーが稼働し、必須 URL への接続テストも成功しているにもかかわらずデバイスが登録されない場合は、クラウド側のデータ受信状況やデバイス ID の突き合わせが必要になる可能性があります。この場合は、採取日時と結果パッケージを添えて弊社サポートサービスへお問い合わせください。</p>
+<div class="alert is-important"><p class="alert-title">重要</p><p>採取いただいた情報が情報採取から 1 週間以上など経過している場合、クラウド側のデータ受信状況などを突き合せた詳細調査が叶わない可能性があり、再度情報採取を依頼する可能性がございますこと、ご容赦ください。</p></div>
+<h3 id="オンボードに失敗する"><a href="#オンボードに失敗する" class="headerlink" title="オンボードに失敗する"></a>オンボードに失敗する</h3><p>オンボーディング スクリプトや管理ツールでエラーとなる、またはオンボーディング状態にならない場合は、次の情報からお客様側で切り分けます。</p>
+<ol>
+<li>HTML レポートの <strong>Device Information</strong> の OS とビルドから、利用するオンボーディング方式のサポート対象か確認します。</li>
+<li>管理者権限のコマンド プロンプトで <code>sc.exe query Sense</code> を実行し、Sense サービスが存在するか、また <code>STATE: 4 RUNNING</code> であるか確認します。サービスが存在しない場合や停止している場合は、OS ごとの前提条件とオンボーディング手順を確認します。</li>
+<li>HTML レポートの <strong>Detailed Results</strong> で、オンボーディング、サービス開始、接続性、証明書、プロキシ、前提条件に関する Error とガイダンスを確認します。</li>
+<li>利用している管理方式の割り当て、対象グループ、ポリシー競合、更新プログラム、再起動待ちを確認します。</li>
+</ol>
+<p>公開ガイダンスに従って前提条件、ポリシー、サービス、通信を修正できる場合はセルフサービスの範囲です。正しいポリシーが配布されているにもかかわらずセンサー サービスが開始できない、同じ Error が継続する、または HTML レポートに原因が示されない場合は、センサーの内部ログや OS 側の詳細ログの解析が必要になるため、弊社サポートサービスへお問い合わせください。</p>
+<div class="alert is-important"><p class="alert-title">重要</p><p>採取いただいた情報が情報採取から 1 週間以上など経過している場合、クラウド側のデータ受信状況などを突き合せた詳細調査が叶わない可能性があり、再度情報採取を依頼する可能性がございますこと、ご容赦ください。</p></div>
+<h3 id="MDE-の必須-URL-への接続に失敗している"><a href="#MDE-の必須-URL-への接続に失敗している" class="headerlink" title="MDE の必須 URL への接続に失敗している"></a>MDE の必須 URL への接続に失敗している</h3><p>Detailed Results の接続性カテゴリに Error がある場合は、失敗した接続先とガイダンスを確認します。特に EDR Cloud CnC など、MDE センサーが使用する通信の失敗は、デバイスがポータルへ登録されない、またはセンサーが非アクティブになる原因となる可能性があります。</p>
+<p>次の順で確認します。</p>
+<ol>
+<li>利用中の接続方式に対応する最新の MDE サービス URL が許可されているか確認します。対応する URL とプロキシ要件は、Microsoft Learn の <a href="https://learn.microsoft.com/ja-jp/defender-endpoint/configure-proxy-internet">プロキシを使用して Defender for Endpoint サービスに接続するようにデバイスを構成する</a> を参照してください。</li>
+<li>URL のワイルドカード、ポート、テナントの保存リージョンに対応した許可設定を確認します。</li>
+<li>認証が必要なプロキシ、TLS インスペクション、証明書失効確認の遮断がないか確認します。</li>
+<li>HTML レポートの <strong>Device Information</strong> の <code>System-wide WinHTTP proxy</code> と <code>Sense Service Discovered Proxy</code> が想定した値か確認します。</li>
+<li>設定変更後に Client Analyzer を再実行し、同じ接続テストが成功するか確認します。</li>
+</ol>
+<h3 id="想定と異なるテナントへオンボードされている"><a href="#想定と異なるテナントへオンボードされている" class="headerlink" title="想定と異なるテナントへオンボードされている"></a>想定と異なるテナントへオンボードされている</h3><p>デバイス ID、Org ID、オンボーディング情報が想定した環境と異なる場合は、過去のオンボーディング設定や古いポリシーが残っていないか確認します。</p>
+<p>オンボーディング パッケージを手動で編集せず、現在のテナントから取得した正しいパッケージと、利用している管理方式の公開手順に従って、オフボードおよび再オンボードを検討します。VDI などではデバイス識別子の取り扱いに固有の要件があるため、該当するオンボーディング手順を確認してください。</p>
+<h3 id="プロキシ設定が想定と異なる"><a href="#プロキシ設定が想定と異なる" class="headerlink" title="プロキシ設定が想定と異なる"></a>プロキシ設定が想定と異なる</h3><p>HTML レポートの <strong>Device Information</strong> の <code>System-wide WinHTTP proxy</code> と <code>Sense Service Discovered Proxy</code> を確認します。</p>
+<p>プロキシの設定方法、認証方式、除外リスト、PAC ファイル、TLS インスペクションの対象を確認し、MDE がサポートするプロキシ構成に修正した後、再度接続テストを実施します。</p>
+<h3 id="MDE-MDAV-コンポーネントが古い、または停止している"><a href="#MDE-MDAV-コンポーネントが古い、または停止している" class="headerlink" title="MDE&#x2F;MDAV コンポーネントが古い、または停止している"></a>MDE&#x2F;MDAV コンポーネントが古い、または停止している</h3><p>HTML レポートの <strong>Device Information</strong>　に表示された OS ビルド、MDE センサー、MDAV プラットフォーム、エンジン、セキュリティ インテリジェンスの状態を確認します。</p>
+<p>サポート対象外または古いコンポーネントがある場合は、Microsoft Update など組織で承認された更新経路を使用して最新化します。サービスを無効にする設定、更新元への通信制限、サード パーティ製セキュリティ製品との競合も確認します。</p>
+<h3 id="ポリシーが想定どおりに適用されていない"><a href="#ポリシーが想定どおりに適用されていない" class="headerlink" title="ポリシーが想定どおりに適用されていない"></a>ポリシーが想定どおりに適用されていない</h3><p>HTML レポートの <strong>Device Information</strong> の Device Configuration Management Details などから、Intune、MDE セキュリティ構成管理、グループ ポリシー、Microsoft Configuration Manager など、利用している管理経路を確認します。</p>
+<p>複数の管理経路から同じ設定を配布している場合は、競合や適用優先順位を確認します。意図したポリシーの割り当て、対象グループ、同期状態を修正し、ポリシー同期後に Client Analyzer を再実行します。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>Client Analyzer を使用したセルフサービスで対応できる範囲をご案内しました。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Client-Analyzer/" rel="tag">Client Analyzer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-Antivirus-MDAV/" rel="tag">Microsoft Defender Antivirus (MDAV)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint-MDE/" rel="tag">Microsoft Defender for Endpoint (MDE)</a></li></ul>
+
+        
+        <a href="https://github.com/jp-sec/blog/edit/main/articles/MDEClientAnalyzer-self-service-blog.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../MDEClientAnalyzer-collected-data-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Microsoft Defender for Endpoint Client Analyzer で収集される情報</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">MDE Client Analyzer を使用した初動調査とセルフサービスの範囲</a>
+          </li>
+        
+          <li>
+            <a href="../MDEClientAnalyzer-collected-data-blog/">Microsoft Defender for Endpoint Client Analyzer で収集される情報</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2026-03-06/">ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2025-11-07/">Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</a>
+          </li>
+        
+          <li>
+            <a href="../Endpoint-MDAV-2025-04-30/">Microsoft Defender for Endpoint(MDE) にオンボードしたデバイスがデバイスインベントリに登録されない問題のトラブルシューティング手順</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Active-Directory-Rithts-Management-Service/" rel="tag">Active Directory Rithts Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-AdvancedThreat-Protection/" rel="tag">Azure AdvancedThreat Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Azure-Information-Protection/" rel="tag">Azure Information Protection</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Client-Analyzer/" rel="tag">Client Analyzer</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Identity-Manager/" rel="tag">Identity Manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-Linux/" rel="tag">MDE on Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/MDE-on-macOS/" rel="tag">MDE on macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" rel="tag">Microsoft AdvancedThreat Analytics(ATA)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-Antivirus-MDAV/" rel="tag">Microsoft Defender Antivirus (MDAV)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint/" rel="tag">Microsoft Defender for Endpoint</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-for-Endpoint-MDE/" rel="tag">Microsoft Defender for Endpoint (MDE)</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" rel="tag">Microsoft Defender ウイルス対策</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/Rights-Management-Service/" rel="tag">Rights Management Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" rel="tag">セキュリティインテリジェンス</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" rel="tag">マルウェア対策プラットフォーム</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../tags/Information/">Information</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2026/08/">2026 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2026/03/">2026 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/04/">2025 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/10/">2024 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/08/">2024 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/05/">2024 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2024/02/">2024 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/11/">2021 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2021/08/">2021 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/">2020 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/11/">2019 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/08/">2019 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/05/">2019 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/03/">2019 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/01/">2016 / 01</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../tags/Active-Directory-Rithts-Management-Service/" style="font-size: 10px;">Active Directory Rithts Management Service</a> <a href="../tags/Azure-AdvancedThreat-Protection/" style="font-size: 10px;">Azure AdvancedThreat Protection</a> <a href="../tags/Azure-Information-Protection/" style="font-size: 16.67px;">Azure Information Protection</a> <a href="../tags/Client-Analyzer/" style="font-size: 11.67px;">Client Analyzer</a> <a href="../tags/General/" style="font-size: 15px;">General</a> <a href="../tags/Identity-Manager/" style="font-size: 13.33px;">Identity Manager</a> <a href="../tags/Information/" style="font-size: 10px;">Information</a> <a href="../tags/MDE-on-Linux/" style="font-size: 11.67px;">MDE on Linux</a> <a href="../tags/MDE-on-macOS/" style="font-size: 11.67px;">MDE on macOS</a> <a href="../tags/Microsoft-AdvancedThreat-Analytics-ATA/" style="font-size: 10px;">Microsoft AdvancedThreat Analytics(ATA)</a> <a href="../tags/Microsoft-Defender-Antivirus-MDAV/" style="font-size: 11.67px;">Microsoft Defender Antivirus (MDAV)</a> <a href="../tags/Microsoft-Defender-for-Endpoint/" style="font-size: 20px;">Microsoft Defender for Endpoint</a> <a href="../tags/Microsoft-Defender-for-Endpoint-MDE/" style="font-size: 11.67px;">Microsoft Defender for Endpoint (MDE)</a> <a href="../tags/Microsoft-Defender-%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E5%AF%BE%E7%AD%96/" style="font-size: 18.33px;">Microsoft Defender ウイルス対策</a> <a href="../tags/Rights-Management-Service/" style="font-size: 10px;">Rights Management Service</a> <a href="../tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%B9/" style="font-size: 10px;">セキュリティインテリジェンス</a> <a href="../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 15px;">チーム紹介</a> <a href="../tags/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/" style="font-size: 10px;">マルウェア対策プラットフォーム</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="https://privacy.microsoft.com/ja-jp/privacystatement" target="_blank" rel=”noopener”>Privacy & Cookies</a> |  
+      <a href="https://www.microsoft.com/ja-jp/legal/intellectualproperty/copyright" target="_blank" rel=”noopener”>Terms of use</a> |
+      <a href="https://www.microsoft.com/ja-jp/legal/intellectualproperty/trademarks" target="_blank" rel=”noopener”>Trademarks</a> |
+      &copy; 2026 CSS Japan Secuirty team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
