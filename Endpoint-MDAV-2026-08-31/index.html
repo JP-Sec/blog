@@ -14,7 +14,7 @@
 <meta property="og:description" content="本記事では、Microsoft Defender for Endpoint(MDE) の WSL 用プラグインをインストールした後、WSL 2 のディストリビューションが Microsoft Defender ポータルに表示されない、またはオンボードが完了しない場合に確認いただきたい項目と対処方法をご案内します。 WSL 用プラグインの前提要件、インストール方法および既知の制限事項については、以下">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2026-08-31T06:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-31T08:27:00.029Z">
+<meta property="article:modified_time" content="2026-08-31T08:37:07.590Z">
 <meta property="article:author" content="CSS Japan Secuirty team">
 <meta property="article:tag" content="MDE on Linux">
 <meta property="article:tag" content="Microsoft Defender for Endpoint">
@@ -105,7 +105,7 @@
         
         <a href="https://github.com/jp-sec/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+9be067e6-8e16-574e-a705-1516de46dcc4%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMicrosoft+Defender+for+Endpoint+WSL+%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E5%BE%8C%E3%81%AB%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%8C%E5%AE%8C%E4%BA%86%E3%81%97%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%89%8B%E9%A0%86%5D%28https%3A%2F%2Fjp-sec.github.io%2Fblog%2FEndpoint-MDAV-2026-08-31%2F%29%0A*+Content+Source%3A+%5Barticles%2FEndpoint-MDAV-2026-08-31.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-sec%2Fblog%2Fblob%2Fmain%2Farticles%2FEndpoint-MDAV-2026-08-31.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2026-08-31/" data-id="cuidmq-LU4HVo5i7qTLITN8dY" class="article-share-link">共有</a>
+        <a data-url="https://jp-sec.github.io/blog/Endpoint-MDAV-2026-08-31/" data-id="cuid3RXpuasJ-4jpOPgTgH7IO" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -206,7 +206,6 @@
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /d &quot;<span class="variable">%ProgramFiles%</span>\Microsoft Defender <span class="keyword">for</span> Endpoint plug-<span class="keyword">in</span> <span class="keyword">for</span> WSL\tools&quot;</span><br><span class="line">healthcheck.exe</span><br><span class="line">healthcheck.exe --supportBundle</span><br></pre></td></tr></table></figure>
 
 <p><code>healthcheck.exe</code> の実行結果のスクリーンショットと、<code>healthcheck.exe --supportBundle</code> で作成されたサポートバンドルを保存します。</p>
-<p>また、Windows ホストの正常性状態を確認するため、MDEClientAnalyzer を使用して情報を採取します。</p>
 <h2 id="実展開時の留意事項"><a href="#実展開時の留意事項" class="headerlink" title="実展開時の留意事項"></a>実展開時の留意事項</h2><p>WSL 用プラグインを実展開する際は、Microsoft Defender ポータルから取得した最新のインストーラーを使用してください。</p>
 <p>また、初回のオンボード処理が完了するまで、WSL 2 のディストリビューションを少なくとも 30 分間起動した状態にしておく運用をご検討ください。</p>
 <p>短時間で起動と停止を繰り返すディストリビューションやコンテナーでは、WSL 2 のインスタンスが Microsoft Defender ポータルに表示されない場合があります。</p>

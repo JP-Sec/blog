@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, CSS Japan Secuirty team</rights>
   <subtitle>日本マイクロソフトのセキュリティ製品に関するサポート情報のブログです。</subtitle>
   <title>Japan CSS Security Support Blog</title>
-  <updated>2026-08-31T08:27:00.029Z</updated>
+  <updated>2026-08-31T08:37:07.590Z</updated>
   <entry>
     <author>
       <name>CSS Japan Secuirty team</name>
@@ -18,7 +18,7 @@
     <category term="MDE on Linux" scheme="https://jp-sec.github.io/blog/tags/MDE-on-Linux/"/>
     <category term="Microsoft Defender for Endpoint" scheme="https://jp-sec.github.io/blog/tags/Microsoft-Defender-for-Endpoint/"/>
     <content>
-      <![CDATA[<p>本記事では、Microsoft Defender for Endpoint(MDE) の WSL 用プラグインをインストールした後、WSL 2 のディストリビューションが Microsoft Defender ポータルに表示されない、またはオンボードが完了しない場合に確認いただきたい項目と対処方法をご案内します。</p><p>WSL 用プラグインの前提要件、インストール方法および既知の制限事項については、以下の公開情報をご参照ください。</p><p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/mde-plugin-wsl">Linux 用 Windows サブシステム用の Microsoft Defender for Endpoint プラグイン (WSL) | Microsoft Learn</a></p><!-- omit in toc --><h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul><li><a href="#%E4%BA%8B%E8%B1%A1%E3%81%AE%E6%A6%82%E8%A6%81">事象の概要</a></li><li><a href="#%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%BE%E3%81%A7%E3%81%AE%E6%99%82%E9%96%93%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E6%97%A2%E7%9F%A5%E3%81%AE%E5%88%B6%E9%99%90">オンボードまでの時間に関する既知の制限</a></li><li><a href="#%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%89%8B%E9%A0%86">トラブルシューティング手順</a><ul><li><a href="#WSL-2-%E3%81%A8-Windows-%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E5%89%8D%E6%8F%90%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">WSL 2 と Windows ホストの前提を確認する</a></li><li><a href="#%E3%83%87%E3%82%A3%E3%82%B9%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%8C%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%9F%E7%8A%B6%E6%85%8B%E3%82%92%E7%B6%AD%E6%8C%81%E3%81%99%E3%82%8B">ディストリビューションが起動した状態を維持する</a></li><li><a href="#healthcheck.exe-%E3%81%A7%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E7%8A%B6%E6%85%8B%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">healthcheck.exe でプラグインの状態を確認する</a></li><li><a href="#%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%82%92%E5%86%8D%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B">プラグインを再インストールする</a></li><li><a href="#WSL-%E3%82%92%E5%86%8D%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%A6%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%82%92%E5%86%8D%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">WSL を再起動してオンボードを再確認する</a></li></ul></li><li><a href="#%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%83%AD%E3%82%B0%E3%81%AE%E5%8F%96%E5%BE%97">プラグインログの取得</a></li><li><a href="#%E5%AE%9F%E5%B1%95%E9%96%8B%E6%99%82%E3%81%AE%E7%95%99%E6%84%8F%E4%BA%8B%E9%A0%85">実展開時の留意事項</a></li><li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li></ul><h2 id="事象の概要"><a href="#事象の概要" class="headerlink" title="事象の概要"></a>事象の概要</h2><p>WSL 用プラグインのインストール後、WSL 2 のディストリビューションを起動しても、Microsoft Defender ポータルの [デバイス] ページに WSL のデバイスが表示されない場合があります。</p><p>このような場合は、オンボード処理に必要な時間とディストリビューションの稼働状態を確認します。</p><h2 id="オンボードまでの時間に関する既知の制限"><a href="#オンボードまでの時間に関する既知の制限" class="headerlink" title="オンボードまでの時間に関する既知の制限"></a>オンボードまでの時間に関する既知の制限</h2><p>WSL 用プラグインは、インストール後に完全にインスタンス化されるまで数分かかります。また、WSL 2 のインスタンスがオンボードされるまでには 30 分 ~ 2 時間程度かかる場合があります。</p><p>また、有効期間が短い WSL コンテナーインスタンスでは WSL 2 のデバイスプロファイルが <a href="https://security.microsoft.com/">Microsoft Defender ポータル</a> に表示されない場合があります。</p><p>ディストリビューションを少なくとも 30 分間起動した状態にすることで、WSL 2 のデバイスプロファイルが表示されることを確認してください。</p><p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/mde-plugin-wsl#known-issues-and-limitations">既知の問題と制限事項 | Microsoft Learn</a></p><h2 id="トラブルシューティング手順"><a href="#トラブルシューティング手順" class="headerlink" title="トラブルシューティング手順"></a>トラブルシューティング手順</h2><p>WSL 用プラグインのインストール後にオンボードが完了しない場合は、以下の順番で確認します。</p><ol><li>WSL 2 と Windows ホストの前提要件を確認します。</li><li>ディストリビューションを起動し、少なくとも 30 分間起動した状態を維持します。(1 ~ 2 時間程度の時間を要する場合があります。)</li><li><code>healthcheck.exe</code> を実行し、プラグイン、WSL および Defender の正常性を確認します。</li><li>問題が継続する場合、プラグインを再インストールします。</li><li>問題が解決しない場合、WSL を再起動して、オンボードを再確認します。</li></ol><h3 id="WSL-2-と-Windows-ホストの前提を確認する"><a href="#WSL-2-と-Windows-ホストの前提を確認する" class="headerlink" title="WSL 2 と Windows ホストの前提を確認する"></a>WSL 2 と Windows ホストの前提を確認する</h3><p>WSL 用プラグインを使用するには、Windows ホストが MDE にオンボードされており、WSL 2 が利用可能な状態である必要があります。</p><p>管理者権限のコマンドプロンプトまたは PowerShell で、WSL のバージョンとディストリビューションの状態を確認します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">--version</span></span><br><span class="line">wsl.exe <span class="literal">--list</span> <span class="literal">--verbose</span></span><br></pre></td></tr></table></figure><p><code>wsl.exe --list --verbose</code> の実行結果で、対象のディストリビューションについて以下を確認します。</p><ul><li><code>STATE</code> が <code>Running</code> であること</li><li><code>VERSION</code> が <code>2</code> であること</li></ul><p><code>VERSION</code> が <code>1</code> の場合、WSL 用プラグインの対象となる WSL 2 に変換します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">--set-version</span> &lt;ディストリビューション名&gt; <span class="number">2</span></span><br></pre></td></tr></table></figure><p>また、WSL のバージョンが古い場合は、以下のコマンドで更新します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">--update</span></span><br></pre></td></tr></table></figure><p>WSL のバージョン要件やサポートされる Windows のバージョンについては、以下の公開情報をご参照ください。</p><p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/mde-plugin-wsl#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6">Linux 用 Windows サブシステム用の Microsoft Defender for Endpoint プラグイン (WSL) | Microsoft Learn</a></p><h3 id="ディストリビューションが起動した状態を維持する"><a href="#ディストリビューションが起動した状態を維持する" class="headerlink" title="ディストリビューションが起動した状態を維持する"></a>ディストリビューションが起動した状態を維持する</h3><p>対象のディストリビューションが停止している場合は、以下のコマンドで起動します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">-d</span> &lt;ディストリビューション名&gt;</span><br></pre></td></tr></table></figure><p>ディストリビューションを起動した後は、Linux のターミナルを閉じず、少なくとも 30 分間起動した状態を維持します。</p><p>コンテナーやスクリプトの終了に伴ってディストリビューションが自動的に停止する構成では、オンボード処理が完了する前に WSL 2 のインスタンスが終了する場合があります。実行中の処理が終了した後もディストリビューションが起動した状態となるように、運用方法をご確認ください。</p><h3 id="healthcheck-exe-でプラグインの状態を確認する"><a href="#healthcheck-exe-でプラグインの状態を確認する" class="headerlink" title="healthcheck.exe でプラグインの状態を確認する"></a>healthcheck.exe でプラグインの状態を確認する</h3><p>プラグインのインストールまたは更新後は、プラグインが初期化され、ログが出力されるまで少なくとも 5 分間待ってから正常性を確認します。</p><p>管理者権限のコマンドプロンプトを起動し、以下のコマンドを実行します。</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /d &quot;<span class="variable">%ProgramFiles%</span>\Microsoft Defender <span class="keyword">for</span> Endpoint plug-<span class="keyword">in</span> <span class="keyword">for</span> WSL\tools&quot;</span><br><span class="line">healthcheck.exe</span><br></pre></td></tr></table></figure><p><code>healthcheck.exe</code> の実行結果で、以下の項目を確認します。</p><ul><li>WSL のバージョンが要件を満たしていること</li><li>プラグインのバージョンが表示されていること</li><li>Defender の正常性状態が <code>Healthy</code> であること</li><li>接続テストが成功していること</li></ul><p><code>healthcheck.exe</code> の実行時に、WSL ディストリビューションの起動を促すメッセージが表示された場合は、ディストリビューションを起動してから少なくとも 5 分間待ち、再度 <code>healthcheck.exe</code> を実行します。</p><p>また、<code>Waiting for Telemetry</code> などのメッセージが表示された場合も、テレメトリの初期化に時間がかかっている可能性があります。5 分程度待ってから、正常性を再確認します。</p><p>接続テストの結果が <code>invalid</code> の場合は、WSL 用プラグインから MDE のサービス URL への接続に失敗している可能性があります。プロキシを使用している環境では、以下のコマンドを実行してプロキシ設定の検出結果を確認します。</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">healthcheck.exe --extendedProxy</span><br></pre></td></tr></table></figure><p>接続テストやプロキシ設定に問題がある場合は、MDE の通信要件、プロキシおよびファイアウォールの構成をご確認ください。解消しない場合は、後述の手順でサポートバンドルを取得します。</p><p>オンボードが完了した後、Microsoft Defender ポータルの [デバイス] ページで <code>WSL2</code> タグを使用して、対象の WSL インスタンスが表示されることを確認します。</p><h3 id="プラグインを再インストールする"><a href="#プラグインを再インストールする" class="headerlink" title="プラグインを再インストールする"></a>プラグインを再インストールする</h3><p><code>healthcheck.exe</code> でプラグインの状態を確認できない場合は、以下の手順で再インストールを実施します。</p><ol><li>コントロール パネルを開き、[プログラム]&gt;[プログラムと機能] を選択します。</li><li>インストールされているプログラムの一覧から、WSL 用 Microsoft Defender for Endpoint プラグインをアンインストールします。</li><li>OS を再起動します。</li><li>OS の再起動後、WSL のディストリビューションを起動しないまま、Microsoft Defender ポータルのオンボードページからダウンロードした最新のインストーラーを使用してプラグインをインストールします。</li><li>WSL のディストリビューションを起動し、少なくとも 30 分間お待ちください。</li><li><a href="#healthcheck.exe-%E3%81%A7%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E7%8A%B6%E6%85%8B%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">healthcheck.exe でプラグインの状態を確認する</a> の手順で正常性を確認します。</li></ol><p>プラグインのインストーラーは、Microsoft Defender ポータルの [設定]&gt;[エンドポイント]&gt;[オンボード]&gt;[Linux 用 Windows サブシステム 2 (プラグイン)] から取得できます。</p><h3 id="WSL-を再起動してオンボードを再確認する"><a href="#WSL-を再起動してオンボードを再確認する" class="headerlink" title="WSL を再起動してオンボードを再確認する"></a>WSL を再起動してオンボードを再確認する</h3><p>管理者権限の PowerShell またはコマンドプロンプトで以下のコマンドを実行し、実行中の WSL インスタンスを停止します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">--shutdown</span></span><br></pre></td></tr></table></figure><p><code>wsl.exe --shutdown</code> の実行後、対象のディストリビューションを起動します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">-d</span> &lt;ディストリビューション名&gt;</span><br></pre></td></tr></table></figure><p>ディストリビューションを起動した状態で 30 分程度待ち、その後 <code>healthcheck.exe</code> を実行して正常性を確認します。</p><p>WSL のサービスが一時停止していた場合でも、ディストリビューションを起動することで WSL が再度起動します。WSL 用プラグインのインストールや更新直後に問題が発生した場合は、OS の再起動または上記の WSL 再起動を実施してから、オンボードを再確認します。</p><h2 id="プラグインログの取得"><a href="#プラグインログの取得" class="headerlink" title="プラグインログの取得"></a>プラグインログの取得</h2><p>上記の手順を実施しても問題が解消しない場合は、<code>healthcheck.exe</code> の実行結果とプラグインのログを取得します。</p><p>まず、ディストリビューションを起動した状態で 30 分程度待った後、以下のコマンドを実行します。</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /d &quot;<span class="variable">%ProgramFiles%</span>\Microsoft Defender <span class="keyword">for</span> Endpoint plug-<span class="keyword">in</span> <span class="keyword">for</span> WSL\tools&quot;</span><br><span class="line">healthcheck.exe</span><br><span class="line">healthcheck.exe --supportBundle</span><br></pre></td></tr></table></figure><p><code>healthcheck.exe</code> の実行結果のスクリーンショットと、<code>healthcheck.exe --supportBundle</code> で作成されたサポートバンドルを保存します。</p><p>また、Windows ホストの正常性状態を確認するため、MDEClientAnalyzer を使用して情報を採取します。</p><h2 id="実展開時の留意事項"><a href="#実展開時の留意事項" class="headerlink" title="実展開時の留意事項"></a>実展開時の留意事項</h2><p>WSL 用プラグインを実展開する際は、Microsoft Defender ポータルから取得した最新のインストーラーを使用してください。</p><p>また、初回のオンボード処理が完了するまで、WSL 2 のディストリビューションを少なくとも 30 分間起動した状態にしておく運用をご検討ください。</p><p>短時間で起動と停止を繰り返すディストリビューションやコンテナーでは、WSL 2 のインスタンスが Microsoft Defender ポータルに表示されない場合があります。</p><div class="alert is-info"><p class="alert-title">Note</p><p></p><p>WSL 用プラグインのインストールまたは更新時に WslService が実行中の場合、サービスが一時停止します。</p></div><p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/mde-plugin-wsl">Linux 用 Windows サブシステム用の Microsoft Defender for Endpoint プラグイン (WSL) | Microsoft Learn</a></p><h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>WSL 用プラグインのインストール後にオンボードが完了しない場合は、まず Windows ホストが MDE にオンボードされていること、WSL 2 のディストリビューションが <code>Running</code> の状態であることを確認します。</p><p>ディストリビューションを起動した状態で少なくとも 30 分間待っても問題が解消しない場合は、<code>healthcheck.exe</code> でプラグインの正常性を確認し、インストールログにエラーが記録されている場合はプラグインを再インストールしてください。</p>]]>
+      <![CDATA[<p>本記事では、Microsoft Defender for Endpoint(MDE) の WSL 用プラグインをインストールした後、WSL 2 のディストリビューションが Microsoft Defender ポータルに表示されない、またはオンボードが完了しない場合に確認いただきたい項目と対処方法をご案内します。</p><p>WSL 用プラグインの前提要件、インストール方法および既知の制限事項については、以下の公開情報をご参照ください。</p><p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/mde-plugin-wsl">Linux 用 Windows サブシステム用の Microsoft Defender for Endpoint プラグイン (WSL) | Microsoft Learn</a></p><!-- omit in toc --><h2 id="本記事の内容"><a href="#本記事の内容" class="headerlink" title="本記事の内容"></a>本記事の内容</h2><ul><li><a href="#%E4%BA%8B%E8%B1%A1%E3%81%AE%E6%A6%82%E8%A6%81">事象の概要</a></li><li><a href="#%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%81%BE%E3%81%A7%E3%81%AE%E6%99%82%E9%96%93%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E6%97%A2%E7%9F%A5%E3%81%AE%E5%88%B6%E9%99%90">オンボードまでの時間に関する既知の制限</a></li><li><a href="#%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%89%8B%E9%A0%86">トラブルシューティング手順</a><ul><li><a href="#WSL-2-%E3%81%A8-Windows-%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E5%89%8D%E6%8F%90%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">WSL 2 と Windows ホストの前提を確認する</a></li><li><a href="#%E3%83%87%E3%82%A3%E3%82%B9%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%8C%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%9F%E7%8A%B6%E6%85%8B%E3%82%92%E7%B6%AD%E6%8C%81%E3%81%99%E3%82%8B">ディストリビューションが起動した状態を維持する</a></li><li><a href="#healthcheck.exe-%E3%81%A7%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E7%8A%B6%E6%85%8B%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">healthcheck.exe でプラグインの状態を確認する</a></li><li><a href="#%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%82%92%E5%86%8D%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B">プラグインを再インストールする</a></li><li><a href="#WSL-%E3%82%92%E5%86%8D%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%A6%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89%E3%82%92%E5%86%8D%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">WSL を再起動してオンボードを再確認する</a></li></ul></li><li><a href="#%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%83%AD%E3%82%B0%E3%81%AE%E5%8F%96%E5%BE%97">プラグインログの取得</a></li><li><a href="#%E5%AE%9F%E5%B1%95%E9%96%8B%E6%99%82%E3%81%AE%E7%95%99%E6%84%8F%E4%BA%8B%E9%A0%85">実展開時の留意事項</a></li><li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li></ul><h2 id="事象の概要"><a href="#事象の概要" class="headerlink" title="事象の概要"></a>事象の概要</h2><p>WSL 用プラグインのインストール後、WSL 2 のディストリビューションを起動しても、Microsoft Defender ポータルの [デバイス] ページに WSL のデバイスが表示されない場合があります。</p><p>このような場合は、オンボード処理に必要な時間とディストリビューションの稼働状態を確認します。</p><h2 id="オンボードまでの時間に関する既知の制限"><a href="#オンボードまでの時間に関する既知の制限" class="headerlink" title="オンボードまでの時間に関する既知の制限"></a>オンボードまでの時間に関する既知の制限</h2><p>WSL 用プラグインは、インストール後に完全にインスタンス化されるまで数分かかります。また、WSL 2 のインスタンスがオンボードされるまでには 30 分 ~ 2 時間程度かかる場合があります。</p><p>また、有効期間が短い WSL コンテナーインスタンスでは WSL 2 のデバイスプロファイルが <a href="https://security.microsoft.com/">Microsoft Defender ポータル</a> に表示されない場合があります。</p><p>ディストリビューションを少なくとも 30 分間起動した状態にすることで、WSL 2 のデバイスプロファイルが表示されることを確認してください。</p><p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/mde-plugin-wsl#known-issues-and-limitations">既知の問題と制限事項 | Microsoft Learn</a></p><h2 id="トラブルシューティング手順"><a href="#トラブルシューティング手順" class="headerlink" title="トラブルシューティング手順"></a>トラブルシューティング手順</h2><p>WSL 用プラグインのインストール後にオンボードが完了しない場合は、以下の順番で確認します。</p><ol><li>WSL 2 と Windows ホストの前提要件を確認します。</li><li>ディストリビューションを起動し、少なくとも 30 分間起動した状態を維持します。(1 ~ 2 時間程度の時間を要する場合があります。)</li><li><code>healthcheck.exe</code> を実行し、プラグイン、WSL および Defender の正常性を確認します。</li><li>問題が継続する場合、プラグインを再インストールします。</li><li>問題が解決しない場合、WSL を再起動して、オンボードを再確認します。</li></ol><h3 id="WSL-2-と-Windows-ホストの前提を確認する"><a href="#WSL-2-と-Windows-ホストの前提を確認する" class="headerlink" title="WSL 2 と Windows ホストの前提を確認する"></a>WSL 2 と Windows ホストの前提を確認する</h3><p>WSL 用プラグインを使用するには、Windows ホストが MDE にオンボードされており、WSL 2 が利用可能な状態である必要があります。</p><p>管理者権限のコマンドプロンプトまたは PowerShell で、WSL のバージョンとディストリビューションの状態を確認します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">--version</span></span><br><span class="line">wsl.exe <span class="literal">--list</span> <span class="literal">--verbose</span></span><br></pre></td></tr></table></figure><p><code>wsl.exe --list --verbose</code> の実行結果で、対象のディストリビューションについて以下を確認します。</p><ul><li><code>STATE</code> が <code>Running</code> であること</li><li><code>VERSION</code> が <code>2</code> であること</li></ul><p><code>VERSION</code> が <code>1</code> の場合、WSL 用プラグインの対象となる WSL 2 に変換します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">--set-version</span> &lt;ディストリビューション名&gt; <span class="number">2</span></span><br></pre></td></tr></table></figure><p>また、WSL のバージョンが古い場合は、以下のコマンドで更新します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">--update</span></span><br></pre></td></tr></table></figure><p>WSL のバージョン要件やサポートされる Windows のバージョンについては、以下の公開情報をご参照ください。</p><p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/mde-plugin-wsl#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6">Linux 用 Windows サブシステム用の Microsoft Defender for Endpoint プラグイン (WSL) | Microsoft Learn</a></p><h3 id="ディストリビューションが起動した状態を維持する"><a href="#ディストリビューションが起動した状態を維持する" class="headerlink" title="ディストリビューションが起動した状態を維持する"></a>ディストリビューションが起動した状態を維持する</h3><p>対象のディストリビューションが停止している場合は、以下のコマンドで起動します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">-d</span> &lt;ディストリビューション名&gt;</span><br></pre></td></tr></table></figure><p>ディストリビューションを起動した後は、Linux のターミナルを閉じず、少なくとも 30 分間起動した状態を維持します。</p><p>コンテナーやスクリプトの終了に伴ってディストリビューションが自動的に停止する構成では、オンボード処理が完了する前に WSL 2 のインスタンスが終了する場合があります。実行中の処理が終了した後もディストリビューションが起動した状態となるように、運用方法をご確認ください。</p><h3 id="healthcheck-exe-でプラグインの状態を確認する"><a href="#healthcheck-exe-でプラグインの状態を確認する" class="headerlink" title="healthcheck.exe でプラグインの状態を確認する"></a>healthcheck.exe でプラグインの状態を確認する</h3><p>プラグインのインストールまたは更新後は、プラグインが初期化され、ログが出力されるまで少なくとも 5 分間待ってから正常性を確認します。</p><p>管理者権限のコマンドプロンプトを起動し、以下のコマンドを実行します。</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /d &quot;<span class="variable">%ProgramFiles%</span>\Microsoft Defender <span class="keyword">for</span> Endpoint plug-<span class="keyword">in</span> <span class="keyword">for</span> WSL\tools&quot;</span><br><span class="line">healthcheck.exe</span><br></pre></td></tr></table></figure><p><code>healthcheck.exe</code> の実行結果で、以下の項目を確認します。</p><ul><li>WSL のバージョンが要件を満たしていること</li><li>プラグインのバージョンが表示されていること</li><li>Defender の正常性状態が <code>Healthy</code> であること</li><li>接続テストが成功していること</li></ul><p><code>healthcheck.exe</code> の実行時に、WSL ディストリビューションの起動を促すメッセージが表示された場合は、ディストリビューションを起動してから少なくとも 5 分間待ち、再度 <code>healthcheck.exe</code> を実行します。</p><p>また、<code>Waiting for Telemetry</code> などのメッセージが表示された場合も、テレメトリの初期化に時間がかかっている可能性があります。5 分程度待ってから、正常性を再確認します。</p><p>接続テストの結果が <code>invalid</code> の場合は、WSL 用プラグインから MDE のサービス URL への接続に失敗している可能性があります。プロキシを使用している環境では、以下のコマンドを実行してプロキシ設定の検出結果を確認します。</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">healthcheck.exe --extendedProxy</span><br></pre></td></tr></table></figure><p>接続テストやプロキシ設定に問題がある場合は、MDE の通信要件、プロキシおよびファイアウォールの構成をご確認ください。解消しない場合は、後述の手順でサポートバンドルを取得します。</p><p>オンボードが完了した後、Microsoft Defender ポータルの [デバイス] ページで <code>WSL2</code> タグを使用して、対象の WSL インスタンスが表示されることを確認します。</p><h3 id="プラグインを再インストールする"><a href="#プラグインを再インストールする" class="headerlink" title="プラグインを再インストールする"></a>プラグインを再インストールする</h3><p><code>healthcheck.exe</code> でプラグインの状態を確認できない場合は、以下の手順で再インストールを実施します。</p><ol><li>コントロール パネルを開き、[プログラム]&gt;[プログラムと機能] を選択します。</li><li>インストールされているプログラムの一覧から、WSL 用 Microsoft Defender for Endpoint プラグインをアンインストールします。</li><li>OS を再起動します。</li><li>OS の再起動後、WSL のディストリビューションを起動しないまま、Microsoft Defender ポータルのオンボードページからダウンロードした最新のインストーラーを使用してプラグインをインストールします。</li><li>WSL のディストリビューションを起動し、少なくとも 30 分間お待ちください。</li><li><a href="#healthcheck.exe-%E3%81%A7%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E7%8A%B6%E6%85%8B%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">healthcheck.exe でプラグインの状態を確認する</a> の手順で正常性を確認します。</li></ol><p>プラグインのインストーラーは、Microsoft Defender ポータルの [設定]&gt;[エンドポイント]&gt;[オンボード]&gt;[Linux 用 Windows サブシステム 2 (プラグイン)] から取得できます。</p><h3 id="WSL-を再起動してオンボードを再確認する"><a href="#WSL-を再起動してオンボードを再確認する" class="headerlink" title="WSL を再起動してオンボードを再確認する"></a>WSL を再起動してオンボードを再確認する</h3><p>管理者権限の PowerShell またはコマンドプロンプトで以下のコマンドを実行し、実行中の WSL インスタンスを停止します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">--shutdown</span></span><br></pre></td></tr></table></figure><p><code>wsl.exe --shutdown</code> の実行後、対象のディストリビューションを起動します。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe <span class="literal">-d</span> &lt;ディストリビューション名&gt;</span><br></pre></td></tr></table></figure><p>ディストリビューションを起動した状態で 30 分程度待ち、その後 <code>healthcheck.exe</code> を実行して正常性を確認します。</p><p>WSL のサービスが一時停止していた場合でも、ディストリビューションを起動することで WSL が再度起動します。WSL 用プラグインのインストールや更新直後に問題が発生した場合は、OS の再起動または上記の WSL 再起動を実施してから、オンボードを再確認します。</p><h2 id="プラグインログの取得"><a href="#プラグインログの取得" class="headerlink" title="プラグインログの取得"></a>プラグインログの取得</h2><p>上記の手順を実施しても問題が解消しない場合は、<code>healthcheck.exe</code> の実行結果とプラグインのログを取得します。</p><p>まず、ディストリビューションを起動した状態で 30 分程度待った後、以下のコマンドを実行します。</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /d &quot;<span class="variable">%ProgramFiles%</span>\Microsoft Defender <span class="keyword">for</span> Endpoint plug-<span class="keyword">in</span> <span class="keyword">for</span> WSL\tools&quot;</span><br><span class="line">healthcheck.exe</span><br><span class="line">healthcheck.exe --supportBundle</span><br></pre></td></tr></table></figure><p><code>healthcheck.exe</code> の実行結果のスクリーンショットと、<code>healthcheck.exe --supportBundle</code> で作成されたサポートバンドルを保存します。</p><h2 id="実展開時の留意事項"><a href="#実展開時の留意事項" class="headerlink" title="実展開時の留意事項"></a>実展開時の留意事項</h2><p>WSL 用プラグインを実展開する際は、Microsoft Defender ポータルから取得した最新のインストーラーを使用してください。</p><p>また、初回のオンボード処理が完了するまで、WSL 2 のディストリビューションを少なくとも 30 分間起動した状態にしておく運用をご検討ください。</p><p>短時間で起動と停止を繰り返すディストリビューションやコンテナーでは、WSL 2 のインスタンスが Microsoft Defender ポータルに表示されない場合があります。</p><div class="alert is-info"><p class="alert-title">Note</p><p></p><p>WSL 用プラグインのインストールまたは更新時に WslService が実行中の場合、サービスが一時停止します。</p></div><p>参考情報：<a href="https://learn.microsoft.com/ja-jp/defender-endpoint/mde-plugin-wsl">Linux 用 Windows サブシステム用の Microsoft Defender for Endpoint プラグイン (WSL) | Microsoft Learn</a></p><h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>WSL 用プラグインのインストール後にオンボードが完了しない場合は、まず Windows ホストが MDE にオンボードされていること、WSL 2 のディストリビューションが <code>Running</code> の状態であることを確認します。</p><p>ディストリビューションを起動した状態で少なくとも 30 分間待っても問題が解消しない場合は、<code>healthcheck.exe</code> でプラグインの正常性を確認し、インストールログにエラーが記録されている場合はプラグインを再インストールしてください。</p>]]>
     </content>
     <id>https://jp-sec.github.io/blog/Endpoint-MDAV-2026-08-31/</id>
     <link href="https://jp-sec.github.io/blog/Endpoint-MDAV-2026-08-31/"/>
@@ -27,7 +27,7 @@
       <![CDATA[<p>本記事では、Microsoft Defender for Endpoint(MDE) の WSL 用プラグインをインストールした後、WSL 2 のディストリビューションが Microsoft Defender ポータルに表示されない、またはオンボードが完了しない場合に確認い]]>
     </summary>
     <title>Microsoft Defender for Endpoint WSL プラグインのインストール後にオンボードが完了しない場合のトラブルシューティング手順</title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -46,7 +46,7 @@
 <p>参考情報：<a href="https:/]]>
     </summary>
     <title>Microsoft Defender ウイルス対策のフルスキャンの長時間化、または進捗がないように見える場合の対処方法</title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -66,7 +66,7 @@
 <h2 id="本記事の内容"><a href="#本記事]]>
     </summary>
     <title>MDE Client Analyzer を使用した初動調査とセルフサービスの範囲</title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -86,7 +86,7 @@
 <h2 id="本記事の内容"><a href="#本記事の内容" class]]>
     </summary>
     <title>Microsoft Defender for Endpoint Client Analyzer で収集される情報</title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -105,7 +105,7 @@
 <p>ネットワーク保]]>
     </summary>
     <title>ネットワーク保護機能をブロックモードで使用する環境で発生した通信の問題のトラブルシューティング</title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -124,7 +124,7 @@
 <!-- omit in toc]]>
     </summary>
     <title>Microsoft Defender ウイルス対策(MDAV)のクラウド保護と改ざん防止機能に関するトラブルシューティングとよくあるお問い合わせ</title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -142,7 +142,7 @@
       <![CDATA[<p>本記事では、Windows デバイスの Microsoft Defender for Endpoint(MDE) へのオンボード操作を実施したものの、Microsoft Defender ポータルの [アセット]&gt;[デバイス] ページにデバイスが登録されない場合の一般]]>
     </summary>
     <title>Microsoft Defender for Endpoint(MDE) にオンボードしたデバイスがデバイスインベントリに登録されない問題のトラブルシューティング手順</title>
-    <updated>2026-08-31T08:27:00.028Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -161,7 +161,7 @@
 <h2 id="本記事の内容"><a href="#本記事の内容" class="h]]>
     </summary>
     <title>KB5007651 が何度も再オファーされる事象へのトラブルシューティング</title>
-    <updated>2026-08-31T08:27:00.028Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -181,7 +181,7 @@
 <]]>
     </summary>
     <title>Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) に関するよくあるお問い合わせ</title>
-    <updated>2026-08-31T08:27:00.028Z</updated>
+    <updated>2026-08-31T08:37:07.589Z</updated>
   </entry>
   <entry>
     <author>
@@ -200,7 +200,7 @@
 <p>この記事では、Microsoft Defender ウイルス対策(MDAV) および Microsoft Defender for Endpoint(MDE) の検知機能と、]]>
     </summary>
     <title>Windows におけるウイルス対策と除外に関するよくあるお問い合わせ</title>
-    <updated>2026-08-31T08:27:00.028Z</updated>
+    <updated>2026-08-31T08:37:07.589Z</updated>
   </entry>
   <entry>
     <author>
@@ -218,7 +218,7 @@
       <![CDATA[<p>こんにちは Security &amp; Compliance サポートチームです。<br>この記事では、Microsoft Defender for Endpoint (MDE) のサポートを効果的に利用するためのお問い合わせ(SR、サポートリクエスト) 発行方法について]]>
     </summary>
     <title>お問い合わせの発行方法について</title>
-    <updated>2026-08-31T08:27:00.030Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -238,7 +238,7 @@
     <title>
       <![CDATA[<第 1 弾> Security & Compliance サポートチームについて]]>
     </title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -258,7 +258,7 @@
     <title>
       <![CDATA[<第 2 弾> CP チームの製品紹介]]>
     </title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -278,7 +278,7 @@
     <title>
       <![CDATA[<第 3 弾> リモートワークでの働き方について]]>
     </title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -298,7 +298,7 @@
     <title>
       <![CDATA[<第 4 弾> チームの様子、雰囲気について]]>
     </title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -318,7 +318,7 @@
     <title>
       <![CDATA[<第 5 弾> Security & Compliance チームの多様性について]]>
     </title>
-    <updated>2026-08-31T08:27:00.029Z</updated>
+    <updated>2026-08-31T08:37:07.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -337,7 +337,7 @@
 <p>この記事では、Microsoft Defender for Endpoint(MDE) を使用する Windows マシンでデバイスコントロール機能を使用してリムーバブルメデ]]>
     </summary>
     <title>デバイスコントロール機能を使用してリムーバブルメディアアクセス制御を構成する手順と確認ポイント</title>
-    <updated>2026-08-31T08:27:00.028Z</updated>
+    <updated>2026-08-31T08:37:07.589Z</updated>
   </entry>
   <entry>
     <author>
@@ -356,7 +356,7 @@
 <p>この記事では、Windows Server 2012 R2 と Windows Server 2016 を Microsoft Defender for Endpoint(MDE) にオンボード]]>
     </summary>
     <title>Windows Server 2012 R2 または Windows Server 2016 を MDE にオンボードする手順と確認ポイント</title>
-    <updated>2026-08-31T08:27:00.027Z</updated>
+    <updated>2026-08-31T08:37:07.589Z</updated>
   </entry>
   <entry>
     <author>
@@ -374,7 +374,7 @@
       <![CDATA[<h2 id="Active-Directory-Rithts-Management-Service-AD-RMS-の役割は-Azure-IaaS-を含めパブリック-クラウドへの移行は許諾されません。"><a href="#Active-Directory-Rithts-Mana]]>
     </summary>
     <title>Active Directory Rithts Management Service (AD RMS) の役割は Azure IaaS を含めパブリック クラウドへの移行は許諾されません。</title>
-    <updated>2026-08-31T08:27:00.025Z</updated>
+    <updated>2026-08-31T08:37:07.588Z</updated>
   </entry>
   <entry>
     <author>
@@ -392,6 +392,6 @@
 <p>この記事では <a href="https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/microso]]>
     </summary>
     <title>Windows デバイスの Microsoft Defender ウイルス対策(MDAV) のセキュリティインテリジェンス(定義ファイル)更新設定について</title>
-    <updated>2026-08-31T08:27:00.027Z</updated>
+    <updated>2026-08-31T08:37:07.589Z</updated>
   </entry>
 </feed>
